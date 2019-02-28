@@ -1,0 +1,32 @@
+$colors: (
+  primary: (
+    normal: #6516DD,
+    hover: #5007C0,
+    active: #4000A1,
+    disabled: #C5A5F4
+  ),
+  secondary: (
+    normal: #B327BF,
+    hover: #A107C0,
+    active: #8804A3,
+    disabled: #F4A5CD
+  ),
+  cancel: (
+    normal: #F3F3F3,
+    hover: #E2E2E2,
+    active: #CDCDCD,
+    disabled: #FAFAFA
+  ),
+  destory: (
+    normal: #EB443B,
+    hover: #C00717,
+    active: #A10000,
+    disabled: #FF9D98
+  ),
+  affirm: (
+    normal: #00BF9A,
+    hover: #00A786,
+    active: #018D72,
+    disabled: #9EDCD0
+  )
+);
