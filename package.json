@@ -23,8 +23,8 @@
     "type": "git",
     "url": "git+https://github.com/apostrophecms/apostrophe-storybook.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "P'unk Avenue",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/apostrophecms/apostrophe-storybook/issues"
   },
