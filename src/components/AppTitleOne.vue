@@ -1,5 +1,5 @@
 <template>
-  <h1>{{ text }}</h1>
+  <h1 class="apos-title-one">{{ text }}</h1>
 </template>
 
 <script>
@@ -9,3 +9,11 @@ module.exports = {
   }
 }
 </script>
+
+<style lang="scss">
+.apos-title-one {
+  color: $gray;
+  font-family: $font-family;
+  font-weight: 700;
+}
+</style>
