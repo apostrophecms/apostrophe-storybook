@@ -1,20 +1,17 @@
-import { configure } from '@storybook/vue';
+import { configure } from '@storybook/vue'
 
-import Vue from 'vue';
-import Vuex from 'vuex'; // Vue plugins
+import Vue from 'vue'
 
-// Import your custom components.
-import Mybutton from '../src/stories/Button.vue';
+// Import components
+import AppTitleOne from '../src/components/AppTitleOne.vue'
 
-// Install Vue plugins.
-Vue.use(Vuex);
+const req = require.context('../src/stories', true, /\.js$/);
 
 // Register custom components.
-Vue.component('my-button', Mybutton);
+Vue.component('AppTitleOne', AppTitleOne)
 
 function loadStories() {
-  // You can require as many stories as you need.
-  require('../src/stories');
+  req.keys().forEach(filename => req(filename));
 }
 
-configure(loadStories, module);
+configure(loadStories, module)
