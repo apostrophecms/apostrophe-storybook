@@ -13,13 +13,13 @@ module.exports = {
 
 <style lang="scss">
 .apos-title-one {
-  font-family: $font-family;
-  font-weight: 700;
+  font-family: family('default');
+  font-weight: weights('bold');
   &.apos-theme--light {
-    color: $gray;
+    color: color('primary', 'shade-one');
   }
   &.apos-theme--dark {
-    color: #000;
+    color: color('primary', 'shade-two');
   }
 }
 </style>
