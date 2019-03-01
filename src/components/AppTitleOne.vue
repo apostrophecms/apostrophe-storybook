@@ -15,5 +15,6 @@ module.exports = {
   color: $gray;
   font-family: $font-family;
   font-weight: 700;
+
 }
 </style>
