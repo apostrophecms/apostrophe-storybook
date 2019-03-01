@@ -1,19 +1,25 @@
 <template>
-  <h1 class="apos-title-one">{{ text }}</h1>
+  <h1 :class="`apos-theme--${theme} apos-title-one`">{{ text }}</h1>
 </template>
 
 <script>
 module.exports = {
   props: {
-    text: String
+    text: String,
+    theme: String
   }
 }
 </script>
 
 <style lang="scss">
 .apos-title-one {
-  color: color('primary', 'shade-one');
   font-family: family('default');
   font-weight: weights('bold');
+  &.apos-theme--light {
+    color: color('primary', 'shade-one');
+  }
+  &.apos-theme--dark {
+    color: color('primary', 'shade-two');
+  }
 }
 </style>
