@@ -12,9 +12,8 @@ module.exports = {
 
 <style lang="scss">
 .apos-title-one {
-  color: $gray;
-  font-family: $font-family;
-  font-weight: 700;
-
+  color: color('primary', 'shade-one');
+  font-family: family('default');
+  font-weight: weights('bold');
 }
 </style>
