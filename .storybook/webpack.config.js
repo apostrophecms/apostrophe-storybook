@@ -1,7 +1,7 @@
 const path = require('path')
 
-module.exports = (baseConfig, env, defaultConfig) => {
-  defaultConfig.module.rules.push(    {
+module.exports = async ({ config, mode }) => {
+  config.module.rules.push({
       test: /\.js$/,
       exclude: /node_modules/,
       use: [
@@ -27,5 +27,5 @@ module.exports = (baseConfig, env, defaultConfig) => {
     include: path.resolve(__dirname, '../')
   })
 
-  return defaultConfig
+  return config;
 }
