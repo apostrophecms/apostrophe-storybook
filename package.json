@@ -8,7 +8,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",
-    "@storybook/vue": "^4.1.13",
+    "@storybook/vue": "^5.0.1",
     "babel-loader": "^8.0.5",
     "babel-preset-vue": "^2.0.2",
     "eslint": "^5.14.1",
