@@ -1,12 +1,11 @@
 <template>
-  <h1 :class="`apos-theme--${theme} apos-title-one`">{{ text }}</h1>
+  <h1 class="apos-title-one">{{ text }}</h1>
 </template>
 
 <script>
 module.exports = {
   props: {
-    text: String,
-    theme: String
+    text: String
   }
 }
 </script>
@@ -14,12 +13,7 @@ module.exports = {
 <style lang="scss">
 .apos-title-one {
   font-family: family('default');
-  font-weight: weights('bold');
-  &.apos-theme--light {
-    color: color('primary', 'shade-two');
-  }
-  &.apos-theme--dark {
-    color: color('primary', 'shade-one');
-  }
+  font-weight: weight('bold');
+  @include variable(color, --text-color, color('primary', 'shade-two'));
 }
 </style>

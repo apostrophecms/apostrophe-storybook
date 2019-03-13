@@ -24,3 +24,8 @@
   @warn 'Unknown `#{$key}` in $font-weight.';
   @return null;
 }
+
+@mixin variable($property, $variable, $fallback) {
+  #{$property}: $fallback;
+  #{$property}: var($variable);
+}
