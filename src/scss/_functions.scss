@@ -1,11 +1,11 @@
 // TODO: Need API documentation
-@function color($key: null, $style: null) {
-  @if $key and $style {
-    @return map-get(map-get($colors, $key), $style);
-  }
-  // TODO: Need error handling.
-  @return null;
-}
+// @function color($key: null, $style: null) {
+//   @if $key and $style {
+//     @return map-get(map-get($colors, $key), $style);
+//   }
+//   // TODO: Need error handling.
+//   @return null;
+// }
 
 // TODO: Need API documentation
 @function family($key) {

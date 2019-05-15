@@ -8,52 +8,56 @@ $font-weights: (
   bold: 700
 );
 
-$colors: (
-  primary: (
-    normal: #6516DD,
-    hover: #5007C0,
-    active: #4000A1,
-    disabled: #C5A5F4,
-    shade-one: #323232,
-    shade-two: #767676,
-    shade-three: #A5A5A5,
-    shade-four: #CACACA,
-    shade-five: #DBDBDB,
-    shade-size: #E8E8E8,
-    shade-seven: #F3F3F3,
-    shade-eight: #FFF
-  ),
-  secondary: (
-    normal: #B327BF,
-    hover: #A107C0,
-    active: #8804A3,
-    disabled: #F4A5CD,
-    shade-one: #11151F,
-    shade-two: #2C354D,
-    shade-three: #8895A7,
-    shade-four: #B8C4CE,
-    shade-five: #CFD6DE,
-    shade-six: #E1E7ED,
-    shade-seven: #F8F9FA
-  ),
-  cancel: (
-    normal: #F3F3F3,
-    hover: #E2E2E2,
-    active: #CDCDCD,
-    disabled: #FAFAFA
-  ),
-  destory: (
-    normal: #EB443B,
-    hover: #C00717,
-    active: #A10000,
-    disabled: #FF9D98
-  ),
-  affirm: (
-    normal: #00BF9A,
-    hover: #00A786,
-    active: #018D72,
-    disabled: #9EDCD0
-  )
-);
+:root, .apos-theme-light {
+  --primary: #6516DD;
+  --primary-hover: #5007C0;
+  --primary-active: #4000A1;
+  --primary-disabled: #C5A5F4;
 
+  --secondary: #B327BF;
+  --secondary-hover: #A107C0;
+  --secondary-active: #8804A3;
+  --secondary-disabled: #F4A5CD;
 
+  --cancel: #F3F3F3;
+  --cancel-hover: #E2E2E2;
+  --cancel-active: #CDCDCD;
+  --cancel-disabled: #FAFAFA;
+
+  --danger: #EB443B;
+  --danger-hover: #C00717;
+  --danger-active: #A10000;
+  --danger-disabled: #FF9D98;
+
+  --neutral-one: #323232;
+  --neutral-two: #767676;
+  --neutral-three: #A5A5A5;
+  --neutral-four: #CACACA;
+  --neutral-five: #DBDBDB;
+  --neutral-six: #E8E8E8;
+  --neutral-seven: #F3F3F3;
+  --neutral-eight: #FFFFFF;
+
+  --radius-small: 4px;
+}
+
+.apos-theme-dark {
+  --primary: #0562FF;
+  --primary-hover: #014FD3;
+  --primary-active: #0443AF;
+  --primary-disabled: #6BA1FE;
+
+  --secondary: #6516DD;
+  --secondary-hover: #5007C0;
+  --secondary-active: #4000A1;
+  --secondary-disabled: #C5A5F4;
+
+  --neutral-one: #11151F;
+  --neutral-two: #2C354D;
+  --neutral-three: #8895A7;
+  --neutral-four: #9DA9B9;
+  --neutral-five: #B8C4CE;
+  --neutral-six: #CFD6DE;
+  --neutral-seven: #E1E7ED;
+  --neutral-eight: #F8F9FA;
+}
