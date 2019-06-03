@@ -16,13 +16,12 @@ module.exports = {
 
 <style lang="scss">
   .apos-button {
-    font-family: family('default');
     color: var(--neutral-eight);
     background: var(--primary);
     padding: 10px 20px; // re use this?
     border-radius: var(--radius-small);
     border: none;
-    font-size: 13px;
+    font-size: 1.3em;
     letter-spacing: 0.75px; // how do we reuse this
     &:hover {
       cursor: pointer;

@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/vue'
 
-import aposButton from '../components/button.vue'
+import aposButton from './button.vue'
 
 storiesOf('Button', module)
   .add('Primary', () => ({
@@ -29,9 +29,9 @@ storiesOf('Button', module)
   }))
   .add('Danger', () => ({
     components: { aposButton },
-    template: '<aposButton label="Deleta Article" modifier="danger" />'
+    template: '<aposButton label="Delete Article" modifier="danger" />'
   }))
   .add('Danger, Disabled', () => ({
     components: { aposButton },
-    template: '<aposButton label="Deleta Article" modifier="danger" disabled="true" />'
+    template: '<aposButton label="Delete Article" modifier="danger" disabled="true" />'
   }))
