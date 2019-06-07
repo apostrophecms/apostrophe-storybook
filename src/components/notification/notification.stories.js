@@ -4,8 +4,6 @@ import aposNotification from './notification.vue'
 import Dot from 'vue-material-design-icons/Circle.vue'
 import Close from 'vue-material-design-icons/Close.vue'
 
-// console.log(Circle)
-
 storiesOf('Notification', module)
   .add('Success', () => ({
     components: { aposNotification, Dot, Close },
