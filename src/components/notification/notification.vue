@@ -1,5 +1,5 @@
 <template>
-  <button :class="`apos-notification apos-notification--${modifier}`" role="alert">
+  <button :class="`apos-notification ${modifier}`" role="alert">
     <span class="apos-notification__indicator">
       <slot name="indicator"></slot>
     </span>
@@ -14,7 +14,10 @@
 module.exports = {
   props: {
     label: String,
-    modifier: String
+    modifier: {
+      default: '',
+      type: String
+    }
   }
 }
 </script>

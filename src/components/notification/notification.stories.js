@@ -8,7 +8,7 @@ storiesOf('Notification', module)
   .add('Success', () => ({
     components: { aposNotification, Dot, Close },
     template: `
-      <aposNotification label="The article has been saved" modifier="success">
+      <aposNotification label="The article has been saved" modifier="apos-notification--success">
         <template v-slot:indicator>
           <Dot title="Success" :size=12 decorative=true fillColor="var(--success)" />
         </template>
@@ -19,14 +19,41 @@ storiesOf('Notification', module)
     `
   }))
   .add('Danger', () => ({
-    components: { aposNotification },
-    template: '<aposNotification label="Something went wrong" modifier="danger" />'
+    components: { aposNotification, Dot, Close },
+    template: `
+    <aposNotification label="Something went wrong" modifier="apos-notification--danger">
+      <template v-slot:indicator>
+        <Dot title="Something went wrong" :size=12 decorative=true fillColor="var(--danger)" />
+      </template>
+      <template v-slot:button>
+        <Close title="Close Notification" :size="14" />
+      </template>
+    </aposNotification>
+  `
   }))
   .add('Info', () => ({
-    components: { aposNotification },
-    template: '<aposNotification label="Something happened, that is all" modifier="info" />'
+    components: { aposNotification, Dot, Close },
+    template: `
+    <aposNotification label="Something happened, that is all" modifier="apos-notification--info">
+      <template v-slot:indicator>
+        <Dot :size=12 decorative=true fillColor="var(--info)" />
+      </template>
+      <template v-slot:button>
+        <Close title="Close Notification" :size="14" />
+      </template>
+    </aposNotification>
+  `
   }))
   .add('Warning', () => ({
-    components: { aposNotification },
-    template: '<aposNotification label="You should know this, but maybe it’s fine" modifier="warning" />'
+    components: { aposNotification, Dot, Close },
+    template: `
+    <aposNotification label="You should know this, but maybe it’s fine" modifier="apos-notification--warning">
+      <template v-slot:indicator>
+        <Dot :size=12 decorative=true fillColor="var(--warning)" />
+      </template>
+      <template v-slot:button>
+        <Close title="Close Notification" :size="14" />
+      </template>
+    </aposNotification>
+  `
   }))
