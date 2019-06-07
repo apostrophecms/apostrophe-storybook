@@ -1,5 +1,6 @@
 <template>
   <div :class="`apos-tag apos-tag--${modifier}`" :disabled="disabled">
+    <slot name="icon"></slot>
     {{ label }}
   </div>
 </template>
@@ -21,9 +22,19 @@ module.exports = {
   padding: 6px 10px;
   background-color: var(--neutral-one);
   font-size: 1.2em;
-
   border-radius: var(--radius-small);
   color: var(--neutral-eight);
+}
+
+.apos-tag-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.apos-tag-list .apos-tag {
+  margin-right: 1rem;
 }
 </style>
 
