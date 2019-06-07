@@ -1,8 +1,12 @@
 <template>
   <button :class="`apos-notification apos-notification--${modifier}`" role="alert">
-    <slot name="alertType"></slot>
+    <span class="apos-notification__indicator">
+      <slot name="indicator"></slot>
+    </span>
     <span class="apos-notification__label">{{ label }}</span>
-    <slot name="button"></slot>
+    <button class="apos-notification__button">
+      <slot name="button"></slot>
+    </button>
   </button>
 </template>
 

@@ -9,15 +9,11 @@ storiesOf('Notification', module)
     components: { aposNotification, Dot, Close },
     template: `
       <aposNotification label="The article has been saved" modifier="success">
-        <template v-slot:alertType>
-          <span class="apos-notification__indicator">
-            <Dot title="Success" :size=12 decorative=true fillColor="var(--success)" />
-          </span>
+        <template v-slot:indicator>
+          <Dot title="Success" :size=12 decorative=true fillColor="var(--success)" />
         </template>
         <template v-slot:button>
-          <button class="apos-notification__button">
-            <Close title="Close Notification" :size="14" />
-          </button>
+          <Close title="Close Notification" :size="14" />
         </template>
       </aposNotification>
     `
