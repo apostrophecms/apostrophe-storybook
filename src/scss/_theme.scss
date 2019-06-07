@@ -31,6 +31,10 @@ $font-weights: (
   --danger-active: #A10000;
   --danger-disabled: #FF9D98;
 
+  --success: #00BF9A;
+  --warning: #FFCE00;
+  --info: #DBDBDB;
+
   --neutral-one: #323232;
   --neutral-two: #767676;
   --neutral-three: #A5A5A5;
@@ -41,6 +45,7 @@ $font-weights: (
   --neutral-eight: #FFFFFF;
 
   --radius-small: 4px;
+  --radius-medium: 5px;
 }
 
 .apos-theme-dark {
