@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
-    "vue": "^2.6.7"
+    "vue": "^2.6.7",
+    "vue-material-design-icons": "^3.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.3.4",

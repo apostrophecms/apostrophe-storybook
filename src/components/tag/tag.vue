@@ -1,5 +1,6 @@
 <template>
-  <div :class="`apos-tag apos-tag--${modifier}`" :disabled="disabled">
+  <div :class="`apos-tag ${modifier}`" :disabled="disabled">
+    <slot name="icon"></slot>
     {{ label }}
   </div>
 </template>
@@ -8,7 +9,10 @@
 module.exports = {
   props: {
     label: String,
-    modifier: String,
+    modifier: {
+      default: '',
+      type: String
+    },
     disabled: Boolean
   }
 }
@@ -16,14 +20,42 @@ module.exports = {
 
 <style lang="scss">
 .apos-tag {
-  display: inline-block;
+  display: inline-flex;
   font-family: map-get($font-families, secondary);
   padding: 6px 10px;
   background-color: var(--neutral-one);
   font-size: 1.2em;
-
   border-radius: var(--radius-small);
   color: var(--neutral-eight);
+  align-items: center;
+  justify-content: center;
+
+  .material-design-icon {
+    display: flex;
+    margin-right: 5px;
+  }
+}
+
+.apos-tag-button {
+  border: none;
+  padding: 0;
+  margin: 0;
+  background-color: transparent;
+  color: currentColor;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.apos-tag-list {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.apos-tag-list .apos-tag {
+  margin-right: 1rem;
 }
 </style>
 
