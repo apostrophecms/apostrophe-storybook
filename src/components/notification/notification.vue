@@ -1,6 +1,8 @@
 <template>
   <button :class="`apos-notification apos-notification--${modifier}`" role="alert">
+    <slot name="alertType"></slot>
     <span class="apos-notification__label">{{ label }}</span>
+    <slot name="button"></slot>
   </button>
 </template>
 
@@ -20,27 +22,36 @@ module.exports = {
     color: var(--neutral-one);
     background: var(--neutral-eight);
     border: 1px solid var(--neutral-six);
-    border-radius: var(--radius-medium);
-    padding: 0 20px;
-    height: 55px;
-    box-shadow: 0 3px 13px 4px rgba(0,0,0,0.08);
+    border-radius: var(--border-radius);
+    padding: 15px 20px;
+    box-shadow: var(--box-shadow);
   }
+
+  .apos-notification__indicator {
+    display: flex;
+    margin-right: 10px;
+    height: 13px;
+  }
+
+  .apos-notification__button {
+    display: flex;
+    align-items: center;
+    border: none;
+    padding: 0;
+    background-color: transparent;   
+    margin-left: 10px;
+    &:hover {
+      cursor: pointer;
+    }
+
+    .material-design-icon {
+      height: 13px;
+    }
+  }
+
   .apos-notification__label {
-    font-size: 1.4em;
+    font-size: 1.2em;
     letter-spacing: 0.75px;
     color: var(--neutral-one);
-    &:before {
-      display: inline-block;
-      content: '';
-      width: 10px;
-      height: 10px;
-      background: #000;
-      border-radius: 100%;
-      margin-right: 10px;
-      .apos-notification--success & { background: var(--success) }
-      .apos-notification--danger & { background: var(--danger) }
-      .apos-notification--info & { background: var(--info) }
-      .apos-notification--warning & { background: var(--warning) }
-    }
   }
 </style>

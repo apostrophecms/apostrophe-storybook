@@ -44,8 +44,9 @@ $font-weights: (
   --neutral-seven: #F3F3F3;
   --neutral-eight: #FFFFFF;
 
-  --radius-small: 4px;
-  --radius-medium: 5px;
+  --border-radius: 5px;
+
+  --box-shadow: 0 3px 13px 4px rgba(0,0,0,0.08);
 }
 
 .apos-theme-dark {
