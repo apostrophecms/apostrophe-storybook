@@ -16,35 +16,45 @@ storiesOf('Tag', module)
         <li>
           <aposTag label="Community">
             <template v-slot:icon>
-              <Close title="Remove Tag" size="14" />
+              <button class="apos-tag-button">
+                <Close title="Remove Tag" :size="14" />
+              </button>
             </template>
           </aposTag>
         </li>
         <li>
           <aposTag label="Neighborhood">
             <template v-slot:icon>
-              <Close title="Remove Tag" size="14" />
+              <button class="apos-tag-button">
+                <Close title="Remove Tag" :size="14" />
+              </button>
             </template>
           </aposTag>
         </li>
         <li>
           <aposTag label="Activism">
             <template v-slot:icon>
-              <Close title="Remove Tag" size="14" />
+              <button class="apos-tag-button">
+                <Close title="Remove Tag" :size="14" />
+              </button>
             </template>
           </aposTag>
         </li>
         <li>
           <aposTag label="What's Hot">
             <template v-slot:icon>
-              <Close title="Remove Tag" size="14" />
+              <button class="apos-tag-button">
+                <Close title="Remove Tag" :size="14" />
+              </button>
             </template>
           </aposTag>
         </li>
         <li>
           <aposTag label="Top 40">
             <template v-slot:icon>
-              <Close title="Remove Tag" size="14" />
+              <button class="apos-tag-button">
+                <Close title="Remove Tag" :size="14" />
+              </button>
             </template>
           </aposTag>
         </li>
