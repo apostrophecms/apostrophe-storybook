@@ -57,9 +57,19 @@ storiesOf('Notification', module)
     </aposNotification>
   `
   }))
-  .add('Not Clickable', () => ({
+  .add('Not clickable', () => ({
     components: { aposNotification, Dot, Close },
     template: `
     <aposNotification label="This notification is not clickable." modifier="apos-notification--success"></aposNotification>
+  `
+  }))
+  .add('Only icon clickable', () => ({
+    components: { aposNotification, Dot, Close },
+    template: `
+    <aposNotification label="Only the icon is clickable." modifier="apos-notification--success">
+      <template v-slot:button>
+        <Close title="Close Notification" :size="14" />
+      </template>
+    </aposNotification>
   `
   }))

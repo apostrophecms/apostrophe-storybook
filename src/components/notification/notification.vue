@@ -4,21 +4,27 @@
       <slot name="indicator"></slot>
     </span>
     <span class="apos-notification__label">{{ label }}</span>
-    <span class="apos-notification__button">
+    <component :is="clickable ? 'span' : 'button'" class="apos-notification__button">
       <slot name="button"></slot>
-    </span>
+    </component>
   </component>
 </template>
 
 <script>
 module.exports = {
   props: {
-    label: String,
+    label: {
+      default: 'Set a label',
+      type: String
+    },
     modifier: {
       default: '',
       type: String
     },
-    clickable: Boolean
+    clickable: {
+      default: false,
+      type: Boolean
+    }
   }
 }
 </script>
@@ -33,6 +39,9 @@ module.exports = {
     border-radius: var(--border-radius);
     padding: 15px 20px;
     box-shadow: var(--box-shadow);
+    & button {
+      cursor: default;
+    }
   }
 
   .apos-notification__indicator {
@@ -48,9 +57,6 @@ module.exports = {
     padding: 0;
     background-color: transparent;
     margin-left: 10px;
-    &:hover {
-      cursor: pointer;
-    }
 
     .material-design-icon {
       height: 13px;
