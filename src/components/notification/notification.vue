@@ -39,9 +39,6 @@ module.exports = {
     border-radius: var(--border-radius);
     padding: 15px 20px;
     box-shadow: var(--box-shadow);
-    & button {
-      cursor: default;
-    }
   }
 
   .apos-notification__indicator {
