@@ -8,9 +8,9 @@ storiesOf('Notification', module)
   .add('Success', () => ({
     components: { aposNotification, Dot, Close },
     template: `
-      <aposNotification label="The article has been saved" modifier="apos-notification--success">
+      <aposNotification :clickable=true label="The article has been saved" modifier="apos-notification--success">
         <template v-slot:indicator>
-          <Dot title="Success" :size=12 decorative=true fillColor="var(--success)" />
+          <Dot title="Success" :size=12 :decorative=true fillColor="var(--success)" />
         </template>
         <template v-slot:button>
           <Close title="Close Notification" :size="14" />
@@ -21,9 +21,9 @@ storiesOf('Notification', module)
   .add('Danger', () => ({
     components: { aposNotification, Dot, Close },
     template: `
-    <aposNotification label="Something went wrong" modifier="apos-notification--danger">
+    <aposNotification :clickable=true label="Something went wrong" modifier="apos-notification--danger">
       <template v-slot:indicator>
-        <Dot title="Something went wrong" :size=12 decorative=true fillColor="var(--danger)" />
+        <Dot title="Something went wrong" :size=12 :decorative=true fillColor="var(--danger)" />
       </template>
       <template v-slot:button>
         <Close title="Close Notification" :size="14" />
@@ -34,9 +34,9 @@ storiesOf('Notification', module)
   .add('Info', () => ({
     components: { aposNotification, Dot, Close },
     template: `
-    <aposNotification label="Something happened, that is all" modifier="apos-notification--info">
+    <aposNotification :clickable=true label="Something happened, that is all" modifier="apos-notification--info">
       <template v-slot:indicator>
-        <Dot :size=12 decorative=true fillColor="var(--info)" />
+        <Dot :size=12 :decorative=true fillColor="var(--info)" />
       </template>
       <template v-slot:button>
         <Close title="Close Notification" :size="14" />
@@ -47,13 +47,19 @@ storiesOf('Notification', module)
   .add('Warning', () => ({
     components: { aposNotification, Dot, Close },
     template: `
-    <aposNotification label="You should know this, but maybe it’s fine" modifier="apos-notification--warning">
+    <aposNotification :clickable=true label="You should know this, but maybe it’s fine" modifier="apos-notification--warning">
       <template v-slot:indicator>
-        <Dot :size=12 decorative=true fillColor="var(--warning)" />
+        <Dot :size=12 :decorative=true fillColor="var(--warning)" />
       </template>
       <template v-slot:button>
         <Close title="Close Notification" :size="14" />
       </template>
     </aposNotification>
+  `
+  }))
+  .add('Not Clickable', () => ({
+    components: { aposNotification, Dot, Close },
+    template: `
+    <aposNotification label="This notification is not clickable." modifier="apos-notification--success"></aposNotification>
   `
   }))

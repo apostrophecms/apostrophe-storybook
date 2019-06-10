@@ -1,13 +1,13 @@
 <template>
-  <button :class="`apos-notification ${modifier}`" role="alert">
+  <component :is="clickable ? 'button' : 'div'" :class="`apos-notification ${modifier}`" role="alert">
     <span class="apos-notification__indicator">
       <slot name="indicator"></slot>
     </span>
     <span class="apos-notification__label">{{ label }}</span>
-    <button class="apos-notification__button">
+    <span class="apos-notification__button">
       <slot name="button"></slot>
-    </button>
-  </button>
+    </span>
+  </component>
 </template>
 
 <script>
@@ -17,7 +17,8 @@ module.exports = {
     modifier: {
       default: '',
       type: String
-    }
+    },
+    clickable: Boolean
   }
 }
 </script>
@@ -45,7 +46,7 @@ module.exports = {
     align-items: center;
     border: none;
     padding: 0;
-    background-color: transparent;   
+    background-color: transparent;
     margin-left: 10px;
     &:hover {
       cursor: pointer;
