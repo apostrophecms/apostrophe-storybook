@@ -25,7 +25,7 @@ module.exports = {
   padding: 6px 10px;
   background-color: var(--neutral-one);
   font-size: 1.2em;
-  border-radius: var(--radius-small);
+  border-radius: var(--border-radius);
   color: var(--neutral-eight);
   align-items: center;
   justify-content: center;

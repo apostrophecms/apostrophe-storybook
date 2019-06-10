@@ -19,7 +19,7 @@ module.exports = {
     color: var(--neutral-eight);
     background: var(--primary);
     padding: 10px 20px; // re use this?
-    border-radius: var(--radius-small);
+    border-radius: var(--border-radius);
     border: none;
     font-size: 1.3em;
     letter-spacing: 0.75px; // how do we reuse this
