@@ -1,13 +1,10 @@
 <template>
   <label :for="label"
-    :class="`apos-input-label--box apos-input-label--checkbox
+    :class="`apos-input-label--box apos-input-label--radio
       ${disabled ? ' apos-input-label--disabled' : ''}`">
-
-    <input type="checkbox" class="apos-input--box apos-input--checkbox"
+    <input type="radio" class="apos-input--box apos-input--radio"
       :value="value" :name="name" :id="label"
-      v-model="checked"
-      :disabled="disabled" :indeterminate.prop="indeterminate"/>
-
+      v-model="checked" :disabled="disabled"/>
     <span class="apos-input-indicator" aria-hidden="true">
       <component :is="`${
         indeterminate ? 'MinusIcon' :
@@ -23,13 +20,12 @@ import CheckBoldIcon from "vue-material-design-icons/CheckBold.vue";
 import MinusIcon from "vue-material-design-icons/Minus.vue";
 
 export default {
-  name: 'AposInputsCheckbox',
+  name: 'AposInputsRadio',
   props: {
     label: String,
     value: String,
     name: String,
     disabled: Boolean,
-    indeterminate: Boolean,
     checked: Boolean
   },
   components: {
@@ -43,8 +39,8 @@ export default {
   @import '../../scss/_inputs';
 
   .apos-input-indicator {
-    .apos-input--checkbox + & {
-      border-radius: 3px;
+    .apos-input--radio + & {
+      border-radius: 50%;
     }
   }
 </style>
