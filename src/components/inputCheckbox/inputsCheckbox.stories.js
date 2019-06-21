@@ -4,17 +4,17 @@ import AposInputsCheckbox from './inputsCheckbox.vue'
 storiesOf('Inputs (Checkbox)', module)
   .add('Checkbox', () => ({
     components: { AposInputsCheckbox },
-    template: `<AposInputsCheckbox inputType="checkbox" name="turtles" label="Donatello" value="does machines" />`
+    template: `<AposInputsCheckbox name="turtles" label="Donatello" value="does machines" />`
   }))
   .add('Checkbox (checked)', () => ({
     components: { AposInputsCheckbox },
-    template: `<AposInputsCheckbox inputType="checkbox" name="turtles" label="Donatello" value="does machines" checked="true"/>`
+    template: `<AposInputsCheckbox name="turtles" label="Donatello" value="does machines" checked="true"/>`
   }))
   .add('Checkbox (indeterminate)', () => ({
     components: { AposInputsCheckbox },
-    template: `<AposInputsCheckbox inputType="checkbox" name="turtles" label="Donatello" value="does machines" indeterminate="true" checked="true"/>`
+    template: `<AposInputsCheckbox name="turtles" label="Donatello" value="does machines" indeterminate="true" checked="true"/>`
   }))
   .add('Checkbox (disabled)', () => ({
     components: { AposInputsCheckbox },
-    template: `<AposInputsCheckbox inputType="checkbox" name="turtles" label="Donatello" value="does machines" disabled="true"/>`
+    template: `<AposInputsCheckbox name="turtles" label="Donatello" value="does machines" disabled="true"/>`
   }))

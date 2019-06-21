@@ -4,9 +4,9 @@ import AposInputsRadio from './inputsRadio.vue'
 storiesOf('Inputs (Radio)', module)
   .add('Radio', () => ({
     components: { AposInputsRadio },
-    template: `<AposInputsRadio inputType="checkbox" name="turtles" label="Donatello" value="does machines" />`
+    template: `<AposInputsRadio name="turtles" label="Donatello" value="does machines" />`
   }))
   .add('Radio (disabled)', () => ({
     components: { AposInputsRadio },
-    template: `<AposInputsRadio inputType="checkbox" name="turtles" label="Donatello" value="does machines" disabled="true"/>`
+    template: `<AposInputsRadio name="turtles" label="Donatello" value="does machines" disabled="true"/>`
   }))
