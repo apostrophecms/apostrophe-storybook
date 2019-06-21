@@ -1,0 +1,64 @@
+  .apos-input-label--box {
+    display: inline-flex;
+    align-items: center;
+    font-size: map-get($font-sizes, input-hint);
+    font-weight: map-get($font-weights, medium);
+    color: var(--neutral-two);
+
+    & + &,
+    .apos-legend + & {
+      margin-top: $spacing-base;
+    }
+  }
+
+  .apos-input-label--disabled {
+    color: var(--neutral-three);
+  }
+
+  $box-width: 14px;
+
+  .apos-input--box {
+    position: absolute;
+    display: inline;
+    max-width: $box-width;
+    margin: 0;
+    padding: 0;
+    visibility: hidden;
+  }
+
+  .apos-input-indicator {
+    @include apos-transition(all, .1s, ease-in-out);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: $box-width;
+    height: $box-width;
+    border: 1px solid var(--neutral-four);
+    background-color: var(--neutral-seven);
+
+    .apos-input--radio + & {
+      border-radius: 50%;
+    }
+
+    .apos-input-label--box > & {
+      margin-right: $spacing-base;
+    }
+
+    .apos-input-label--box:hover > &,
+    .apos-input-label--box:focus > & {
+      border-color: var(--neutral-two);
+    }
+
+    .apos-input--box[disabled] + & {
+      border-color: var(--neutral-five);
+      background-color: var(--neutral-five);
+    }
+
+    .apos-input--box:checked + & {
+      background-color: var(--primary);
+      border-color: var(--primary);
+      color: var(--neutral-seven);
+
+      .material-design-icon { display: inline-flex; }
+    }
+  }
