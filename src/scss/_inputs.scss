@@ -36,10 +36,6 @@
     border: 1px solid var(--neutral-four);
     background-color: var(--neutral-seven);
 
-    .apos-input--radio + & {
-      border-radius: 50%;
-    }
-
     .apos-input-label--box > & {
       margin-right: $spacing-base;
     }
@@ -54,7 +50,8 @@
       background-color: var(--neutral-five);
     }
 
-    .apos-input--box:checked + & {
+    .apos-input--box:checked + &,
+    .apos-input--box[checked] + & {
       background-color: var(--primary);
       border-color: var(--primary);
       color: var(--neutral-seven);
