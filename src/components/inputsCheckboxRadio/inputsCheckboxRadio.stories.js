@@ -8,7 +8,8 @@ const options = [
   },
   {
     label: 'Leonardo',
-    value: 'leads'
+    value: 'leads',
+    indeterminate: true
   },
   {
     label: 'Rafael',
@@ -16,7 +17,8 @@ const options = [
   },
   {
     label: 'Donatello',
-    value: 'does machines'
+    value: 'does machines',
+    disabled: true
   }
 ]
 
