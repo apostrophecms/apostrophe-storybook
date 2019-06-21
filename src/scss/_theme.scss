@@ -7,8 +7,16 @@ $font-families: (
 );
 
 $font-weights: (
+  medium: 500,
   bold: 700
 );
+
+$font-sizes: (
+  input-label: 14px,
+  input-hint: 12px
+);
+
+$spacing-base: 10px;
 
 :root, .apos-theme-light {
   --primary: #6516DD;
