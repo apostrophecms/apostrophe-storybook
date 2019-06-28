@@ -1,15 +1,17 @@
 <template>
   <nav class="apos-breadcrumb" aria-label="breadcrumb">
     <ol class="apos-breadcrumb__items">
-      <li v-for="item in items" :class="`apos-breadcrumb__item ${modifier}`">
+      <li v-for="(item, index) in items" :class="`apos-breadcrumb__item ${modifier}`">
         <component :is="item.href ? 'a' : 'span'" :href="item.href">{{ item.label }}</component>
+        <ChevronRightIcon class="apos-breadcrumb__chevron" :size="13" v-if="index !== last" />
       </li>
     </ol>
   </nav>
 </template>
 
 <script>
-module.exports = {
+import ChevronRightIcon from 'vue-material-design-icons/ChevronRight.vue';
+export default {
   props: {
     label: {
       default: 'Set a label',
@@ -22,10 +24,38 @@ module.exports = {
     items: {
       default: [],
       type: Array
+    },
+  },
+  computed: {
+    last() {
+       return Object.keys(this.items).length - 1;
     }
+  },
+  components: {
+    ChevronRightIcon
   }
 }
 </script>
 
 <style lang="scss">
+  .apos-breadcrumb__items {
+    margin-block-start: 0;
+    padding-inline-start: 0;
+  }
+  .apos-breadcrumb__item {
+    display: inline-flex;
+    align-items: center;
+    font-family: map-get($font-families, default);
+    letter-spacing: 0.75px;
+    font-size: 1.2em;
+    & a {
+      color: var(--primary);
+      text-decoration: none;
+    }
+  }
+  .apos-breadcrumb__chevron {
+    display: flex;
+    margin: 0 0.3rem;
+    color: var(--neutral-two);
+  }
 </style>
