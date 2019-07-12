@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/vue'
 
-import AposStringInput from './AposTextInput.vue'
+import AposStringInput from './AposStringInput.vue'
 
 const field = {
   mandatory: false,
@@ -17,7 +17,7 @@ const dateField = {
 
 const baseTemplate = `<AposStringInput :field="field" :value="value" :status="status"/>`
 
-storiesOf('Inputs (Text)', module)
+storiesOf('Inputs (strings)', module)
   .add('Text', () => ({
     components: { AposStringInput },
     data () {
@@ -64,7 +64,7 @@ storiesOf('Inputs (Text)', module)
     },
     template: baseTemplate
   }))
-  .add('Text, date', () => ({
+  .add('Date', () => ({
     components: { AposStringInput },
     data () {
       return {

@@ -10,7 +10,7 @@
 
 <script>
 // A component designed to be used as a scaffold for
-// AposTextInput and friends, which override the `body`
+// AposStringInput and friends, which override the `body`
 // slot
 export default {
   name: 'AposInputWrapper',
@@ -55,7 +55,5 @@ export default {
     color: var(--neutral-one);
   }
 
-  .apos-field-help {
-
-  }
+  .apos-field-help {}
 </style>
