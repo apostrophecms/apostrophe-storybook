@@ -1,5 +1,5 @@
 <template>
-  <div :class="cssClass">
+  <div :class="classList">
     <!-- TODO i18n -->
     <label class="apos-field-label">{{ field.label }}</label>
     <!-- TODO i18n -->
@@ -16,17 +16,32 @@ export default {
   name: 'AposInputWrapper',
   props: {
     field: Object,
-    error: [ String, Boolean ]
+    error: [ String, Boolean, Object ]
   },
   computed: {
-    cssClass() {
-      return `apos-field apos-field-${this.field.type} apos-field-${this.field.name} ${this.field.classes} ${this.errorClasses}`;
+    classList: function () {
+      return [
+        'apos-field',
+        `apos-field-${this.field.type}`,
+        `apos-field-${this.field.name}`,
+        this.field.classes,
+        this.errorClasses
+      ];
     },
-    errorClasses() {
+    errorClasses: function () {
       if (!this.error) {
-        return '';
+        return null;
       }
-      return `apos-field-error apos-${this.error}-error`;
+
+      let error = 'unknown';
+
+      if (typeof this.error === 'String') {
+        error = this.error;
+      } else if (this.error.type) {
+        error = this.error.type;
+      }
+
+      return `apos-field--error apos-field--error-${error}`;
     }
   }
 };

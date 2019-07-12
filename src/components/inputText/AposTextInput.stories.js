@@ -1,6 +1,6 @@
 import { storiesOf } from '@storybook/vue'
 
-import AposTextInput from './AposTextInput.vue'
+import AposStringInput from './AposTextInput.vue'
 
 const field = {
   mandatory: false,
@@ -10,11 +10,16 @@ const field = {
   placeholder: 'Enter the number.'
 }
 
-const baseTemplate = `<AposTextInput :field="field" :value="value" :status="status"/>`
+const dateField = {
+  ...field,
+  type: 'date'
+}
+
+const baseTemplate = `<AposStringInput :field="field" :value="value" :status="status"/>`
 
 storiesOf('Inputs (Text)', module)
   .add('Text', () => ({
-    components: { AposTextInput },
+    components: { AposStringInput },
     data () {
       return {
         field,
@@ -27,13 +32,44 @@ storiesOf('Inputs (Text)', module)
     template: baseTemplate
   }))
   .add('Text, disabled', () => ({
-    components: { AposTextInput },
+    components: { AposStringInput },
     data () {
       return {
         field,
         status: {
           disabled: true
         },
+        value: {
+          data: ''
+        }
+      }
+    },
+    template: baseTemplate
+  }))
+  .add('Text, error', () => ({
+    components: { AposStringInput },
+    data () {
+      return {
+        field,
+        status: {
+          error: {
+            type: 'invalid',
+            message: 'Not a valid email address'
+          }
+        },
+        value: {
+          data: ''
+        }
+      }
+    },
+    template: baseTemplate
+  }))
+  .add('Text, date', () => ({
+    components: { AposStringInput },
+    data () {
+      return {
+        field: dateField,
+        status: {},
         value: {
           data: ''
         }

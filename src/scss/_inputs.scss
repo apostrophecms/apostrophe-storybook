@@ -1,6 +1,12 @@
+.apos-input,
+.apos-input-wrapper {
+  .apos-field-label + & {
+    margin-top: $spacing-base;
+  }
+}
+
 .apos-input {
   color: var(--neutral-one);
-  margin-top: $spacing-base;
   background: var(--neutral-seven);
   border: 1px solid var(--neutral-four);
   border-radius: var(--border-radius);
@@ -21,6 +27,37 @@
     background: var(--neutral-five);
     border-color: var(--neutral-four);
     color: var(--neutral-two);
+  }
+
+  .apos-field--error & {
+    border-color: var(--danger);
+  }
+
+  &--text,
+  &--textarea {
+    padding: $input-padding;
+
+    .apos-field--error & {
+      padding-right: $input-padding * 1.5;
+    }
+  }
+}
+
+.apos-input-wrapper {
+  position: relative;
+  display: inline-block;
+}
+
+.apos-input-icon {
+  position: absolute;
+  right: $spacing-triple;
+  top: 50%;
+  transform: translate(100%, -50%);
+  color: var(--neutral-two);
+  pointer-events: none;
+
+  .apos-field--error & {
+    color: var(--danger);
   }
 }
 

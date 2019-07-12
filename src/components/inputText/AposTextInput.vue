@@ -1,7 +1,16 @@
 <template>
-  <AposInputWrapper :field="field" :error="error" >
+  <AposInputWrapper :field="field" :error="status.error" >
     <template slot="body">
-      <input class="apos-input apos-input--text" v-model="next" type="text" :placeholder=field.placeholder :disabled="status.disabled" />
+      <div class="apos-input-wrapper">
+        <input class="apos-input apos-input--text"
+          v-model="next" :type="field.type" :placeholder=field.placeholder
+          :disabled="status.disabled" />
+        <!-- NOTE: This calendar icon might be a bad idea for date fields since
+          they often have their own icon in the input. - AB -->
+        <component :is="`${
+          field.type === 'date' ? 'Calendar' : 'CircleMedium'}`"
+        :size="14" class="apos-input-icon" v-if="hasIcon"></component>
+      </div>
     </template>
   </AposInputWrapper>
 </template>
@@ -9,17 +18,28 @@
 <script>
 import AposInputWrapper from '../AposInputWrapper';
 import AposInputMixin from '../../mixins/AposInputMixin.js';
+import CircleMedium from "vue-material-design-icons/CircleMedium.vue";
+import Calendar from "vue-material-design-icons/Calendar.vue";
+
+const specialTypes = [ 'date' ]
 
 export default {
   props: {
     field: Object,
-    status: String
+    status: Object
   },
   components: {
-    AposInputWrapper
+    AposInputWrapper,
+    CircleMedium,
+    Calendar
   },
   mixins: [ AposInputMixin ],
-  name: 'AposTextInput',
+  name: 'AposStringInput',
+  computed: {
+    hasIcon: function () {
+      return this.status.error || specialTypes.includes(this.field.type);
+    }
+  },
   methods: {
     validate(value) {
       if (this.field.required) {
@@ -44,7 +64,4 @@ export default {
 </script>
 
 <style lang="scss">
-  .apos-input--text {
-    padding: $input-padding;
-  }
 </style>
