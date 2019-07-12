@@ -13,7 +13,7 @@
 // AposTextInput and friends, which override the `body`
 // slot
 export default {
-  name: 'ApostropheInputWrapper',
+  name: 'AposInputWrapper',
   props: {
     field: Object,
     error: [ String, Boolean ]

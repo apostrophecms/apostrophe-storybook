@@ -1,18 +1,18 @@
 <template>
-  <ApostropheInputWrapper :field="field" :error="error">
+  <AposInputWrapper :field="field" :error="error">
     <template slot="body">
       <input v-model="next" />
     </template>
-  </ApostropheInputWrapper>
+  </AposInputWrapper>
 </template>
 
 <script>
-import ApostropheInputWrapper from '../ApostropheInputWrapper';
+import AposInputWrapper from '../AposInputWrapper';
 import AposInputMixin from '../../mixins/AposInputMixin.js';
 
 export default {
   components: {
-    ApostropheInputWrapper
+    AposInputWrapper
   },
   mixins: [ AposInputMixin ],
   name: 'AposTextInput',
