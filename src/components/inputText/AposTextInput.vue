@@ -1,7 +1,7 @@
 <template>
-  <AposInputWrapper :field="field" :error="error">
+  <AposInputWrapper :field="field" :error="error" >
     <template slot="body">
-      <input v-model="next" />
+      <input class="apos-input apos-input--text" v-model="next" type="text" :placeholder=field.placeholder :disabled="status.disabled" />
     </template>
   </AposInputWrapper>
 </template>
@@ -11,6 +11,10 @@ import AposInputWrapper from '../AposInputWrapper';
 import AposInputMixin from '../../mixins/AposInputMixin.js';
 
 export default {
+  props: {
+    field: Object,
+    status: String
+  },
   components: {
     AposInputWrapper
   },
@@ -38,3 +42,9 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+  .apos-input--text {
+    padding: $input-padding;
+  }
+</style>

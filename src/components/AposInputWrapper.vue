@@ -31,3 +31,16 @@ export default {
   }
 };
 </script>
+
+<style lang="scss">
+  .apos-field-label {
+    display: block;
+    font-size: map-get($font-sizes, input);
+    font-weight: map-get($font-weights, medium);
+    color: var(--neutral-one);
+  }
+
+  .apos-field-help {
+
+  }
+</style>

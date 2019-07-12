@@ -1,3 +1,29 @@
+.apos-input {
+  color: var(--neutral-one);
+  margin-top: $spacing-base;
+  background: var(--neutral-seven);
+  border: 1px solid var(--neutral-four);
+  border-radius: var(--border-radius);
+  font-size: map-get($font-sizes, input);
+  @include apos-transition(border-color);
+
+  &::placeholder {
+    color: var(--neutral-two);
+    font-style: italic;
+  }
+
+  &:hover,
+  &:focus {
+    border-color: var(--neutral-two);
+  }
+
+  &[disabled] {
+    background: var(--neutral-five);
+    border-color: var(--neutral-four);
+    color: var(--neutral-two);
+  }
+}
+
   .apos-input-label--box {
     display: inline-flex;
     align-items: center;

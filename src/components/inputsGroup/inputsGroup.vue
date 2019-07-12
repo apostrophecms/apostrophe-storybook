@@ -30,7 +30,7 @@ export default {
   }
 
   .apos-legend {
-    font-size: map-get($font-sizes, input-label);
+    font-size: map-get($font-sizes, input);
     font-weight: map-get($font-weights, medium);
     color: var(--neutral-one);
   }
