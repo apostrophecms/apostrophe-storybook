@@ -11,13 +11,13 @@
 
 <script>
 import ApostropheInputWrapper from '../ApostropheInputWrapper';
-import ApostropheFieldMixin from '../../mixins/ApostropheInputMixin';
+import AposInputMixin from '../../mixins/AposInputMixin';
 
 export default {
   components: {
     ApostropheInputWrapper
   },
-  mixins: [ ApostropheFieldMixin ],
+  mixins: [ AposInputMixin ],
   name: 'ApostropheBooleanField',
   methods: {
     validate(value) {

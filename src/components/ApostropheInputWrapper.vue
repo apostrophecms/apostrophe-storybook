@@ -10,7 +10,7 @@
 
 <script>
 // A component designed to be used as a scaffold for
-// ApostropheStringField and friends, which override the `body`
+// AposTextInput and friends, which override the `body`
 // slot
 export default {
   name: 'ApostropheInputWrapper',
