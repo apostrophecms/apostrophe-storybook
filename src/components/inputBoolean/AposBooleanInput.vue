@@ -28,7 +28,7 @@ export default {
     CircleIcon
   },
   mixins: [ AposInputMixin ],
-  name: 'ApostropheBooleanField',
+  name: 'AposBooleanField',
   methods: {
     validate(value) {
       if (this.field.mandatory) {

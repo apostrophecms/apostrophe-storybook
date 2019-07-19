@@ -1,5 +1,5 @@
 import { storiesOf } from '@storybook/vue'
-import ApostropheBooleanInput from './ApostropheBooleanInput'
+import AposBooleanInput from './AposBooleanInput'
 
 const field = {
   mandatory: false,
@@ -10,7 +10,7 @@ const field = {
 
 storiesOf('Inputs (Boolean)', module)
   .add('Boolean', () => ({
-    components: { ApostropheBooleanInput },
+    components: { AposBooleanInput },
     data () {
       return {
         field,
@@ -20,10 +20,10 @@ storiesOf('Inputs (Boolean)', module)
         }
       }
     },
-    template: `<ApostropheBooleanInput :field="field" :value="value" :status="status"/>`
+    template: `<AposBooleanInput :field="field" :value="value" :status="status"/>`
   }))
   .add('Boolean (prechecked)', () => ({
-    components: { ApostropheBooleanInput },
+    components: { AposBooleanInput },
     data () {
       return {
         field,
@@ -33,5 +33,5 @@ storiesOf('Inputs (Boolean)', module)
         }
       }
     },
-    template: `<ApostropheBooleanInput :field="field" :value="value" :status="status"/>`
+    template: `<AposBooleanInput :field="field" :value="value" :status="status"/>`
   }))
