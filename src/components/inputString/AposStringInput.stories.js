@@ -7,12 +7,13 @@ const field = {
   name: 'plancksConstant',
   type: 'text',
   label: 'What is Planck\'s constant?',
-  placeholder: 'Enter the number.'
+  placeholder: 'Enter the number.',
+  icon: null
 }
 
 const dateField = {
   ...field,
-  type: 'date'
+  icon: 'Calendar'
 }
 
 const baseTemplate = `<AposStringInput :field="field" :value="value" :status="status"/>`

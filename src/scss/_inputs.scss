@@ -36,10 +36,7 @@
   &--text,
   &--textarea {
     padding: $input-padding;
-
-    .apos-field--error & {
-      padding-right: $input-padding * 1.5;
-    }
+    padding-right: $input-padding * 2;
   }
 }
 
@@ -50,9 +47,9 @@
 
 .apos-input-icon {
   position: absolute;
-  right: $spacing-triple;
+  right: $input-padding;
   top: 50%;
-  transform: translate(100%, -50%);
+  transform: translateY(-50%);
   color: var(--neutral-two);
   pointer-events: none;
 
