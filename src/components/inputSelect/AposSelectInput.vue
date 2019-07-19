@@ -6,7 +6,7 @@
           <option v-for="choice in field.choices" :key="choice.value"
             :value="choice.value">{{ choice.label }}</option>
         </select>
-        <ArrowDownDropCircleOutline :size="20" class="apos-input-icon" ></ArrowDownDropCircleOutline>
+        <MenuDown :size="24" class="apos-input-icon" ></MenuDown>
       </div>
     </template>
   </AposInputWrapper>
@@ -15,15 +15,12 @@
 <script>
 import AposInputWrapper from '../AposInputWrapper';
 import AposInputMixin from '../../mixins/AposInputMixin.js';
-// TODO: Get the right arrow. I have no internet to look up...
-import ArrowDownDropCircleOutline from "vue-material-design-icons/ArrowDownDropCircleOutline.vue";
-import Calendar from "vue-material-design-icons/Calendar.vue";
+import MenuDown from "vue-material-design-icons/MenuDown.vue";
 
 export default {
   components: {
     AposInputWrapper,
-    ArrowDownDropCircleOutline,
-    Calendar
+    MenuDown
   },
   mixins: [ AposInputMixin ],
   name: 'AposSelectInput',

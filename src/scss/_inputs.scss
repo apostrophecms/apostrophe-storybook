@@ -1,5 +1,6 @@
 .apos-input,
-.apos-input-wrapper {
+.apos-input-wrapper,
+.apos-choice-label {
   .apos-field-label + &,
   .apos-field-help + & {
     margin-top: $spacing-base;
@@ -49,8 +50,8 @@
   display: inline-block;
 }
 
-.apos-input-label--box {
-  display: inline-flex;
+.apos-choice-label {
+  display: flex;
   align-items: center;
   font-size: map-get($font-sizes, input-hint);
   font-weight: map-get($font-weights, medium);
@@ -68,7 +69,7 @@
 
 $box-width: 14px;
 
-.apos-input--box {
+.apos-input--choice {
   position: absolute;
   display: inline;
   max-width: $box-width;
@@ -87,22 +88,22 @@ $box-width: 14px;
   border: 1px solid var(--neutral-four);
   background-color: var(--neutral-seven);
 
-  .apos-input-label--box > & {
+  .apos-choice-label > & {
     margin-right: $spacing-base;
   }
 
-  .apos-input-label--box:hover > &,
-  .apos-input-label--box:focus > & {
+  .apos-choice-label:hover > &,
+  .apos-choice-label:focus > & {
     border-color: var(--neutral-two);
   }
 
-  .apos-input--box[disabled] + & {
+  .apos-input--choice[disabled] + & {
     border-color: var(--neutral-five);
     background-color: var(--neutral-five);
   }
 
-  .apos-input--box:checked + &,
-  .apos-input--box[checked] + & {
+  .apos-input--choice:checked + &,
+  .apos-input--choice[checked] + & {
     background-color: var(--primary);
     border-color: var(--primary);
     color: var(--neutral-seven);

@@ -4,10 +4,9 @@ import AposSelectInput from './AposSelectInput.vue'
 
 const field = {
   mandatory: false,
-  name: 'plancksConstant',
+  name: 'mashHousing',
   type: 'select',
   label: 'MASH housing?',
-  placeholder: 'Enter the number.',
   choices: [
     {
       label: 'Mansion',

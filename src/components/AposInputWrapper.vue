@@ -1,14 +1,14 @@
 <template>
-  <div :class="classList">
+  <component :is="wrapEl" :class="classList">
     <!-- TODO i18n -->
-    <label class="apos-field-label">
+    <labelEl :is="labelEl" class="apos-field-label">
       {{ field.label }}
       <span v-if="field.mandatory" class="apos-field-required">*</span>
-    </label>
+    </labelEl>
     <!-- TODO i18n -->
     <p v-if="field.help" class="apos-field-help">{{ field.help }}</p>
     <slot name="body"></slot>
-  </div>
+  </component>
 </template>
 
 <script>
@@ -19,6 +19,18 @@ export default {
   props: {
     field: Object,
     error: [ String, Boolean, Object ]
+  },
+  data () {
+    return {
+      wrapEl: 'div',
+      labelEl: 'label'
+    }
+  },
+  mounted: function () {
+    if (this.field.type === 'radio' || this.field.type === 'checkbox') {
+      this.wrapEl = 'fieldset';
+      this.labelEl = 'legend';
+    }
   },
   computed: {
     classList: function () {
@@ -51,9 +63,14 @@ export default {
 
 <style lang="scss">
   @import '../scss/_inputs';
+  .apos-field {
+    border-width: 0;
+    padding: 0;
+  }
 
   .apos-field-label {
     display: block;
+    padding: 0;
     font-size: map-get($font-sizes, input);
     font-weight: map-get($font-weights, medium);
     color: var(--neutral-one);
