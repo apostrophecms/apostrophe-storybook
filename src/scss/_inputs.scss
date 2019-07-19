@@ -1,17 +1,18 @@
 .apos-input,
 .apos-input-wrapper {
-  .apos-field-label + & {
+  .apos-field-label + &,
+  .apos-field-help + & {
     margin-top: $spacing-base;
   }
 }
 
 .apos-input {
-  color: var(--neutral-one);
-  background: var(--neutral-seven);
   border: 1px solid var(--neutral-four);
   border-radius: var(--border-radius);
+  background: var(--neutral-seven);
+  color: var(--neutral-one);
   font-size: map-get($font-sizes, input);
-  @include apos-transition(border-color);
+  @include apos-transition(all);
 
   &::placeholder {
     color: var(--neutral-two);
@@ -24,8 +25,8 @@
   }
 
   &[disabled] {
-    background: var(--neutral-five);
     border-color: var(--neutral-four);
+    background: var(--neutral-five);
     color: var(--neutral-two);
   }
 
@@ -45,77 +46,64 @@
   display: inline-block;
 }
 
-.apos-input-icon {
-  position: absolute;
-  right: $input-padding;
-  top: 50%;
-  transform: translateY(-50%);
+.apos-input-label--box {
+  display: inline-flex;
+  align-items: center;
+  font-size: map-get($font-sizes, input-hint);
+  font-weight: map-get($font-weights, medium);
   color: var(--neutral-two);
-  pointer-events: none;
 
-  .apos-field--error & {
-    color: var(--danger);
+  & + &,
+  .apos-legend + & {
+    margin-top: $spacing-base;
   }
 }
 
-.apos-input-label--box {
-    display: inline-flex;
-    align-items: center;
-    font-size: map-get($font-sizes, input-hint);
-    font-weight: map-get($font-weights, medium);
-    color: var(--neutral-two);
+.apos-input-label--disabled {
+  color: var(--neutral-three);
+}
 
-    & + &,
-    .apos-legend + & {
-      margin-top: $spacing-base;
-    }
+$box-width: 14px;
+
+.apos-input--box {
+  position: absolute;
+  display: inline;
+  max-width: $box-width;
+  margin: 0;
+  padding: 0;
+  visibility: hidden;
+}
+
+.apos-input-indicator {
+  @include apos-transition(all, .1s, ease-in-out);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: $box-width;
+  height: $box-width;
+  border: 1px solid var(--neutral-four);
+  background-color: var(--neutral-seven);
+
+  .apos-input-label--box > & {
+    margin-right: $spacing-base;
   }
 
-  .apos-input-label--disabled {
-    color: var(--neutral-three);
+  .apos-input-label--box:hover > &,
+  .apos-input-label--box:focus > & {
+    border-color: var(--neutral-two);
   }
 
-  $box-width: 14px;
-
-  .apos-input--box {
-    position: absolute;
-    display: inline;
-    max-width: $box-width;
-    margin: 0;
-    padding: 0;
-    visibility: hidden;
+  .apos-input--box[disabled] + & {
+    border-color: var(--neutral-five);
+    background-color: var(--neutral-five);
   }
 
-  .apos-input-indicator {
-    @include apos-transition(all, .1s, ease-in-out);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: $box-width;
-    height: $box-width;
-    border: 1px solid var(--neutral-four);
-    background-color: var(--neutral-seven);
+  .apos-input--box:checked + &,
+  .apos-input--box[checked] + & {
+    background-color: var(--primary);
+    border-color: var(--primary);
+    color: var(--neutral-seven);
 
-    .apos-input-label--box > & {
-      margin-right: $spacing-base;
-    }
-
-    .apos-input-label--box:hover > &,
-    .apos-input-label--box:focus > & {
-      border-color: var(--neutral-two);
-    }
-
-    .apos-input--box[disabled] + & {
-      border-color: var(--neutral-five);
-      background-color: var(--neutral-five);
-    }
-
-    .apos-input--box:checked + &,
-    .apos-input--box[checked] + & {
-      background-color: var(--primary);
-      border-color: var(--primary);
-      color: var(--neutral-seven);
-
-      .material-design-icon { display: inline-flex; }
-    }
+    .material-design-icon { display: inline-flex; }
   }
+}

@@ -2,7 +2,8 @@ module.exports = {
   props: {
     value: Object,
     field: Object,
-    context: Object
+    context: Object,
+    status: Object
   },
   data () {
     return {

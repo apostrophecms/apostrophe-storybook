@@ -20,10 +20,6 @@ import CircleMedium from "vue-material-design-icons/CircleMedium.vue";
 import Calendar from "vue-material-design-icons/Calendar.vue";
 
 export default {
-  props: {
-    field: Object,
-    status: Object
-  },
   components: {
     AposInputWrapper,
     CircleMedium,
@@ -59,5 +55,17 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
+.apos-input-icon {
+  position: absolute;
+  right: $input-padding;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--neutral-two);
+  pointer-events: none;
+
+  .apos-field--error & {
+    color: var(--danger);
+  }
+}
 </style>

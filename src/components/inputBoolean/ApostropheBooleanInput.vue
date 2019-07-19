@@ -1,10 +1,18 @@
 <template>
-  <AposInputWrapper :field="field" :error="error">
+  <AposInputWrapper :field="field" :error="status.error">
     <template slot="body">
-      <input type="radio" :id="uid + '-true'" :value="true" v-model="next">
-      <label :for="uid + '-true'">Yes</label>
-      <input type="radio" :id="uid + '-false'" :value="false" v-model="next">
-      <label :for="uid + '-false'">No</label>
+      <div class="apos-input-wrapper apos-boolean">
+        <input class="apos-sr-only" type="radio" :id="uid + '-true'" :value="true" v-model="next" :checked="value.data === true">
+        <label :for="uid + '-true'" class="apos-boolean__label apos-input">
+          <CircleIcon :size="12" class="apos-boolean__icon"
+            title=""></CircleIcon>Yes
+        </label>
+        <input class="apos-sr-only" type="radio" :id="uid + '-false'" :value="false" v-model="next" :checked="value.data === false">
+        <label :for="uid + '-false'" class="apos-boolean__label apos-input">
+          <CircleIcon :size="12" class="apos-boolean__icon"
+            title=""></CircleIcon>No
+        </label>
+      </div>
     </template>
   </AposInputWrapper>
 </template>
@@ -12,10 +20,12 @@
 <script>
 import AposInputWrapper from '../AposInputWrapper';
 import AposInputMixin from '../../mixins/AposInputMixin';
+import CircleIcon from "vue-material-design-icons/Circle.vue";
 
 export default {
   components: {
-    AposInputWrapper
+    AposInputWrapper,
+    CircleIcon
   },
   mixins: [ AposInputMixin ],
   name: 'ApostropheBooleanField',
@@ -31,3 +41,45 @@ export default {
   }
 };
 </script>
+
+<style lang="scss" scoped>
+  .apos-boolean {
+    position: relative;
+    z-index: 0;
+    display: inline-flex;
+  }
+
+  .apos-boolean__label {
+    position: relative;
+    display: inline-block;
+    padding: ($input-padding / 2) $input-padding;
+
+    &:first-of-type {
+      border-top-right-radius: 0;
+      border-bottom-right-radius: 0;
+    }
+
+    &:last-of-type {
+      border-top-left-radius: 0;
+      border-bottom-left-radius: 0;
+      margin-left: -1px;
+    }
+
+    &:hover,
+    &:focus {
+      z-index: 1;
+    }
+
+    input:checked + & {
+      background-color: var(--neutral-eight);
+
+      .apos-boolean__icon {
+        color: var(--success);
+      }
+    }
+  }
+
+  .apos-boolean__icon {
+    margin-right: $spacing-base;
+  }
+</style>

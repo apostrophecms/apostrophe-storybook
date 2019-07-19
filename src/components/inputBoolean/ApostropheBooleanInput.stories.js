@@ -14,10 +14,24 @@ storiesOf('Inputs (Boolean)', module)
     data () {
       return {
         field,
+        status: {},
         value: {
-          data: 'test'
+          data: null
         }
       }
     },
-    template: `<ApostropheBooleanInput :field="field" :value="value" />`
+    template: `<ApostropheBooleanInput :field="field" :value="value" :status="status"/>`
+  }))
+  .add('Boolean (prechecked)', () => ({
+    components: { ApostropheBooleanInput },
+    data () {
+      return {
+        field,
+        status: {},
+        value: {
+          data: false
+        }
+      }
+    },
+    template: `<ApostropheBooleanInput :field="field" :value="value" :status="status"/>`
   }))

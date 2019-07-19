@@ -7,9 +7,7 @@ const field = {
   name: 'plancksConstant',
   type: 'text',
   label: 'What is Planck\'s constant?',
-  placeholder: 'Enter the number.',
-  help: null,
-  icon: null
+  placeholder: 'Enter the number.'
 }
 
 const dateField = {

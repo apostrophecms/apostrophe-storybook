@@ -40,8 +40,6 @@ export default {
 </script>
 
 <style lang="scss">
-  @import '../../scss/_inputs';
-
   .apos-input-indicator {
     .apos-input--checkbox + & {
       border-radius: 3px;

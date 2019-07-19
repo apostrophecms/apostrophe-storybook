@@ -50,6 +50,8 @@ export default {
 </script>
 
 <style lang="scss">
+  @import '../scss/_inputs';
+
   .apos-field-label {
     display: block;
     font-size: map-get($font-sizes, input);
@@ -58,6 +60,7 @@ export default {
   }
 
   .apos-field-help {
+    margin: $spacing-base 0 0;
     font-size: map-get($font-sizes, input-hint);
     color: var(--neutral-two);
   }

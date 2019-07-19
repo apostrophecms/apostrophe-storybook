@@ -36,8 +36,6 @@ export default {
 </script>
 
 <style lang="scss">
-  @import '../../scss/_inputs';
-
   .apos-input-indicator {
     .apos-input--radio + & {
       border-radius: 50%;
