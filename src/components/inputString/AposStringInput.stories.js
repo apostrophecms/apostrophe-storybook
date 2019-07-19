@@ -16,6 +16,11 @@ const dateField = {
   icon: 'Calendar'
 }
 
+const requiredField = {
+  ...field,
+  mandatory: true
+}
+
 const baseTemplate = `<AposStringInput :field="field" :value="value" :status="status"/>`
 
 storiesOf('Inputs (strings)', module)
@@ -70,6 +75,19 @@ storiesOf('Inputs (strings)', module)
     data () {
       return {
         field: dateField,
+        status: {},
+        value: {
+          data: ''
+        }
+      }
+    },
+    template: baseTemplate
+  }))
+  .add('Required', () => ({
+    components: { AposStringInput },
+    data () {
+      return {
+        field: requiredField,
         status: {},
         value: {
           data: ''

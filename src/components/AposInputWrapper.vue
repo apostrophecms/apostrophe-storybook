@@ -1,7 +1,10 @@
 <template>
   <div :class="classList">
     <!-- TODO i18n -->
-    <label class="apos-field-label">{{ field.label }}</label>
+    <label class="apos-field-label">
+      {{ field.label }}
+      <span v-if="field.mandatory" class="apos-field-required">*</span>
+    </label>
     <!-- TODO i18n -->
     <p v-if="field.help" class="apos-field-help">{{ field.help }}</p>
     <slot name="body"></slot>
@@ -9,9 +12,8 @@
 </template>
 
 <script>
-// A component designed to be used as a scaffold for
-// AposStringInput and friends, which override the `body`
-// slot
+// A component designed to be used as a scaffold for AposStringInput and
+// friends, which override the `body` slot
 export default {
   name: 'AposInputWrapper',
   props: {
@@ -56,4 +58,8 @@ export default {
   }
 
   .apos-field-help {}
+
+  .apos-field-required {
+    color: var(--danger);
+  }
 </style>

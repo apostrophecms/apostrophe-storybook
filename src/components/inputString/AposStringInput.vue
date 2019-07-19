@@ -4,7 +4,7 @@
       <div class="apos-input-wrapper">
         <input class="apos-input apos-input--text"
           v-model="next" :type="field.type" :placeholder=field.placeholder
-          :disabled="status.disabled" />
+          :disabled="status.disabled" :required="field.mandatory"/>
         <component :is="`${
           field.icon ? field.icon : 'CircleMedium' }`"
           :size="20" class="apos-input-icon" v-if="hasIcon"></component>
