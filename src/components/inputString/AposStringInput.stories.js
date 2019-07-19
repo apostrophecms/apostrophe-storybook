@@ -8,6 +8,7 @@ const field = {
   type: 'text',
   label: 'What is Planck\'s constant?',
   placeholder: 'Enter the number.',
+  help: null,
   icon: null
 }
 
@@ -19,6 +20,11 @@ const dateField = {
 const requiredField = {
   ...field,
   mandatory: true
+}
+
+const helpField = {
+  ...field,
+  help: 'Sing the Neverending Story theme song.'
 }
 
 const baseTemplate = `<AposStringInput :field="field" :value="value" :status="status"/>`
@@ -88,6 +94,19 @@ storiesOf('Inputs (strings)', module)
     data () {
       return {
         field: requiredField,
+        status: {},
+        value: {
+          data: ''
+        }
+      }
+    },
+    template: baseTemplate
+  }))
+  .add('With help text', () => ({
+    components: { AposStringInput },
+    data () {
+      return {
+        field: helpField,
         status: {},
         value: {
           data: ''

@@ -57,7 +57,10 @@ export default {
     color: var(--neutral-one);
   }
 
-  .apos-field-help {}
+  .apos-field-help {
+    font-size: map-get($font-sizes, input-hint);
+    color: var(--neutral-two);
+  }
 
   .apos-field-required {
     color: var(--danger);
