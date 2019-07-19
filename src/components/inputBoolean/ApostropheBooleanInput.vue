@@ -50,6 +50,7 @@ export default {
   }
 
   .apos-boolean__label {
+    min-width: 0;
     position: relative;
     display: inline-block;
     padding: ($input-padding / 2) $input-padding;

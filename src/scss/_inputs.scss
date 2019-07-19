@@ -7,6 +7,8 @@
 }
 
 .apos-input {
+  min-width: 460px;
+  max-width: 100%;
   border: 1px solid var(--neutral-four);
   border-radius: var(--border-radius);
   background: var(--neutral-seven);
@@ -35,7 +37,8 @@
   }
 
   &--text,
-  &--textarea {
+  &--textarea,
+  &--select {
     padding: $input-padding;
     padding-right: $input-padding * 2;
   }
