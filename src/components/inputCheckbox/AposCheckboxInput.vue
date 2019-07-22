@@ -4,8 +4,9 @@
       <label class="apos-choice-label" :for="getChoiceId(uid, choice.value)"
         v-for="choice in field.choices" :key="choice.value">
         <input type="checkbox" class="apos-input--choice apos-input--checkbox"
-          :value="choice.value" :name="field.name" :id="getChoiceId(uid, choice.value)"
-          @click="toggle(choice)" :disabled="status.disabled"/>
+          :value="choice.value" :name="field.name"
+          :id="getChoiceId(uid, choice.value)"
+          v-model="value.data" :disabled="status.disabled"/>
         <span class="apos-input-indicator" aria-hidden="true">
           <component :is="`${
               choice.indeterminate ? 'MinusIcon' : 'CheckBoldIcon'
@@ -33,30 +34,22 @@ export default {
     MinusIcon
   },
   methods: {
-    toggle: function (choice) {
-      if (this.value.data.includes(choice.value)) {
-        this.value.data = this.value.data.filter(value => {
-          return value !== choice.value;
-        })
-      } else {
-        this.value.data.push(choice.value);
-      }
-    },
     getChoiceId(uid, value) {
        return uid + value.replace(/\s/g, '');
     },
-    validate(value) {
+    validate(values) {
       if (!Array.isArray(this.field.choices)) {
         return 'choices';
       }
 
-      if (this.field.required && this.value.data.length === 0) {
+      if (this.field.required &&
+        !Array.isArray(values) && values.length === 0) {
         return 'required';
       }
 
-      this.value.data.forEach(chosen => {
+      values.forEach(chosen => {
         if (!this.field.choices.includes(chosen)) {
-          return 'checked'
+          return 'selected'
         }
       });
 
