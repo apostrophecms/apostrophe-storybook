@@ -10,7 +10,7 @@
           <component :is="`${
               choice.indeterminate ? 'MinusIcon' : 'CheckBoldIcon'
             }`"
-            :size="10" v-if="checked.includes(choice.value)"></component>
+            :size="10" v-if="value.data.includes(choice.value)"></component>
         </span>
         {{ choice.label }}
       </label>
@@ -27,11 +27,6 @@ import MinusIcon from "vue-material-design-icons/Minus.vue";
 export default {
   name: 'AposCheckboxInput',
   mixins: [ AposInputMixin ],
-  data () {
-    return {
-      checked: []
-    }
-  },
   components: {
     AposInputWrapper,
     CheckBoldIcon,
@@ -39,35 +34,37 @@ export default {
   },
   methods: {
     toggle: function (choice) {
-      if (this.checked.includes(choice.value)) {
-        this.checked = this.checked.filter(value => {
+      if (this.value.data.includes(choice.value)) {
+        this.value.data = this.value.data.filter(value => {
           return value !== choice.value;
         })
       } else {
-        this.checked.push(choice.value);
+        this.value.data.push(choice.value);
       }
     },
     getChoiceId(uid, value) {
        return uid + value.replace(/\s/g, '');
     },
     validate(value) {
-      if (this.field.required) {
-        if (!value.length) {
-          return 'required';
-        }
+      if (!Array.isArray(this.field.choices)) {
+        return 'choices';
       }
-      if (this.field.min) {
-        if (value.length && (value.length < this.field.min)) {
-          return 'min';
-        }
+
+      if (this.field.required && this.value.data.length === 0) {
+        return 'required';
       }
-      if (this.field.max) {
-        if (value.length && (value.length > this.field.max)) {
-          return 'max';
+
+      this.value.data.forEach(chosen => {
+        if (!this.field.choices.includes(chosen)) {
+          return 'checked'
         }
-      }
+      });
+
       return false;
     }
+  },
+  beforeMount: function () {
+    this.value.data = Array.isArray(this.value.data) ? this.value.data : [];
   }
 }
 </script>
