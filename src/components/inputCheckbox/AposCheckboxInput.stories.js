@@ -4,7 +4,7 @@ import AposCheckboxInput from './AposCheckboxInput.vue'
 
 const field = {
   mandatory: true,
-  name: 'turtleLeads',
+  name: 'toppings',
   type: 'radio',
   label: 'Which toppings?',
   choices: [

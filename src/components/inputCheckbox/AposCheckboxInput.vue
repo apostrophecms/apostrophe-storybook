@@ -1,10 +1,10 @@
 <template>
   <AposInputWrapper :field="field" :error="status.error" >
     <template slot="body">
-      <label class="apos-choice-label" :for="choice.value"
+      <label class="apos-choice-label" :for="getChoiceId(uid, choice.value)"
         v-for="choice in field.choices" :key="choice.value">
         <input type="checkbox" class="apos-input--choice apos-input--checkbox"
-          :value="choice.value" :name="field.name" :id="choice.value"
+          :value="choice.value" :name="field.name" :id="getChoiceId(uid, choice.value)"
           @click="toggle(choice)" :disabled="status.disabled"/>
         <span class="apos-input-indicator" aria-hidden="true">
           <component :is="`${
@@ -46,6 +46,9 @@ export default {
       } else {
         this.checked.push(choice.value);
       }
+    },
+    getChoiceId(uid, value) {
+       return uid + value.replace(/\s/g, '');
     },
     validate(value) {
       if (this.field.required) {

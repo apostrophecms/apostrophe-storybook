@@ -1,10 +1,10 @@
 <template>
   <component :is="wrapEl" :class="classList">
     <!-- TODO i18n -->
-    <labelEl :is="labelEl" class="apos-field-label">
+    <component :is="labelEl" class="apos-field-label" :for="uid">
       {{ field.label }}
       <span v-if="field.mandatory" class="apos-field-required">*</span>
-    </labelEl>
+    </component>
     <!-- TODO i18n -->
     <p v-if="field.help" class="apos-field-help">{{ field.help }}</p>
     <slot name="body"></slot>
@@ -18,7 +18,8 @@ export default {
   name: 'AposInputWrapper',
   props: {
     field: Object,
-    error: [ String, Boolean, Object ]
+    error: [ String, Boolean, Object ],
+    uid: Number
   },
   data () {
     return {
