@@ -49,7 +49,6 @@ export default {
 .apos-input--select {
   -moz-appearance: none;
   -webkit-appearance: none;
-  // background-image: url();
   background-repeat: no-repeat, repeat;
 
 }

@@ -12,7 +12,7 @@
             next === choice.value ? 'CheckBoldIcon' : 'span'}`"
             :size="8" v-if="next === choice.value"></component>
         </span>
-        {{ choice.label }}
+        <span>{{ choice.label }}</span>
       </label>
     </template>
   </AposInputWrapper>

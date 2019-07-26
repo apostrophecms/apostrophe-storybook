@@ -7,7 +7,7 @@
           <CircleIcon :size="12" class="apos-boolean__icon"
             title=""></CircleIcon>Yes
         </label>
-        <input class="apos-sr-only" type="radio" :id="uid + '-false'" :value="false" v-model="next" :checked="value.data === false">
+        <input class="apos-sr-only apos-boolean__input--false" type="radio" :id="uid + '-false'" :value="false" v-model="next" :checked="value.data === false">
         <label :for="uid + '-false'" class="apos-boolean__label apos-input">
           <CircleIcon :size="12" class="apos-boolean__icon"
             title=""></CircleIcon>No
@@ -49,11 +49,15 @@ export default {
     display: inline-flex;
   }
 
+  .apos-boolean__icon {
+    color: var(--neutral-four);
+  }
+
   .apos-boolean__label {
     min-width: 0;
     position: relative;
     display: inline-block;
-    padding: ($input-padding / 2) $input-padding;
+    padding: ($boolean-padding / 2) $boolean-padding;
 
     &:first-of-type {
       border-top-right-radius: 0;
@@ -78,9 +82,19 @@ export default {
         color: var(--success);
       }
     }
+
+    input:checked.apos-boolean__input--false + & {
+      .apos-boolean__icon{
+        color: var(--neutral-two);
+      }
+    }
   }
 
   .apos-boolean__icon {
     margin-right: $spacing-base;
+    svg {
+      top: 1px;
+      position: relative;
+    }
   }
 </style>

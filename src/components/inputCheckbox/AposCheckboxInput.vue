@@ -13,7 +13,7 @@
             }`"
             :size="10" v-if="value.data.includes(choice.value)"></component>
         </span>
-        {{ choice.label }}
+        <span>{{ choice.label }}</span>
       </label>
     </template>
   </AposInputWrapper>
@@ -65,4 +65,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .apos-input-indicator {
+    border-radius: 3px;
+  }
 </style>

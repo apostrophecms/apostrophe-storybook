@@ -67,12 +67,15 @@ export default {
   .apos-field {
     border-width: 0;
     padding: 0;
+    [disable]:hover, [disabled] ~ *:hover {
+      cursor: not-allowed;
+    }
   }
 
   .apos-field-label {
     display: block;
     padding: 0;
-    font-size: map-get($font-sizes, input);
+    font-size: map-get($font-sizes, input-label);
     font-weight: map-get($font-weights, medium);
     color: var(--neutral-one);
   }
@@ -80,7 +83,8 @@ export default {
   .apos-field-help {
     margin: $spacing-base 0 0;
     font-size: map-get($font-sizes, input-hint);
-    color: var(--neutral-two);
+    font-weight: 500;
+    color: var(--neutral-three);
   }
 
   .apos-field-required {

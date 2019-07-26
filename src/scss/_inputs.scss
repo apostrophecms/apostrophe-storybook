@@ -10,7 +10,7 @@
 .apos-input {
   min-width: 460px;
   max-width: 100%;
-  border: 1px solid var(--neutral-four);
+  border: 1px solid var(--neutral-five);
   border-radius: var(--border-radius);
   background: var(--neutral-seven);
   color: var(--neutral-one);
@@ -27,14 +27,27 @@
     border-color: var(--neutral-two);
   }
 
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 3px var(--neutral-two);
+    border-color: var(--neutral-two);
+  }
+
   &[disabled] {
     border-color: var(--neutral-four);
-    background: var(--neutral-five);
+    background: var(--neutral-six);
     color: var(--neutral-two);
+    &:hover {
+      cursor: not-allowed;
+    }
   }
 
   .apos-field--error & {
     border-color: var(--danger);
+    &:focus {
+      outline: none;
+      box-shadow: 0 0 3px var(--danger);
+    }
   }
 
   &--text,

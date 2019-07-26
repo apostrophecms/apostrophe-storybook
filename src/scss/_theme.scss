@@ -12,7 +12,8 @@ $font-weights: (
 );
 
 $font-sizes: (
-  input: 14px,
+  input-label: 14px,
+  input: 12px,
   input-hint: 12px
 );
 
@@ -20,7 +21,8 @@ $spacing-base: 10px;
 $spacing-double: $spacing-base * 2;
 $spacing-triple: $spacing-base * 3;
 
-$input-padding: $spacing-double;
+$input-padding: $spacing-base * 1.5;
+$boolean-padding: $spacing-double;
 
 :root, .apos-theme-light {
   --primary: #6516DD;
