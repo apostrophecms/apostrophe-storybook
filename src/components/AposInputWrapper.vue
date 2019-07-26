@@ -67,9 +67,13 @@ export default {
   .apos-field {
     border-width: 0;
     padding: 0;
-    [disable]:hover, [disabled] ~ *:hover {
+    [disable]:hover, [disabled] ~ .apos-choice-label-text:hover {
       cursor: not-allowed;
     }
+  }
+
+  .apos-field-text {
+    font-size: map-get($font-sizes, input-label);
   }
 
   .apos-field-label {
