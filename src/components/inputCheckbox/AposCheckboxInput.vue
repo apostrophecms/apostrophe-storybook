@@ -47,11 +47,13 @@ export default {
         return 'required';
       }
 
-      values.forEach(chosen => {
-        if (!this.field.choices.includes(chosen)) {
-          return 'selected'
-        }
-      });
+      if (Array.isArray(values)) {
+        values.forEach(chosen => {
+          if (!this.field.choices.includes(chosen)) {
+            return 'selected'
+          }
+        });
+      }
 
       return false;
     }
