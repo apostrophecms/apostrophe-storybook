@@ -1,18 +1,34 @@
 $font-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 $font-secondary: 'Roboto Mono', monospace;
 
+body {
+  font-family: $font-default;
+  font-size: 10px;
+}
+
 $font-families: (
   default: $font-default,
   secondary: $font-secondary
 );
 
 $font-weights: (
+  medium: 500,
   bold: 700
 );
 
 $font-sizes: (
-  meta: 12px
+  meta: 12px,
+  input-label: 14px,
+  input: 12px,
+  input-hint: 12px
 );
+
+$spacing-base: 10px;
+$spacing-double: $spacing-base * 2;
+$spacing-triple: $spacing-base * 3;
+
+$input-padding: $spacing-base * 1.5;
+$boolean-padding: $spacing-double;
 
 :root, .apos-theme-light {
   --primary: #6516DD;
