@@ -1,7 +1,7 @@
 <template>
   <nav class="apos-breadcrumb" aria-label="breadcrumb">
     <ol class="apos-breadcrumb__items">
-      <li v-for="(item, index) in items" :class="`apos-breadcrumb__item ${modifier}`">
+      <li v-for="(item, index) in items" :key="index" :class="`apos-breadcrumb__item ${modifier}`">
         <component :is="item.href ? 'a' : 'span'" :href="item.href">{{ item.label }}</component>
         <ChevronRightIcon class="apos-breadcrumb__chevron" :size="13" v-if="index !== last" />
       </li>
@@ -39,23 +39,24 @@ export default {
 
 <style lang="scss">
   .apos-breadcrumb__items {
-    margin-block-start: 0;
-    padding-inline-start: 0;
+    margin: 18px 20px;
+    padding-left: 0;
   }
   .apos-breadcrumb__item {
     display: inline-flex;
     align-items: center;
     font-family: map-get($font-families, default);
     letter-spacing: 0.75px;
-    font-size: 1.2em;
-    & a {
-      color: var(--primary);
+    font-size: map-get($font-sizes, meta);
+
+    a {
+      @include link-primary;
       text-decoration: none;
     }
   }
   .apos-breadcrumb__chevron {
     display: flex;
-    margin: 0 0.3rem;
+    margin: 0 4px;
     color: var(--neutral-two);
   }
 </style>
