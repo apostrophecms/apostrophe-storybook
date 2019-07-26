@@ -1,0 +1,12 @@
+@mixin link-primary {
+  color: var(--primary);
+
+  &:hover,
+  &:focus {
+    color: var(--primary-hover);
+  }
+
+  &:active {
+    color: var(--primary-active);
+  }
+}
