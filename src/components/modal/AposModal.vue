@@ -12,7 +12,7 @@
             <slot name="secondaryControls"></slot>
           </div>
           <h2 class="c-modal__heading o-heading">
-            {{modal.title}} {{transitionType}}
+            {{modal.title}}
           </h2>
           <div class="c-modal__controls--primary" v-if="hasSecondaryControls">
             <slot name="primaryControls"></slot>
