@@ -1,5 +1,9 @@
 <template>
-  <section class="c-modal" role="dialog" aria-modal="true"
+<transition :name="transitionType">
+  <section :class="[
+    'c-modal',
+    `c-modal--${modal.type}`
+  ]" role="dialog" aria-modal="true"
     v-if="modal.active">
     <div class="c-modal__inner">
       <header class="c-modal__header">
@@ -8,7 +12,7 @@
             <slot name="secondaryControls"></slot>
           </div>
           <h2 class="c-modal__heading o-heading">
-            {{modal.title}}
+            {{modal.title}} {{transitionType}}
           </h2>
           <div class="c-modal__controls--primary" v-if="hasSecondaryControls">
             <slot name="primaryControls"></slot>
@@ -21,11 +25,10 @@
       <div class="c-modal__main">
         <slot name="main"></slot>
       </div>
-      <div class="c-modal__"></div>
-      <slot name="right"></slot>
     </div>
     <div class="c-modal__overlay" v-if="modal.type === 'overlay'"></div>
   </section>
+</transition>
 </template>
 
 <script>
@@ -35,6 +38,13 @@ export default {
     modal: Object
   },
   computed: {
+    transitionType: function () {
+      if (this.modal.type === 'slide') {
+        return 'slide';
+      } else {
+        return 'fade';
+      }
+    },
     hasPrimaryControls: function () {
       return !!this.$slots.primaryControls;
     },
@@ -49,6 +59,15 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  .c-modal--overlay {
+    transition: all .25s ease;
+
+    &.fade-enter,
+    &.fade-leave-to {
+      opacity: 0;
+    }
+  }
+
   .c-modal__inner {
     position: fixed;
     z-index: 1001;
