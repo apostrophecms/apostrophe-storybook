@@ -88,10 +88,16 @@ export default {
       position: fixed;
       transition: transform .5s ease;
       top: 0;
-      bottom: 0;
       right: 0;
+      bottom: 0;
+      left: auto;
       transform: translateX(0);
+      width: 90%;
       border-radius: 0;
+
+      @media screen and (min-width: 800px) {
+        max-width: 600px;
+      }
     }
 
     &.slide-enter,
