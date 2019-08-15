@@ -7,7 +7,7 @@
   ]" role="dialog" aria-modal="true"
     v-if="modal.active">
     <transition :name="transitionType" @after-leave="modal.active = false">
-    <div class="c-modal__inner" v-if="modal.showSlide">
+    <div class="c-modal__inner" v-if="modal.showSlide || transitionType !== 'slide'">
       <header class="c-modal__header">
         <div class="c-modal__header__main">
           <div class="c-modal__controls--secondary" v-if="hasSecondaryControls">
@@ -30,7 +30,7 @@
     </div>
     </transition>
     <transition :name="transitionType">
-      <div class="c-modal__overlay" v-if="modal.showSlide"></div>
+      <div class="c-modal__overlay" v-if="modal.showSlide || transitionType !== 'slide'"></div>
     </transition>
   </section>
 </transition>
