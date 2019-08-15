@@ -1,39 +1,40 @@
 <template>
-<transition :name="transitionType" @enter="modal.showSlide = true"
-  :duration="transitionType === 'slide' ? 500 : 250">
-  <section :class="[
-    'c-modal',
-    `c-modal--${modal.type}`
-  ]" role="dialog" aria-modal="true"
-    v-if="modal.active">
-    <transition :name="transitionType" @after-leave="modal.active = false">
-    <div class="c-modal__inner" v-if="modal.showSlide || transitionType !== 'slide'">
-      <header class="c-modal__header">
-        <div class="c-modal__header__main">
-          <div class="c-modal__controls--secondary" v-if="hasSecondaryControls">
-            <slot name="secondaryControls"></slot>
-          </div>
-          <h2 class="c-modal__heading o-heading">
-            {{modal.title}}
-          </h2>
-          <div class="c-modal__controls--primary" v-if="hasSecondaryControls">
-            <slot name="primaryControls"></slot>
+  <transition :name="transitionType" @enter="modal.showSlide = true"
+    :duration="transitionType === 'slide' ? 500 : 250">
+    <section :class="[ 'c-modal', `c-modal--${modal.type}` ]"
+      role="dialog" aria-modal="true" v-if="modal.active">
+      <transition :name="transitionType" @after-leave="modal.active = false">
+        <div class="c-modal__inner"
+          v-if="modal.showSlide || transitionType !== 'slide'">
+          <header class="c-modal__header">
+            <div class="c-modal__header__main">
+              <div class="c-modal__controls--secondary"
+                v-if="hasSecondaryControls">
+                <slot name="secondaryControls"></slot>
+              </div>
+              <h2 class="c-modal__heading o-heading">
+                {{modal.title}}
+              </h2>
+              <div class="c-modal__controls--primary"
+                v-if="hasSecondaryControls">
+                <slot name="primaryControls"></slot>
+              </div>
+            </div>
+            <div class="c-modal__breadcrumbs" v-if="hasBreadcrumbs">
+              <slot class="c-modal__breadcrumbs" name="breadcrumbs"></slot>
+            </div>
+          </header>
+          <div class="c-modal__main">
+            <slot name="main"></slot>
           </div>
         </div>
-        <div class="c-modal__breadcrumbs" v-if="hasBreadcrumbs">
-          <slot class="c-modal__breadcrumbs" name="breadcrumbs"></slot>
-        </div>
-      </header>
-      <div class="c-modal__main">
-        <slot name="main"></slot>
-      </div>
-    </div>
-    </transition>
-    <transition :name="transitionType">
-      <div class="c-modal__overlay" v-if="modal.showSlide || transitionType !== 'slide'"></div>
-    </transition>
-  </section>
-</transition>
+      </transition>
+      <transition :name="transitionType">
+        <div class="c-modal__overlay"
+          v-if="modal.showSlide || transitionType !== 'slide'"></div>
+      </transition>
+    </section>
+  </transition>
 </template>
 
 <script>
