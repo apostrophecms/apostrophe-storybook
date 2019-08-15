@@ -1,11 +1,13 @@
 <template>
-<transition :name="transitionType">
+<transition :name="transitionType" @enter="modal.showSlide = true"
+  :duration="transitionType === 'slide' ? 500 : 250">
   <section :class="[
     'c-modal',
     `c-modal--${modal.type}`
   ]" role="dialog" aria-modal="true"
     v-if="modal.active">
-    <div class="c-modal__inner">
+    <transition :name="transitionType" @after-leave="modal.active = false">
+    <div class="c-modal__inner" v-if="modal.showSlide">
       <header class="c-modal__header">
         <div class="c-modal__header__main">
           <div class="c-modal__controls--secondary" v-if="hasSecondaryControls">
@@ -26,7 +28,10 @@
         <slot name="main"></slot>
       </div>
     </div>
-    <div class="c-modal__overlay" v-if="modal.type === 'overlay'"></div>
+    </transition>
+    <transition :name="transitionType">
+      <div class="c-modal__overlay" v-if="modal.showSlide"></div>
+    </transition>
   </section>
 </transition>
 </template>
@@ -60,7 +65,7 @@ export default {
 
 <style lang="scss" scoped>
   .c-modal--overlay {
-    transition: all .25s ease;
+    transition: opacity .25s ease;
 
     &.fade-enter,
     &.fade-leave-to {
@@ -78,6 +83,20 @@ export default {
     border-radius: var(--border-radius);
     background-color: var(--background-color);
 
+    .c-modal--slide & {
+      position: fixed;
+      transition: transform .5s ease;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      transform: translateX(0);
+      border-radius: 0;
+    }
+
+    &.slide-enter,
+    &.slide-leave-to {
+      transform: translateX(100%);
+    }
   }
 
   .c-modal__overlay {
@@ -89,6 +108,15 @@ export default {
     left: 0;
     display: block;
     background-color: rgba(#000, .8);
+
+    .c-modal--slide & {
+      transition: opacity .5s ease;
+    }
+
+    &.slide-enter,
+    &.slide-leave-to {
+      opacity: 0;
+    }
   }
 
   .c-modal__header__main {
