@@ -13,7 +13,9 @@
         :aria-labelledby="uid + i" class="c-modal-tabs__pane"
         :aria-hidden="uid + i === current ? false : true"
       >
+        <!-- Temporary demo content: -->
         <h2>Tab {{ i }}: {{ group.label }}</h2>
+        <div style="min-height: 70vh"></div>
       </fieldset>
     </form>
   </div>
@@ -53,41 +55,73 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$z-tab-content: 1;
-
 .c-modal-tabs {
   display: flex;
+  height: 100%;
 }
 
 .c-modal-tabs__tabs {
   display: flex;
   flex-direction: column;
-  padding: 0;
+  width: 32%;
   margin: 0;
+  padding: 0;
+  background-color: var(--background-alt);
 }
 
 .c-modal-tabs__tab {
   display: block;
 
-  .c-modal-tabs__btn {
-    &[aria-selected='true'],
-    &:hover,
-    &:focus {
-      color: blue;
+}
+
+.c-modal-tabs__btn {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  padding: 25px 20px;
+  border-width: 0;
+  border-bottom: 1px solid var(--border-color);
+  border-radius: 0;
+  background-color: var(--background-alt);
+  font-size: map-get($font-sizes, modal);
+  text-align: left;
+  cursor: pointer;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    background-color: var(--primary);
+    transition: width .25s ease;
+  }
+
+  &[aria-selected='true'],
+  &:hover,
+  &:focus {
+    background-color: var(--background);
+  }
+
+  &[aria-selected='true'] {
+    &::before {
+      width: 6px;
     }
   }
 }
 
 .c-modal-tabs__wrapper {
-  z-index: $z-tab-content;
   display: flex;
   flex-grow: 1;
 }
 
 .c-modal-tabs__pane {
   width: 100%;
+  margin: 0;
+  padding: 40px 60px;
+  border-width: 0;
 
-  &[aria-hidden='false'] { display: flex; }
   &[aria-hidden='true'] { display: none; }
 }
 </style>

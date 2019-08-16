@@ -10,10 +10,10 @@
 .apos-input {
   min-width: 460px;
   max-width: 100%;
-  border: 1px solid var(--neutral-five);
+  border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
-  background: var(--neutral-seven);
-  color: var(--neutral-one);
+  background: var(--background-alt);
+  color: var(--text-primary);
   font-size: map-get($font-sizes, input);
   @include apos-transition(all);
 
@@ -111,7 +111,7 @@ $box-width: 14px;
   }
 
   .apos-input--choice[disabled] + & {
-    border-color: var(--neutral-five);
+    border-color: var(--border-color);
     background-color: var(--neutral-five);
   }
 
