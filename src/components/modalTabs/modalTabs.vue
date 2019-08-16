@@ -1,23 +1,21 @@
 <template>
-  <div class="c-modal-tabs" data-tabbed>
+  <div class="c-modal-tabs">
     <ul class="c-modal-tabs__tabs">
-      <li class="c-modal-tabs__tab" v-for="(group, index) in groups" :key="group.name">
-        <button :data-tab="uid + index" :id="uid + index"
-          class="c-modal-tabs__btn" @click="selectTab"
-          :aria-selected="uid + index === current ? true : false"
-        >{{ group.label }} {{ current }}</button>
+      <li class="c-modal-tabs__tab" v-for="(group, i) in groups"
+        :key="group.name">
+        <button :id="uid + i" class="c-modal-tabs__btn" @click="selectTab"
+          :aria-selected="uid + i === current ? true : false"
+        >{{ group.label }}</button>
       </li>
     </ul>
-    <div class="c-modal-tabs__wrapper">
-      <section
-        :aria-hidden="uid + index === current ? false : true"
-        :aria-labelledby="uid + index" class="c-modal-tabs__pane"
-        v-for="(group, index) in groups" :key="group.name"
-        :ref="uid + index"
+    <form class="c-modal-tabs__wrapper">
+      <fieldset v-for="(group, i) in groups" :key="group.name" :ref="uid + i"
+        :aria-labelledby="uid + i" class="c-modal-tabs__pane"
+        :aria-hidden="uid + i === current ? false : true"
       >
-        <h2>Tab {{ index }}: {{ group.label }}</h2>
-      </section>
-    </div>
+        <h2>Tab {{ i }}: {{ group.label }}</h2>
+      </fieldset>
+    </form>
   </div>
 </template>
 
@@ -42,14 +40,12 @@ export default {
       const id = tab.id;
       this.current = Number(id);
       const pane = this.$refs[id][0];
-
-      pane.focus();
-
       const focusable = pane.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
 
       if (focusable.length > 0) {
-        console.log(focusable[0]);
         focusable[0].focus();
+      } else {
+        pane.focus();
       }
     }
   }
