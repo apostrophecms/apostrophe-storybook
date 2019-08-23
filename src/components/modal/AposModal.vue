@@ -1,6 +1,6 @@
 <template>
   <transition :name="transitionType" @enter="modal.showModal = true"
-    :duration="transitionType === 'slide' ? 500 : 250">
+    :duration="250">
     <section :class="[ 'apos-modal', `apos-modal--${modal.type}` ]"
       role="dialog" aria-modal="true" v-if="modal.active">
       <transition :name="transitionType" @after-leave="modal.active = false">
@@ -65,6 +65,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+  // NOTE: Transition timings below are set to match the wrapper transition
+  // timing in the template to coordinate the inner and overlay animations.
   .apos-modal__inner {
     position: fixed;
     z-index: 1001;
@@ -77,7 +79,7 @@ export default {
 
     .apos-modal--slide & {
       position: fixed;
-      transition: transform .5s ease;
+      transition: transform .25s ease;
       top: 0;
       right: 0;
       bottom: 0;
@@ -119,7 +121,7 @@ export default {
     background-color: rgba(#000, .8);
 
     .apos-modal--slide & {
-      transition: opacity .5s ease;
+      transition: opacity .25s ease;
     }
 
     &.slide-enter,
