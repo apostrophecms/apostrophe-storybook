@@ -1,11 +1,11 @@
 <template>
-  <transition :name="transitionType" @enter="modal.showSlide = true"
+  <transition :name="transitionType" @enter="modal.showModal = true"
     :duration="transitionType === 'slide' ? 500 : 250">
     <section :class="[ 'apos-modal', `apos-modal--${modal.type}` ]"
       role="dialog" aria-modal="true" v-if="modal.active">
       <transition :name="transitionType" @after-leave="modal.active = false">
         <div class="apos-modal__inner"
-          v-if="modal.showSlide || transitionType !== 'slide'">
+          v-if="modal.showModal">
           <header class="apos-modal__header">
             <div class="apos-modal__header__main">
               <div class="apos-modal__controls--secondary"
@@ -31,7 +31,7 @@
       </transition>
       <transition :name="transitionType">
         <div class="apos-modal__overlay"
-          v-if="modal.showSlide || transitionType !== 'slide'"></div>
+          v-if="modal.showModal"></div>
       </transition>
     </section>
   </transition>
@@ -65,15 +65,6 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .apos-modal--overlay {
-    transition: opacity .25s ease;
-
-    &.fade-enter,
-    &.fade-leave-to {
-      opacity: 0;
-    }
-  }
-
   .apos-modal__inner {
     position: fixed;
     z-index: 1001;
@@ -104,6 +95,17 @@ export default {
     &.slide-leave-to {
       transform: translateX(100%);
     }
+
+    .apos-modal--overlay & {
+      transform: scale(1);
+      transition: opacity .25s ease, transform .25s ease;
+    }
+
+    &.fade-enter,
+    &.fade-leave-to {
+      opacity: 0;
+      transform: scale(0.8);
+    }
   }
 
   .apos-modal__overlay {
@@ -122,6 +124,15 @@ export default {
 
     &.slide-enter,
     &.slide-leave-to {
+      opacity: 0;
+    }
+
+    .apos-modal--overlay & {
+      transition: opacity .25s ease;
+    }
+
+    &.fade-enter,
+    &.fade-leave-to {
       opacity: 0;
     }
   }

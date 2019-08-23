@@ -25,19 +25,20 @@ storiesOf('Modal', module)
         modal: {
           title: 'New Page',
           active: false,
-          type: 'overlay'
+          type: 'overlay',
+          showModal: false
         },
         breadcrumbs: breadcrumbs
       }
     },
     template: `
     <div>
-      <button type="button" class="apos-button" @click="toggleModal">
+      <button type="button" class="apos-button" @click="startEnter">
         Activate modal
       </button>
       <AposModal :modal="modal">
         <template #secondaryControls>
-          <button class="apos-button apos-button--cancel" @click="toggleModal">Exit</button>
+          <button class="apos-button apos-button--cancel" @click="startExit">Exit</button>
         </template>
         <template #primaryControls>
           <button class="apos-button">Save Page</button>
@@ -49,8 +50,11 @@ storiesOf('Modal', module)
     </div>
     `,
     methods: {
-      toggleModal: function () {
-        this.modal.active = !this.modal.active
+      startEnter: function () {
+        this.modal.active = true
+      },
+      startExit: function () {
+        this.modal.showModal = false
       }
     }
   }))
@@ -61,19 +65,20 @@ storiesOf('Modal', module)
         modal: {
           title: 'New Page',
           active: false,
-          type: 'overlay'
+          type: 'overlay',
+          showModal: false
         },
         breadcrumbs: breadcrumbs
       }
     },
     template: `
     <div>
-      <button type="button" class="apos-button" @click="toggleModal">
+      <button type="button" class="apos-button" @click="startEnter">
         Activate modal
       </button>
       <AposModal :modal="modal">
         <template #secondaryControls>
-          <button class="apos-button apos-button--cancel" @click="toggleModal">Exit</button>
+          <button class="apos-button apos-button--cancel" @click="startExit">Exit</button>
         </template>
         <template #primaryControls>
           <button class="apos-button">Save Page</button>
@@ -85,8 +90,11 @@ storiesOf('Modal', module)
     </div>
     `,
     methods: {
-      toggleModal: function () {
-        this.modal.active = !this.modal.active
+      startEnter: function () {
+        this.modal.active = true
+      },
+      startExit: function () {
+        this.modal.showModal = false
       }
     }
   }))
@@ -98,7 +106,7 @@ storiesOf('Modal', module)
           title: 'New Page',
           active: false,
           type: 'slide',
-          showSlide: false // Theoretically could be left out.
+          showModal: false
         },
         breadcrumbs: breadcrumbs
       }
@@ -123,7 +131,7 @@ storiesOf('Modal', module)
         this.modal.active = true
       },
       startExit: function () {
-        this.modal.showSlide = false
+        this.modal.showModal = false
       }
     }
   }))
