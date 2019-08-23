@@ -1,16 +1,16 @@
 <template>
-  <div class="c-modal-tabs">
-    <ul class="c-modal-tabs__tabs">
-      <li class="c-modal-tabs__tab" v-for="(group, i) in groups"
+  <div class="apos-modal-tabs">
+    <ul class="apos-modal-tabs__tabs">
+      <li class="apos-modal-tabs__tab" v-for="(group, i) in groups"
         :key="group.name">
-        <button :id="uid + i" class="c-modal-tabs__btn" @click="selectTab"
+        <button :id="uid + i" class="apos-modal-tabs__btn" @click="selectTab"
           :aria-selected="uid + i === current ? true : false"
         >{{ group.label }}</button>
       </li>
     </ul>
-    <form class="c-modal-tabs__wrapper">
+    <form class="apos-modal-tabs__wrapper">
       <fieldset v-for="(group, i) in groups" :key="group.name" :ref="uid + i"
-        :aria-labelledby="uid + i" class="c-modal-tabs__pane"
+        :aria-labelledby="uid + i" class="apos-modal-tabs__pane"
         :aria-hidden="uid + i === current ? false : true"
       >
         <!-- Temporary demo content: -->
@@ -55,12 +55,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.c-modal-tabs {
+.apos-modal-tabs {
   display: flex;
   height: 100%;
 }
 
-.c-modal-tabs__tabs {
+.apos-modal-tabs__tabs {
   display: flex;
   flex-direction: column;
   width: 32%;
@@ -69,12 +69,12 @@ export default {
   background-color: var(--background-alt);
 }
 
-.c-modal-tabs__tab {
+.apos-modal-tabs__tab {
   display: block;
 
 }
 
-.c-modal-tabs__btn {
+.apos-modal-tabs__btn {
   position: relative;
   width: 100%;
   margin: 0;
@@ -111,12 +111,12 @@ export default {
   }
 }
 
-.c-modal-tabs__wrapper {
+.apos-modal-tabs__wrapper {
   display: flex;
   flex-grow: 1;
 }
 
-.c-modal-tabs__pane {
+.apos-modal-tabs__pane {
   width: 100%;
   margin: 0;
   padding: 40px 60px;
