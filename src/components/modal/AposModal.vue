@@ -1,36 +1,36 @@
 <template>
   <transition :name="transitionType" @enter="modal.showSlide = true"
     :duration="transitionType === 'slide' ? 500 : 250">
-    <section :class="[ 'c-modal', `c-modal--${modal.type}` ]"
+    <section :class="[ 'apos-modal', `apos-modal--${modal.type}` ]"
       role="dialog" aria-modal="true" v-if="modal.active">
       <transition :name="transitionType" @after-leave="modal.active = false">
-        <div class="c-modal__inner"
+        <div class="apos-modal__inner"
           v-if="modal.showSlide || transitionType !== 'slide'">
-          <header class="c-modal__header">
-            <div class="c-modal__header__main">
-              <div class="c-modal__controls--secondary"
+          <header class="apos-modal__header">
+            <div class="apos-modal__header__main">
+              <div class="apos-modal__controls--secondary"
                 v-if="hasSecondaryControls">
                 <slot name="secondaryControls"></slot>
               </div>
-              <h2 class="c-modal__heading o-heading">
+              <h2 class="apos-modal__heading o-heading">
                 {{modal.title}}
               </h2>
-              <div class="c-modal__controls--primary"
+              <div class="apos-modal__controls--primary"
                 v-if="hasSecondaryControls">
                 <slot name="primaryControls"></slot>
               </div>
             </div>
-            <div class="c-modal__breadcrumbs" v-if="hasBreadcrumbs">
-              <slot class="c-modal__breadcrumbs" name="breadcrumbs"></slot>
+            <div class="apos-modal__breadcrumbs" v-if="hasBreadcrumbs">
+              <slot class="apos-modal__breadcrumbs" name="breadcrumbs"></slot>
             </div>
           </header>
-          <div class="c-modal__main">
+          <div class="apos-modal__main">
             <slot name="main"></slot>
           </div>
         </div>
       </transition>
       <transition :name="transitionType">
-        <div class="c-modal__overlay"
+        <div class="apos-modal__overlay"
           v-if="modal.showSlide || transitionType !== 'slide'"></div>
       </transition>
     </section>
@@ -65,7 +65,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-  .c-modal--overlay {
+  .apos-modal--overlay {
     transition: opacity .25s ease;
 
     &.fade-enter,
@@ -74,7 +74,7 @@ export default {
     }
   }
 
-  .c-modal__inner {
+  .apos-modal__inner {
     position: fixed;
     z-index: 1001;
     top: $spacing-double;
@@ -84,7 +84,7 @@ export default {
     border-radius: var(--border-radius);
     background-color: var(--background-color);
 
-    .c-modal--slide & {
+    .apos-modal--slide & {
       position: fixed;
       transition: transform .5s ease;
       top: 0;
@@ -106,7 +106,7 @@ export default {
     }
   }
 
-  .c-modal__overlay {
+  .apos-modal__overlay {
     position: fixed;
     z-index: 1000;
     top: 0;
@@ -116,7 +116,7 @@ export default {
     display: block;
     background-color: rgba(#000, .8);
 
-    .c-modal--slide & {
+    .apos-modal--slide & {
       transition: opacity .5s ease;
     }
 
@@ -126,19 +126,19 @@ export default {
     }
   }
 
-  .c-modal__header__main {
+  .apos-modal__header__main {
     display: flex;
     padding: $spacing-double;
     align-items: center;
     border-bottom: 1px solid var(--border-color);
   }
 
-  .c-modal__controls--primary {
+  .apos-modal__controls--primary {
     flex-grow: 1;
     text-align: right;
   }
 
-  .c-modal__heading {
+  .apos-modal__heading {
     margin: 0 $spacing-double;
 
     &:first-child {
@@ -146,7 +146,7 @@ export default {
     }
   }
 
-  .c-modal__breadcrumbs {
+  .apos-modal__breadcrumbs {
     padding-top: $spacing-base;
     padding-bottom: $spacing-base;
     background-color: var(--background-alt);
