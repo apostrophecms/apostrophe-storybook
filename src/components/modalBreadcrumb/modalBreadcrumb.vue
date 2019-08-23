@@ -44,6 +44,14 @@ export default {
 </script>
 
 <style lang="scss">
+  .apos-breadcrumb {
+    border-bottom: 1px solid var(--border-color);
+
+    &--dark {
+      background-color: var(--background-alt);
+      color: var(--text-alt);
+    }
+  }
   .apos-breadcrumb__items {
     display: inline-block;
     margin: $spacing-base $spacing-double;

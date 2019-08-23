@@ -18,7 +18,43 @@ const breadcrumbs = [
 ]
 
 storiesOf('Modal', module)
-  .add('Primary', () => ({
+  .add('Overlay', () => ({
+    components: { AposModal, AposBreadcrumb },
+    data () {
+      return {
+        modal: {
+          title: 'New Page',
+          active: false,
+          type: 'overlay'
+        },
+        breadcrumbs: breadcrumbs
+      }
+    },
+    template: `
+    <div>
+      <button type="button" class="apos-button" @click="toggleModal">
+        Activate modal
+      </button>
+      <AposModal :modal="modal">
+        <template #secondaryControls>
+          <button class="apos-button apos-button--cancel" @click="toggleModal">Exit</button>
+        </template>
+        <template #primaryControls>
+          <button class="apos-button">Save Page</button>
+        </template>
+        <template #breadcrumbs>
+          <AposBreadcrumb :items="breadcrumbs" />
+        </template>
+      </AposModal>
+    </div>
+    `,
+    methods: {
+      toggleModal: function () {
+        this.modal.active = !this.modal.active
+      }
+    }
+  }))
+  .add('Overlay (dark breadcrumbs', () => ({
     components: { AposModal, AposBreadcrumb },
     data () {
       return {
@@ -78,9 +114,6 @@ storiesOf('Modal', module)
         </template>
         <template #primaryControls>
           <button class="apos-button">Save Page</button>
-        </template>
-        <template #breadcrumbs>
-          <AposBreadcrumb :items="breadcrumbs" variant="dark" />
         </template>
       </AposModal>
     </div>

@@ -145,11 +145,4 @@ export default {
       margin-left: 0;
     }
   }
-
-  .apos-modal__breadcrumbs {
-    padding-top: $spacing-base;
-    padding-bottom: $spacing-base;
-    background-color: var(--background-alt);
-    color: var(--text-alt);
-  }
 </style>
