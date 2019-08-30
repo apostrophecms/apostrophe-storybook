@@ -1,16 +1,18 @@
 <template>
   <AposInputWrapper :field="field" :error="status.error">
     <template slot="body">
-      <div class="apos-input-wrapper apos-boolean">
+      <div :class="classList">
         <input class="apos-sr-only" type="radio" :id="uid + '-true'" :value="true" v-model="next" :checked="value.data === true">
         <label :for="uid + '-true'" class="apos-boolean__label apos-input">
           <CircleIcon :size="12" class="apos-boolean__icon"
-            title=""></CircleIcon>Yes
+            title="" v-show="!field.toggle"></CircleIcon>
+            {{ trueLabel || 'Yes' }}
         </label>
         <input class="apos-sr-only apos-boolean__input--false" type="radio" :id="uid + '-false'" :value="false" v-model="next" :checked="value.data === false">
         <label :for="uid + '-false'" class="apos-boolean__label apos-input">
           <CircleIcon :size="12" class="apos-boolean__icon"
-            title=""></CircleIcon>No
+            title="" v-show="!field.toggle"></CircleIcon>
+            {{ falseLabel || 'No' }}
         </label>
       </div>
     </template>
@@ -29,6 +31,33 @@ export default {
   },
   mixins: [ AposInputMixin ],
   name: 'AposBooleanField',
+  computed: {
+    classList: function () {
+      return [
+        'apos-input-wrapper',
+        'apos-boolean',
+        {
+          'apos-boolean--toggle': this.field.toggle
+        }
+      ];
+    },
+    trueLabel: function () {
+      if (this.field.toggle && this.field.toggle.true
+        && typeof this.field.toggle.true === 'string') {
+        return this.field.toggle.true;
+      } else {
+        return false;
+      }
+    },
+    falseLabel: function () {
+      if (this.field.toggle && this.field.toggle
+        && typeof this.field.toggle.false === 'string') {
+        return this.field.toggle.false;
+      } else {
+        return false;
+      }
+    }
+  },
   methods: {
     validate(value) {
       if (this.field.mandatory) {
@@ -76,15 +105,35 @@ export default {
     }
 
     input:checked + & {
-      background-color: var(--neutral-eight);
+      background-color: var(--neutral-eight); // TODO: --background-color? Check when doing dark theme.
 
       .apos-boolean__icon {
         color: var(--success);
       }
+
+      .apos-boolean--toggle &:first-of-type,
+      .apos-boolean--toggle &:last-of-type {
+        color: var(--text-light);
+      }
+
+      .apos-boolean--toggle &:first-of-type {
+        background-color: var(--success);
+      }
+
+      .apos-boolean--toggle &:last-of-type {
+        background-color: var(--background-dark);
+      }
+
+      &:hover,
+      &:focus {
+        // Prevent border change for active boolean.
+        border-color: var(--border-color);
+
+      }
     }
 
     input:checked.apos-boolean__input--false + & {
-      .apos-boolean__icon{
+      .apos-boolean__icon {
         color: var(--neutral-two);
       }
     }
@@ -92,6 +141,7 @@ export default {
 
   .apos-boolean__icon {
     margin-right: $spacing-base;
+
     svg {
       top: 1px;
       position: relative;
