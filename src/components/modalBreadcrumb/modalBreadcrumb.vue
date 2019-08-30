@@ -1,5 +1,5 @@
 <template>
-  <nav class="apos-breadcrumb" aria-label="breadcrumb">
+  <nav :class="['apos-breadcrumb', classObj]" aria-label="breadcrumb">
     <ol class="apos-breadcrumb__items">
       <li v-for="(item, index) in items" :key="index" :class="`apos-breadcrumb__item ${modifier}`">
         <component :is="item.href ? 'a' : 'span'" :href="item.href">{{ item.label }}</component>
@@ -25,10 +25,16 @@ export default {
       default: [],
       type: Array
     },
+    variant: String
   },
   computed: {
     last() {
        return Object.keys(this.items).length - 1;
+    },
+    classObj: function () {
+      return {
+        'apos-breadcrumb--dark': this.variant === 'dark'
+      };
     }
   },
   components: {
@@ -38,8 +44,17 @@ export default {
 </script>
 
 <style lang="scss">
+  .apos-breadcrumb {
+    border-bottom: 1px solid var(--border-color);
+
+    &--dark {
+      background-color: var(--background-dark);
+      color: var(--text-light);
+    }
+  }
   .apos-breadcrumb__items {
-    margin: 18px 20px;
+    display: inline-block;
+    margin: $spacing-base $spacing-double;
     padding-left: 0;
   }
   .apos-breadcrumb__item {
@@ -52,6 +67,10 @@ export default {
     a {
       @include link-primary;
       text-decoration: none;
+
+      .apos-breadcrumb--dark & {
+        color: inherit;
+      }
     }
   }
   .apos-breadcrumb__chevron {

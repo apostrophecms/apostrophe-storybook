@@ -101,7 +101,7 @@ export default {
   &[aria-selected='true'],
   &:hover,
   &:focus {
-    background-color: var(--background);
+    background-color: var(--background-color);
   }
 
   &[aria-selected='true'] {

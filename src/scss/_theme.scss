@@ -21,6 +21,7 @@ $font-sizes: (
   input-label: 14px,
   input: 12px,
   input-hint: 12px,
+  heading: 22px,
   modal: 14px
 );
 
@@ -67,6 +68,7 @@ $boolean-padding: $spacing-double;
 
   // Text colors
   --text-primary: #323232;
+  --text-light: #FFF;
 
   // Borders
   --border-color: #DBDBDB;
@@ -74,7 +76,8 @@ $boolean-padding: $spacing-double;
   --box-shadow: 0 3px 13px 4px rgba(0,0,0,0.08);
 
   // Backgrounds
-  --background: #fdfdfd;
+  --background-color: #fff;
+  --background-dark: #323232;
   --background-alt: #f3f3f3;
 }
 
