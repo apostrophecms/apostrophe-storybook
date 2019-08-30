@@ -105,7 +105,7 @@ export default {
     }
 
     input:checked + & {
-      background-color: var(--neutral-eight);
+      background-color: var(--neutral-eight); // TODO: --background-color? Check when doing dark theme.
 
       .apos-boolean__icon {
         color: var(--success);
@@ -113,7 +113,7 @@ export default {
 
       .apos-boolean--toggle &:first-of-type,
       .apos-boolean--toggle &:last-of-type {
-        color: #fff;
+        color: var(--text-light);
       }
 
       .apos-boolean--toggle &:first-of-type {
@@ -121,12 +121,19 @@ export default {
       }
 
       .apos-boolean--toggle &:last-of-type {
-        background-color: var(--neutral-one);
+        background-color: var(--background-dark);
+      }
+
+      &:hover,
+      &:focus {
+        // Prevent border change for active boolean.
+        border-color: var(--border-color);
+
       }
     }
 
     input:checked.apos-boolean__input--false + & {
-      .apos-boolean__icon{
+      .apos-boolean__icon {
         color: var(--neutral-two);
       }
     }
@@ -134,6 +141,7 @@ export default {
 
   .apos-boolean__icon {
     margin-right: $spacing-base;
+
     svg {
       top: 1px;
       position: relative;

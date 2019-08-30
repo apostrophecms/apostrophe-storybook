@@ -44,6 +44,7 @@
 
   .apos-field--error & {
     border-color: var(--danger);
+
     &:focus {
       outline: none;
       box-shadow: 0 0 3px var(--danger);
