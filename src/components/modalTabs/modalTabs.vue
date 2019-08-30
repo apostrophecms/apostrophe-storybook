@@ -95,7 +95,7 @@ export default {
     left: 0;
     width: 0;
     background-color: var(--primary);
-    transition: width .25s ease;
+    transition: width .25s cubic-bezier(0, 1.61, 1, 1.23);
   }
 
   &[aria-selected='true'],
