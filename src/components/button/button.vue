@@ -76,7 +76,7 @@ module.exports = {
 
   .apos-button--cancel {
     background-color: var(--cancel);
-    color: var(--neutral-one);
+    color: var(--text-primary);
     border: 1px solid var(--neutral-six);
     &:hover {
       background-color: var(--cancel-hover);

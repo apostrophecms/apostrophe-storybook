@@ -48,8 +48,8 @@ export default {
     border-bottom: 1px solid var(--border-color);
 
     &--dark {
-      background-color: var(--background-alt);
-      color: var(--text-alt);
+      background-color: var(--background-dark);
+      color: var(--text-light);
     }
   }
   .apos-breadcrumb__items {

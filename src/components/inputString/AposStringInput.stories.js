@@ -25,6 +25,12 @@ const helpField = {
   help: 'Sing the Neverending Story theme song.'
 }
 
+const textAreaField = {
+  ...field,
+  type: 'textarea',
+  help: 'Sing the Neverending Story theme song.'
+}
+
 const baseTemplate = `<AposStringInput :field="field" :value="value" :status="status"/>`
 
 storiesOf('Inputs (strings)', module)
@@ -105,6 +111,19 @@ storiesOf('Inputs (strings)', module)
     data () {
       return {
         field: helpField,
+        status: {},
+        value: {
+          data: ''
+        }
+      }
+    },
+    template: baseTemplate
+  }))
+  .add('Textarea', () => ({
+    components: { AposStringInput },
+    data () {
+      return {
+        field: textAreaField,
         status: {},
         value: {
           data: ''

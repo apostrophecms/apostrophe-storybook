@@ -81,7 +81,7 @@ export default {
     padding: 0;
     font-size: map-get($font-sizes, input-label);
     font-weight: map-get($font-weights, medium);
-    color: var(--neutral-one);
+    color: var(--text-primary);
   }
 
   .apos-field-help {

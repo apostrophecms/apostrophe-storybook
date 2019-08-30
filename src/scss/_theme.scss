@@ -21,7 +21,8 @@ $font-sizes: (
   input-label: 14px,
   input: 12px,
   input-hint: 12px,
-  heading: 22px
+  heading: 22px,
+  modal: 14px
 );
 
 $spacing-base: 10px;
@@ -65,12 +66,22 @@ $boolean-padding: $spacing-double;
   --neutral-seven: #F3F3F3;
   --neutral-eight: #FFFFFF;
 
+  // <<<<<<< HEAD
+  // =======
+  // Text colors
+  --text-primary: #323232;
+  --text-light: #FFF;
+
+  // Borders
   --border-color: #DBDBDB;
   --border-radius: 5px;
   --box-shadow: 0 3px 13px 4px rgba(0,0,0,0.08);
-  --background-color: #FFF;
-  --background-alt: #323232;
-  --text-alt: #FFF;
+
+  // Backgrounds
+  --background-color: #fff;
+  --background-dark: #323232;
+  --background-alt: #f3f3f3;
+// >>>>>>> develop
 }
 
 .apos-theme-dark {

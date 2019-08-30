@@ -33,7 +33,7 @@ module.exports = {
   .apos-notification {
     display: inline-flex;
     align-items: center;
-    color: var(--neutral-one);
+    color: var(--text-primary);
     background: var(--neutral-eight);
     border: 1px solid var(--neutral-six);
     border-radius: var(--border-radius);
@@ -63,6 +63,6 @@ module.exports = {
   .apos-notification__label {
     font-size: 1.2em;
     letter-spacing: 0.75px;
-    color: var(--neutral-one);
+    color: var(--text-primary);
   }
 </style>

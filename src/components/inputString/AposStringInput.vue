@@ -2,9 +2,13 @@
   <AposInputWrapper :field="field" :error="status.error" :uid="uid" >
     <template slot="body">
       <div class="apos-input-wrapper">
-        <input class="apos-input apos-input--text"
+        <textarea class="apos-input apos-input--text"
+          v-if="field.type === 'textarea'" rows="5"
+          v-model="next" :placeholder=field.placeholder
+          :disabled="status.disabled" :required="field.mandatory" :id="uid"></textarea>
+        <input class="apos-input apos-input--text" v-else
           v-model="next" :type="field.type" :placeholder=field.placeholder
-          :disabled="status.disabled" :required="field.mandatory" :id="uid"/>
+          :disabled="status.disabled" :required="field.mandatory" :id="uid">
         <component :is="`${
           field.icon ? field.icon : 'CircleMedium' }`"
           :size="20" class="apos-input-icon" v-if="hasIcon"></component>
@@ -67,5 +71,11 @@ export default {
   .apos-field--error & {
     color: var(--danger);
   }
+}
+
+textarea.apos-input--text {
+  // Some  browser styles set `textarea` to monospace.
+  font-family: inherit;
+  resize: none;
 }
 </style>
