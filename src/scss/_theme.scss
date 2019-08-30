@@ -20,7 +20,8 @@ $font-sizes: (
   meta: 12px,
   input-label: 14px,
   input: 12px,
-  input-hint: 12px
+  input-hint: 12px,
+  modal: 14px
 );
 
 $spacing-base: 10px;
@@ -64,8 +65,17 @@ $boolean-padding: $spacing-double;
   --neutral-seven: #F3F3F3;
   --neutral-eight: #FFFFFF;
 
+  // Text colors
+  --text-primary: #323232;
+
+  // Borders
+  --border-color: #DBDBDB;
   --border-radius: 5px;
   --box-shadow: 0 3px 13px 4px rgba(0,0,0,0.08);
+
+  // Backgrounds
+  --background: #fdfdfd;
+  --background-alt: #f3f3f3;
 }
 
 .apos-theme-dark {
