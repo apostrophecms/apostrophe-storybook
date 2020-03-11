@@ -2,6 +2,7 @@ import { storiesOf } from '@storybook/vue'
 
 import AposModal from './AposModal.vue'
 import AposBreadcrumb from './../modalBreadcrumb/modalBreadcrumb.vue'
+import AposButton from './../button/button.vue'
 
 const breadcrumbs = [
   {
@@ -19,7 +20,7 @@ const breadcrumbs = [
 
 storiesOf('Modal', module)
   .add('Overlay', () => ({
-    components: { AposModal, AposBreadcrumb },
+    components: { AposModal, AposBreadcrumb, AposButton },
     data () {
       return {
         modal: {
@@ -38,10 +39,10 @@ storiesOf('Modal', module)
       </button>
       <AposModal :modal="modal">
         <template #secondaryControls>
-          <button class="apos-button apos-button--cancel" @click="startExit">Exit</button>
+          <AposButton @click="startExit" label="Exit" />'
         </template>
-        <template #primaryControls>
-          <button class="apos-button">Save Page</button>
+        <template #primaryControls>=
+          <AposButton modifier="primary" @click="startExit" label="Save Page" />'
         </template>
         <template #breadcrumbs>
           <AposBreadcrumb :items="breadcrumbs" />
@@ -59,7 +60,7 @@ storiesOf('Modal', module)
     }
   }))
   .add('Overlay (dark breadcrumbs', () => ({
-    components: { AposModal, AposBreadcrumb },
+    components: { AposModal, AposBreadcrumb, AposButton },
     data () {
       return {
         modal: {
@@ -78,10 +79,10 @@ storiesOf('Modal', module)
       </button>
       <AposModal :modal="modal">
         <template #secondaryControls>
-          <button class="apos-button apos-button--cancel" @click="startExit">Exit</button>
+          <AposButton @click="startExit" label="Exit" />'
         </template>
         <template #primaryControls>
-          <button class="apos-button">Save Page</button>
+          <AposButton modifier="primary" @click="startExit" label="Save Page" />'
         </template>
         <template #breadcrumbs>
           <AposBreadcrumb :items="breadcrumbs" variant="dark" />
@@ -99,7 +100,7 @@ storiesOf('Modal', module)
     }
   }))
   .add('Slide out', () => ({
-    components: { AposModal, AposBreadcrumb },
+    components: { AposModal, AposBreadcrumb, AposButton },
     data () {
       return {
         modal: {
@@ -118,10 +119,10 @@ storiesOf('Modal', module)
       </button>
       <AposModal :modal="modal">
         <template #secondaryControls>
-          <button class="apos-button apos-button--cancel" @click="startExit">Exit</button>
+          <AposButton @click="startExit" label="Exit" />'
         </template>
         <template #primaryControls>
-          <button class="apos-button">Save Page</button>
+          <AposButton modifier="primary" @click="startExit" label="Save Page" />'
         </template>
       </AposModal>
     </div>

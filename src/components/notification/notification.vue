@@ -61,7 +61,7 @@ module.exports = {
   }
 
   .apos-notification__label {
-    font-size: 1.2em;
+    font-size: map-get($font-sizes, default);
     letter-spacing: 0.75px;
     color: var(--text-primary);
   }

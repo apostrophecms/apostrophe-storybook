@@ -49,7 +49,7 @@ export default {
 
     &--dark {
       background-color: var(--background-dark);
-      color: var(--text-light);
+      color: var(--white);
     }
   }
   .apos-breadcrumb__items {

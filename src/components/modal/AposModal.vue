@@ -75,7 +75,8 @@ export default {
     bottom: $spacing-double;
     left: $spacing-double;
     border-radius: var(--border-radius);
-    background-color: var(--background-color);
+    background-color: var(--modal-background-color);
+    color: var(--text-primary);
 
     .apos-modal--slide & {
       position: fixed;
@@ -118,7 +119,7 @@ export default {
     bottom: 0;
     left: 0;
     display: block;
-    background-color: rgba(#000, .8);
+    background-color: var(--modal-overlay-color);
 
     .apos-modal--slide & {
       transition: opacity .25s ease;

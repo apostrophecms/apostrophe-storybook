@@ -17,7 +17,7 @@ storiesOf('Tag', module)
           <aposTag label="Community">
             <template v-slot:icon>
               <button class="apos-tag-button">
-                <Close title="Remove Tag" :size="14" />
+                <Close title="Remove Tag" :size="12" />
               </button>
             </template>
           </aposTag>

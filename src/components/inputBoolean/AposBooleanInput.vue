@@ -85,7 +85,9 @@ export default {
   .apos-boolean__label {
     min-width: 0;
     position: relative;
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: ($boolean-padding / 2) $boolean-padding;
 
     &:first-of-type {
@@ -113,7 +115,7 @@ export default {
 
       .apos-boolean--toggle &:first-of-type,
       .apos-boolean--toggle &:last-of-type {
-        color: var(--text-light);
+        color: var(--white);
       }
 
       .apos-boolean--toggle &:first-of-type {
@@ -140,6 +142,7 @@ export default {
   }
 
   .apos-boolean__icon {
+    display: inline-flex;
     margin-right: $spacing-base;
 
     svg {

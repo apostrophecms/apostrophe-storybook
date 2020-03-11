@@ -12,7 +12,7 @@
   max-width: 100%;
   border: 1px solid var(--border-color);
   border-radius: var(--border-radius);
-  background: var(--background-alt);
+  background: var(--neutral-seven);
   color: var(--text-primary);
   font-size: map-get($font-sizes, input);
   @include apos-transition(all);
@@ -118,9 +118,9 @@ $box-width: 14px;
 
   .apos-input--choice:checked + &,
   .apos-input--choice[checked] + & {
-    background-color: var(--primary);
-    border-color: var(--primary);
-    color: var(--neutral-seven);
+    background-color: var(--primary-button);
+    border-color: var(--primary-button);
+    color: #fff;
 
     .material-design-icon { display: inline-flex; }
   }

@@ -66,7 +66,7 @@ export default {
   width: 32%;
   margin: 0;
   padding: 0;
-  background-color: var(--background-alt);
+  background-color: var(--neutral-seven);
 }
 
 .apos-modal-tabs__tab {
@@ -82,8 +82,10 @@ export default {
   border-width: 0;
   border-bottom: 1px solid var(--border-color);
   border-radius: 0;
-  background-color: var(--background-alt);
+  color: var(--text-primary);
+  background-color: var(--neutral-seven);
   font-size: map-get($font-sizes, modal);
+  letter-spacing: 0.5px;
   text-align: left;
   cursor: pointer;
 
@@ -94,14 +96,14 @@ export default {
     bottom: 0;
     left: 0;
     width: 0;
-    background-color: var(--primary);
+    background-color: var(--primary-button);
     transition: width .25s cubic-bezier(0, 1.61, 1, 1.23);
   }
 
   &[aria-selected='true'],
   &:hover,
   &:focus {
-    background-color: var(--background-color);
+    background-color: var(--modal-background-color);
   }
 
   &[aria-selected='true'] {

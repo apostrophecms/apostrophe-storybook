@@ -1,5 +1,4 @@
 $font-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-$font-secondary: 'Roboto Mono', monospace;
 
 body {
   font-family: $font-default;
@@ -7,8 +6,7 @@ body {
 }
 
 $font-families: (
-  default: $font-default,
-  secondary: $font-secondary
+  default: $font-default
 );
 
 $font-weights: (
@@ -17,12 +15,13 @@ $font-weights: (
 );
 
 $font-sizes: (
+  default: 12px,
   meta: 12px,
   input-label: 14px,
   input: 12px,
   input-hint: 12px,
   heading: 22px,
-  modal: 14px
+  modal: 12px
 );
 
 $spacing-base: 10px;
@@ -33,26 +32,26 @@ $input-padding: $spacing-base * 1.5;
 $boolean-padding: $spacing-double;
 
 :root, .apos-theme-light {
-  --primary: #6516DD;
-  --primary-hover: #5007C0;
-  --primary-active: #4000A1;
-  --primary-disabled: #C5A5F4;
+  --primary-button: #6516DD;
+  --primary-button-hover: #5007C0;
+  --primary-button-active: #4000A1;
+  --primary-button-disabled: #C5A5F4;
 
-  --secondary: #B327BF;
-  --secondary-hover: #A107C0;
-  --secondary-active: #8804A3;
-  --secondary-disabled: #F4A5CD;
+  --default-button: #F3F3F3;
+  --default-button-hover: #E2E2E2;
+  --default-button-active: #CDCDCD;
+  --default-button-disabled: #FAFAFA;
 
-  --cancel: #F3F3F3;
-  --cancel-hover: #E2E2E2;
-  --cancel-active: #CDCDCD;
-  --cancel-disabled: #FAFAFA;
+  --input-button: #323232;
+  --input-button-hover: #101010;
+  --input-button-active: #000;
+  --input-button-disabled: #DBDBDB;
+
+  --danger-button-hover: #C00717;
+  --danger-button-active: #A10000;
+  --danger-button-disabled: #FF9D98;
 
   --danger: #EB443B;
-  --danger-hover: #C00717;
-  --danger-active: #A10000;
-  --danger-disabled: #FF9D98;
-
   --success: #00BF9A;
   --warning: #FFCE00;
   --info: #DBDBDB;
@@ -68,7 +67,6 @@ $boolean-padding: $spacing-double;
 
   // Text colors
   --text-primary: #323232;
-  --text-light: #fff;
 
   // Borders
   --border-color: #DBDBDB;
@@ -78,26 +76,46 @@ $boolean-padding: $spacing-double;
   // Backgrounds
   --background-color: #fff;
   --background-dark: #323232;
-  --background-alt: #f3f3f3;
+  // --background-alt: #f3f3f3;
+
+  --modal-background-color: #fff;
+  --modal-overlay-color: #00000080;
+
+  // Universal
+  --white: #fff;
+
 }
 
 .apos-theme-dark {
-  --primary: #0562FF;
-  --primary-hover: #014FD3;
-  --primary-active: #0443AF;
-  --primary-disabled: #6BA1FE;
+  --primary-button: #0562FF;
+  --primary-button-hover: #014FD3;
+  --primary-button-active: #0443AF;
+  --primary-button-disabled: #6BA1FE;
 
-  --secondary: #6516DD;
-  --secondary-hover: #5007C0;
-  --secondary-active: #4000A1;
-  --secondary-disabled: #C5A5F4;
+  --neutral-one: #F8F9FA;
+  --neutral-two: #E1E7ED;
+  --neutral-three: #CFD6DE;
+  --neutral-four: #B8C4CE;
+  --neutral-five: #9DA9B9;
+  --neutral-six: #2C354D;
+  --neutral-seven: #1D2435;
+  --neutral-eight: #11151F;
 
-  --neutral-one: #11151F;
-  --neutral-two: #2C354D;
-  --neutral-three: #8895A7;
-  --neutral-four: #9DA9B9;
-  --neutral-five: #B8C4CE;
-  --neutral-six: #CFD6DE;
-  --neutral-seven: #E1E7ED;
-  --neutral-eight: #F8F9FA;
+  --default-button: #2C354D;
+  --default-button-hover: #0B0E14;
+  --default-button-active: #0B0E14;
+  --default-button-disabled: #171D2D;
+
+  --input-button: #121620;
+  --input-button-hover: #101010;
+  --input-button-active: #000;
+  --input-button-disabled: #8895A7;
+
+  --modal-background-color: #11151F;
+  --modal-overlay-color: #11151F90;
+
+  --border-color: #586383;
+
+  // Text colors
+  --text-primary: #fff;
 }

@@ -8,17 +8,17 @@ const field = {
   label: 'Do you approve?'
 }
 
-const toggleField = {
-  mandatory: false,
-  name: 'approval',
-  type: 'radio',
-  label: 'Published',
-  help: 'Tell the user a little about this thing',
-  toggle: {
-    true: 'Published',
-    false: 'Unpublished'
-  }
-}
+// const toggleField = {
+//   mandatory: false,
+//   name: 'approval',
+//   type: 'radio',
+//   label: 'Published',
+//   help: 'Tell the user a little about this thing',
+//   toggle: {
+//     true: 'Published',
+//     false: 'Unpublished'
+//   }
+// }
 
 storiesOf('Inputs (Boolean)', module)
   .add('Boolean', () => ({
@@ -34,29 +34,29 @@ storiesOf('Inputs (Boolean)', module)
     },
     template: `<AposBooleanInput :field="field" :value="value" :status="status"/>`
   }))
-  .add('Boolean (prechecked)', () => ({
-    components: { AposBooleanInput },
-    data () {
-      return {
-        field,
-        status: {},
-        value: {
-          data: false
-        }
-      }
-    },
-    template: `<AposBooleanInput :field="field" :value="value" :status="status"/>`
-  }))
-  .add('Toggle', () => ({
-    components: { AposBooleanInput },
-    data () {
-      return {
-        field: toggleField,
-        status: {},
-        value: {
-          data: false
-        }
-      }
-    },
-    template: `<AposBooleanInput :field="field" :value="value" :status="status"/>`
-  }))
+  // .add('Boolean (prechecked)', () => ({
+  //   components: { AposBooleanInput },
+  //   data () {
+  //     return {
+  //       field,
+  //       status: {},
+  //       value: {
+  //         data: false
+  //       }
+  //     }
+  //   },
+  //   template: `<AposBooleanInput :field="field" :value="value" :status="status"/>`
+  // }))
+  // .add('Toggle', () => ({
+  //   components: { AposBooleanInput },
+  //   data () {
+  //     return {
+  //       field: toggleField,
+  //       status: {},
+  //       value: {
+  //         data: false
+  //       }
+  //     }
+  //   },
+  //   template: `<AposBooleanInput :field="field" :value="value" :status="status"/>`
+  // }))
