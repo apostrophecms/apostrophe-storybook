@@ -39,10 +39,10 @@ storiesOf('Modal', module)
       </button>
       <AposModal :modal="modal">
         <template #secondaryControls>
-          <AposButton @click="startExit" label="Exit" />'
+          <AposButton @click="startExit" label="Exit" />
         </template>
-        <template #primaryControls>=
-          <AposButton modifier="primary" @click="startExit" label="Save Page" />'
+        <template #primaryControls>
+          <AposButton modifier="primary" @click="startExit" label="Save Page" />
         </template>
         <template #breadcrumbs>
           <AposBreadcrumb :items="breadcrumbs" />
@@ -79,10 +79,10 @@ storiesOf('Modal', module)
       </button>
       <AposModal :modal="modal">
         <template #secondaryControls>
-          <AposButton @click="startExit" label="Exit" />'
+          <AposButton @click="startExit" label="Exit" />
         </template>
         <template #primaryControls>
-          <AposButton modifier="primary" @click="startExit" label="Save Page" />'
+          <AposButton modifier="primary" @click="startExit" label="Save Page" />
         </template>
         <template #breadcrumbs>
           <AposBreadcrumb :items="breadcrumbs" variant="dark" />
@@ -119,10 +119,10 @@ storiesOf('Modal', module)
       </button>
       <AposModal :modal="modal">
         <template #secondaryControls>
-          <AposButton @click="startExit" label="Exit" />'
+          <AposButton @click="startExit" label="Exit" />
         </template>
         <template #primaryControls>
-          <AposButton modifier="primary" @click="startExit" label="Save Page" />'
+          <AposButton modifier="primary" @click="startExit" label="Save Page" />
         </template>
       </AposModal>
     </div>

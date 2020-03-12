@@ -32,90 +32,66 @@ $input-padding: $spacing-base * 1.5;
 $boolean-padding: $spacing-double;
 
 :root, .apos-theme-light {
-  --primary-button: #6516DD;
-  --primary-button-hover: #5007C0;
-  --primary-button-active: #4000A1;
-  --primary-button-disabled: #C5A5F4;
-
-  --default-button: #F3F3F3;
-  --default-button-hover: #E2E2E2;
-  --default-button-active: #CDCDCD;
-  --default-button-disabled: #FAFAFA;
-
-  --input-button: #323232;
-  --input-button-hover: #101010;
-  --input-button-active: #000;
-  --input-button-disabled: #DBDBDB;
-
-  --danger-button-hover: #C00717;
-  --danger-button-active: #A10000;
-  --danger-button-disabled: #FF9D98;
 
   --danger: #EB443B;
   --success: #00BF9A;
   --warning: #FFCE00;
   --info: #DBDBDB;
+  --primary: #6516DD;
+  
+  --primary-button-hover: #5007C0;
+  --primary-button-active: #4000A1;
+  --primary-button-disabled: #C5A5F4;
+
+  --danger-button-hover: #C00717;
+  --danger-button-active: #A10000;
+  --danger-button-disabled: #FF9D98;
 
   --neutral-one: #323232;
-  --neutral-two: #767676;
-  --neutral-three: #A5A5A5;
-  --neutral-four: #CACACA;
-  --neutral-five: #DBDBDB;
-  --neutral-six: #E8E8E8;
-  --neutral-seven: #F3F3F3;
-  --neutral-eight: #FFFFFF;
+  --neutral-two: #494949;
+  --neutral-three: #606060;
+  --neutral-four: #767676;
+  --neutral-five: #8D8D8D;
+  --neutral-six: #A4A4A4;
+  --neutral-seven: #BBBBBB;
+  --neutral-eight: #D1D1D1;
+  --neutral-nine: #E8E8E8;
+  --neutral-ten: #FFFFFF;
 
-  // Text colors
-  --text-primary: #323232;
+  --text-primary: #000;
 
   // Borders
-  --border-color: #DBDBDB;
   --border-radius: 5px;
   --box-shadow: 0 3px 13px 4px rgba(0,0,0,0.08);
 
   // Backgrounds
-  --background-color: #fff;
-  --background-dark: #323232;
-  // --background-alt: #f3f3f3;
-
-  --modal-background-color: #fff;
-  --modal-overlay-color: #00000080;
+  --background-primary: #fff;
+  --background-inverted: #323232;
+  --overlay: #00000080;
 
   // Universal
   --white: #fff;
-
 }
 
 .apos-theme-dark {
-  --primary-button: #0562FF;
+  --primary: #0562FF;
   --primary-button-hover: #014FD3;
   --primary-button-active: #0443AF;
   --primary-button-disabled: #6BA1FE;
 
   --neutral-one: #F8F9FA;
-  --neutral-two: #E1E7ED;
-  --neutral-three: #CFD6DE;
-  --neutral-four: #B8C4CE;
-  --neutral-five: #9DA9B9;
-  --neutral-six: #2C354D;
-  --neutral-seven: #1D2435;
-  --neutral-eight: #11151F;
+  --neutral-two: #E1E3E7;
+  --neutral-three: #CBCDD4;
+  --neutral-four: #B4B8C0;
+  --neutral-five: #9DA2AD;
+  --neutral-six: #878C9A;
+  --neutral-seven: #707687;
+  --neutral-eight: #596173;
+  --neutral-nine: #434B60;
+  --neutral-ten: #2C354D;
 
-  --default-button: #2C354D;
-  --default-button-hover: #0B0E14;
-  --default-button-active: #0B0E14;
-  --default-button-disabled: #171D2D;
+  --background-primary: #11151F;
+  --overlay: #11151F90;
 
-  --input-button: #121620;
-  --input-button-hover: #101010;
-  --input-button-active: #000;
-  --input-button-disabled: #8895A7;
-
-  --modal-background-color: #11151F;
-  --modal-overlay-color: #11151F90;
-
-  --border-color: #586383;
-
-  // Text colors
   --text-primary: #fff;
 }

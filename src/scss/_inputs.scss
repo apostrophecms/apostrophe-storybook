@@ -10,15 +10,15 @@
 .apos-input {
   min-width: 460px;
   max-width: 100%;
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--neutral-five);
   border-radius: var(--border-radius);
-  background: var(--neutral-seven);
+  background-color: var(--neutral-nine);
   color: var(--text-primary);
   font-size: map-get($font-sizes, input);
   @include apos-transition(all);
 
   &::placeholder {
-    color: var(--neutral-two);
+    color: var(--neutral-four);
     font-style: italic;
   }
 
@@ -35,8 +35,8 @@
 
   &[disabled] {
     border-color: var(--neutral-four);
-    background: var(--neutral-six);
-    color: var(--neutral-two);
+    background: var(--neutral-seven);
+    color: var(--neutral-four);
     &:hover {
       cursor: not-allowed;
     }
@@ -100,7 +100,7 @@ $box-width: 14px;
   width: $box-width;
   height: $box-width;
   border: 1px solid var(--neutral-four);
-  background-color: var(--neutral-seven);
+  background-color: var(--neutral-ten);
 
   .apos-choice-label > & {
     margin-right: $spacing-base;
@@ -112,14 +112,14 @@ $box-width: 14px;
   }
 
   .apos-input--choice[disabled] + & {
-    border-color: var(--border-color);
-    background-color: var(--neutral-five);
+    border-color: var(--neutral-four);
+    background-color: var(--neutral-four);
   }
 
   .apos-input--choice:checked + &,
   .apos-input--choice[checked] + & {
-    background-color: var(--primary-button);
-    border-color: var(--primary-button);
+    background-color: var(--primary);
+    border-color: var(--primary);
     color: #fff;
 
     .material-design-icon { display: inline-flex; }

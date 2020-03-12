@@ -27,27 +27,28 @@ module.exports = {
 <style lang="scss">
   .apos-button {
     color: var(--text-primary);
-    background-color: var(--default-button);
+    background-color: var(--neutral-nine);
     padding: 10px 20px;
     border-radius: var(--border-radius);
     border: none;
     font-size: map-get($font-sizes, modal);
     letter-spacing: 0.75px; // how do we reuse this
-    border: 1px solid var(--border-color);
+    border: 1px solid var(--neutral-five);
     &:hover {
       cursor: pointer;
-      background-color: var(--default-button-hover);
+      background-color: var(--neutral-eight);
     }
     &:active {
-      background-color: var(--default-button-active);
+      background-color: var(--neutral-seven);
     }
     &:focus {
-      box-shadow: 0 0 0 1px var(--neutral-seven), 0 0 0 3px var(--default-button-hover);
+      box-shadow: 0 0 0 1px var(--neutral-seven), 0 0 0 3px var(--neutral-six);
       outline: none;
     }
     &[disabled] {
-      background-color: var(--default-button-disabled);
-      color: var(--neutral-three);
+      background-color: var(--neutral-nine);
+      color: var(--neutral-five);
+      border: 1px solid var(--neutral-eight);
       &:hover {
         cursor: not-allowed;
       }
@@ -56,7 +57,7 @@ module.exports = {
 
   .apos-button--primary {
     color: var(--white);
-    background: var(--primary-button);
+    background: var(--primary);
     border: none;
     &:hover {
       background-color: var(--primary-button-hover);
@@ -70,29 +71,33 @@ module.exports = {
     &[disabled] {
       background-color: var(--primary-button-disabled);
       color: var(--white);
+      border: none;
     }
   }
 
   .apos-button--input {
-    background-color: var(--input-button);
-    color: var(--white);
+    background-color: var(--neutral-two);
+    color: var(--neutral-ten);
+    border-color: var(--neutral-four);
     &:hover {
-      background-color: var(--input-button-hover);
+      background-color: var(--neutral-one);
     }
     &:active {
-      background-color: var(--input-button-active);
+      background-color: var(--neutral-one);
     }
     &:focus {
-      box-shadow: 0 0 0 1px var(--neutral-seven), 0 0 0 3px var(--input-button-disabled);
+      box-shadow: 0 0 0 1px var(--neutral-seven), 0 0 0 3px var(--neutral-one);
     }
     &[disabled] {
-      background-color: var(--input-button-disabled);
+      background-color: var(--neutral-four);
+      color: var(--neutral-seven);
     }
   }
 
   .apos-button--danger {
     color: var(--white);
     background-color: var(--danger);
+    border: none;
     &:hover {
       background-color: var(--danger-button-hover);
     }
@@ -105,6 +110,7 @@ module.exports = {
     &[disabled] {
       color: var(--white);
       background-color: var(--danger-button-disabled);
+      border: none;
     }
   }
 

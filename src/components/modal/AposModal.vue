@@ -75,12 +75,13 @@ export default {
     bottom: $spacing-double;
     left: $spacing-double;
     border-radius: var(--border-radius);
-    background-color: var(--modal-background-color);
+    background-color: var(--background-primary);
+    border: 1px solid var(--neutral-four);
     color: var(--text-primary);
 
     .apos-modal--slide & {
       position: fixed;
-      transition: transform .25s ease;
+      transition: transform .15s ease;
       top: 0;
       right: 0;
       bottom: 0;
@@ -101,13 +102,13 @@ export default {
 
     .apos-modal--overlay & {
       transform: scale(1);
-      transition: opacity .25s ease, transform .25s ease;
+      transition: opacity .15s ease, transform .15s ease;
     }
 
     &.fade-enter,
     &.fade-leave-to {
       opacity: 0;
-      transform: scale(0.8);
+      transform: scale(0.95);
     }
   }
 
@@ -119,10 +120,10 @@ export default {
     bottom: 0;
     left: 0;
     display: block;
-    background-color: var(--modal-overlay-color);
+    background-color: var(--overlay);
 
     .apos-modal--slide & {
-      transition: opacity .25s ease;
+      transition: opacity .15s ease;
     }
 
     &.slide-enter,
@@ -131,7 +132,7 @@ export default {
     }
 
     .apos-modal--overlay & {
-      transition: opacity .25s ease;
+      transition: opacity .15s ease;
     }
 
     &.fade-enter,
@@ -144,7 +145,7 @@ export default {
     display: flex;
     padding: $spacing-double;
     align-items: center;
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--neutral-four);
   }
 
   .apos-modal__controls--primary {

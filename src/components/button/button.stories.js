@@ -33,5 +33,5 @@ storiesOf('Button', module)
   }))
   .add('Danger, Disabled', () => ({
     components: { aposButton },
-    template: '<aposButton label="Delete Article" modifier="danger" disabled=true />'
+    template: '<aposButton label="Delete Article" modifier="danger" v-bind:disabled="true" />'
   }))

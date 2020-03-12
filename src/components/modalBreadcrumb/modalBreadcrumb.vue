@@ -45,7 +45,7 @@ export default {
 
 <style lang="scss">
   .apos-breadcrumb {
-    border-bottom: 1px solid var(--border-color);
+    border-bottom: 1px solid var(--neutral-four);
 
     &--dark {
       background-color: var(--background-dark);

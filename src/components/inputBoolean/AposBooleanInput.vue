@@ -79,7 +79,7 @@ export default {
   }
 
   .apos-boolean__icon {
-    color: var(--neutral-four);
+    color: var(--neutral-six);
   }
 
   .apos-boolean__label {
@@ -107,7 +107,7 @@ export default {
     }
 
     input:checked + & {
-      background-color: var(--neutral-eight); // TODO: --background-color? Check when doing dark theme.
+      background-color: var(--neutral-nine); // TODO: --background-color? Check when doing dark theme.
 
       .apos-boolean__icon {
         color: var(--success);
@@ -129,7 +129,7 @@ export default {
       &:hover,
       &:focus {
         // Prevent border change for active boolean.
-        border-color: var(--border-color);
+        border-color: var(--neutral-four);
 
       }
     }
