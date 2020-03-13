@@ -10,7 +10,7 @@ storiesOf('Notification', module)
     template: `
       <AposNotification :clickable=true label="The article has been saved" modifier="apos-notification--success">
         <template v-slot:indicator>
-          <Dot title="Success" :size=12 :decorative=true fillColor="var(--success)" />
+          <Dot title="Success" :size=12 :decorative=true fillColor="var(--a-success)" />
         </template>
         <template v-slot:button>
           <Close title="Close Notification" :size="14" />
@@ -23,7 +23,7 @@ storiesOf('Notification', module)
     template: `
     <AposNotification :clickable=true label="Something went wrong" modifier="apos-notification--danger">
       <template v-slot:indicator>
-        <Dot title="Something went wrong" :size=12 :decorative=true fillColor="var(--danger)" />
+        <Dot title="Something went wrong" :size=12 :decorative=true fillColor="var(--a-danger)" />
       </template>
       <template v-slot:button>
         <Close title="Close Notification" :size="14" />
@@ -36,7 +36,7 @@ storiesOf('Notification', module)
     template: `
     <AposNotification :clickable=true label="Something happened, that is all" modifier="apos-notification--info">
       <template v-slot:indicator>
-        <Dot :size=12 :decorative=true fillColor="var(--info)" />
+        <Dot :size=12 :decorative=true fillColor="var(--a-primary)" />
       </template>
       <template v-slot:button>
         <Close title="Close Notification" :size="14" />
@@ -49,7 +49,7 @@ storiesOf('Notification', module)
     template: `
     <AposNotification :clickable=true label="You should know this, but maybe it’s fine" modifier="apos-notification--warning">
       <template v-slot:indicator>
-        <Dot :size=12 :decorative=true fillColor="var(--warning)" />
+        <Dot :size=12 :decorative=true fillColor="var(--a-warning)" />
       </template>
       <template v-slot:button>
         <Close title="Close Notification" :size="14" />

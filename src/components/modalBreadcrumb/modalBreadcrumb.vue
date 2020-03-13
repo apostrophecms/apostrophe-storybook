@@ -45,11 +45,11 @@ export default {
 
 <style lang="scss">
   .apos-breadcrumb {
-    border-bottom: 1px solid var(--neutral-four);
+    border-bottom: 1px solid var(--a-base-4);
 
     &--dark {
-      background-color: var(--background-dark);
-      color: var(--white);
+      background-color: var(--a-background-dark);
+      color: var(--a-white);
     }
   }
   .apos-breadcrumb__items {
@@ -76,6 +76,6 @@ export default {
   .apos-breadcrumb__chevron {
     display: flex;
     margin: 0 4px;
-    color: var(--neutral-two);
+    color: var(--a-base-2);
   }
 </style>

@@ -13,7 +13,7 @@ module.exports = {
   },
   computed: {
     modifierClass() {
-      return this.modifier ? 'apos-button--' + this.modifier : false;
+      return this.modifier ? `apos-button--${this.modifier}` : false;
     }
   },
   methods: {
@@ -26,29 +26,29 @@ module.exports = {
 
 <style lang="scss">
   .apos-button {
-    color: var(--text-primary);
-    background-color: var(--neutral-nine);
+    color: var(--a-text-primary);
+    background-color: var(--a-base-9);
     padding: 10px 20px;
-    border-radius: var(--border-radius);
+    border-radius: var(--a-border-radius);
     border: none;
     font-size: map-get($font-sizes, modal);
     letter-spacing: 0.75px; // how do we reuse this
-    border: 1px solid var(--neutral-five);
+    border: 1px solid var(--a-base-5);
     &:hover {
       cursor: pointer;
-      background-color: var(--neutral-eight);
+      background-color: var(--a-base-8);
     }
     &:active {
-      background-color: var(--neutral-seven);
+      background-color: var(--a-base-7);
     }
     &:focus {
-      box-shadow: 0 0 0 1px var(--neutral-seven), 0 0 0 3px var(--neutral-six);
+      box-shadow: 0 0 0 1px var(--a-base-7), 0 0 0 3px var(--a-base--6);
       outline: none;
     }
     &[disabled] {
-      background-color: var(--neutral-nine);
-      color: var(--neutral-five);
-      border: 1px solid var(--neutral-eight);
+      background-color: var(--a-base-9);
+      color: var(--a-base-5);
+      border: 1px solid var(--a-base-8);
       &:hover {
         cursor: not-allowed;
       }
@@ -56,60 +56,60 @@ module.exports = {
   }
 
   .apos-button--primary {
-    color: var(--white);
-    background: var(--primary);
+    color: var(--a-white);
+    background: var(--a-primary);
     border: none;
     &:hover {
-      background-color: var(--primary-button-hover);
+      background-color: var(--a-primary-button-hover);
     }
     &:active {
-      background-color: var(--primary-button-active);
+      background-color: var(--a-primary-button-active);
     }
     &:focus {
-      box-shadow: 0 0 0 1px var(--neutral-seven), 0 0 0 3px var(--primary-button-disabled);
+      box-shadow: 0 0 0 1px var(--a-base-7), 0 0 0 3px var(--a-primary-button-disabled);
     }
     &[disabled] {
-      background-color: var(--primary-button-disabled);
-      color: var(--white);
+      background-color: var(--a-primary-button-disabled);
+      color: var(--a-white);
       border: none;
     }
   }
 
   .apos-button--input {
-    background-color: var(--neutral-two);
-    color: var(--neutral-ten);
-    border-color: var(--neutral-four);
+    background-color: var(--a-base-2);
+    color: var(--a-base-10);
+    border-color: var(--a-base-4);
     &:hover {
-      background-color: var(--neutral-one);
+      background-color: var(--a-base-1);
     }
     &:active {
-      background-color: var(--neutral-one);
+      background-color: var(--a-base-1);
     }
     &:focus {
-      box-shadow: 0 0 0 1px var(--neutral-seven), 0 0 0 3px var(--neutral-one);
+      box-shadow: 0 0 0 1px var(--a-base-7), 0 0 0 3px var(--a-base-1);
     }
     &[disabled] {
-      background-color: var(--neutral-four);
-      color: var(--neutral-seven);
+      background-color: var(--a-base-4);
+      color: var(--a-base-7);
     }
   }
 
   .apos-button--danger {
-    color: var(--white);
-    background-color: var(--danger);
+    color: var(--a-white);
+    background-color: var(--a-danger);
     border: none;
     &:hover {
-      background-color: var(--danger-button-hover);
+      background-color: var(--a-danger-button-hover);
     }
     &:active {
-      background-color: var(--danger-button-active);
+      background-color: var(--a-danger-button-active);
     }
     &:focus {
-      box-shadow: 0 0 0 1px var(--neutral-seven), 0 0 0 3px var(--danger-button-disabled);
+      box-shadow: 0 0 0 1px var(--a-base-7), 0 0 0 3px var(--a-danger-button-disabled);
     }
     &[disabled] {
-      color: var(--white);
-      background-color: var(--danger-button-disabled);
+      color: var(--a-white);
+      background-color: var(--a-danger-button-disabled);
       border: none;
     }
   }

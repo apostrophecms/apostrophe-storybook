@@ -22,11 +22,11 @@ module.exports = {
 .apos-tag {
   display: inline-flex;
   padding: 6px 10px;
-  background-color: var(--neutral-one);
+  background-color: var(--a-base-1);
   font-size: map-get($font-sizes, default);
   letter-spacing: 0.5px;
-  border-radius: var(--border-radius);
-  color: var(--neutral-eight);
+  border-radius: var(--a-border-radius);
+  color: var(--a-base-8);
   align-items: center;
   justify-content: center;
 

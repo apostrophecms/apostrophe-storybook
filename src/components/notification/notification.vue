@@ -33,12 +33,12 @@ module.exports = {
   .apos-notification {
     display: inline-flex;
     align-items: center;
-    color: var(--text-primary);
-    background: var(--neutral-eight);
-    border: 1px solid var(--neutral-six);
-    border-radius: var(--border-radius);
+    color: var(--a-text-primary);
+    background: var(--a-base-9);
+    border: 1px solid var(--a-base-8);
+    border-radius: var(--a-border-radius);
     padding: 15px 20px;
-    box-shadow: var(--box-shadow);
+    box-shadow: var(--a-box-shadow);
   }
 
   .apos-notification__indicator {
@@ -63,6 +63,6 @@ module.exports = {
   .apos-notification__label {
     font-size: map-get($font-sizes, default);
     letter-spacing: 0.75px;
-    color: var(--text-primary);
+    color: var(--a-text-primary);
   }
 </style>

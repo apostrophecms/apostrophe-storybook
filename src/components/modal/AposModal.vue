@@ -74,10 +74,10 @@ export default {
     right: $spacing-double;
     bottom: $spacing-double;
     left: $spacing-double;
-    border-radius: var(--border-radius);
-    background-color: var(--background-primary);
-    border: 1px solid var(--neutral-four);
-    color: var(--text-primary);
+    border-radius: var(--a-border-radius);
+    background-color: var(--a-background-primary);
+    border: 1px solid var(--a-base-4);
+    color: var(--a-text-primary);
 
     .apos-modal--slide & {
       position: fixed;
@@ -120,7 +120,7 @@ export default {
     bottom: 0;
     left: 0;
     display: block;
-    background-color: var(--overlay);
+    background-color: var(--a-overlay);
 
     .apos-modal--slide & {
       transition: opacity .15s ease;
@@ -145,7 +145,7 @@ export default {
     display: flex;
     padding: $spacing-double;
     align-items: center;
-    border-bottom: 1px solid var(--neutral-four);
+    border-bottom: 1px solid var(--a-base-4);
   }
 
   .apos-modal__controls--primary {

@@ -79,7 +79,7 @@ export default {
   }
 
   .apos-boolean__icon {
-    color: var(--neutral-six);
+    color: var(--a-base-7);
   }
 
   .apos-boolean__label {
@@ -107,36 +107,40 @@ export default {
     }
 
     input:checked + & {
-      background-color: var(--neutral-nine); // TODO: --background-color? Check when doing dark theme.
+      background-color: var(--a-base-9);
 
       .apos-boolean__icon {
-        color: var(--success);
+        color: var(--a-success);
       }
 
       .apos-boolean--toggle &:first-of-type,
       .apos-boolean--toggle &:last-of-type {
-        color: var(--white);
+        // color: var(--a-base-6);
       }
 
       .apos-boolean--toggle &:first-of-type {
-        background-color: var(--success);
+        background-color: var(--a-success);
+        color: var(--a-white);
       }
 
       .apos-boolean--toggle &:last-of-type {
-        background-color: var(--background-dark);
+        background-color: var(--a-danger);
+        color: var(--a-white);
       }
 
       &:hover,
       &:focus {
         // Prevent border change for active boolean.
-        border-color: var(--neutral-four);
+        border-color: var(--a-base-4);
 
       }
     }
 
     input:checked.apos-boolean__input--false + & {
+      
+      
       .apos-boolean__icon {
-        color: var(--neutral-two);
+        color: var(--a-danger);
       }
     }
   }

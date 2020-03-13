@@ -81,17 +81,17 @@ export default {
     padding: 0;
     font-size: map-get($font-sizes, input-label);
     font-weight: map-get($font-weights, medium);
-    color: var(--text-primary);
+    color: var(--a-text-primary);
   }
 
   .apos-field-help {
     margin: $spacing-base 0 0;
     font-size: map-get($font-sizes, input-hint);
     font-weight: 500;
-    color: var(--neutral-three);
+    color: var(--a-base-3);
   }
 
   .apos-field-required {
-    color: var(--danger);
+    color: var(--a-danger);
   }
 </style>

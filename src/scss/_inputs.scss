@@ -10,44 +10,44 @@
 .apos-input {
   min-width: 460px;
   max-width: 100%;
-  border: 1px solid var(--neutral-five);
-  border-radius: var(--border-radius);
-  background-color: var(--neutral-nine);
-  color: var(--text-primary);
+  border: 1px solid var(--a-base-5);
+  border-radius: var(--a-border-radius);
+  background-color: var(--a-base-9);
+  color: var(--a-text-primary);
   font-size: map-get($font-sizes, input);
   @include apos-transition(all);
 
   &::placeholder {
-    color: var(--neutral-four);
+    color: var(--a-base-4);
     font-style: italic;
   }
 
   &:hover,
   &:focus {
-    border-color: var(--neutral-two);
+    border-color: var(--a-base-2);
   }
 
   &:focus {
     outline: none;
-    box-shadow: 0 0 3px var(--neutral-two);
-    border-color: var(--neutral-two);
+    box-shadow: 0 0 3px var(--a-base-2);
+    border-color: var(--a-base-2);
   }
 
   &[disabled] {
-    border-color: var(--neutral-four);
-    background: var(--neutral-seven);
-    color: var(--neutral-four);
+    border-color: var(--a-base-4);
+    background: var(--a-base-7);
+    color: var(--a-base-4);
     &:hover {
       cursor: not-allowed;
     }
   }
 
   .apos-field--error & {
-    border-color: var(--danger);
+    border-color: var(--a-danger);
 
     &:focus {
       outline: none;
-      box-shadow: 0 0 3px var(--danger);
+      box-shadow: 0 0 3px var(--a-danger);
     }
   }
 
@@ -69,7 +69,7 @@
   align-items: center;
   font-size: map-get($font-sizes, input-hint);
   font-weight: map-get($font-weights, medium);
-  color: var(--neutral-two);
+  color: var(--a-base-2);
 
   & + &,
   .apos-legend + & {
@@ -78,7 +78,7 @@
 }
 
 .apos-input-label--disabled {
-  color: var(--neutral-three);
+  color: var(--a-base-3);
 }
 
 $box-width: 14px;
@@ -99,8 +99,8 @@ $box-width: 14px;
   justify-content: center;
   width: $box-width;
   height: $box-width;
-  border: 1px solid var(--neutral-four);
-  background-color: var(--neutral-ten);
+  border: 1px solid var(--a-base-4);
+  background-color: var(--a-base-10);
 
   .apos-choice-label > & {
     margin-right: $spacing-base;
@@ -108,19 +108,19 @@ $box-width: 14px;
 
   .apos-choice-label:hover > &,
   .apos-choice-label:focus > & {
-    border-color: var(--neutral-two);
+    border-color: var(--a-base-2);
   }
 
   .apos-input--choice[disabled] + & {
-    border-color: var(--neutral-four);
-    background-color: var(--neutral-four);
+    border-color: var(--a-base-4);
+    background-color: var(--a-base-4);
   }
 
   .apos-input--choice:checked + &,
   .apos-input--choice[checked] + & {
-    background-color: var(--primary);
-    border-color: var(--primary);
-    color: #fff;
+    background-color: var(--a-primary);
+    border-color: var(--a-primary);
+    color: var(--a-white);
 
     .material-design-icon { display: inline-flex; }
   }

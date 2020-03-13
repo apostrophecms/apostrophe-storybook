@@ -65,11 +65,11 @@ export default {
   right: $input-padding;
   top: 50%;
   transform: translateY(-50%);
-  color: var(--neutral-two);
+  color: var(--a-base-2);
   pointer-events: none;
 
   .apos-field--error & {
-    color: var(--danger);
+    color: var(--a-danger);
   }
 }
 
