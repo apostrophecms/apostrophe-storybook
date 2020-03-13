@@ -113,11 +113,6 @@ export default {
         color: var(--a-success);
       }
 
-      .apos-boolean--toggle &:first-of-type,
-      .apos-boolean--toggle &:last-of-type {
-        // color: var(--a-base-6);
-      }
-
       .apos-boolean--toggle &:first-of-type {
         background-color: var(--a-success);
         color: var(--a-white);
@@ -137,8 +132,6 @@ export default {
     }
 
     input:checked.apos-boolean__input--false + & {
-      
-      
       .apos-boolean__icon {
         color: var(--a-danger);
       }
