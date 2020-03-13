@@ -80,7 +80,7 @@ storiesOf('Inputs (strings)', module)
     },
     template: baseTemplate
   }))
-  .add('Date', () => ({
+  .add('Text with Icon', () => ({
     components: { AposStringInput },
     data () {
       return {

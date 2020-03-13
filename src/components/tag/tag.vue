@@ -21,12 +21,12 @@ module.exports = {
 <style lang="scss">
 .apos-tag {
   display: inline-flex;
-  font-family: map-get($font-families, secondary);
   padding: 6px 10px;
-  background-color: var(--neutral-one);
-  font-size: 1.2em;
-  border-radius: var(--border-radius);
-  color: var(--neutral-eight);
+  background-color: var(--a-base-1);
+  font-size: map-get($font-sizes, default);
+  letter-spacing: 0.5px;
+  border-radius: var(--a-border-radius);
+  color: var(--a-base-8);
   align-items: center;
   justify-content: center;
 
@@ -58,14 +58,3 @@ module.exports = {
   margin-right: 1rem;
 }
 </style>
-
-  --tag-font-size: 1.2em;
-  --tag-font-weight: 600;
-  --tag-color: var(--neutral-eight);
-  --tag-background-color: var(--neutral-one);
-
-
-  // --tag-text-size: 1.2rem;
-  // --tag-text-weight: 600;
-  // --tag-text-color: --neutral-eight;
-  // --tag-background-color: --neutral-one;

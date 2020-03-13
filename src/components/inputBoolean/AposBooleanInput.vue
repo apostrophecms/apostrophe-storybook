@@ -79,13 +79,15 @@ export default {
   }
 
   .apos-boolean__icon {
-    color: var(--neutral-four);
+    color: var(--a-base-7);
   }
 
   .apos-boolean__label {
     min-width: 0;
     position: relative;
-    display: inline-block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding: ($boolean-padding / 2) $boolean-padding;
 
     &:first-of-type {
@@ -105,41 +107,39 @@ export default {
     }
 
     input:checked + & {
-      background-color: var(--neutral-eight); // TODO: --background-color? Check when doing dark theme.
+      background-color: var(--a-base-9);
 
       .apos-boolean__icon {
-        color: var(--success);
-      }
-
-      .apos-boolean--toggle &:first-of-type,
-      .apos-boolean--toggle &:last-of-type {
-        color: var(--text-light);
+        color: var(--a-success);
       }
 
       .apos-boolean--toggle &:first-of-type {
-        background-color: var(--success);
+        background-color: var(--a-success);
+        color: var(--a-white);
       }
 
       .apos-boolean--toggle &:last-of-type {
-        background-color: var(--background-dark);
+        background-color: var(--a-danger);
+        color: var(--a-white);
       }
 
       &:hover,
       &:focus {
         // Prevent border change for active boolean.
-        border-color: var(--border-color);
+        border-color: var(--a-base-4);
 
       }
     }
 
     input:checked.apos-boolean__input--false + & {
       .apos-boolean__icon {
-        color: var(--neutral-two);
+        color: var(--a-danger);
       }
     }
   }
 
   .apos-boolean__icon {
+    display: inline-flex;
     margin-right: $spacing-base;
 
     svg {

@@ -3,29 +3,29 @@ import { storiesOf } from '@storybook/vue'
 import aposButton from './button.vue'
 
 storiesOf('Button', module)
+  .add('Default', () => ({
+    components: { aposButton },
+    template: '<aposButton label="Filter" />'
+  }))
+  .add('Default, Disabled', () => ({
+    components: { aposButton },
+    template: '<aposButton label="Filter" v-bind:disabled="true" />'
+  }))
   .add('Primary', () => ({
     components: { aposButton },
-    template: '<aposButton label="Save Article" />'
+    template: '<aposButton modifier="primary" label="Save Article" />'
   }))
   .add('Primary, Disabled', () => ({
     components: { aposButton },
-    template: '<aposButton label="Save Article" disabled=true />'
+    template: '<aposButton modifier="primary" label="Save Article" v-bind:disabled="true" />'
   }))
-  .add('Secondary', () => ({
+  .add('Input', () => ({
     components: { aposButton },
-    template: '<aposButton label="Browse Articles" modifier="secondary" />'
+    template: '<aposButton label="Browse Articles" modifier="input" />'
   }))
-  .add('Secondary, Disabled', () => ({
+  .add('Input, Disabled', () => ({
     components: { aposButton },
-    template: '<aposButton label="Browse Articles" modifier="secondary" disabled="true" />'
-  }))
-  .add('Cancel', () => ({
-    components: { aposButton },
-    template: '<aposButton label="Cancel" modifier="cancel" />'
-  }))
-  .add('Cancel, Disabled', () => ({
-    components: { aposButton },
-    template: '<aposButton label="Cancel" modifier="cancel" disabled="true" />'
+    template: '<aposButton label="Browse Articles" modifier="input" v-bind:disabled="true" />'
   }))
   .add('Danger', () => ({
     components: { aposButton },
@@ -33,5 +33,5 @@ storiesOf('Button', module)
   }))
   .add('Danger, Disabled', () => ({
     components: { aposButton },
-    template: '<aposButton label="Delete Article" modifier="danger" disabled="true" />'
+    template: '<aposButton label="Delete Article" modifier="danger" v-bind:disabled="true" />'
   }))
