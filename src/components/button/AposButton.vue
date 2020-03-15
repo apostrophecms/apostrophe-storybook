@@ -21,12 +21,16 @@ export default {
   },
   computed: {
     modifierClass() {
-      let modifier = '';
+      let modifier = false;
       if (this.modifier) {
-        modifier += `apos-button--${this.modifier}`
+        modifier = `apos-button--${this.modifier}`
       }
       if (this.busy) {
-        modifier += ' apos-button--busy'
+        if (modifier) {
+          modifier += ' apos-button--busy'  
+        } else {
+          modifier = 'apos-button--busy'
+        }
       }
       return modifier;
     },
