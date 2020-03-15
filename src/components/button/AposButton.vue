@@ -1,24 +1,42 @@
 <template>
-  <button type="button" @click="click" class="apos-button" :class="modifierClass" v-bind:disabled="disabled">
-    {{ label }}
+  <button type="button" @click="click" class="apos-button" :class="modifierClass" v-bind:busy="busy" v-bind:disabled="isDisabled">
+    <AposLoading />
+    <span class="apos-button__label">{{ label }}</span>
   </button>
 </template>
 
 <script>
-module.exports = {
+import AposLoading from '../loading/AposLoading.vue';
+
+export default {
+  name: 'AposButton',
+  components: {
+    AposLoading
+  },
   props: {
     label: String,
     modifier: String,
-    disabled: Boolean
+    disabled: Boolean,
+    busy: Boolean
   },
   computed: {
     modifierClass() {
-      return this.modifier ? `apos-button--${this.modifier}` : false;
+      let modifier = '';
+      if (this.modifier) {
+        modifier += `apos-button--${this.modifier}`
+      }
+      if (this.busy) {
+        modifier += ' apos-button--busy'
+      }
+      return modifier;
+    },
+    isDisabled() {
+      return (this.disabled || this.busy) ? true : false;
     }
   },
   methods: {
     click() {
-    	this.$emit('click');
+      this.$emit('click');
     }
   }
 }
@@ -26,6 +44,7 @@ module.exports = {
 
 <style lang="scss">
   .apos-button {
+    position: relative;
     color: var(--a-text-primary);
     background-color: var(--a-base-9);
     padding: 10px 20px;
@@ -53,6 +72,19 @@ module.exports = {
         cursor: not-allowed;
       }
     }
+    &[disabled].apos-button--busy {
+      background-color: transparent;
+      border: 1px solid var(--a-base-1);
+    }
+    .apos-loading {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+      opacity: 0;
+    }
   }
 
   .apos-button--primary {
@@ -73,6 +105,9 @@ module.exports = {
       color: var(--a-white);
       border: none;
     }
+    &[disabled].apos-button--busy {
+      border: 1px solid var(--a-primary-button-disabled);
+    }
   }
 
   .apos-button--input {
@@ -91,6 +126,9 @@ module.exports = {
     &[disabled] {
       background-color: var(--a-base-4);
       color: var(--a-base-7);
+    }
+    &[disabled].apos-button--busy {
+      border: 1px solid var(--a-base-1);
     }
   }
 
@@ -112,6 +150,22 @@ module.exports = {
       background-color: var(--a-danger-button-disabled);
       border: none;
     }
+    &[disabled].apos-button--busy {
+      border: 1px solid var(--a-danger-button-disabled);
+    }
+  }
+
+  .apos-button--busy {
+    .apos-button__label {
+      opacity: 0;
+    }
+    .apos-loading {
+      opacity: 1;
+    }
+  }
+
+  .apos-button__label {
+    transition: opacity 0.2s ease;
   }
 
 
