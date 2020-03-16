@@ -2,7 +2,7 @@ import { storiesOf } from '@storybook/vue'
 
 import AposModal from './AposModal.vue'
 import AposBreadcrumb from './../modalBreadcrumb/modalBreadcrumb.vue'
-import AposButton from './../button/button.vue'
+import AposButton from './../button/AposButton.vue'
 
 const breadcrumbs = [
   {
