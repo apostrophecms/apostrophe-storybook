@@ -112,6 +112,9 @@ export default {
     &[disabled].apos-button--busy {
       border: 1px solid var(--a-primary-button-disabled);
     }
+    .apos-loading__svg {
+      color: var(--a-primary);
+    }
   }
 
   .apos-button--input {
@@ -156,6 +159,9 @@ export default {
     }
     &[disabled].apos-button--busy {
       border: 1px solid var(--a-danger-button-disabled);
+    }
+    .apos-loading__svg {
+      color: var(--a-danger);
     }
   }
 
