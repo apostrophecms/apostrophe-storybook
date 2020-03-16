@@ -1,7 +1,12 @@
 <template>
   <button type="button" @click="click" class="apos-button" :class="modifierClass" v-bind:busy="busy" v-bind:disabled="isDisabled">
     <AposLoading />
-    <span class="apos-button__label">{{ label }}</span>
+    <div class="apos-button__content">
+      <component :size="15" class="apos-button__icon" v-if="icon" v-bind:is="iconComponent"></component>
+      <span class="apos-button__label">
+        {{ label }}
+      </span>
+    </div>
   </button>
 </template>
 
@@ -15,24 +20,43 @@ export default {
   },
   props: {
     label: String,
-    modifier: String,
+    modifiers: Array,
     disabled: Boolean,
-    busy: Boolean
+    busy: Boolean,
+    icon: String
   },
   computed: {
     modifierClass() {
-      let modifier = false;
-      if (this.modifier) {
-        modifier = `apos-button--${this.modifier}`
+      let modifiers = false;
+      if (this.modifiers) {
+        modifiers = '';
+        this.modifiers.forEach((m) => {
+          modifiers += `apos-button--${m}`
+        });
       }
       if (this.busy) {
-        if (modifier) {
-          modifier += ' apos-button--busy'  
+        if (modifiers) {
+          modifiers += ' apos-button--outline apos-button--busy';
         } else {
-          modifier = 'apos-button--busy'
+          modifiers = 'apos-button--outline apos-button--busy';
         }
       }
-      return modifier;
+
+      if (this.icon && !this.label) {
+        if (modifiers) {
+          modifiers += ' apos-button--icon';
+        } else {
+          modifiers = 'apos-button--icon';
+        }
+      }
+      return modifiers;
+    },
+    iconComponent () {
+      if (this.icon) {
+        return () => import(`vue-material-design-icons/${this.icon}.vue`);
+      } else {
+        return false
+      }
     },
     isDisabled() {
       return (this.disabled || this.busy) ? true : false;
@@ -77,7 +101,6 @@ export default {
       }
     }
     &[disabled].apos-button--busy {
-      background-color: transparent;
       border: 1px solid var(--a-base-1);
     }
     .apos-loading {
@@ -89,6 +112,11 @@ export default {
       margin: auto;
       opacity: 0;
     }
+  }
+
+  .apos-button--outline,
+  .apos-button[disabled].apos-button--outline {
+    background-color: transparent;
   }
 
   .apos-button--primary {
@@ -166,7 +194,7 @@ export default {
   }
 
   .apos-button--busy {
-    .apos-button__label {
+    .apos-button__content {
       opacity: 0;
     }
     .apos-loading {
@@ -174,9 +202,28 @@ export default {
     }
   }
 
+  .apos-button--icon {
+    padding: 10px;
+    .apos-button__icon {
+      margin-right: 0;
+    }
+  }
+
   .apos-button__label {
+    display: inline-block;
+  }
+
+  .apos-button__content {
+    display: flex;
+    align-content: center;
+    justify-items: center;
     transition: opacity 0.2s ease;
   }
 
+  .apos-button__icon {
+    display: inline-flex;
+    margin-right: 5px;
+    align-items: center;
+  }
 
 </style>
