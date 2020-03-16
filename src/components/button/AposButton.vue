@@ -36,17 +36,17 @@ export default {
       }
       if (this.busy) {
         if (modifiers) {
-          modifiers += ' apos-button--hollow apos-button--busy';
+          modifiers += ' apos-button--outline apos-button--busy';
         } else {
-          modifiers = 'apos-button--hollow apos-button--busy';
+          modifiers = 'apos-button--outline apos-button--busy';
         }
       }
 
       if (this.icon && !this.label) {
         if (modifiers) {
-          modifiers += ' apos-button--icon-only';
+          modifiers += ' apos-button--icon';
         } else {
-          modifiers = 'apos-button--icon-only';
+          modifiers = 'apos-button--icon';
         }
       }
       return modifiers;
@@ -114,8 +114,8 @@ export default {
     }
   }
 
-  .apos-button--hollow,
-  .apos-button[disabled].apos-button--hollow {
+  .apos-button--outline,
+  .apos-button[disabled].apos-button--outline {
     background-color: transparent;
   }
 
@@ -202,7 +202,7 @@ export default {
     }
   }
 
-  .apos-button--icon-only {
+  .apos-button--icon {
     padding: 10px;
     .apos-button__icon {
       margin-right: 0;

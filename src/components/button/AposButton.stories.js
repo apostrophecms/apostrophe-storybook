@@ -61,12 +61,12 @@ storiesOf('Button', module)
     `,
     ...mixin
   }))
-  .add('Hollow, icon only', () => ({
+  .add('Outline, icon only', () => ({
     template: `
       <AposButton
         @click="fakeBusy"
         v-bind:busy="busy"
-        v-bind:modifiers='["hollow"]'
+        v-bind:modifiers='["outline"]'
         icon="Delete"
       />
     `,
