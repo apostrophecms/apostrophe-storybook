@@ -1,7 +1,9 @@
 import { storiesOf } from '@storybook/vue'
 
 import AposButton from './AposButton.vue'
+
 const mixin = {
+  components: { AposButton },
   data () {
     return {
       busy: false
@@ -19,47 +21,119 @@ const mixin = {
 
 storiesOf('Button', module)
   .add('Default', () => ({
-    components: { AposButton },
-    template: '<AposButton @click="fakeBusy" v-bind:busy="busy" label="Filter" />',
+    template: `
+      <AposButton 
+        @click="fakeBusy"
+        v-bind:busy="busy"
+        label="Filter"
+      />
+    `,
     ...mixin
   }))
   .add('Default, Disabled', () => ({
-    components: { AposButton },
-    template: '<AposButton @click="fakeBusy" label="Filter" v-bind:disabled="true" />',
+    template: `
+      <AposButton
+        @click="fakeBusy"
+        label="Filter"
+        v-bind:disabled="true"
+      />
+    `,
     ...mixin
   }))
   .add('Default, Busy', () => ({
-    components: { AposButton },
-    template: '<AposButton @click="fakeBusy" label="Filter" v-bind:busy="true" />',
+    template: `
+      <AposButton
+        @click="fakeBusy"
+        label="Filter"
+        v-bind:busy="true"
+      />
+    `,
+    ...mixin
+  }))
+  .add('Default, with icon', () => ({
+    template: `
+      <AposButton
+        @click="fakeBusy"
+        v-bind:busy="busy"
+        label="Tags"
+        icon="Label"
+      />
+    `,
+    ...mixin
+  }))
+  .add('Hollow, icon only', () => ({
+    template: `
+      <AposButton
+        @click="fakeBusy"
+        v-bind:busy="busy"
+        v-bind:modifiers='["hollow"]'
+        icon="Delete"
+      />
+    `,
     ...mixin
   }))
   .add('Primary', () => ({
-    components: { AposButton },
-    template: '<AposButton @click="fakeBusy" v-bind:busy="busy" modifier="primary" label="Save Article" />',
+    template: `
+      <AposButton
+        @click="fakeBusy"
+        v-bind:busy="busy"
+        v-bind:modifiers='["primary"]'
+        label="Save Article"
+      />`,
     ...mixin
   }))
   .add('Primary, Disabled', () => ({
-    components: { AposButton },
-    template: '<AposButton @click="fakeBusy" modifier="primary" label="Save Article" v-bind:disabled="true" />',
+    template: `
+      <AposButton
+        @click="fakeBusy"
+        v-bind:modifiers='["primary"]'
+        label="Save Article"
+        v-bind:disabled="true"
+      />
+      `,
     ...mixin
   }))
   .add('Input', () => ({
-    components: { AposButton },
-    template: '<AposButton @click="fakeBusy" v-bind:busy="busy" label="Browse Articles" modifier="input" />',
+    template: `
+      <AposButton
+        @click="fakeBusy"
+        v-bind:busy="busy"
+        label="Browse Articles"
+        v-bind:modifiers='["input"]'
+      />
+    `,
     ...mixin
   }))
   .add('Input, Disabled', () => ({
-    components: { AposButton },
-    template: '<AposButton @click="fakeBusy" label="Browse Articles" modifier="input" v-bind:disabled="true" />',
+    template: `
+      <AposButton
+        @click="fakeBusy"
+        label="Browse Articles"
+        v-bind:modifiers='["input"]'
+        v-bind:disabled="true"
+      />
+    `,
     ...mixin
   }))
   .add('Danger', () => ({
-    components: { AposButton },
-    template: '<AposButton @click="fakeBusy" v-bind:busy="busy" label="Delete Article" modifier="danger" />',
+    template: `
+      <AposButton
+        @click="fakeBusy"
+        v-bind:busy="busy"
+        label="Delete Article"
+        v-bind:modifiers='["danger"]'
+      />
+    `,
     ...mixin
   }))
   .add('Danger, Disabled', () => ({
-    components: { AposButton },
-    template: '<AposButton @click="fakeBusy" label="Delete Article" modifier="danger" v-bind:disabled="true" />',
+    template: `
+      <AposButton
+        @click="fakeBusy"
+        label="Delete Article"
+        v-bind:modifiers='["danger"]'
+        v-bind:disabled="true"
+      />
+    `,
     ...mixin
   }))
