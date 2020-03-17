@@ -30,7 +30,7 @@ storiesOf('Button', module)
         label="Filter"
       />
     `,
-    ...mixin
+    mixins: [mixin]
   }))
   .add('Default, Disabled', () => ({
     template: `
@@ -40,7 +40,7 @@ storiesOf('Button', module)
         v-bind:disabled="true"
       />
     `,
-    ...mixin
+    mixins: [mixin]
   }))
   .add('Default, with icon', () => ({
     template: `
@@ -51,7 +51,7 @@ storiesOf('Button', module)
         icon="Label"
       />
     `,
-    ...mixin
+    mixins: [mixin]
   }))
   .add('Outline, icons only', () => ({
     template: `
@@ -82,7 +82,7 @@ storiesOf('Button', module)
         />
       </div>
     `,
-    ...mixin
+    mixins: [mixin]
   }))
   .add('Primary', () => ({
     template: `
@@ -92,7 +92,7 @@ storiesOf('Button', module)
         v-bind:modifiers='["primary"]'
         label="Save Article"
       />`,
-    ...mixin
+    mixins: [mixin]
   }))
   .add('Primary, Disabled', () => ({
     template: `
@@ -103,7 +103,7 @@ storiesOf('Button', module)
         v-bind:disabled="true"
       />
       `,
-    ...mixin
+    mixins: [mixin]
   }))
   .add('Input', () => ({
     template: `
@@ -114,7 +114,7 @@ storiesOf('Button', module)
         v-bind:modifiers='["input"]'
       />
     `,
-    ...mixin
+    mixins: [mixin]
   }))
   .add('Input, Disabled', () => ({
     template: `
@@ -125,7 +125,7 @@ storiesOf('Button', module)
         v-bind:disabled="true"
       />
     `,
-    ...mixin
+    mixins: [mixin]
   }))
   .add('Danger', () => ({
     template: `
@@ -136,7 +136,7 @@ storiesOf('Button', module)
         v-bind:modifiers='["danger"]'
       />
     `,
-    ...mixin
+    mixins: [mixin]
   }))
   .add('Danger, Disabled', () => ({
     template: `
@@ -147,5 +147,5 @@ storiesOf('Button', module)
         v-bind:disabled="true"
       />
     `,
-    ...mixin
+    mixins: [mixin]
   }))
