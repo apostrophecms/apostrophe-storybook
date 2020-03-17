@@ -2,7 +2,7 @@
   <button type="button" @click="click" class="apos-button" :class="modifierClass" v-bind:busy="busy" v-bind:disabled="isDisabled">
     <AposLoading />
     <div class="apos-button__content">
-      <component :size="15" class="apos-button__icon" v-if="icon" v-bind:is="iconComponent"></component>
+      <component :size="16" class="apos-button__icon" v-if="icon" v-bind:is="iconComponent"></component>
       <span class="apos-button__label">
         {{ label }}
       </span>
@@ -54,8 +54,6 @@ export default {
     iconComponent () {
       if (this.icon) {
         return () => import(`vue-material-design-icons/${this.icon}.vue`);
-      } else {
-        return false
       }
     },
     isDisabled() {
@@ -117,6 +115,26 @@ export default {
   .apos-button--outline,
   .apos-button[disabled].apos-button--outline {
     background-color: transparent;
+  }
+
+  .apos-button--outline {
+    &:hover {
+      background-color: var(--a-base-9);
+    }
+    &:active {
+      background-color: var(--a-base-8);
+    }
+    &:focus {
+      box-shadow: 0 0 0 1px var(--a-base-8), 0 0 0 3px var(--a-base--7);
+    }
+    &[disabled] {
+      background-color: transparent;
+      color: var(--a-base-9);
+      border: 1px solid var(--a-base-9);
+    }
+    &.apos-button--busy {
+      color: var(--a-base-5);
+    }
   }
 
   .apos-button--primary {

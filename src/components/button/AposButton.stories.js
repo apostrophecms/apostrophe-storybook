@@ -61,14 +61,34 @@ storiesOf('Button', module)
     `,
     ...mixin
   }))
-  .add('Outline, icon only', () => ({
+  .add('Outline, icons only', () => ({
     template: `
-      <AposButton
-        @click="fakeBusy"
-        v-bind:busy="busy"
-        v-bind:modifiers='["outline"]'
-        icon="Delete"
-      />
+      <div>
+        <AposButton
+          @click="fakeBusy"
+          v-bind:busy="busy"
+          v-bind:modifiers='["outline"]'
+          icon="CheckboxBlankOutline"
+        />
+        <AposButton
+          @click="fakeBusy"
+          v-bind:busy="busy"
+          v-bind:modifiers='["outline"]'
+          icon="Label"
+        />
+        <AposButton
+          @click="fakeBusy"
+          v-bind:busy="busy"
+          v-bind:modifiers='["outline"]'
+          icon="Delete"
+        />
+        <AposButton
+          @click="fakeBusy"
+          v-bind:busy="busy"
+          v-bind:modifiers='["outline"]'
+          icon="DotsVertical"
+        />
+      </div>
     `,
     ...mixin
   }))
