@@ -29,7 +29,7 @@ export default {
     label: String,
     modifiers: Array,
     disabled: Boolean,
-    busy: Boolean,
+    contextBusy: Boolean,
     icon: String
   },
   computed: {
@@ -64,11 +64,11 @@ export default {
       }
     },
     isDisabled() {
-      return (this.disabled || this.busy) ? true : false;
+      return this.disabled || this.contextBusy;
     }
   },
   watch: {
-    busy (val) {
+    contextBusy (val) {
       if (!val && this.buttonBusy) {
         this.buttonBusy = !this.buttonBusy;
       }

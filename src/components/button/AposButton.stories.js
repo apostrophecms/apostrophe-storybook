@@ -26,7 +26,7 @@ storiesOf('Button', module)
     template: `
       <AposButton
         @click="fakeBusy"
-        v-bind:busy="busy"
+        :contextBusy="busy"
         label="Filter"
       />
     `,
@@ -42,21 +42,11 @@ storiesOf('Button', module)
     `,
     ...mixin
   }))
-  .add('Default, Busy', () => ({
-    template: `
-      <AposButton
-        @click="fakeBusy"
-        label="Filter"
-        v-bind:busy="true"
-      />
-    `,
-    ...mixin
-  }))
   .add('Default, with icon', () => ({
     template: `
       <AposButton
         @click="fakeBusy"
-        v-bind:busy="busy"
+        :contextBusy="busy"
         label="Tags"
         icon="Label"
       />
@@ -68,25 +58,25 @@ storiesOf('Button', module)
       <div>
         <AposButton
           @click="fakeBusy"
-          v-bind:busy="busy"
+          :contextBusy="busy"
           v-bind:modifiers='["outline"]'
           icon="CheckboxBlankOutline"
         />
         <AposButton
           @click="fakeBusy"
-          v-bind:busy="busy"
+          :contextBusy="busy"
           v-bind:modifiers='["outline"]'
           icon="Label"
         />
         <AposButton
           @click="fakeBusy"
-          v-bind:busy="busy"
+          :contextBusy="busy"
           v-bind:modifiers='["outline"]'
           icon="Delete"
         />
         <AposButton
           @click="fakeBusy"
-          v-bind:busy="busy"
+          :contextBusy="busy"
           v-bind:modifiers='["outline"]'
           icon="DotsVertical"
         />
@@ -98,7 +88,7 @@ storiesOf('Button', module)
     template: `
       <AposButton
         @click="fakeBusy"
-        v-bind:busy="busy"
+        :contextBusy="busy"
         v-bind:modifiers='["primary"]'
         label="Save Article"
       />`,
@@ -119,7 +109,7 @@ storiesOf('Button', module)
     template: `
       <AposButton
         @click="fakeBusy"
-        v-bind:busy="busy"
+        :contextBusy="busy"
         label="Browse Articles"
         v-bind:modifiers='["input"]'
       />
@@ -141,7 +131,7 @@ storiesOf('Button', module)
     template: `
       <AposButton
         @click="fakeBusy"
-        v-bind:busy="busy"
+        :contextBusy="busy"
         label="Delete Article"
         v-bind:modifiers='["danger"]'
       />
