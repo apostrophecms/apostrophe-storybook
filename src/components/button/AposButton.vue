@@ -1,6 +1,8 @@
 <template>
-  <button type="button" @click="click" class="apos-button" :class="modifierClass" v-bind:busy="busy" v-bind:disabled="isDisabled">
-    <AposLoading />
+  <button type="button" @click="click"
+    class="apos-button" :class="modifierClass" v-bind:disabled="isDisabled"
+  >
+    <AposLoading :busy="buttonBusy"/>
     <div class="apos-button__content">
       <component :size="16" class="apos-button__icon" v-if="icon" v-bind:is="iconComponent"></component>
       <span class="apos-button__label">
@@ -18,6 +20,11 @@ export default {
   components: {
     AposLoading
   },
+  data () {
+    return {
+      buttonBusy: false
+    }
+  },
   props: {
     label: String,
     modifiers: Array,
@@ -34,7 +41,7 @@ export default {
           modifiers += `apos-button--${m}`
         });
       }
-      if (this.busy) {
+      if (this.buttonBusy) {
         if (modifiers) {
           modifiers += ' apos-button--outline apos-button--busy';
         } else {
@@ -60,8 +67,16 @@ export default {
       return (this.disabled || this.busy) ? true : false;
     }
   },
+  watch: {
+    busy (val) {
+      if (!val && this.buttonBusy) {
+        this.buttonBusy = !this.buttonBusy;
+      }
+    }
+  },
   methods: {
     click() {
+      this.buttonBusy = true;
       this.$emit('click');
     }
   }
@@ -100,15 +115,6 @@ export default {
     }
     &[disabled].apos-button--busy {
       border: 1px solid var(--a-base-1);
-    }
-    .apos-loading {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      left: 0;
-      margin: auto;
-      opacity: 0;
     }
   }
 
@@ -158,9 +164,6 @@ export default {
     &[disabled].apos-button--busy {
       border: 1px solid var(--a-primary-button-disabled);
     }
-    .apos-loading__svg {
-      color: var(--a-primary);
-    }
   }
 
   .apos-button--input {
@@ -206,17 +209,11 @@ export default {
     &[disabled].apos-button--busy {
       border: 1px solid var(--a-danger-button-disabled);
     }
-    .apos-loading__svg {
-      color: var(--a-danger);
-    }
   }
 
   .apos-button--busy {
     .apos-button__content {
       opacity: 0;
-    }
-    .apos-loading {
-      opacity: 1;
     }
   }
 

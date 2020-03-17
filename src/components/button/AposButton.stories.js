@@ -2,6 +2,8 @@ import { storiesOf } from '@storybook/vue'
 
 import AposButton from './AposButton.vue'
 
+// NOTE: This mixin is applied to the story components, not the button
+// components. This mimics a modal component with buttons, for example.
 const mixin = {
   components: { AposButton },
   data () {
@@ -14,7 +16,7 @@ const mixin = {
       this.busy = true
       setTimeout(() => {
         this.busy = false
-      }, 1000)
+      }, 5000)
     }
   }
 }
@@ -22,7 +24,7 @@ const mixin = {
 storiesOf('Button', module)
   .add('Default', () => ({
     template: `
-      <AposButton 
+      <AposButton
         @click="fakeBusy"
         v-bind:busy="busy"
         label="Filter"

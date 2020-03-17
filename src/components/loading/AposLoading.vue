@@ -1,5 +1,5 @@
 <template>
-  <div class="apos-loading">
+  <div class="apos-loading" :class="{ 'is-active': busy }">
     <svg xmlns="http://www.w3.org/2000/svg" class="apos-loading__svg" width="38" height="38" viewBox="0 0 38 38">
       <defs>
         <linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="a">
@@ -24,7 +24,10 @@
 
 <script>
 module.exports = {
-  name: 'AposLoading'
+  name: 'AposLoading',
+  props: {
+    busy: Boolean
+  }
 }
 </script>
 
@@ -33,9 +36,32 @@ module.exports = {
     position: relative;
     width: 17px;
     height: 17px;
+    opacity: 0;
+
+    &.is-active {
+      opacity: 1;
+    }
+
+    .apos-button & {
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      margin: auto;
+    }
   }
   .apos-loading__svg {
     max-width: 100%;
     max-height: 100%;
+
+    // TODO: Should these be currentColor, managed above?
+    .apos-button--primary & {
+      color: var(--a-primary);
+    }
+
+    .apos-button--danger & {
+      color: var(--a-danger);
+    }
   }
 </style>
