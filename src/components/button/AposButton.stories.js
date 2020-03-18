@@ -65,32 +65,72 @@ storiesOf('Button', module)
     template: `
       <div>
         <AposButton
-          @click="fakeBusy"
-          v-bind:busy="busy"
+          v-on:click="handler"
+          v-bind:busy="selectAllBusy"
           v-bind:modifiers='["outline"]'
           icon="CheckboxBlankOutline"
+          action="selectAll"
         />
         <AposButton
-          @click="fakeBusy"
-          v-bind:busy="busy"
+          v-on:click="handler"
+          v-bind:busy="addTagBusy"
           v-bind:modifiers='["outline"]'
           icon="Label"
+          action="addTag"
         />
         <AposButton
-          @click="fakeBusy"
-          v-bind:busy="busy"
+          v-on:click="handler"
+          v-bind:busy="deleteBusy"
+          action="delete"
           v-bind:modifiers='["outline"]'
           icon="Delete"
         />
         <AposButton
-          @click="fakeBusy"
-          v-bind:busy="busy"
+          v-on:click="handler"
+          v-bind:busy="openMenuBusy"
+          action="openMenu"
           v-bind:modifiers='["outline"]'
           icon="DotsVertical"
         />
       </div>
     `,
-    mixins: [mixin]
+    components: { AposButton },
+    data () {
+      return {
+        selectAllBusy: false,
+        addTagBusy: false,
+        deleteBusy: false,
+        openMenuBusy: false
+      }
+    },
+    methods: {
+      busy (button) {
+        this[`${button}Busy`] = true
+        setTimeout(() => {
+          this[`${button}Busy`] = false
+        }, 1000)
+      },
+      handler (button) {
+        console.log(`${button} was clicked`)
+        this[button]()
+      },
+      selectAll () {
+        console.log('special select All func')
+        this.busy('selectAll')
+      },
+      delete () {
+        console.log('special delete func')
+        this.busy('delete')
+      },
+      openMenu () {
+        console.log('special open menu func')
+        this.busy('openMenu')
+      },
+      addTag () {
+        console.log('special add tag func')
+        this.busy('addTag')
+      }
+    }
   }))
   .add('Primary', () => ({
     template: `

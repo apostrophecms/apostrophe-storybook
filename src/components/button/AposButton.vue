@@ -23,7 +23,8 @@ export default {
     modifiers: Array,
     disabled: Boolean,
     busy: Boolean,
-    icon: String
+    icon: String,
+    action: String
   },
   computed: {
     modifierClass() {
@@ -62,7 +63,7 @@ export default {
   },
   methods: {
     click() {
-      this.$emit('click');
+      this.$emit('click', this.action);
     }
   }
 }
