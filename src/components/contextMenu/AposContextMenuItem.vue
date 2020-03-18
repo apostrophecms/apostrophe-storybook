@@ -37,10 +37,16 @@ export default {
     font-size: map-get($font-sizes, default);
     letter-spacing: 0.5px;
     color: var(--a-base-5);
-    background-color: var(--a-base-10);
+    background-color: var(--a-background-primary);
     &:hover {
       cursor: pointer;
       color: var(--a-base-1);
+    }
+    &:focus {
+      outline: none;
+    }
+    &:active {
+      color: var(--a-base-2);
     }
   }
 </style>
