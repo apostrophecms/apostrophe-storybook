@@ -2,7 +2,7 @@ import { storiesOf } from '@storybook/vue'
 
 import AposContextMenu from './AposContextMenu.vue'
 
-let menu = [
+const menu = [
   {
     label: 'New Page',
     action: 'new-page'

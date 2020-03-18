@@ -1,6 +1,9 @@
 <template>
-  <div class="apos-context-menu" :class="modifiers">
-    <AposContextMenuTip />
+  <div class="apos-context-menu">
+    <AposContextMenuTip 
+      :align="tipAlignment"
+      :origin="origin"
+    />
     <ul class="apos-context-menu__items">
       <AposContextMenuItem 
         v-for="item in menu" 
@@ -33,19 +36,10 @@ export default {
     origin: {
       type: String,
       default: 'below'
-    },
-  },
-  computed: {
-    modifiers() {
-      let modifiers = 
-        `apos-context-menu--tip-alignment-${this.tipAlignment} 
-        apos-context-menu--origin-${this.origin}`;
-      return modifiers;
     }
   },
   methods: {
     itemClicked(action) {
-      console.log(`menu heard ${action} was clicked`);
       this.$emit('itemClicked', action);
     }
   }
@@ -57,48 +51,6 @@ export default {
     position: relative;
     display: inline-block;
     margin: 10px;
-    &:before {
-      content: '';
-      width: 20px;
-      height: 20px;
-    }
-  }
-
-  .apos-context-menu--tip-alignment-left {
-    .apos-context-menu__tab {
-      left: 20px;
-    }
-  }
-
-  .apos-context-menu--tip-alignment-center {
-    .apos-context-menu__tab {
-      right: 0;
-      left: 0;
-      margin-left: auto;
-      margin-right: auto;
-    }
-  }
-  .apos-context-menu--tip-alignment-right {
-    .apos-context-menu__tab {
-      right: 20px;
-    }
-  }
-
-  .apos-context-menu--origin-below {
-    .apos-context-menu__tab {
-      top: -8.5px;
-    }
-  }
-
-  .apos-context-menu--origin-above {
-    .apos-context-menu__tab {
-      bottom: -9.5px;
-      transform: rotate(180deg);
-    }
-  }
-
-  .apos-context-menu__tab {
-    position: absolute;
   }
 
   .apos-context-menu__items {

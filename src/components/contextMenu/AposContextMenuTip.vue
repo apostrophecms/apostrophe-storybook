@@ -1,20 +1,58 @@
 <template>
-<svg class="apos-context-menu__tab" width="25px" height="10px" viewBox="0 0 25 9" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <g id="Pattern-Library" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-    <g id="z" transform="translate(-883.000000, -96.000000)" fill-rule="nonzero">
-      <g id="Group" transform="translate(883.749000, 96.000000)">
-        <path d="M15.5352712,1.46446609 L23.999,9.928 L3.41060513e-13,9.928 L8.46420344,1.46446609 C10.4168249,-0.488155365 13.5826498,-0.488155365 15.5352712,1.46446609 Z" stroke="var(--a-base-8)"></path>
-        <path d="M15.211122,2.33015728 C13.4966965,0.615731731 10.7525704,0.558584212 8.96946944,2.15874341 L8.7885205,2.33018903 L1.11770341,10.0000035 L22.8802966,10.0000035 L15.211122,2.33015728 Z" fill="var(--a-background-primary)"></path>
+  <svg :class="[alignmentModifier, originModifier]" class="apos-context-menu__tip" width="27px" height="13px" viewBox="0 0 27 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+      <g transform="translate(-0.375000, 1.312500)">
+        <path d="M17.2842712,1.46446609 L25.748,9.928 L1.749,9.928 L10.2132034,1.46446609 C12.1658249,-0.488155365 15.3316498,-0.488155365 17.2842712,1.46446609 Z" stroke="var(--a-base-8)"></path>
+        <path d="M17.0029602,1.84623992 C15.3903198,0.179595947 12.5749711,0.0148310371 10.7918701,1.61499023 C9.60313614,2.68176303 9.52086075,2.75884626 10.5450439,1.84623992 L0.815307617,11.4361572 L26.6676025,11.4361572 L17.0029602,1.84623992 Z" fill="var(--a-background-primary)" fill-rule="nonzero"></path>
       </g>
     </g>
-  </g>
-</svg>
-
-
+  </svg>
 </template>
 
 <script>
 export default {
-  name: 'AposContextMenuTab'
+  name: 'AposContextMenuTip',
+  props: {
+    align: String,
+    origin: String
+  },
+  computed: {
+    alignmentModifier () {
+      return `apos-context-menu__tip--alignment-${this.align}`
+    },
+    originModifier () {
+      return `apos-context-menu__tip--origin-${this.origin}`
+    } 
+  }
 }
 </script>
+
+<style lang="scss">
+  .apos-context-menu__tip {
+    position: absolute;
+  }
+
+  .apos-context-menu__tip--alignment-left {
+    left: 20px;
+  }
+
+  .apos-context-menu__tip--alignment-center {
+    right: 0;
+    left: 0;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .apos-context-menu__tip--alignment-right {
+    right: 20px;
+  }
+
+  .apos-context-menu__tip--origin-below {
+    top: -10px;
+  }
+
+  .apos-context-menu__tip--origin-above {
+    bottom: -11px;
+    transform: rotate(180deg);
+  }
+</style>

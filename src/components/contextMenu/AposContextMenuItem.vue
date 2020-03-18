@@ -2,7 +2,7 @@
   <li class="apos-context-menu__item">
     <button 
       class="apos-context-menu__button"
-      @click="clicked"
+      @click="click"
     >
       {{ menuItem.label }}
     </button>
@@ -19,8 +19,7 @@ export default {
   computed: {
   },
   methods: {
-    clicked() {
-      console.log('item clicked');
+    click() {
       this.$emit('clicked', this.menuItem.action);
     }
   }
