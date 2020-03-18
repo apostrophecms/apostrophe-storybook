@@ -48,7 +48,7 @@ export default {
   }
 
   .apos-context-menu__tip--origin-below {
-    top: -10px;
+    top: -11px;
   }
 
   .apos-context-menu__tip--origin-above {
