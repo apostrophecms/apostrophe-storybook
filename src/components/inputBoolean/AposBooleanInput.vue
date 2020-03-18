@@ -22,7 +22,7 @@
 <script>
 import AposInputWrapper from '../AposInputWrapper';
 import AposInputMixin from '../../mixins/AposInputMixin';
-import CircleIcon from "vue-material-design-icons/Circle.vue";
+import CircleIcon from 'vue-material-design-icons/Circle.vue';
 
 export default {
   components: {
@@ -107,7 +107,7 @@ export default {
     }
 
     input:checked + & {
-      background-color: var(--a-base-9);
+      background-color: var(--a-base-10);
 
       .apos-boolean__icon {
         color: var(--a-success);
@@ -127,9 +127,19 @@ export default {
       &:focus {
         // Prevent border change for active boolean.
         border-color: var(--a-base-4);
-
       }
     }
+
+    input + & {
+      &:hover {
+        cursor: pointer;
+      }
+
+      &:active,
+      &:focus {
+        background-color: var(--a-base-10);
+      }
+    } 
 
     input:checked.apos-boolean__input--false + & {
       .apos-boolean__icon {
