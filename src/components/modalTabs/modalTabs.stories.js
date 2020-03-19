@@ -1,6 +1,6 @@
-import { storiesOf } from '@storybook/vue'
+import { storiesOf } from '@storybook/vue';
 
-import AposModalTabs from './modalTabs.vue'
+import AposModalTabs from './modalTabs.vue';
 
 storiesOf('Modal Tabs', module)
   .add('Primary', () => ({
@@ -29,7 +29,7 @@ storiesOf('Modal Tabs', module)
             fields: []
           }
         ]
-      }
+      };
     },
     template: '<AposModalTabs :groups="groups" />'
-  }))
+  }));

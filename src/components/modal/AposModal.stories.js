@@ -1,8 +1,8 @@
-import { storiesOf } from '@storybook/vue'
+import { storiesOf } from '@storybook/vue';
 
-import AposModal from './AposModal.vue'
-import AposBreadcrumb from './../modalBreadcrumb/modalBreadcrumb.vue'
-import AposButton from './../button/AposButton.vue'
+import AposModal from './AposModal.vue';
+import AposBreadcrumb from './../modalBreadcrumb/modalBreadcrumb.vue';
+import AposButton from './../button/AposButton.vue';
 
 const breadcrumbs = [
   {
@@ -16,11 +16,15 @@ const breadcrumbs = [
   {
     label: 'Link Page'
   }
-]
+];
 
 storiesOf('Modal', module)
   .add('Overlay', () => ({
-    components: { AposModal, AposBreadcrumb, AposButton },
+    components: {
+      AposModal,
+      AposBreadcrumb,
+      AposButton
+    },
     data () {
       return {
         modal: {
@@ -30,7 +34,7 @@ storiesOf('Modal', module)
           showModal: false
         },
         breadcrumbs: breadcrumbs
-      }
+      };
     },
     template: `
     <div>
@@ -52,15 +56,19 @@ storiesOf('Modal', module)
     `,
     methods: {
       startEnter: function () {
-        this.modal.active = true
+        this.modal.active = true;
       },
       startExit: function () {
-        this.modal.showModal = false
+        this.modal.showModal = false;
       }
     }
   }))
   .add('Overlay (dark breadcrumbs', () => ({
-    components: { AposModal, AposBreadcrumb, AposButton },
+    components: {
+      AposModal,
+      AposBreadcrumb,
+      AposButton
+    },
     data () {
       return {
         modal: {
@@ -70,7 +78,7 @@ storiesOf('Modal', module)
           showModal: false
         },
         breadcrumbs: breadcrumbs
-      }
+      };
     },
     template: `
     <div>
@@ -92,15 +100,19 @@ storiesOf('Modal', module)
     `,
     methods: {
       startEnter: function () {
-        this.modal.active = true
+        this.modal.active = true;
       },
       startExit: function () {
-        this.modal.showModal = false
+        this.modal.showModal = false;
       }
     }
   }))
   .add('Slide out', () => ({
-    components: { AposModal, AposBreadcrumb, AposButton },
+    components: {
+      AposModal,
+      AposBreadcrumb,
+      AposButton
+    },
     data () {
       return {
         modal: {
@@ -110,7 +122,7 @@ storiesOf('Modal', module)
           showModal: false
         },
         breadcrumbs: breadcrumbs
-      }
+      };
     },
     template: `
     <div>
@@ -129,10 +141,10 @@ storiesOf('Modal', module)
     `,
     methods: {
       startEnter: function () {
-        this.modal.active = true
+        this.modal.active = true;
       },
       startExit: function () {
-        this.modal.showModal = false
+        this.modal.showModal = false;
       }
     }
-  }))
+  }));
