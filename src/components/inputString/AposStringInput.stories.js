@@ -1,6 +1,6 @@
-import { storiesOf } from '@storybook/vue'
+import { storiesOf } from '@storybook/vue';
 
-import AposStringInput from './AposStringInput.vue'
+import AposStringInput from './AposStringInput.vue';
 
 const field = {
   mandatory: false,
@@ -8,30 +8,30 @@ const field = {
   type: 'text',
   label: 'What is Planck\'s constant?',
   placeholder: 'Enter the number.'
-}
+};
 
 const dateField = {
   ...field,
   icon: 'Calendar'
-}
+};
 
 const requiredField = {
   ...field,
   mandatory: true
-}
+};
 
 const helpField = {
   ...field,
   help: 'Sing the Neverending Story theme song.'
-}
+};
 
 const textAreaField = {
   ...field,
   type: 'textarea',
   help: 'Sing the Neverending Story theme song.'
-}
+};
 
-const baseTemplate = `<AposStringInput :field="field" :value="value" :status="status"/>`
+const baseTemplate = `<AposStringInput :field="field" :value="value" :status="status"/>`;
 
 storiesOf('Inputs (strings)', module)
   .add('Text', () => ({
@@ -43,7 +43,7 @@ storiesOf('Inputs (strings)', module)
         value: {
           data: ''
         }
-      }
+      };
     },
     template: baseTemplate
   }))
@@ -58,7 +58,7 @@ storiesOf('Inputs (strings)', module)
         value: {
           data: ''
         }
-      }
+      };
     },
     template: baseTemplate
   }))
@@ -76,7 +76,7 @@ storiesOf('Inputs (strings)', module)
         value: {
           data: ''
         }
-      }
+      };
     },
     template: baseTemplate
   }))
@@ -89,7 +89,7 @@ storiesOf('Inputs (strings)', module)
         value: {
           data: ''
         }
-      }
+      };
     },
     template: baseTemplate
   }))
@@ -102,7 +102,7 @@ storiesOf('Inputs (strings)', module)
         value: {
           data: ''
         }
-      }
+      };
     },
     template: baseTemplate
   }))
@@ -115,7 +115,7 @@ storiesOf('Inputs (strings)', module)
         value: {
           data: ''
         }
-      }
+      };
     },
     template: baseTemplate
   }))
@@ -128,7 +128,7 @@ storiesOf('Inputs (strings)', module)
         value: {
           data: ''
         }
-      }
+      };
     },
     template: baseTemplate
-  }))
+  }));

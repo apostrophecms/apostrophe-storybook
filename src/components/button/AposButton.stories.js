@@ -1,28 +1,28 @@
-import { storiesOf } from '@storybook/vue'
+import { storiesOf } from '@storybook/vue';
 
-import AposButton from './AposButton.vue'
+import AposButton from './AposButton.vue';
 
 const mixin = {
   components: { AposButton },
   data () {
     return {
       busy: false
-    }
+    };
   },
   methods: {
     fakeBusy: function () {
-      this.busy = true
+      this.busy = true;
       setTimeout(() => {
-        this.busy = false
-      }, 1000)
+        this.busy = false;
+      }, 1000);
     }
   }
-}
+};
 
 storiesOf('Button', module)
   .add('Default', () => ({
     template: `
-      <AposButton 
+      <AposButton
         @click="fakeBusy"
         v-bind:busy="busy"
         label="Filter"
@@ -156,4 +156,4 @@ storiesOf('Button', module)
       />
     `,
     mixins: [mixin]
-  }))
+  }));

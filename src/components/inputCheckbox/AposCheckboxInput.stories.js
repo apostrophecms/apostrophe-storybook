@@ -1,6 +1,6 @@
-import { storiesOf } from '@storybook/vue'
+import { storiesOf } from '@storybook/vue';
 
-import AposCheckboxInput from './AposCheckboxInput.vue'
+import AposCheckboxInput from './AposCheckboxInput.vue';
 
 const field = {
   mandatory: true,
@@ -26,9 +26,9 @@ const field = {
       value: 'Anchovies'
     }
   ]
-}
+};
 
-const baseTemplate = `<AposCheckboxInput :field="field" :value="value" :status="status"/>`
+const baseTemplate = `<AposCheckboxInput :field="field" :value="value" :status="status"/>`;
 
 storiesOf('Inputs (Checkbox)', module)
   .add('Checkbox', () => ({
@@ -40,7 +40,7 @@ storiesOf('Inputs (Checkbox)', module)
         value: {
           data: null
         }
-      }
+      };
     },
     template: baseTemplate
   }))
@@ -55,7 +55,7 @@ storiesOf('Inputs (Checkbox)', module)
         value: {
           data: null
         }
-      }
+      };
     },
     template: baseTemplate
-  }))
+  }));

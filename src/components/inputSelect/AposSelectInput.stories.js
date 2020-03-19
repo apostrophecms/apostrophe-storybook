@@ -1,6 +1,6 @@
-import { storiesOf } from '@storybook/vue'
+import { storiesOf } from '@storybook/vue';
 
-import AposSelectInput from './AposSelectInput.vue'
+import AposSelectInput from './AposSelectInput.vue';
 
 const field = {
   mandatory: false,
@@ -25,9 +25,9 @@ const field = {
       value: 'house'
     }
   ]
-}
+};
 
-const baseTemplate = `<AposSelectInput :field="field" :value="value" :status="status"/>`
+const baseTemplate = `<AposSelectInput :field="field" :value="value" :status="status"/>`;
 
 storiesOf('Inputs (Select)', module)
   .add('Select', () => ({
@@ -39,7 +39,7 @@ storiesOf('Inputs (Select)', module)
         value: {
           data: null
         }
-      }
+      };
     },
     template: baseTemplate
-  }))
+  }));

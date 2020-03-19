@@ -1,6 +1,6 @@
-import { storiesOf } from '@storybook/vue'
+import { storiesOf } from '@storybook/vue';
 
-import AposRadioInput from './AposRadioInput.vue'
+import AposRadioInput from './AposRadioInput.vue';
 
 const field = {
   mandatory: true,
@@ -26,9 +26,9 @@ const field = {
       value: 'Raphael'
     }
   ]
-}
+};
 
-const baseTemplate = `<AposRadioInput :field="field" :value="value" :status="status"/>`
+const baseTemplate = `<AposRadioInput :field="field" :value="value" :status="status"/>`;
 
 storiesOf('Inputs (Radio)', module)
   .add('Radio', () => ({
@@ -40,7 +40,7 @@ storiesOf('Inputs (Radio)', module)
         value: {
           data: null
         }
-      }
+      };
     },
     template: baseTemplate
   }))
@@ -55,7 +55,7 @@ storiesOf('Inputs (Radio)', module)
         value: {
           data: null
         }
-      }
+      };
     },
     template: baseTemplate
-  }))
+  }));

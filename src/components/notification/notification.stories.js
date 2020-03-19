@@ -1,12 +1,16 @@
-import { storiesOf } from '@storybook/vue'
+import { storiesOf } from '@storybook/vue';
 
-import AposNotification from './notification.vue'
-import Dot from 'vue-material-design-icons/Circle.vue'
-import Close from 'vue-material-design-icons/Close.vue'
+import AposNotification from './notification.vue';
+import Dot from 'vue-material-design-icons/Circle.vue';
+import Close from 'vue-material-design-icons/Close.vue';
 
 storiesOf('Notification', module)
   .add('Success', () => ({
-    components: { AposNotification, Dot, Close },
+    components: {
+      AposNotification,
+      Dot,
+      Close
+    },
     template: `
       <AposNotification :clickable=true label="The article has been saved" modifier="apos-notification--success">
         <template v-slot:indicator>
@@ -19,7 +23,11 @@ storiesOf('Notification', module)
     `
   }))
   .add('Danger', () => ({
-    components: { AposNotification, Dot, Close },
+    components: {
+      AposNotification,
+      Dot,
+      Close
+    },
     template: `
     <AposNotification :clickable=true label="Something went wrong" modifier="apos-notification--danger">
       <template v-slot:indicator>
@@ -32,7 +40,11 @@ storiesOf('Notification', module)
   `
   }))
   .add('Info', () => ({
-    components: { AposNotification, Dot, Close },
+    components: {
+      AposNotification,
+      Dot,
+      Close
+    },
     template: `
     <AposNotification :clickable=true label="Something happened, that is all" modifier="apos-notification--info">
       <template v-slot:indicator>
@@ -45,7 +57,11 @@ storiesOf('Notification', module)
   `
   }))
   .add('Warning', () => ({
-    components: { AposNotification, Dot, Close },
+    components: {
+      AposNotification,
+      Dot,
+      Close
+    },
     template: `
     <AposNotification :clickable=true label="You should know this, but maybe it’s fine" modifier="apos-notification--warning">
       <template v-slot:indicator>
@@ -58,13 +74,21 @@ storiesOf('Notification', module)
   `
   }))
   .add('Not clickable', () => ({
-    components: { AposNotification, Dot, Close },
+    components: {
+      AposNotification,
+      Dot,
+      Close
+    },
     template: `
     <AposNotification label="This notification is not clickable." modifier="apos-notification--success"></AposNotification>
   `
   }))
   .add('Only icon clickable', () => ({
-    components: { AposNotification, Dot, Close },
+    components: {
+      AposNotification,
+      Dot,
+      Close
+    },
     template: `
     <AposNotification label="Only the icon is clickable." modifier="apos-notification--success">
       <template v-slot:button>
@@ -72,4 +96,4 @@ storiesOf('Notification', module)
       </template>
     </AposNotification>
   `
-  }))
+  }));

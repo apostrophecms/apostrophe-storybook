@@ -1,7 +1,7 @@
-import { storiesOf } from '@storybook/vue'
-import Close from 'vue-material-design-icons/Close.vue'
+import { storiesOf } from '@storybook/vue';
+import Close from 'vue-material-design-icons/Close.vue';
 
-import aposTag from './tag.vue'
+import aposTag from './tag.vue';
 // import aposIcon from '../icon/icon.vue'
 
 storiesOf('Tag', module)
@@ -10,7 +10,10 @@ storiesOf('Tag', module)
     template: '<aposTag label="Portrait" />'
   }))
   .add('List', () => ({
-    components: { aposTag, Close },
+    components: {
+      aposTag,
+      Close
+    },
     template: `
       <ul class="apos-tag-list">
         <li>
@@ -60,4 +63,4 @@ storiesOf('Tag', module)
         </li>
       </ul>
     `
-  }))
+  }));

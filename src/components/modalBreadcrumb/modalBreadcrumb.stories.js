@@ -1,6 +1,6 @@
-import { storiesOf } from '@storybook/vue'
+import { storiesOf } from '@storybook/vue';
 
-import AposBreadcrumb from './modalBreadcrumb.vue'
+import AposBreadcrumb from './modalBreadcrumb.vue';
 
 storiesOf('Breadcrumb', module)
   .add('Primary', () => ({
@@ -21,6 +21,6 @@ storiesOf('Breadcrumb', module)
             label: 'Link Page'
           }
         ]
-      }
+      };
     }
-  }))
+  }));

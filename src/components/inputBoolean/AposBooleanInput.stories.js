@@ -1,12 +1,12 @@
-import { storiesOf } from '@storybook/vue'
-import AposBooleanInput from './AposBooleanInput'
+import { storiesOf } from '@storybook/vue';
+import AposBooleanInput from './AposBooleanInput';
 
 const field = {
   mandatory: false,
   name: 'approval',
   type: 'radio',
   label: 'Do you approve?'
-}
+};
 
 const toggleField = {
   mandatory: false,
@@ -18,7 +18,7 @@ const toggleField = {
     true: 'Published',
     false: 'Unpublished'
   }
-}
+};
 
 storiesOf('Inputs (Boolean)', module)
   .add('Boolean', () => ({
@@ -30,7 +30,7 @@ storiesOf('Inputs (Boolean)', module)
         value: {
           data: null
         }
-      }
+      };
     },
     template: `<AposBooleanInput :field="field" :value="value" :status="status"/>`
   }))
@@ -43,7 +43,7 @@ storiesOf('Inputs (Boolean)', module)
         value: {
           data: false
         }
-      }
+      };
     },
     template: `<AposBooleanInput :field="field" :value="value" :status="status"/>`
   }))
@@ -56,7 +56,7 @@ storiesOf('Inputs (Boolean)', module)
         value: {
           data: false
         }
-      }
+      };
     },
     template: `<AposBooleanInput :field="field" :value="value" :status="status"/>`
-  }))
+  }));

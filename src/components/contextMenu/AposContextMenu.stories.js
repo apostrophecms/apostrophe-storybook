@@ -1,6 +1,6 @@
-import { storiesOf } from '@storybook/vue'
+import { storiesOf } from '@storybook/vue';
 
-import AposContextMenu from './AposContextMenu.vue'
+import AposContextMenu from './AposContextMenu.vue';
 
 const menu = [
   {
@@ -23,26 +23,26 @@ const menu = [
     label: 'New Article',
     action: 'new-article'
   }
-]
+];
 
 storiesOf('Context Menu', module)
   .add('Default, from below', () => ({
     components: { AposContextMenu },
     data () {
-      return { menu }
+      return { menu };
     },
     template: `
       <div>
-        <AposContextMenu 
+        <AposContextMenu
           v-bind:menu="menu"
           v-on:itemClicked="log"
         />
-        <AposContextMenu 
+        <AposContextMenu
           tipAlignment="center"
           v-bind:menu="menu"
           v-on:itemClicked="log"
         />
-          <AposContextMenu 
+          <AposContextMenu
           tipAlignment="right"
           v-bind:menu="menu"
           v-on:itemClicked="log"
@@ -51,29 +51,29 @@ storiesOf('Context Menu', module)
     `,
     methods: {
       log (action) {
-        console.log(`Story heard ${action} was clicked`)
+        console.log(`Story heard ${action} was clicked`);
       }
     }
   }))
   .add('From above', () => ({
     components: { AposContextMenu },
     data () {
-      return { menu }
+      return { menu };
     },
     template: `
       <div>
-        <AposContextMenu 
+        <AposContextMenu
           v-bind:menu="menu"
           v-on:itemClicked="log"
           origin="above"
         />
-        <AposContextMenu 
+        <AposContextMenu
           tipAlignment="center"
           v-bind:menu="menu"
           v-on:itemClicked="log"
           origin="above"
         />
-          <AposContextMenu 
+          <AposContextMenu
           tipAlignment="right"
           v-bind:menu="menu"
           v-on:itemClicked="log"
@@ -83,7 +83,7 @@ storiesOf('Context Menu', module)
     `,
     methods: {
       log (action) {
-        console.log(`Story heard ${action} was clicked`)
+        console.log(`Story heard ${action} was clicked`);
       }
     }
-  }))
+  }));
