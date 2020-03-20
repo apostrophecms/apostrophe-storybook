@@ -1,7 +1,6 @@
 
 <template>
   <div>
-    {{ theme }}
     <img :src="src" class="apos-avatar" :style="{ width: size }" :alt=alt>
   </div>
 </template>
