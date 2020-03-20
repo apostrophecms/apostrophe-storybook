@@ -29,7 +29,7 @@
   "scripts": {
     "test": "npx eslint .",
     "storybook": "start-storybook -s ./public -p 9001 -c .storybook",
-    "deploy-storybook": "storybook-to-ghpages"
+    "deploy-storybook": "build-storybook -s public && storybook-to-ghpages"
   },
   "repository": {
     "type": "git",
