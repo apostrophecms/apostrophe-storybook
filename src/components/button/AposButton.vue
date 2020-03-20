@@ -2,8 +2,8 @@
   <button type="button" @click="click" class="apos-button" :class="modifierClass" v-bind:busy="busy" v-bind:disabled="isDisabled">
     <AposLoading />
     <div class="apos-button__content">
-      <component :size="16" class="apos-button__icon" v-if="icon" v-bind:is="iconComponent"></component>
-      <span class="apos-button__label">
+      <component :size="15" class="apos-button__icon" v-if="icon" v-bind:is="iconComponent"></component>
+      <span class="apos-button__label" :class="{ 'apos-sr-only' : iconOnly }">
         {{ label }}
       </span>
     </div>
@@ -19,37 +19,44 @@ export default {
     AposLoading
   },
   props: {
-    label: String,
+    label: {
+      required: true,
+      type: String
+    },
     modifiers: Array,
     disabled: Boolean,
     busy: Boolean,
-    icon: String
+    icon: String,
+    type: String,
+    iconOnly: Boolean
   },
   computed: {
     modifierClass() {
-      let modifiers = false;
+      const modifiers = [];
+
       if (this.modifiers) {
-        modifiers = '';
         this.modifiers.forEach((m) => {
-          modifiers += `apos-button--${m}`
+          modifiers.push(`apos-button--${m}`);
         });
       }
+
       if (this.busy) {
-        if (modifiers) {
-          modifiers += ' apos-button--outline apos-button--busy';
-        } else {
-          modifiers = 'apos-button--outline apos-button--busy';
-        }
+        modifiers.push('apos-button--outline', 'apos-button--busy');
       }
 
-      if (this.icon && !this.label) {
-        if (modifiers) {
-          modifiers += ' apos-button--icon';
-        } else {
-          modifiers = 'apos-button--icon';
-        }
+      if (this.type) {
+        modifiers.push(`apos-button--${this.type}`);
       }
-      return modifiers;
+
+      if (this.iconOnly) {
+        modifiers.push(`apos-button--icon`);
+      }
+
+      if (modifiers.length > 0) {
+        return modifiers.join(' ');
+      } else {
+        return false;
+      }
     },
     iconComponent () {
       if (this.icon) {
