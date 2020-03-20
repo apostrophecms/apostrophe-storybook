@@ -3,6 +3,6 @@ const { contexts } = require('./contexts');
 
 module.exports = {
   stories: ['../src/components/**/*.stories.js'],
-  addons: ['@storybook/addon-contexts/register'],
+  addons: ['@storybook/addon-knobs', '@storybook/addon-contexts/register'],
   decorators: [withContexts(contexts)]
 }
