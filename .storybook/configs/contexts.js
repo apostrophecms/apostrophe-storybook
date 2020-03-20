@@ -5,7 +5,6 @@ export const contexts = [
     title: 'Themes',
     components: [Theme],
     params: [
-      // an array of params contains a set of predefined `props` for `components`
       { name: 'Light Theme', props: { theme: 'apos-theme-light' } },
       { name: 'Dark Theme', props: { theme: 'apos-theme-dark '}, default: true },
     ],
@@ -14,6 +13,5 @@ export const contexts = [
       disable: false, // disable this contextual environment completely
       cancelable: false, // allow this contextual environment to be opt-out optionally in toolbar
     },
-  },
-  /* ... */ // multiple contexts setups are supported
+  }
 ];

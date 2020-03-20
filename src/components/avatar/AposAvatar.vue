@@ -1,8 +1,6 @@
 
 <template>
-  <div>
-    <img :src="src" class="apos-avatar" :style="{ width: size }" :alt=alt>
-  </div>
+  <img :src="src" class="apos-avatar" :style="{ width: size }" :alt=alt>
 </template>
 
 <script>
