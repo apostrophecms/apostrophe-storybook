@@ -3,21 +3,15 @@ import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
 import AposButton from './AposButton.vue';
 
 export default {
-  title: 'Buttons',
+  title: 'All Buttons',
   decorators: [withKnobs]
 };
 
 export const buttons = () => ({
   components: { AposButton },
   props: {
-    disabled: {
-      default: boolean('Disabled', false)
-    },
     label: {
       default: text('Label', 'Filter')
-    },
-    busy: {
-      default: boolean('Busy', false)
     },
     type: {
       default:
@@ -30,6 +24,15 @@ export const buttons = () => ({
           },
           null
         )
+    },
+    disabled: {
+      default: boolean('Disabled', false)
+    },
+    busy: {
+      default: boolean('Busy', false)
+    },
+    iconOnly: {
+      default: boolean('Icon Only', false)
     },
     icon: {
       default:
@@ -45,22 +48,14 @@ export const buttons = () => ({
         )
     }
   },
-  methods: {
-    fakeBusy: function () {
-      this.busy = true;
-      setTimeout(() => {
-        this.busy = false;
-      }, 1000);
-    }
-  },
   template: `
     <AposButton
-      @click="fakeBusy"
       :disabled="disabled"
       :label="label"
       :busy="busy"
       :type="type"
       :icon="icon"
+      :iconOnly="iconOnly"
     />
   `
 });

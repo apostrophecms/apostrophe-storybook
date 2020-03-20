@@ -3,7 +3,7 @@
     <AposLoading />
     <div class="apos-button__content">
       <component :size="15" class="apos-button__icon" v-if="icon" v-bind:is="iconComponent"></component>
-      <span class="apos-button__label">
+      <span class="apos-button__label" :class="{ 'apos-sr-only' : iconOnly }">
         {{ label }}
       </span>
     </div>
@@ -19,12 +19,16 @@ export default {
     AposLoading
   },
   props: {
-    label: String,
+    label: {
+      required: true,
+      type: String
+    },
     modifiers: Array,
     disabled: Boolean,
     busy: Boolean,
     icon: String,
-    type: String
+    type: String,
+    iconOnly: Boolean
   },
   computed: {
     modifierClass() {
@@ -32,27 +36,26 @@ export default {
 
       if (this.modifiers) {
         this.modifiers.forEach((m) => {
-          modifiers.push(`apos-button--${m}`)
+          modifiers.push(`apos-button--${m}`);
         });
       }
 
       if (this.busy) {
-        modifiers.push('apos-button--outline');
-        modifiers.push('apos-button--busy');
+        modifiers.push('apos-button--outline', 'apos-button--busy');
       }
 
       if (this.type) {
         modifiers.push(`apos-button--${this.type}`);
       }
 
-      if (this.icon && !this.label) {
+      if (this.iconOnly) {
         modifiers.push(`apos-button--icon`);
       }
 
       if (modifiers.length > 0) {
         return modifiers.join(' ');
       } else {
-        return false
+        return false;
       }
     },
     iconComponent () {
