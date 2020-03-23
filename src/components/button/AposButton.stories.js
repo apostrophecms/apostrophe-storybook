@@ -20,7 +20,8 @@ export const buttons = () => ({
             Default: null,
             Primary: 'primary',
             Outline: 'outline',
-            Input: 'input'
+            Input: 'input',
+            Danger: 'danger'
           },
           null
         )
