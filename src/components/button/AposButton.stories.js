@@ -46,6 +46,16 @@ export const buttons = () => ({
           },
           null
         )
+    },
+    modifiers: {
+      default:
+        select(
+          'Modifiers', {
+            None: [],
+            'Danger on Hover': ['danger-on-hover']
+          },
+          null
+        )
     }
   },
   template: `
@@ -56,6 +66,7 @@ export const buttons = () => ({
       :type="type"
       :icon="icon"
       :iconOnly="iconOnly"
+      v-bind:modifiers="modifiers"
     />
   `
 });
