@@ -1,99 +1,53 @@
-import { storiesOf } from '@storybook/vue';
-
+import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
+import { withA11y } from '@storybook/addon-a11y';
 import AposNotification from './notification.vue';
-import Dot from 'vue-material-design-icons/Circle.vue';
-import Close from 'vue-material-design-icons/Close.vue';
 
-storiesOf('Notification', module)
-  .add('Success', () => ({
-    components: {
-      AposNotification,
-      Dot,
-      Close
+export default {
+  title: 'All Notifications',
+  decorators: [withKnobs, withA11y]
+};
+
+export const notifications = () => ({
+  components: { AposNotification },
+  props: {
+    label: {
+      default: text('Label', 'I got your number from that sign in the lawn')
     },
-    template: `
-      <AposNotification :clickable=true label="The article has been saved" modifier="apos-notification--success">
-        <template v-slot:indicator>
-          <Dot title="Success" :size=12 :decorative=true fillColor="var(--a-success)" />
-        </template>
-        <template v-slot:button>
-          <Close title="Close Notification" :size="14" />
-        </template>
-      </AposNotification>
-    `
-  }))
-  .add('Danger', () => ({
-    components: {
-      AposNotification,
-      Dot,
-      Close
+    type: {
+      default:
+        select(
+          'Type', {
+            Default: null,
+            Warning: 'warning',
+            Success: 'success',
+            Danger: 'danger'
+          },
+          null
+        )
     },
-    template: `
-    <AposNotification :clickable=true label="Something went wrong" modifier="apos-notification--danger">
-      <template v-slot:indicator>
-        <Dot title="Something went wrong" :size=12 :decorative=true fillColor="var(--a-danger)" />
-      </template>
-      <template v-slot:button>
-        <Close title="Close Notification" :size="14" />
-      </template>
-    </AposNotification>
+    clickable: {
+      default: boolean('Clickable', false)
+    },
+    icon: {
+      default:
+        select(
+          'Icon', {
+            None: null,
+            Label: 'Label',
+            Menu: 'DotsVertical',
+            Delete: 'Delete',
+            'Empty Checkbox': 'CheckboxBlankOutline'
+          },
+          null
+        )
+    }
+  },
+  template: `
+    <AposNotification 
+      :clickable=clickable
+      :label="label"
+      :type="type"
+      :icon="icon"
+    />
   `
-  }))
-  .add('Info', () => ({
-    components: {
-      AposNotification,
-      Dot,
-      Close
-    },
-    template: `
-    <AposNotification :clickable=true label="Something happened, that is all" modifier="apos-notification--info">
-      <template v-slot:indicator>
-        <Dot :size=12 :decorative=true fillColor="var(--a-primary)" />
-      </template>
-      <template v-slot:button>
-        <Close title="Close Notification" :size="14" />
-      </template>
-    </AposNotification>
-  `
-  }))
-  .add('Warning', () => ({
-    components: {
-      AposNotification,
-      Dot,
-      Close
-    },
-    template: `
-    <AposNotification :clickable=true label="You should know this, but maybe it’s fine" modifier="apos-notification--warning">
-      <template v-slot:indicator>
-        <Dot :size=12 :decorative=true fillColor="var(--a-warning)" />
-      </template>
-      <template v-slot:button>
-        <Close title="Close Notification" :size="14" />
-      </template>
-    </AposNotification>
-  `
-  }))
-  .add('Not clickable', () => ({
-    components: {
-      AposNotification,
-      Dot,
-      Close
-    },
-    template: `
-    <AposNotification label="This notification is not clickable." modifier="apos-notification--success"></AposNotification>
-  `
-  }))
-  .add('Only icon clickable', () => ({
-    components: {
-      AposNotification,
-      Dot,
-      Close
-    },
-    template: `
-    <AposNotification label="Only the icon is clickable." modifier="apos-notification--success">
-      <template v-slot:button>
-        <Close title="Close Notification" :size="14" />
-      </template>
-    </AposNotification>
-  `
-  }));
+});
