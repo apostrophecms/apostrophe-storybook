@@ -1,6 +1,8 @@
 <template>
-  <div :class="`apos-tag ${modifier}`" :disabled="disabled">
-    <Close class="apos-tag__close-icon" title="Remove Tag" :size="10" />
+  <div :class="`apos-tag`">
+    <button class="apos-tag-button">
+      <Close class="apos-tag__close-icon" @click="click" title="Remove Tag" :size="10" />
+    </button>
     {{ label }}
   </div>
 </template>
@@ -10,18 +12,19 @@ import Close from 'vue-material-design-icons/Close.vue';
 export default {
   props: {
     label: String,
-    modifier: {
-      default: '',
-      type: String
-    }
+    slug: String
   },
-  components: {
-    Close
+  components: { Close },
+  methods: {
+    click() {
+      this.$emit('click', this)
+    }
   }
 }
 </script>
 
 <style lang="scss">
+@import '../../scss/_mixins';
 .apos-tag {
   display: inline-flex;
   padding: 6px 12px;
@@ -35,7 +38,6 @@ export default {
 }
 
 .apos-tag__close-icon {
-  display: flex;
   position: relative;
   top: 1px;
   margin-right: 5px;
@@ -45,14 +47,7 @@ export default {
 }
 
 .apos-tag-button {
-  border: none;
-  padding: 0;
-  margin: 0;
-  background-color: transparent;
-  color: currentColor;
-  &:hover {
-    cursor: pointer;
-  }
+  @include apos-button-reset();
 }
 
 .apos-tag-list {
