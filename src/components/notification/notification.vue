@@ -2,13 +2,13 @@
   <component 
     :is="clickable ? 'button' : 'div'" 
     :class="modifierClass" 
-    role="alert"
+    :role="clickable ? false : 'alert'"
     class="apos-notification"
   >
     <span class="apos-notification__indicator">
       <component 
         :decorative=true 
-        :size="icon ? '16' : '12'" 
+        :size="icon ? 16 : 12" 
         v-bind:is="iconComponent"
       ></component>
     </span>
@@ -79,6 +79,8 @@ export default {
   }
 
   .apos-notification__indicator {
+    position: relative;
+    top: 1px;
     display: flex;
     margin-right: 10px;
     color: var(--a-base-8);

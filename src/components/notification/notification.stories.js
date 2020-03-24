@@ -11,7 +11,7 @@ export const notifications = () => ({
   components: { AposNotification },
   props: {
     label: {
-      default: text('Label', 'I got your number from that sign in the lawn')
+      default: text('Label', 'Few can name a disguised punch that isnt a bunchy railway.')
     },
     type: {
       default:
@@ -34,8 +34,12 @@ export const notifications = () => ({
           'Icon', {
             None: null,
             Label: 'Label',
-            Menu: 'DotsVertical',
+            Alert: 'AlertCircle',
+            Refresh: 'Refresh',
             Delete: 'Delete',
+            'Double Check': 'CheckAll',
+            'Check': 'CheckBold',
+            'X': 'Close',
             'Empty Checkbox': 'CheckboxBlankOutline'
           },
           null
