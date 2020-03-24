@@ -1,9 +1,8 @@
 <template>
   <component 
     :is="clickable ? 'button' : 'div'" 
-    :class="modifierClass" 
+    :class="classList" 
     :role="clickable ? false : 'alert'"
-    class="apos-notification"
   >
     <span class="apos-notification__indicator">
       <component 
@@ -34,23 +33,19 @@ export default {
       default: 'Set a label',
       type: String
     },
-    modifier: {
-      default: '',
-      type: String
-    },
     clickable: {
       default: false,
       type: Boolean
     }
   },
   computed: {
-    modifierClass() {
-      const modifiers = [];
+    classList() {
+      const classes = ['apos-notification'];
       if (this.type) {
-        modifiers.push(`apos-notification--${this.type}`);
+        classes.push(`apos-notification--${this.type}`);
       }
-      if (modifiers.length > 0) {
-        return modifiers.join(' ');
+      if (classes.length > 0) {
+        return classes.join(' ');
       } else {
         return false;
       }
@@ -81,7 +76,6 @@ export default {
   .apos-notification__indicator {
     position: relative;
     top: 1px;
-    display: flex;
     margin-right: 10px;
     color: var(--a-base-8);
   }

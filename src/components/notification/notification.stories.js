@@ -1,4 +1,9 @@
-import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
+import {
+  withKnobs,
+  text,
+  boolean,
+  select
+} from '@storybook/addon-knobs';
 import { withA11y } from '@storybook/addon-a11y';
 import AposNotification from './notification.vue';
 
