@@ -1,19 +1,22 @@
 <template>
   <div :class="`apos-tag ${modifier}`" :disabled="disabled">
-    <slot name="icon"></slot>
+    <Close class="apos-tag__close-icon" title="Remove Tag" :size="10" />
     {{ label }}
   </div>
 </template>
 
 <script>
-module.exports = {
+import Close from 'vue-material-design-icons/Close.vue';
+export default {
   props: {
     label: String,
     modifier: {
       default: '',
       type: String
-    },
-    disabled: Boolean
+    }
+  },
+  components: {
+    Close
   }
 }
 </script>
@@ -21,18 +24,23 @@ module.exports = {
 <style lang="scss">
 .apos-tag {
   display: inline-flex;
-  padding: 6px 10px;
+  padding: 6px 12px;
+  border-radius: var(--a-border-radius);
   background-color: var(--a-base-1);
   font-size: map-get($font-sizes, default);
   letter-spacing: 0.5px;
-  border-radius: var(--a-border-radius);
   color: var(--a-base-8);
   align-items: center;
   justify-content: center;
+}
 
-  .material-design-icon {
-    display: flex;
-    margin-right: 5px;
+.apos-tag__close-icon {
+  display: flex;
+  position: relative;
+  top: 1px;
+  margin-right: 5px;
+  &:hover {
+    cursor: pointer;
   }
 }
 
