@@ -16,7 +16,7 @@
                 {{modal.title}}
               </h2>
               <div class="apos-modal__controls--primary"
-                v-if="hasSecondaryControls">
+                v-if="hasPrimaryControls">
                 <slot name="primaryControls"></slot>
               </div>
             </div>
@@ -41,7 +41,8 @@
 export default {
   name: 'AposModal',
   props: {
-    modal: Object
+    modal: Object,
+    hasSecondaryControls: Boolean
   },
   computed: {
     transitionType: function () {
@@ -54,9 +55,9 @@ export default {
     hasPrimaryControls: function () {
       return !!this.$slots.primaryControls;
     },
-    hasSecondaryControls: function () {
-      return !!this.$slots.secondaryControls;
-    },
+    // hasSecondaryControls: function () {
+    //   return !!this.$slots.secondaryControls;
+    // },
     hasBreadcrumbs: function () {
       return !!this.$slots.breadcrumbs;
     }
