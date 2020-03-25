@@ -1,15 +1,13 @@
 import {
   withKnobs,
   text,
-  boolean,
   select
 } from '@storybook/addon-knobs';
-import { withA11y } from '@storybook/addon-a11y';
-import AposNotification from './notification.vue';
+import AposNotification from './AposNotification.vue';
 
 export default {
   title: 'All Notifications',
-  decorators: [withKnobs, withA11y]
+  decorators: [withKnobs]
 };
 
 export const notifications = () => ({
@@ -29,9 +27,6 @@ export const notifications = () => ({
           },
           null
         )
-    },
-    clickable: {
-      default: boolean('Clickable', false)
     },
     icon: {
       default:
@@ -53,7 +48,6 @@ export const notifications = () => ({
   },
   template: `
     <AposNotification 
-      :clickable=clickable
       :label="label"
       :type="type"
       :icon="icon"

@@ -1,9 +1,5 @@
 <template>
-  <component 
-    :is="clickable ? 'button' : 'div'" 
-    :class="classList" 
-    :role="clickable ? false : 'alert'"
-  >
+  <div role="alert" :class="classList">
     <span class="apos-notification__indicator">
       <component 
         :decorative=true 
@@ -12,13 +8,10 @@
       ></component>
     </span>
     <span class="apos-notification__label">{{ label }}</span>
-    <component 
-      :is="clickable ? 'span' : 'button'"
-      class="apos-notification__button"
-    >
-      <Close title="Close Notification" :size="14" />
-    </component>
-  </component>
+    <button class="apos-notification__button">
+      <Close class="apos-notification__close-icon" title="Close Notification" :size="14" />
+    </button>
+  </div>
 </template>
 
 <script>
@@ -32,10 +25,6 @@ export default {
     label: {
       default: 'Set a label',
       type: String
-    },
-    clickable: {
-      default: false,
-      type: Boolean
     }
   },
   computed: {
@@ -44,11 +33,8 @@ export default {
       if (this.type) {
         classes.push(`apos-notification--${this.type}`);
       }
-      if (classes.length > 0) {
-        return classes.join(' ');
-      } else {
-        return false;
-      }
+
+      return classes.join(' ');
     },
     iconComponent () {
       if (this.icon) {
@@ -62,21 +48,25 @@ export default {
 </script>
 
 <style lang="scss">
+  @import '../../scss/_mixins';
   .apos-notification {
     display: inline-flex;
+    position: relative;
     align-items: center;
+    min-width: 200px;
+    max-width: 400px;
     color: var(--a-text-primary);
     background: var(--a-background);
     border: 1px solid var(--a-base-8);
     border-radius: var(--a-border-radius);
-    padding: 15px 20px;
+    padding: 15px 35px 15px 15px;
     box-shadow: var(--a-box-shadow);
   }
 
   .apos-notification__indicator {
     position: relative;
     top: 1px;
-    margin-right: 10px;
+    margin-right: 15px;
     color: var(--a-base-8);
   }
 
@@ -94,16 +84,22 @@ export default {
 
   .apos-notification__button {
     display: flex;
+    position: absolute;
+    right: 0;
     align-items: center;
     border: none;
-    padding: 0;
+    padding: 20px 10px;
     background-color: transparent;
-    margin-left: 10px;
-    color: var(--a-primary-text);
-
-    .material-design-icon {
-      height: 12px;
+    color: var(--a-base-4);
+    @include apos-transition(all);
+    &:hover {
+      cursor: pointer;
+      color: var(--a-primary-text);
     }
+  }
+
+  .apos-notification__close-icon {
+    height: 12px;
   }
 
   .apos-notification__label {
