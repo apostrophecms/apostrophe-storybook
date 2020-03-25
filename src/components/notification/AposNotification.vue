@@ -9,7 +9,12 @@
     </span>
     <span class="apos-notification__label">{{ label }}</span>
     <button class="apos-notification__button">
-      <Close class="apos-notification__close-icon" title="Close Notification" :size="14" />
+      <Close 
+        @click="close" 
+        class="apos-notification__close-icon" 
+        title="Close Notification" 
+        :size="14" 
+      />
     </button>
   </div>
 </template>
@@ -42,6 +47,9 @@ export default {
       } else {
         return () => import(`vue-material-design-icons/Circle.vue`);
       }
+    },
+    close () {
+      this.$emit('close', this);
     }
   }
 }
