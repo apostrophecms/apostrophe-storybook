@@ -2,6 +2,8 @@ const path = require('path');
 module.exports = {
   stories: ['../src/components/**/*.stories.js'],
   addons: [
+    '@storybook/addon-knobs',
+    '@storybook/addon-contexts/register',
     {
       name: '@storybook/addon-storysource',
       options: {
@@ -14,6 +16,5 @@ module.exports = {
         },
       },
     },
-    '@storybook/addon-a11y/register'
-  ],
+  ]
 }

@@ -6,6 +6,8 @@
   "dependencies": {
     "@babel/core": "^7.8.7",
     "@storybook/addon-storysource": "^5.3.17",
+    "@storybook/addon-contexts": "^5.3.17",
+    "@storybook/addon-knobs": "^5.3.17",
     "@storybook/vue": "^5.3.17",
     "babel-loader": "^8.0.6",
     "babel-preset-vue": "^2.0.2",
@@ -27,7 +29,9 @@
   },
   "scripts": {
     "test": "npx eslint .",
-    "storybook": "start-storybook -s ./public -p 9001 -c .storybook"
+    "storybook": "start-storybook -s ./public -p 9001 -c .storybook",
+    "deploy-storybook": "storybook-to-ghpages",
+    "build-storybook": "build-storybook -s ./public"
   },
   "repository": {
     "type": "git",
@@ -38,5 +42,8 @@
   "bugs": {
     "url": "https://github.com/apostrophecms/apostrophe-storybook/issues"
   },
-  "homepage": "https://github.com/apostrophecms/apostrophe-storybook#readme"
+  "homepage": "https://github.com/apostrophecms/apostrophe-storybook#readme",
+  "devDependencies": {
+    "@storybook/storybook-deployer": "^2.8.3"
+  }
 }
