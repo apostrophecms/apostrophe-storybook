@@ -8,9 +8,8 @@
       ></component>
     </span>
     <span class="apos-notification__label">{{ label }}</span>
-    <button class="apos-notification__button">
+    <button @click="close" class="apos-notification__button">
       <Close 
-        @click="close" 
         class="apos-notification__close-icon" 
         title="Close Notification" 
         :size="14" 
