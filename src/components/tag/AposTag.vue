@@ -1,7 +1,7 @@
 <template>
-  <div :class="`apos-tag`">
-    <button class="apos-tag-button">
-      <Close class="apos-tag__close-icon" @click="click" title="Remove Tag" :size="10" />
+  <div class="apos-tag">
+    <button @click="click" class="apos-tag-button">
+      <Close class="apos-tag__close-icon" title="Remove Tag" :size="10" />
     </button>
     {{ label }}
   </div>
@@ -17,7 +17,7 @@ export default {
   components: { Close },
   methods: {
     click() {
-      this.$emit('click', this)
+      this.$emit('click', this.slug)
     }
   }
 }
