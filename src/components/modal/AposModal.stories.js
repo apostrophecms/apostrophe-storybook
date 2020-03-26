@@ -11,18 +11,18 @@ export default {
   decorators: [withKnobs]
 };
 
-const field = {
+const inputField = {
   mandatory: false,
   name: 'plancksConstant',
   type: 'text',
   label: 'What is Planck\'s constant?',
   placeholder: 'Enter the number.',
-  help: 'Sing the Neverending Story theme song.',
-  status: {},
-  value: {
-    data: ''
-  }
+  help: 'Sing the Neverending Story theme song.'
 };
+const inputValue = {
+  data: ''
+};
+const inputStatus = {};
 
 const breadcrumbs = [
   {
@@ -43,6 +43,7 @@ export const layouts = () => {
   const hasBreadcrumbs = boolean('Has Breadcrumbs', false);
   const hasLeftRail = boolean('Has Left Rail', true);
   const hasRightRail = boolean('Has Right Rail', true);
+  const hasBodyHeader = boolean('Has Body Header (Controls)', false);
   const hasSecondaryControls = boolean('Has Secondary Controls', false);
   return {
     components: {
@@ -65,7 +66,9 @@ export const layouts = () => {
           showModal: true
         },
         breadcrumbs: breadcrumbs,
-        field: field
+        inputField: inputField,
+        inputValue: inputValue,
+        inputStatus: inputStatus
       };
     },
     template: `
@@ -94,13 +97,17 @@ export const layouts = () => {
               </AposModalRail>
             ` : ''}
             <AposModalBody>
-              <template #bodyHeader>
-                <AposButton label="Exit" :iconOnly="true"  icon="Delete" type="outline" />
-                <AposButton label="Exit" :iconOnly="true"  icon="Delete" type="outline" />
-                <AposButton label="Exit" :iconOnly="true"  icon="Delete" type="outline" />
-              </template>
+              ${hasBodyHeader ? `
+                <template #bodyHeader>
+                  <AposButton label="Exit" :iconOnly="true"  icon="Delete" type="outline" />
+                  <AposButton label="Exit" :iconOnly="true"  icon="Delete" type="outline" />
+                  <AposButton label="Exit" :iconOnly="true"  icon="Delete" type="outline" />
+                </template>
+              ` : ''}
               <template #bodyMain>
-                <AposStringInput v-bind:field="field" />
+                <AposStringInput :field="inputField" :value="inputValue" :status="inputStatus" />
+                <AposStringInput :field="inputField" :value="inputValue" :status="inputStatus" />
+                <AposStringInput :field="inputField" :value="inputValue" :status="inputStatus" />
               </template>
             </AposModalBody>
             ${hasRightRail ? `

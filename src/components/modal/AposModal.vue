@@ -74,6 +74,7 @@ export default {
     background-color: var(--a-background-primary);
     border: 1px solid var(--a-base-4);
     color: var(--a-text-primary);
+    overflow: scroll;
 
     .apos-modal--slide & {
       position: fixed;
