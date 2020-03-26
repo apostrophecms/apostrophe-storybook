@@ -9,8 +9,7 @@ module.exports = {
       name: '@storybook/addon-storysource',
       options: {
         rule: {
-          // test: [/\.stories\.jsx?$/], This is default
-          include: [path.resolve(__dirname, '../src')], // You can specify directories
+          include: [path.resolve(__dirname, '../src')],
         },
         loaderOptions: {
           prettierConfig: { printWidth: 80, singleQuote: false },

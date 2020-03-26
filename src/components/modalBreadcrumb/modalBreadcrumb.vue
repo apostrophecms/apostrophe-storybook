@@ -63,7 +63,7 @@ export default {
     font-family: map-get($font-families, default);
     letter-spacing: 0.75px;
     font-size: map-get($font-sizes, meta);
-
+    color: var(--a-text-primary);
     a {
       @include link-primary;
       text-decoration: none;

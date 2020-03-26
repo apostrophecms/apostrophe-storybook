@@ -16,7 +16,7 @@ $font-weights: (
 
 $font-sizes: (
   default: 12px,
-  meta: 12px,
+  meta: 10px,
   input-label: 14px,
   input: 12px,
   input-hint: 12px,
@@ -46,15 +46,15 @@ $boolean-padding: $spacing-double;
   --a-danger-button-active: #A10000;
   --a-danger-button-disabled: #FF9D98;
 
-  --a-base-1: #323232;
-  --a-base-2: #494949;
-  --a-base-3: #606060;
-  --a-base-4: #767676;
-  --a-base-5: #8D8D8D;
-  --a-base-6: #A4A4A4;
-  --a-base-7: #BBB;
-  --a-base-8: #D1D1D1;
-  --a-base-9: #E8E8E8;
+  --a-base-1: #5D5D5D;
+  --a-base-2: #6F6F6F;
+  --a-base-3: #818181;
+  --a-base-4: #939393;
+  --a-base-5: #A5A5A5;
+  --a-base-6: #B7B7B7;
+  --a-base-7: #C9C9C9;
+  --a-base-8: #DBDBDB;
+  --a-base-9: #EDEDED;
   --a-base-10: #FFF;
 
   --a-text-primary: #000;
