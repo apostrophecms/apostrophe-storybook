@@ -8,12 +8,11 @@
           v-if="modal.showModal">
           <header class="apos-modal__header">
             <div class="apos-modal__header__main">
-              <div class="apos-modal__controls--secondary"
-                v-if="hasSecondaryControls">
+              <div class="apos-modal__controls--secondary">
                 <slot name="secondaryControls"></slot>
               </div>
               <h2 class="apos-modal__heading o-heading">
-                {{modal.title}}
+                {{ modal.title }}
               </h2>
               <div class="apos-modal__controls--primary"
                 v-if="hasPrimaryControls">
@@ -42,7 +41,6 @@ export default {
   name: 'AposModal',
   props: {
     modal: Object,
-    hasSecondaryControls: Boolean
   },
   computed: {
     transitionType: function () {
@@ -55,9 +53,6 @@ export default {
     hasPrimaryControls: function () {
       return !!this.$slots.primaryControls;
     },
-    // hasSecondaryControls: function () {
-    //   return !!this.$slots.secondaryControls;
-    // },
     hasBreadcrumbs: function () {
       return !!this.$slots.breadcrumbs;
     }
@@ -160,5 +155,26 @@ export default {
     &:first-child {
       margin-left: 0;
     }
+  }
+
+  .apos-modal__main {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  // .apos-modal__rail {
+
+  // }
+  // .apos-modal__rail--left
+  .apos-modal__rail--left {
+    width: 22%;
+  }
+
+  .apos-modal__rail--right {
+    width: 18%;
+  }
+
+  .apos-modal__body {
+    background: green;
   }
 </style>

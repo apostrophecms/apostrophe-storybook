@@ -1,12 +1,27 @@
 import { withKnobs, text, boolean, select, object } from '@storybook/addon-knobs';
 import AposModal from './AposModal.vue';
+import AposModalRail from './AposModalRail.vue';
+import AposModalBody from './AposModalBody.vue';
 import AposBreadcrumb from './../modalBreadcrumb/modalBreadcrumb.vue';
 import AposButton from './../button/AposButton.vue';
-// import Vue from 'vue';
+import AposStringInput from './../inputString/AposStringInput.vue';
 
 export default {
-  title: 'All Modals',
+  title: 'Modals',
   decorators: [withKnobs]
+};
+
+const field = {
+  mandatory: false,
+  name: 'plancksConstant',
+  type: 'text',
+  label: 'What is Planck\'s constant?',
+  placeholder: 'Enter the number.',
+  help: 'Sing the Neverending Story theme song.',
+  status: {},
+  value: {
+    data: ''
+  }
 };
 
 const breadcrumbs = [
@@ -23,65 +38,82 @@ const breadcrumbs = [
   }
 ];
 
-export const layouts = () => ({
-  components: {
-    AposModal,
-    AposBreadcrumb,
-    AposButton
-  },
-  props: {
-    label: {
-      default: text('Label', 'Filter')
+export const layouts = () => {
+  const title = text('Modal Title', 'New Page');
+  const hasBreadcrumbs = boolean('Has Breadcrumbs', false);
+  const hasLeftRail = boolean('Has Left Rail', true);
+  const hasRightRail = boolean('Has Right Rail', true);
+  const hasSecondaryControls = boolean('Has Secondary Controls', false);
+  return {
+    components: {
+      AposModal,
+      AposBreadcrumb,
+      AposButton,
+      AposModalRail,
+      AposModalBody,
+      AposStringInput
     },
-    layout: {
-      default:
-        object('layout', {
-          backgroundColor: 'red'
-        })
+    props: {
+
     },
-    hasSecondaryControls: {
-      default: boolean('Has Secondary Controls', false)
+    data () {
+      return {
+        modal: {
+          title: title,
+          active: true,
+          type: 'overlay',
+          showModal: true
+        },
+        breadcrumbs: breadcrumbs,
+        field: field
+      };
     },
-    icon: {
-      default:
-        select(
-          'Icon', {
-            None: null
-          },
-          null
-        )
-    }
-  },
-  data () {
-    return {
-      modal: {
-        title: 'New Page',
-        active: false,
-        type: 'overlay',
-        showModal: false
-      },
-      breadcrumbs: breadcrumbs
-    };
-  },
-  template: `
-    <div>
-      <button type="button" class="apos-button" @click="startEnter">
-        Activate modal
-      </button>
-      <AposModal :modal="modal" :hasSecondaryControls="hasSecondaryControls">
-        <template #secondaryControls v-if="hasSecondaryControls">
-          <AposButton @click="startExit" label="Exit" />
-        </template>
-        <template #primaryControls>
-          <AposButton modifier="primary" @click="startExit" label="Save Page" />
-        </template>
-        <template #breadcrumbs>
-          <AposBreadcrumb :items="breadcrumbs" />
-        </template>
-      </AposModal>
-    </div>
-    `
-});
+    template: `
+      <div>
+        <button type="button" class="apos-button">
+          Activate modal
+        </button>
+        <AposModal :modal="modal">
+            ${hasSecondaryControls ? `
+              <template #secondaryControls>
+                <AposButton label="Exit" />
+              </template>
+          ` : ''}
+          <template #primaryControls>
+            <AposButton type="primary" label="Save Page" />
+          </template>
+          ${hasBreadcrumbs ? `
+            <template #breadcrumbs>
+              <AposBreadcrumb :items="breadcrumbs" />
+            </template>
+          ` : ''}
+          <template #main>
+            ${hasLeftRail ? `
+              <AposModalRail type="left">
+                I am on the left
+              </AposModalRail>
+            ` : ''}
+            <AposModalBody>
+              <template #bodyHeader>
+                <AposButton label="Exit" :iconOnly="true"  icon="Delete" type="outline" />
+                <AposButton label="Exit" :iconOnly="true"  icon="Delete" type="outline" />
+                <AposButton label="Exit" :iconOnly="true"  icon="Delete" type="outline" />
+              </template>
+              <template #bodyMain>
+                <AposStringInput v-bind:field="field" />
+              </template>
+            </AposModalBody>
+            ${hasRightRail ? `
+              <AposModalRail type="right">
+                I am on the right
+              </AposModalRail>
+            ` : ''}
+          </template>
+        </AposModal>
+      </div>
+      `
+  };
+};
 
 export const fullScreen = () => ({
   components: {
