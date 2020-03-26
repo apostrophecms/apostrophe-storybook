@@ -251,4 +251,8 @@ export default {
     align-items: center;
   }
 
+  .apos-button--danger-on-hover:hover {
+    color: var(--a-danger);
+  }
+
 </style>
