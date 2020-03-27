@@ -101,11 +101,11 @@ export default {
     right: $spacing-double;
     bottom: $spacing-double;
     left: $spacing-double;
+    height: calc(100vh - #{$spacing-double * 2});
     border-radius: var(--a-border-radius);
     background-color: var(--a-background-primary);
     border: 1px solid var(--a-base-4);
     color: var(--a-text-primary);
-    overflow: scroll;
 
     .apos-modal--slide & {
       position: fixed;
@@ -138,6 +138,15 @@ export default {
       opacity: 0;
       transform: scale(0.95);
     }
+  }
+
+  .apos-modal__header {
+    grid-row: 1 / 2;
+  }
+
+  .apos-modal__main {
+    grid-row: 2 / 3;
+    overflow-y: auto;
   }
 
   .apos-modal__overlay {

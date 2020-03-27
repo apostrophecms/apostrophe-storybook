@@ -20,6 +20,7 @@ export default {
 
 <style lang="scss" scoped>
   .apos-modal__rail {
+    overflow-y: auto;
     background-color: var(--a-base-9);
     // flex-grow: 1;
     // flex-shrink: 1;

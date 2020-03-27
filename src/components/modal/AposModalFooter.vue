@@ -18,5 +18,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-
+  .apos-modal__footer {
+    grid-row: 3 / 4;
+  }
 </style>

@@ -1,4 +1,6 @@
-import { withKnobs, text, boolean, select, object } from '@storybook/addon-knobs';
+import {
+  withKnobs, text, boolean, select, object
+} from '@storybook/addon-knobs';
 import AposModal from './AposModal.vue';
 import AposModalRail from './AposModalRail.vue';
 import AposModalBody from './AposModalBody.vue';
