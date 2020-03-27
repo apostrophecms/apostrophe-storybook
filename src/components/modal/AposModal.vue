@@ -8,7 +8,7 @@
           v-if="modal.showModal">
           <header class="apos-modal__header">
             <div class="apos-modal__header__main">
-              <div class="apos-modal__controls--secondary">
+              <div v-if="hasSecondaryControls" class="apos-modal__controls--secondary">
                 <slot name="secondaryControls"></slot>
               </div>
               <h2 class="apos-modal__heading o-heading">
@@ -23,9 +23,14 @@
               <slot class="apos-modal__breadcrumbs" name="breadcrumbs"></slot>
             </div>
           </header>
-          <div class="apos-modal__main">
+          <div class="apos-modal__main" :class="gridModifier">
+            <slot v-if="hasLeftRail" name="leftRail"></slot>
             <slot name="main"></slot>
+            <slot name="rightRail"></slot>
           </div>
+          <footer v-if="hasFooter" class="apos-modal__footer">
+            <slot name="footer"></slot>
+          </footer>
         </div>
       </transition>
       <transition :name="transitionType">
@@ -53,8 +58,32 @@ export default {
     hasPrimaryControls: function () {
       return !!this.$slots.primaryControls;
     },
+    hasSecondaryControls: function () {
+      return !!this.$slots.secondaryControls;
+    },
     hasBreadcrumbs: function () {
       return !!this.$slots.breadcrumbs;
+    },
+    hasLeftRail: function () {
+      return !!this.$slots.leftRail;
+    },
+    hasRightRail: function () {
+      return !!this.$slots.rightRail;
+    },
+    hasFooter: function () {
+      return !!this.$slots.footer;
+    },
+    gridModifier() {
+      if (this.hasLeftRail && this.hasRightRail) {
+        return 'apos-modal__main--grid apos-modal__main--with-rails';
+      }
+      if (this.hasLeftRail && !this.hasRightRail) {
+        return 'apos-modal__main--grid apos-modal__main--with-left-rail';
+      }
+      if (!this.hasLeftRail && this.hasRightRail) {
+        return 'apos-modal__main--grid apos-modal__main--with-right-rail';
+      }
+      return 'apos-modal__main--no-rails';
     }
   }
 }
@@ -64,7 +93,9 @@ export default {
   // NOTE: Transition timings below are set to match the wrapper transition
   // timing in the template to coordinate the inner and overlay animations.
   .apos-modal__inner {
+    display: grid;
     position: fixed;
+    grid-template-rows: auto 1fr auto;
     z-index: 1001;
     top: $spacing-double;
     right: $spacing-double;
@@ -151,31 +182,30 @@ export default {
   }
 
   .apos-modal__heading {
-    margin: 0 $spacing-double;
+    margin: 0;
 
     &:first-child {
       margin-left: 0;
     }
   }
 
-  .apos-modal__main {
-    display: flex;
-    justify-content: space-between;
+  .apos-modal__main--grid {
+    display: grid;
   }
 
-  // .apos-modal__rail {
-
-  // }
-  // .apos-modal__rail--left
-  .apos-modal__rail--left {
-    width: 22%;
+  .apos-modal__controls--secondary {
+    margin-right: 20px;
   }
 
-  .apos-modal__rail--right {
-    width: 18%;
+  .apos-modal__main--with-rails {
+    grid-template-columns: 22% 60% 18%;
   }
 
-  .apos-modal__body {
-    background: green;
+  .apos-modal__main--with-left-rail {
+    grid-template-columns: 22% 78%;
+  }
+
+  .apos-modal__main--with-right-rail {
+    grid-template-columns: 78% 22%;
   }
 </style>

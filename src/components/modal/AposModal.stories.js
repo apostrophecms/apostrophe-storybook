@@ -2,6 +2,7 @@ import { withKnobs, text, boolean, select, object } from '@storybook/addon-knobs
 import AposModal from './AposModal.vue';
 import AposModalRail from './AposModalRail.vue';
 import AposModalBody from './AposModalBody.vue';
+import AposModalFooter from './AposModalFooter.vue';
 import AposBreadcrumb from './../modalBreadcrumb/modalBreadcrumb.vue';
 import AposButton from './../button/AposButton.vue';
 import AposStringInput from './../inputString/AposStringInput.vue';
@@ -45,6 +46,7 @@ export const layouts = () => {
   const hasRightRail = boolean('Has Right Rail', true);
   const hasBodyHeader = boolean('Has Body Header (Controls)', false);
   const hasSecondaryControls = boolean('Has Secondary Controls', false);
+  const hasFooter = boolean('Has Footer', true);
   return {
     components: {
       AposModal,
@@ -52,7 +54,8 @@ export const layouts = () => {
       AposButton,
       AposModalRail,
       AposModalBody,
-      AposStringInput
+      AposStringInput,
+      AposModalFooter
     },
     props: {
 
@@ -90,12 +93,14 @@ export const layouts = () => {
               <AposBreadcrumb :items="breadcrumbs" />
             </template>
           ` : ''}
+          ${hasLeftRail ? `
+          <template #leftRail>
+            <AposModalRail type="left">
+              I am on the left
+            </AposModalRail>
+          </template>
+        ` : ''}
           <template #main>
-            ${hasLeftRail ? `
-              <AposModalRail type="left">
-                I am on the left
-              </AposModalRail>
-            ` : ''}
             <AposModalBody>
               ${hasBodyHeader ? `
                 <template #bodyHeader>
@@ -108,14 +113,26 @@ export const layouts = () => {
                 <AposStringInput :field="inputField" :value="inputValue" :status="inputStatus" />
                 <AposStringInput :field="inputField" :value="inputValue" :status="inputStatus" />
                 <AposStringInput :field="inputField" :value="inputValue" :status="inputStatus" />
+                <AposStringInput :field="inputField" :value="inputValue" :status="inputStatus" />
+                <AposStringInput :field="inputField" :value="inputValue" :status="inputStatus" />
+                <AposStringInput :field="inputField" :value="inputValue" :status="inputStatus" />
               </template>
             </AposModalBody>
-            ${hasRightRail ? `
-              <AposModalRail type="right">
-                I am on the right
-              </AposModalRail>
-            ` : ''}
           </template>
+          ${hasRightRail ? `
+          <template #rightRail>
+            <AposModalRail type="right">
+              I am on the right
+            </AposModalRail>
+          </template>
+        ` : ''}
+          ${hasFooter ? `
+          <template #footer>
+            <AposModalFooter>
+              I am the modals butt
+            </AposModalFooter>
+          </template>
+        ` : ''}
         </AposModal>
       </div>
       `

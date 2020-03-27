@@ -21,16 +21,16 @@ export default {
 <style lang="scss" scoped>
   .apos-modal__rail {
     background-color: var(--a-base-9);
-    flex-grow: 1;
-    flex-shrink: 1;
+    // flex-grow: 1;
+    // flex-shrink: 1;
   }
 
   .apos-modal__rail--left {
-    flex-basis: 22%;
+    // width: 22%;
   }
 
   .apos-modal__rail--right {
-    flex-basis: 18%;
+    // width: 18%;
   }
 
 </style>

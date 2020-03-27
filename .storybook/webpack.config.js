@@ -30,7 +30,8 @@ module.exports = async ({ config, mode }) => {
       }
     ],
     include: path.resolve(__dirname, '../')
-  })
+  }
+  )
 
   return config;
 }

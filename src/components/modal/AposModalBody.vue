@@ -18,7 +18,7 @@ export default {
   },
   computed: {
     hasHeader() {
-      return (this.$slots.bodyHeader ? true : false);
+      return !!this.$slots.bodyHeader;
     }
   }
 }
@@ -26,16 +26,26 @@ export default {
 
 <style lang="scss" scoped>
   .apos-modal__body {
-    flex-grow: 1;
-    flex-shrink: 1;
-    flex-basis: 100%;
+    padding: 20px 4%;
+  }
+
+  .apos-modal__main--no-rails .apos-modal__body {
+    padding: 20px;
+  }
+
+  .apos-modal__body-main {
+    // display: grid;
   }
 
   .apos-modal__body-inner {
-    padding: 20px 60px;
+    // padding: 20px 60px;
   }
 
   .apos-modal__body-header {
     margin-bottom: 20px;
+  }
+
+  .apos-modal__body-main .apos-field {
+    margin-bottom: 40px; // is this the right way to do this?s
   }
 </style>
