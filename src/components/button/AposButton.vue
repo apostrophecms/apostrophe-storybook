@@ -127,6 +127,7 @@ export default {
   }
 
   .apos-button--gradient-on-hover {
+    z-index: 0;
     &:after {
       z-index: 1;
       content: '';
@@ -135,12 +136,16 @@ export default {
       left: 0;
       width: 100%;
       height: 100%;
+      background-size: 100%;
       background-image: linear-gradient(46deg, #CC9300 0%, #EA433A 26%, #B327BF 47%, #6666FF 76%, #00BF9A 100%);
       opacity: 0;
-      transition: opacity 0.3s ease;
+      transition: all 0.3s ease;
     }
-    &:hover:after,
+    &:hover:after {
+      opacity: 0.3;
+    }
     &[disabled].apos-button--busy:after {
+      background-size: 400% 400%;
       opacity: 1;
     }
     // extra strength :sweat-smile:
@@ -148,7 +153,7 @@ export default {
       border: none;
     }
     &[disabled].apos-button--busy:after {
-      animation: animateGradient 5s ease-in-out infinite;
+      animation: animateGradient 10s ease-in-out infinite;
     }
     .apos-button__label {
       position: relative;
@@ -299,9 +304,9 @@ export default {
   }
 
   @keyframes animateGradient {
-    0% { width: 100%; }
-    50% { width: 200%; left: -25%; }
-    100% { width: 100%; left: 0; }
+    0% { background-position:0% 50% }
+    50% { background-position:100% 50% }
+    100% { background-position:0% 50% }
   }
 
 </style>

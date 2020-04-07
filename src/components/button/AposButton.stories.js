@@ -9,21 +9,6 @@ export default {
   decorators: [withKnobs]
 };
 
-// const g = ;
-
-// const label = 'Fruits';
-// const valuesObj = {
-//   fruit: 'kiwi',
-//   Guava: 'guava',
-//   Watermelon: 'watermelon'
-// };
-// const defaultValue = ['kiwi'];
-// const optionsObj = {
-//   display: 'multi-select'
-// };
-// const groupId = null;
-// const value = options(label, valuesObj, defaultValue, optionsObj, groupId);
-
 export const buttons = () => ({
   components: { AposButton },
   props: {
@@ -42,6 +27,17 @@ export const buttons = () => ({
           },
           null
         )
+    },
+    modifiers: {
+      default: options('Modifiers', {
+        'Danger on Hover': 'danger-on-hover',
+        'Block': 'block',
+        'Gradient on Hover': 'gradient-on-hover'
+      },
+      [],
+      { display: 'multi-select' },
+      null
+      )
     },
     disabled: {
       default: boolean('Disabled', false)
@@ -64,17 +60,6 @@ export const buttons = () => ({
           },
           null
         )
-    },
-    modifiers: {
-      default: options('Modifiers', {
-        'Danger on Hover': 'danger-on-hover',
-        'Block': 'block',
-        'Gradient on Hover': 'gradient-on-hover'
-      },
-      [],
-      { display: 'multi-select' },
-      null
-      )
     }
   },
   template: `
