@@ -1,4 +1,6 @@
-import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
+import { 
+  withKnobs, text, boolean, select, optionsKnob as options
+} from '@storybook/addon-knobs';
 
 import AposButton from './AposButton.vue';
 
@@ -6,6 +8,21 @@ export default {
   title: 'All Buttons',
   decorators: [withKnobs]
 };
+
+// const g = ;
+
+// const label = 'Fruits';
+// const valuesObj = {
+//   fruit: 'kiwi',
+//   Guava: 'guava',
+//   Watermelon: 'watermelon'
+// };
+// const defaultValue = ['kiwi'];
+// const optionsObj = {
+//   display: 'multi-select'
+// };
+// const groupId = null;
+// const value = options(label, valuesObj, defaultValue, optionsObj, groupId);
 
 export const buttons = () => ({
   components: { AposButton },
@@ -49,14 +66,15 @@ export const buttons = () => ({
         )
     },
     modifiers: {
-      default:
-        select(
-          'Modifiers', {
-            None: [],
-            'Danger on Hover': ['danger-on-hover']
-          },
-          null
-        )
+      default: options('Modifiers', {
+        'Danger on Hover': 'danger-on-hover',
+        'Block': 'block',
+        'Gradient on Hover': 'gradient-on-hover'
+      },
+      [],
+      { display: 'multi-select' },
+      null
+      )
     }
   },
   template: `
