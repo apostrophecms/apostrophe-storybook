@@ -1,7 +1,7 @@
 <template>
   <transition :name="transitionType" @enter="modal.showModal = true"
     :duration="250">
-    <section :class="[ 'apos-modal', `apos-modal--${modal.type}` ]"
+    <section :class="classes"
       role="dialog" aria-modal="true" v-if="modal.active">
       <transition :name="transitionType" @after-leave="modal.active = false">
         <div class="apos-modal__inner"
@@ -73,6 +73,14 @@ export default {
     hasFooter: function () {
       return !!this.$slots.footer;
     },
+    classes() {
+      const classes = ['apos-modal'];
+      classes.push(`apos-modal--${this.modal.type}`);
+      if (this.modal.type === 'slide') {
+        classes.push(`apos-modal--full-height`);  
+      }
+      return classes.join(' ');
+    },
     gridModifier() {
       if (this.hasLeftRail && this.hasRightRail) {
         return 'apos-modal__main--grid apos-modal__main--with-rails';
@@ -119,7 +127,7 @@ export default {
       border-radius: 0;
 
       @media screen and (min-width: 800px) {
-        max-width: 600px;
+        max-width: 540px;
       }
     }
 
@@ -138,6 +146,10 @@ export default {
       opacity: 0;
       transform: scale(0.95);
     }
+  }
+
+  .apos-modal--full-height .apos-modal__inner {
+    height: 100%;
   }
 
   .apos-modal__header {
