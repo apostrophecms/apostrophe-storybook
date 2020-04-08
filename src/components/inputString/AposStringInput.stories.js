@@ -49,7 +49,7 @@ export const stringInputs = () => {
 
   return {
     components: { AposStringInput },
-    data() {
+    data () {
       return {
         status,
         field,
