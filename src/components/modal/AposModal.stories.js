@@ -1,4 +1,8 @@
-import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+import {
+  withKnobs,
+  text,
+  boolean
+} from '@storybook/addon-knobs';
 import AposModal from './AposModal.vue';
 import AposModalRail from './AposModalRail.vue';
 import AposModalBody from './AposModalBody.vue';
@@ -128,7 +132,7 @@ export const layouts = () => {
           ${hasFooter ? `
           <template #footer>
             <AposModalFooter>
-              I am the modals butt
+              I am the footer
             </AposModalFooter>
           </template>
         ` : ''}

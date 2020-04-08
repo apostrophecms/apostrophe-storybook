@@ -34,19 +34,11 @@ export default {
     padding: 20px;
   }
 
-  .apos-modal__body-main {
-    // display: grid;
-  }
-
-  .apos-modal__body-inner {
-    // padding: 20px 60px;
-  }
-
   .apos-modal__body-header {
     margin-bottom: 20px;
   }
 
   .apos-modal__body-main .apos-field {
-    margin-bottom: 40px; // is this the right way to do this?s
+    margin-bottom: 40px; // is this the right way to do this
   }
 </style>

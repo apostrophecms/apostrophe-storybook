@@ -6,14 +6,7 @@
 
 <script>
 export default {
-  name: 'AposModalFooter',
-  props: {
-  },
-  computed: {
-    // hasHeader() {
-    //   return !!this.$slots.bodyHeader;
-    // }
-  }
+  name: 'AposModalFooter'
 }
 </script>
 

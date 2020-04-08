@@ -91,7 +91,6 @@ export default {
       if (!this.hasLeftRail && this.hasRightRail) {
         return 'apos-modal__main--grid apos-modal__main--with-right-rail';
       }
-      return 'apos-modal__main--no-rails';
     }
   }
 }
