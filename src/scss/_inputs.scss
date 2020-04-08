@@ -9,7 +9,6 @@
 
 .apos-input {
   width: 100%;
-  max-width: 460px;
   border: 1px solid var(--a-base-5);
   border-radius: var(--a-border-radius);
   background-color: var(--a-base-9);
@@ -63,6 +62,7 @@
 
 .apos-input-wrapper {
   position: relative;
+  max-width: 460px;
 }
 
 .apos-choice-label {

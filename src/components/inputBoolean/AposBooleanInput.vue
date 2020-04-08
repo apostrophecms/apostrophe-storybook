@@ -60,9 +60,9 @@ export default {
   },
   methods: {
     validate(value) {
-      if (this.field.mandatory) {
+      if (this.field.required) {
         if (!value) {
-          return 'mandatory';
+          return 'required';
         }
       }
       return false;

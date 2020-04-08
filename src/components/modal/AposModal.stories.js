@@ -18,7 +18,7 @@ export default {
 };
 
 const inputField = {
-  mandatory: false,
+  required: false,
   name: 'plancksConstant',
   type: 'text',
   label: 'What is Planck\'s constant?',

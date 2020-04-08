@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/vue';
 import AposSelectInput from './AposSelectInput.vue';
 
 const field = {
-  mandatory: false,
+  required: false,
   name: 'mashHousing',
   type: 'select',
   label: 'MASH housing?',
