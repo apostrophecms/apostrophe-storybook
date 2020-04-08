@@ -8,13 +8,14 @@
 }
 
 .apos-input {
-  min-width: 460px;
-  max-width: 100%;
+  width: 100%;
+  max-width: 460px;
   border: 1px solid var(--a-base-5);
   border-radius: var(--a-border-radius);
   background-color: var(--a-base-9);
   color: var(--a-text-primary);
   font-size: map-get($font-sizes, input);
+  box-sizing: border-box;
   @include apos-transition(all);
 
   &::placeholder {
@@ -62,7 +63,6 @@
 
 .apos-input-wrapper {
   position: relative;
-  display: inline-block;
 }
 
 .apos-choice-label {
