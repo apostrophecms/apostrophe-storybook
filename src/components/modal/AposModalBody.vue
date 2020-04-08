@@ -38,7 +38,8 @@ export default {
     margin-bottom: 20px;
   }
 
+  // TODO responsibilty of this setting might change
   .apos-modal__body-main .apos-field {
-    margin-bottom: 40px; // is this the right way to do this
+    margin-bottom: 40px;
   }
 </style>
