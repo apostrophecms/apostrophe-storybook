@@ -3,7 +3,7 @@ import { storiesOf } from '@storybook/vue';
 import AposRadioInput from './AposRadioInput.vue';
 
 const field = {
-  mandatory: true,
+  required: true,
   name: 'turtleLeads',
   type: 'radio',
   label: 'He\'s the leader',

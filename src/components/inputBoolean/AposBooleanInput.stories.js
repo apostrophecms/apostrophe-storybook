@@ -2,14 +2,14 @@ import { storiesOf } from '@storybook/vue';
 import AposBooleanInput from './AposBooleanInput';
 
 const field = {
-  mandatory: false,
+  required: false,
   name: 'approval',
   type: 'radio',
   label: 'Do you approve?'
 };
 
 const toggleField = {
-  mandatory: false,
+  required: false,
   name: 'approval',
   type: 'radio',
   label: 'Published',
