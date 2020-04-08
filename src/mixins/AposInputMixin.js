@@ -35,10 +35,13 @@ module.exports = {
   },
   methods: {
     validateAndEmit () {
-      this.$emit('input', {
-        data: this.next,
-        error: this.validate(this.next)
-      });
+      // TODO wrong!
+      if (this.next) {
+        this.$emit('input', {
+          data: this.next,
+          error: this.validate(this.next)
+        });
+      }
     },
     watchValue () {
       this.error = this.value.error;

@@ -71,7 +71,9 @@
   font-size: map-get($font-sizes, input-hint);
   font-weight: map-get($font-weights, medium);
   color: var(--a-base-2);
-
+  &:hover {
+    cursor: pointer;
+  }
   & + &,
   .apos-legend + & {
     margin-top: $spacing-base;
@@ -91,6 +93,13 @@ $box-width: 14px;
   margin: 0;
   padding: 0;
   visibility: hidden;
+  &:hover {
+    cursor: pointer;
+  }
+  &[disabled]:hover,
+  &[disabled] ~ .apos-input-indicator:hover{
+    cursor: not-allowed;
+  }
 }
 
 .apos-input-indicator {

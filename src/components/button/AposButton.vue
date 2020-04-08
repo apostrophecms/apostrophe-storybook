@@ -82,7 +82,6 @@ export default {
     background-color: var(--a-base-9);
     padding: 10px 20px;
     border-radius: var(--a-border-radius);
-    border: none;
     font-size: map-get($font-sizes, modal);
     letter-spacing: 0.75px; // how do we reuse this
     border: 1px solid var(--a-base-5);
@@ -142,7 +141,7 @@ export default {
       transition: all 0.3s ease;
     }
     &:hover:after {
-      opacity: 0.3;
+      opacity: 0.4;
     }
     &[disabled].apos-button--busy:after {
       background-size: 400% 400%;
@@ -195,7 +194,7 @@ export default {
   .apos-button--primary {
     color: var(--a-white);
     background: var(--a-primary);
-    border: none;
+    border: 1px solid var(--a-primary);
     &:hover {
       background-color: var(--a-primary-button-hover);
     }
@@ -208,7 +207,7 @@ export default {
     &[disabled] {
       background-color: var(--a-primary-button-disabled);
       color: var(--a-white);
-      border: none;
+      border: 1px solid var(--a-primary-button-disabled);
     }
     &[disabled].apos-button--busy {
       border: 1px solid var(--a-primary-button-disabled);
@@ -243,7 +242,7 @@ export default {
   .apos-button--danger {
     color: var(--a-white);
     background-color: var(--a-danger);
-    border: none;
+    border: 1px solid var(--a-danger);
     &:hover {
       background-color: var(--a-danger-button-hover);
     }
@@ -256,7 +255,7 @@ export default {
     &[disabled] {
       color: var(--a-white);
       background-color: var(--a-danger-button-disabled);
-      border: none;
+      border: 1px solid var(--a-danger-button-disabled);
     }
     &[disabled].apos-button--busy {
       border: 1px solid var(--a-danger-button-disabled);
