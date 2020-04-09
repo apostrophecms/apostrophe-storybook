@@ -46,7 +46,9 @@ export default {
       } else {
         return () => import(`vue-material-design-icons/Circle.vue`);
       }
-    },
+    }
+  },
+  methods: {
     close () {
       this.$emit('close', this);
     }
