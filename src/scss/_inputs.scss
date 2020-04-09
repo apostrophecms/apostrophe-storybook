@@ -60,6 +60,22 @@
   }
 }
 
+.apos-field--inverted {
+  .apos-input:not([disabled]) {
+    background-color: var(--a-background-primary);
+  }
+}
+
+.apos-field--small .apos-input {
+  font-size: 10px;
+  &--text,
+  &--textarea,
+  &--select {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+
 .apos-input-wrapper {
   position: relative;
   max-width: 460px;

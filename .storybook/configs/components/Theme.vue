@@ -9,7 +9,8 @@
 export default {
   name: 'Theme',
   props: {
-    theme: String
+    theme: String,
+    context: String
   }
 };
 </script>
@@ -20,5 +21,8 @@ export default {
     padding-top: 30px;
     padding-left: 30px;
     height: 100vh;
+  }
+  .apos-theme-rail {
+    background-color: var(--a-base-9);
   }
 </style>
