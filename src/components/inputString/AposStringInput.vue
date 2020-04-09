@@ -1,5 +1,5 @@
 <template>
-  <AposInputWrapper :field="field" :error="status.error" :uid="uid" >
+  <AposInputWrapper :modifiers="modifiers" :field="field" :error="status.error" :uid="uid" >
     <template slot="body">
       <div class="apos-input-wrapper">
         <textarea class="apos-input apos-input--text"
@@ -11,7 +11,7 @@
           :disabled="status.disabled" :required="field.required" :id="uid">
         <component 
           v-if="iconComponent"
-          :size="20"
+          :size="iconSize"
           class="apos-input-icon"
           v-bind:is="iconComponent"
         ></component>
@@ -31,6 +31,13 @@ export default {
   mixins: [ AposInputMixin ],
   name: 'AposStringInput',
   computed: {
+    iconSize () {
+      if (this.modifiers.includes('small')) {
+        return 14;
+      } else {
+        return 20;
+      }
+    },
     iconComponent () {
       if (this.field.icon) {
         return () => import(`vue-material-design-icons/${this.field.icon}.vue`);

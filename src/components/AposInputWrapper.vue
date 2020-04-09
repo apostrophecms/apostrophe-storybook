@@ -23,7 +23,8 @@ export default {
   props: {
     field: Object,
     error: [ String, Boolean, Object ],
-    uid: Number
+    uid: Number,
+    modifiers: Array
   },
   data () {
     return {
@@ -39,13 +40,23 @@ export default {
   },
   computed: {
     classList: function () {
-      return [
+      const classes = [
         'apos-field',
         `apos-field-${this.field.type}`,
-        `apos-field-${this.field.name}`,
-        this.field.classes,
-        this.errorClasses
+        `apos-field-${this.field.name}`
       ];
+      if (this.field.classes) {
+        classes.push(this.field.classes);
+      }
+      if (this.errorClasses) {
+        classes.push(this.errorClasses);
+      }
+      if (this.modifiers) {
+        this.modifiers.forEach((m) => {
+          classes.push(`apos-field--${m}`);
+        });
+      }
+      return classes;
     },
     errorClasses: function () {
       if (!this.error) {

@@ -1,6 +1,7 @@
 import {
   withKnobs,
   select,
+  optionsKnob as options,
   boolean
 } from '@storybook/addon-knobs';
 
@@ -53,9 +54,23 @@ export const stringInputs = () => {
       return {
         status,
         field,
-        value
+        value,
+        modifiers: options('Modifiers', {
+          'Small': 'small',
+          'Inverted': 'inverted'
+        },
+        [],
+        { display: 'multi-select' },
+        null
+        )
       };
     },
-    template: `<AposStringInput :field="field" :value="value" :status="status"/>`
+    template: `
+      <AposStringInput 
+        :field="field"
+        :value="value"
+        :status="status"
+        :modifiers="modifiers"
+      />`
   };
 };

@@ -3,7 +3,11 @@ module.exports = {
     value: Object,
     field: Object,
     context: Object,
-    status: Object
+    status: Object,
+    modifiers: {
+      default: [],
+      type: Array
+    }
   },
   data () {
     return {
