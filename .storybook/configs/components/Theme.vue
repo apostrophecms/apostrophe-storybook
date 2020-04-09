@@ -9,8 +9,7 @@
 export default {
   name: 'Theme',
   props: {
-    theme: String,
-    context: String
+    theme: String
   }
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <component :is="wrapEl" data-wuts-this-about :class="classList">
+  <component :is="wrapEl" :class="classList">
     <!-- TODO i18n -->
     <component :is="labelEl" class="apos-field-label" :for="uid">
       {{ field.label }}

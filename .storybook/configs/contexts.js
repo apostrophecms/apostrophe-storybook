@@ -14,20 +14,6 @@ export const contexts = [
       deep: true, // pass the `props` deeply into all wrapping components
       disable: false, // disable this contextual environment completely
       cancelable: false, // allow this contextual environment to be opt-out optionally in toolbar
-    },
+    }
   }
-  // {
-  //   icon: 'switchalt',
-  //   title: 'Context',
-  //   components: [Theme],
-  //   params: [
-  //     { name: 'None', props: { context: 'null' } },
-  //     { name: 'Rail', props: { context: 'rail' }, default: true },
-  //   ],
-  //   options: {
-  //     deep: true, // pass the `props` deeply into all wrapping components
-  //     disable: false, // disable this contextual environment completely
-  //     cancelable: false, // allow this contextual environment to be opt-out optionally in toolbar
-  //   },
-  // }
 ];

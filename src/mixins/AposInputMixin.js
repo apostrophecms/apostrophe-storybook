@@ -19,8 +19,6 @@ module.exports = {
     };
   },
   mounted () {
-    console.log('hi stu');
-    console.log(this.modifiers);
     this.validateAndEmit();
   },
   computed: {
