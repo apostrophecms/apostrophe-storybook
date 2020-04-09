@@ -6,9 +6,9 @@ export const contexts = [
     components: [Theme],
     params: [
       { name: 'Dark Theme', props: { theme: 'apos-theme-dark'}, default: true },
-      { name: 'Dark Theme, in Rail', props: { theme: 'apos-theme-dark apos-theme-rail'} },
+      { name: 'Dark Theme, in Rail', props: { theme: 'apos-theme-dark sb-context-rail'} },
       { name: 'Light Theme', props: { theme: 'apos-theme-light' } },
-      { name: 'Light Theme, in Rail', props: { theme: 'apos-theme-light apos-theme-rail' } },
+      { name: 'Light Theme, in Rail', props: { theme: 'apos-theme-light sb-context-rail' } },
     ],
     options: {
       deep: true, // pass the `props` deeply into all wrapping components
