@@ -95,8 +95,9 @@ export default {
       background-color: var(--a-base-7);
     }
     &:focus {
-      box-shadow: 0 0 0 1px var(--a-base-7), 0 0 0 3px var(--a-base--6);
+      box-shadow: 0 0 0 1px var(--a-base-7), 0 0 0 3px var(--a-base-8);
       outline: none;
+      border: 1px solid var(--a-base-3);
     }
     &[disabled] {
       background-color: var(--a-base-9);

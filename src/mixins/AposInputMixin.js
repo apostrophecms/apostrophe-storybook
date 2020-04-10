@@ -5,7 +5,9 @@ module.exports = {
     context: Object,
     status: Object,
     modifiers: {
-      default: [],
+      default: function () {
+        return [];
+      },
       type: Array
     }
   },
