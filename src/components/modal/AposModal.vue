@@ -1,8 +1,18 @@
 <template>
-  <transition :name="transitionType" @enter="modal.showModal = true"
-    :duration="250">
-    <section :class="classes"
-      role="dialog" aria-modal="true" v-if="modal.active">
+  <transition 
+    :name="transitionType" 
+    @enter="modal.showModal = true"
+    v-on:enter="bindEventListeners"
+    v-on:leave="removeEventListeners"
+    :duration="250"
+  >
+    <section 
+      v-if="modal.active"
+      :class="classes"
+      role="dialog" 
+      aria-modal="true"
+      :aria-labelledby="id"
+    >
       <transition :name="transitionType" @after-leave="modal.active = false">
         <div class="apos-modal__inner"
           v-if="modal.showModal">
@@ -11,7 +21,7 @@
               <div v-if="hasSecondaryControls" class="apos-modal__controls--secondary">
                 <slot name="secondaryControls"></slot>
               </div>
-              <h2 class="apos-modal__heading o-heading">
+              <h2 :id="id" class="apos-modal__heading o-heading">
                 {{ modal.title }}
               </h2>
               <div class="apos-modal__controls--primary"
@@ -47,7 +57,30 @@ export default {
   props: {
     modal: Object,
   },
+  mounted() {
+    
+  },
+  methods: {
+    esc (e) {
+      if (e.keyCode === 27) {
+        this.$emit('esc');
+        this.removeEventListeners();
+      }
+    },
+    bindEventListeners () {
+      window.addEventListener('keydown', this.esc);
+    },
+    removeEventListeners () {
+      window.removeEventListener('keydown', this.esc);
+    }
+  },
   computed: {
+    id() {
+      const rand = (Math.floor(Math.random() * Math.floor(10000)));
+      // replace everything not A-Za-z0-9_ with _
+      const title = this.modal.title.replace(/\W/g,'_');
+      return `${title}-${rand}`;
+    },
     transitionType: function () {
       if (this.modal.type === 'slide') {
         return 'slide';
