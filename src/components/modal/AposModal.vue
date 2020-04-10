@@ -53,12 +53,13 @@ export default {
     modal: Object,
   },
   mounted() {
-    document.onkeydown = this.esc;
+    window.addEventListener('keydown', this.esc);
   },
   methods: {
     esc (e) {
       if (e.keyCode === 27) {
-        this.$emit('esc'); 
+        this.$emit('esc');
+        window.removeEventListener('keydown', this.esc);
       }
     }
   },

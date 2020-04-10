@@ -164,12 +164,8 @@ export const fullScreen = () => ({
       <button type="button" class="apos-button" @click="startEnter">
         Activate modal
       </button>
-      <AposModal 
-        :modal="modal"
-        :hasSecondaryControls="hasSecondaryControls"
-        v-on:esc="startExit"
-      >
-        <template #secondaryControls v-if="hasSecondaryControls">
+      <AposModal :modal="modal" v-on:esc="startExit">
+        <template #secondaryControls>
           <AposButton @click="startExit" label="Exit" />
         </template>
         <template #primaryControls>
