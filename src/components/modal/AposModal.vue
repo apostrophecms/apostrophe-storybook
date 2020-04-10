@@ -1,6 +1,11 @@
 <template>
-  <transition :name="transitionType" @enter="modal.showModal = true"
-    :duration="250">
+  <transition 
+    :name="transitionType" 
+    @enter="modal.showModal = true"
+    v-on:enter="bindEventListeners"
+    v-on:leave="removeEventListeners"
+    :duration="250"
+  >
     <section 
       v-if="modal.active"
       :class="classes"
@@ -53,14 +58,20 @@ export default {
     modal: Object,
   },
   mounted() {
-    window.addEventListener('keydown', this.esc);
+    
   },
   methods: {
     esc (e) {
       if (e.keyCode === 27) {
         this.$emit('esc');
-        window.removeEventListener('keydown', this.esc);
+        this.removeEventListeners();
       }
+    },
+    bindEventListeners () {
+      window.addEventListener('keydown', this.esc);
+    },
+    removeEventListeners () {
+      window.removeEventListener('keydown', this.esc);
     }
   },
   computed: {
