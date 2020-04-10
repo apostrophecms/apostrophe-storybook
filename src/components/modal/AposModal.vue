@@ -64,7 +64,6 @@ export default {
     esc (e) {
       if (e.keyCode === 27) {
         this.$emit('esc');
-        this.removeEventListeners();
       }
     },
     bindEventListeners () {
