@@ -8,13 +8,13 @@
 }
 
 .apos-input {
-  min-width: 460px;
-  max-width: 100%;
+  width: 100%;
   border: 1px solid var(--a-base-5);
   border-radius: var(--a-border-radius);
   background-color: var(--a-base-9);
   color: var(--a-text-primary);
   font-size: map-get($font-sizes, input);
+  box-sizing: border-box;
   @include apos-transition(all);
 
   &::placeholder {
@@ -60,9 +60,25 @@
   }
 }
 
+.apos-field--inverted {
+  .apos-input:not([disabled]) {
+    background-color: var(--a-background-primary);
+  }
+}
+
+.apos-field--small .apos-input {
+  font-size: 10px;
+  &--text,
+  &--textarea,
+  &--select {
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
+}
+
 .apos-input-wrapper {
   position: relative;
-  display: inline-block;
+  max-width: 460px;
 }
 
 .apos-choice-label {
@@ -71,7 +87,9 @@
   font-size: map-get($font-sizes, input-hint);
   font-weight: map-get($font-weights, medium);
   color: var(--a-base-2);
-
+  &:hover {
+    cursor: pointer;
+  }
   & + &,
   .apos-legend + & {
     margin-top: $spacing-base;
@@ -91,6 +109,13 @@ $box-width: 14px;
   margin: 0;
   padding: 0;
   visibility: hidden;
+  &:hover {
+    cursor: pointer;
+  }
+  &[disabled]:hover,
+  &[disabled] ~ .apos-input-indicator:hover{
+    cursor: not-allowed;
+  }
 }
 
 .apos-input-indicator {

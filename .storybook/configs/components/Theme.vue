@@ -21,4 +21,7 @@ export default {
     padding-left: 30px;
     height: 100vh;
   }
+  .sb-context-rail {
+    background-color: var(--a-base-9);
+  }
 </style>

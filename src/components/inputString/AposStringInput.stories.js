@@ -1,134 +1,76 @@
-import { storiesOf } from '@storybook/vue';
+import {
+  withKnobs,
+  select,
+  optionsKnob as options,
+  boolean
+} from '@storybook/addon-knobs';
 
 import AposStringInput from './AposStringInput.vue';
 
-const field = {
-  mandatory: false,
-  name: 'plancksConstant',
-  type: 'text',
-  label: 'What is Planck\'s constant?',
-  placeholder: 'Enter the number.'
+export default {
+  title: 'Inputs (string)'
 };
 
-const dateField = {
-  ...field,
-  icon: 'Calendar'
-};
-
-const requiredField = {
-  ...field,
-  mandatory: true
-};
-
-const helpField = {
-  ...field,
-  help: 'Sing the Neverending Story theme song.'
-};
-
-const textAreaField = {
-  ...field,
-  type: 'textarea',
-  help: 'Sing the Neverending Story theme song.'
-};
-
-const baseTemplate = `<AposStringInput :field="field" :value="value" :status="status"/>`;
-
-storiesOf('Inputs (strings)', module)
-  .add('Text', () => ({
-    components: { AposStringInput },
-    data () {
-      return {
-        field,
-        status: {},
-        value: {
-          data: ''
-        }
-      };
+export const stringInputs = () => {
+  const hasError = boolean('Has Error?', false);
+  const hasHelpText = boolean('Has Help Text?', false);
+  const isRequired = boolean('Is Required?', false);
+  const icon = select(
+    'Icon', {
+      None: null,
+      Calendar: 'Calendar',
+      Search: 'Magnify',
+      Time: 'Clock',
+      Phone: 'Phone'
     },
-    template: baseTemplate
-  }))
-  .add('Text, disabled', () => ({
+    null
+  );
+
+  const value = {
+    data: ''
+  };
+
+  const status = {
+    disabled: boolean('Disabled', false),
+    error: hasError ? {
+      type: 'invalid',
+      message: 'Not valid'
+    } : false
+  };
+
+  const field = {
+    name: 'plancksConstant',
+    type: 'text',
+    label: 'What is Planck\'s constant?',
+    placeholder: 'Enter the number.',
+    help: hasHelpText ? 'Sing the Neverending Story theme song.' : false,
+    icon: icon,
+    required: isRequired
+  };
+
+  return {
     components: { AposStringInput },
     data () {
       return {
+        status,
         field,
-        status: {
-          disabled: true
+        value,
+        modifiers: options('Modifiers', {
+          'Small': 'small',
+          'Inverted': 'inverted'
         },
-        value: {
-          data: ''
-        }
+        [],
+        { display: 'multi-select' },
+        null
+        )
       };
     },
-    template: baseTemplate
-  }))
-  .add('Text, error', () => ({
-    components: { AposStringInput },
-    data () {
-      return {
-        field,
-        status: {
-          error: {
-            type: 'invalid',
-            message: 'Not a valid email address'
-          }
-        },
-        value: {
-          data: ''
-        }
-      };
-    },
-    template: baseTemplate
-  }))
-  .add('Text with Icon', () => ({
-    components: { AposStringInput },
-    data () {
-      return {
-        field: dateField,
-        status: {},
-        value: {
-          data: ''
-        }
-      };
-    },
-    template: baseTemplate
-  }))
-  .add('Required', () => ({
-    components: { AposStringInput },
-    data () {
-      return {
-        field: requiredField,
-        status: {},
-        value: {
-          data: ''
-        }
-      };
-    },
-    template: baseTemplate
-  }))
-  .add('With help text', () => ({
-    components: { AposStringInput },
-    data () {
-      return {
-        field: helpField,
-        status: {},
-        value: {
-          data: ''
-        }
-      };
-    },
-    template: baseTemplate
-  }))
-  .add('Textarea', () => ({
-    components: { AposStringInput },
-    data () {
-      return {
-        field: textAreaField,
-        status: {},
-        value: {
-          data: ''
-        }
-      };
-    },
-    template: baseTemplate
-  }));
+    template: `
+      <AposStringInput 
+        :field="field"
+        :value="value"
+        :status="status"
+        :modifiers="modifiers"
+      />`
+  };
+};

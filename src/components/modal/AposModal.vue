@@ -1,22 +1,31 @@
 <template>
-  <transition :name="transitionType" @enter="modal.showModal = true"
-    :duration="250">
-    <section :class="[ 'apos-modal', `apos-modal--${modal.type}` ]"
-      role="dialog" aria-modal="true" v-if="modal.active">
+  <transition 
+    :name="transitionType" 
+    @enter="modal.showModal = true"
+    v-on:enter="bindEventListeners"
+    v-on:leave="removeEventListeners"
+    :duration="250"
+  >
+    <section 
+      v-if="modal.active"
+      :class="classes"
+      role="dialog" 
+      aria-modal="true"
+      :aria-labelledby="id"
+    >
       <transition :name="transitionType" @after-leave="modal.active = false">
         <div class="apos-modal__inner"
           v-if="modal.showModal">
           <header class="apos-modal__header">
             <div class="apos-modal__header__main">
-              <div class="apos-modal__controls--secondary"
-                v-if="hasSecondaryControls">
+              <div v-if="hasSecondaryControls" class="apos-modal__controls--secondary">
                 <slot name="secondaryControls"></slot>
               </div>
-              <h2 class="apos-modal__heading o-heading">
-                {{modal.title}}
+              <h2 :id="id" class="apos-modal__heading o-heading">
+                {{ modal.title }}
               </h2>
               <div class="apos-modal__controls--primary"
-                v-if="hasSecondaryControls">
+                v-if="hasPrimaryControls">
                 <slot name="primaryControls"></slot>
               </div>
             </div>
@@ -24,9 +33,14 @@
               <slot class="apos-modal__breadcrumbs" name="breadcrumbs"></slot>
             </div>
           </header>
-          <div class="apos-modal__main">
+          <div class="apos-modal__main" :class="gridModifier">
+            <slot v-if="hasLeftRail" name="leftRail"></slot>
             <slot name="main"></slot>
+            <slot name="rightRail"></slot>
           </div>
+          <footer v-if="hasFooter" class="apos-modal__footer">
+            <slot name="footer"></slot>
+          </footer>
         </div>
       </transition>
       <transition :name="transitionType">
@@ -41,9 +55,31 @@
 export default {
   name: 'AposModal',
   props: {
-    modal: Object
+    modal: Object,
+  },
+  mounted() {
+    
+  },
+  methods: {
+    esc (e) {
+      if (e.keyCode === 27) {
+        this.$emit('esc');
+      }
+    },
+    bindEventListeners () {
+      window.addEventListener('keydown', this.esc);
+    },
+    removeEventListeners () {
+      window.removeEventListener('keydown', this.esc);
+    }
   },
   computed: {
+    id() {
+      const rand = (Math.floor(Math.random() * Math.floor(10000)));
+      // replace everything not A-Za-z0-9_ with _
+      const title = this.modal.title.replace(/\W/g,'_');
+      return `${title}-${rand}`;
+    },
     transitionType: function () {
       if (this.modal.type === 'slide') {
         return 'slide';
@@ -59,6 +95,35 @@ export default {
     },
     hasBreadcrumbs: function () {
       return !!this.$slots.breadcrumbs;
+    },
+    hasLeftRail: function () {
+      return !!this.$slots.leftRail;
+    },
+    hasRightRail: function () {
+      return !!this.$slots.rightRail;
+    },
+    hasFooter: function () {
+      return !!this.$slots.footer;
+    },
+    classes() {
+      const classes = ['apos-modal'];
+      classes.push(`apos-modal--${this.modal.type}`);
+      if (this.modal.type === 'slide') {
+        classes.push(`apos-modal--full-height`);  
+      }
+      return classes.join(' ');
+    },
+    gridModifier() {
+      if (this.hasLeftRail && this.hasRightRail) {
+        return 'apos-modal__main--grid apos-modal__main--with-rails';
+      }
+      if (this.hasLeftRail && !this.hasRightRail) {
+        return 'apos-modal__main--grid apos-modal__main--with-left-rail';
+      }
+      if (!this.hasLeftRail && this.hasRightRail) {
+        return 'apos-modal__main--grid apos-modal__main--with-right-rail';
+      }
+      return false;
     }
   }
 }
@@ -68,12 +133,15 @@ export default {
   // NOTE: Transition timings below are set to match the wrapper transition
   // timing in the template to coordinate the inner and overlay animations.
   .apos-modal__inner {
+    display: grid;
     position: fixed;
+    grid-template-rows: auto 1fr auto;
     z-index: 1001;
     top: $spacing-double;
     right: $spacing-double;
     bottom: $spacing-double;
     left: $spacing-double;
+    height: calc(100vh - #{$spacing-double * 2});
     border-radius: var(--a-border-radius);
     background-color: var(--a-background-primary);
     border: 1px solid var(--a-base-4);
@@ -91,7 +159,7 @@ export default {
       border-radius: 0;
 
       @media screen and (min-width: 800px) {
-        max-width: 600px;
+        max-width: 540px;
       }
     }
 
@@ -110,6 +178,19 @@ export default {
       opacity: 0;
       transform: scale(0.95);
     }
+  }
+
+  .apos-modal--full-height .apos-modal__inner {
+    height: 100%;
+  }
+
+  .apos-modal__header {
+    grid-row: 1 / 2;
+  }
+
+  .apos-modal__main {
+    grid-row: 2 / 3;
+    overflow-y: auto;
   }
 
   .apos-modal__overlay {
@@ -154,10 +235,30 @@ export default {
   }
 
   .apos-modal__heading {
-    margin: 0 $spacing-double;
+    margin: 0;
 
     &:first-child {
       margin-left: 0;
     }
+  }
+
+  .apos-modal__main--grid {
+    display: grid;
+  }
+
+  .apos-modal__controls--secondary {
+    margin-right: 20px;
+  }
+
+  .apos-modal__main--with-rails {
+    grid-template-columns: 22% 60% 18%;
+  }
+
+  .apos-modal__main--with-left-rail {
+    grid-template-columns: 22% 78%;
+  }
+
+  .apos-modal__main--with-right-rail {
+    grid-template-columns: 78% 22%;
   }
 </style>

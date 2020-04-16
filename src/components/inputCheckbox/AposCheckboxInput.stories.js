@@ -3,9 +3,9 @@ import { storiesOf } from '@storybook/vue';
 import AposCheckboxInput from './AposCheckboxInput.vue';
 
 const field = {
-  mandatory: true,
+  required: true,
   name: 'toppings',
-  type: 'radio',
+  type: 'checkbox',
   label: 'Which toppings?',
   choices: [
     {

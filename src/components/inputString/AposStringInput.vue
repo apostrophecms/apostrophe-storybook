@@ -1,17 +1,20 @@
 <template>
-  <AposInputWrapper :field="field" :error="status.error" :uid="uid" >
+  <AposInputWrapper :modifiers="modifiers" :field="field" :error="status.error" :uid="uid" >
     <template slot="body">
       <div class="apos-input-wrapper">
         <textarea class="apos-input apos-input--text"
           v-if="field.type === 'textarea'" rows="5"
           v-model="next" :placeholder=field.placeholder
-          :disabled="status.disabled" :required="field.mandatory" :id="uid"></textarea>
+          :disabled="status.disabled" :required="field.required" :id="uid"></textarea>
         <input class="apos-input apos-input--text" v-else
           v-model="next" :type="field.type" :placeholder=field.placeholder
-          :disabled="status.disabled" :required="field.mandatory" :id="uid">
-        <component :is="`${
-          field.icon ? field.icon : 'CircleMedium' }`"
-          :size="20" class="apos-input-icon" v-if="hasIcon"></component>
+          :disabled="status.disabled" :required="field.required" :id="uid">
+        <component 
+          v-if="iconComponent"
+          :size="iconSize"
+          class="apos-input-icon"
+          v-bind:is="iconComponent"
+        ></component>
       </div>
     </template>
   </AposInputWrapper>
@@ -20,20 +23,28 @@
 <script>
 import AposInputWrapper from '../AposInputWrapper';
 import AposInputMixin from '../../mixins/AposInputMixin.js';
-import CircleMedium from "vue-material-design-icons/CircleMedium.vue";
-import Calendar from "vue-material-design-icons/Calendar.vue";
 
 export default {
   components: {
-    AposInputWrapper,
-    CircleMedium,
-    Calendar
+    AposInputWrapper
   },
   mixins: [ AposInputMixin ],
   name: 'AposStringInput',
   computed: {
-    hasIcon: function () {
-      return this.status.error || (this.field.icon && this.field.icon !== null);
+    iconSize () {
+      if (this.modifiers.includes('small')) {
+        return 14;
+      } else {
+        return 20;
+      }
+    },
+    iconComponent () {
+      if (this.field.icon) {
+        return () => import(`vue-material-design-icons/${this.field.icon}.vue`);
+      } if (this.status.error) {
+        return () => import(`vue-material-design-icons/CircleMedium.vue`);
+      }
+      return false;
     }
   },
   methods: {
@@ -77,5 +88,10 @@ textarea.apos-input--text {
   // Some  browser styles set `textarea` to monospace.
   font-family: inherit;
   resize: none;
+}
+
+.apos-input-icon svg {
+  // little bit better centering
+  display: flex;
 }
 </style>

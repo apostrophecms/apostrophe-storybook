@@ -1,4 +1,6 @@
-import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
+import { 
+  withKnobs, text, boolean, select, optionsKnob as options
+} from '@storybook/addon-knobs';
 
 import AposButton from './AposButton.vue';
 
@@ -26,6 +28,17 @@ export const buttons = () => ({
           null
         )
     },
+    modifiers: {
+      default: options('Modifiers', {
+        'Danger on Hover': 'danger-on-hover',
+        'Block': 'block',
+        'Gradient on Hover': 'gradient-on-hover'
+      },
+      [],
+      { display: 'multi-select' },
+      null
+      )
+    },
     disabled: {
       default: boolean('Disabled', false)
     },
@@ -44,16 +57,6 @@ export const buttons = () => ({
             Menu: 'DotsVertical',
             Delete: 'Delete',
             'Empty Checkbox': 'CheckboxBlankOutline'
-          },
-          null
-        )
-    },
-    modifiers: {
-      default:
-        select(
-          'Modifiers', {
-            None: [],
-            'Danger on Hover': ['danger-on-hover']
           },
           null
         )

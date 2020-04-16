@@ -3,11 +3,15 @@
     <!-- TODO i18n -->
     <component :is="labelEl" class="apos-field-label" :for="uid">
       {{ field.label }}
-      <span v-if="field.mandatory" class="apos-field-required">*</span>
+      <span v-if="field.required" class="apos-field-required">*</span>
     </component>
     <!-- TODO i18n -->
     <p v-if="field.help" class="apos-field-help">{{ field.help }}</p>
     <slot name="body"></slot>
+    <!-- TODO i18n -->
+    <div v-if="errorMessage" class="apos-field-error">
+      {{ errorMessage }}
+    </div>
   </component>
 </template>
 
@@ -19,7 +23,8 @@ export default {
   props: {
     field: Object,
     error: [ String, Boolean, Object ],
-    uid: Number
+    uid: Number,
+    modifiers: Array
   },
   data () {
     return {
@@ -35,13 +40,23 @@ export default {
   },
   computed: {
     classList: function () {
-      return [
+      const classes = [
         'apos-field',
         `apos-field-${this.field.type}`,
-        `apos-field-${this.field.name}`,
-        this.field.classes,
-        this.errorClasses
+        `apos-field-${this.field.name}`
       ];
+      if (this.field.classes) {
+        classes.push(this.field.classes);
+      }
+      if (this.errorClasses) {
+        classes.push(this.errorClasses);
+      }
+      if (this.modifiers) {
+        this.modifiers.forEach((m) => {
+          classes.push(`apos-field--${m}`);
+        });
+      }
+      return classes;
     },
     errorClasses: function () {
       if (!this.error) {
@@ -57,6 +72,17 @@ export default {
       }
 
       return `apos-field--error apos-field--error-${error}`;
+    },
+    errorMessage () {
+      if (this.error) {
+        if (this.error.message) {
+          return this.error.message;
+        } else {
+          return 'Error'
+        }
+      } else {
+        return false;
+      }
     }
   }
 };
@@ -84,11 +110,19 @@ export default {
     color: var(--a-text-primary);
   }
 
-  .apos-field-help {
+  .apos-field-help,
+  .apos-field-error {
     margin: $spacing-base 0 0;
     font-size: map-get($font-sizes, input-hint);
     font-weight: 500;
+  }
+
+  .apos-field-help {
     color: var(--a-base-3);
+  }
+
+  .apos-field-error {
+    color: var(--a-danger);
   }
 
   .apos-field-required {

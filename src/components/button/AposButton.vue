@@ -82,10 +82,11 @@ export default {
     background-color: var(--a-base-9);
     padding: 10px 20px;
     border-radius: var(--a-border-radius);
-    border: none;
     font-size: map-get($font-sizes, modal);
     letter-spacing: 0.75px; // how do we reuse this
     border: 1px solid var(--a-base-5);
+    transition: all 0.3s ease;
+    overflow: hidden;
     &:hover {
       cursor: pointer;
       background-color: var(--a-base-8);
@@ -94,8 +95,9 @@ export default {
       background-color: var(--a-base-7);
     }
     &:focus {
-      box-shadow: 0 0 0 1px var(--a-base-7), 0 0 0 3px var(--a-base--6);
+      box-shadow: 0 0 0 1px var(--a-base-7), 0 0 0 3px var(--a-base-8);
       outline: none;
+      border: 1px solid var(--a-base-3);
     }
     &[disabled] {
       background-color: var(--a-base-9);
@@ -124,6 +126,52 @@ export default {
     background-color: transparent;
   }
 
+  .apos-button--gradient-on-hover {
+    z-index: 0;
+    &:after {
+      z-index: 1;
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-size: 100%;
+      background-image: linear-gradient(46deg, #CC9300 0%, #EA433A 26%, #B327BF 47%, #6666FF 76%, #00BF9A 100%);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+    &:hover:after {
+      opacity: 0.4;
+    }
+    &[disabled].apos-button--busy:after {
+      background-size: 400% 400%;
+      opacity: 1;
+    }
+    // extra strength :sweat-smile:
+    &.apos-button[disabled].apos-button--busy {
+      border: none;
+    }
+    &[disabled].apos-button--busy:after {
+      animation: animateGradient 10s ease-in-out infinite;
+    }
+    .apos-button__label {
+      position: relative;
+    }
+    &[disabled].apos-button--busy .apos-loading__svg {
+      color: var(--a-white)
+    }
+    .apos-button__label,
+    .apos-loading {
+      z-index: 2;
+    }
+  }
+  .apos-button--block {
+    display: block;
+    width: 100%;
+    max-width: 400px;
+  }
+
   .apos-button--outline {
     &:hover {
       background-color: var(--a-base-9);
@@ -147,7 +195,7 @@ export default {
   .apos-button--primary {
     color: var(--a-white);
     background: var(--a-primary);
-    border: none;
+    border: 1px solid var(--a-primary);
     &:hover {
       background-color: var(--a-primary-button-hover);
     }
@@ -160,7 +208,7 @@ export default {
     &[disabled] {
       background-color: var(--a-primary-button-disabled);
       color: var(--a-white);
-      border: none;
+      border: 1px solid var(--a-primary-button-disabled);
     }
     &[disabled].apos-button--busy {
       border: 1px solid var(--a-primary-button-disabled);
@@ -195,7 +243,7 @@ export default {
   .apos-button--danger {
     color: var(--a-white);
     background-color: var(--a-danger);
-    border: none;
+    border: 1px solid var(--a-danger);
     &:hover {
       background-color: var(--a-danger-button-hover);
     }
@@ -208,7 +256,7 @@ export default {
     &[disabled] {
       color: var(--a-white);
       background-color: var(--a-danger-button-disabled);
-      border: none;
+      border: 1px solid var(--a-danger-button-disabled);
     }
     &[disabled].apos-button--busy {
       border: 1px solid var(--a-danger-button-disabled);
@@ -240,8 +288,8 @@ export default {
 
   .apos-button__content {
     display: flex;
-    align-content: center;
-    justify-items: center;
+    align-items: center;
+    justify-content: center;
     transition: opacity 0.2s ease;
   }
 
@@ -253,6 +301,12 @@ export default {
 
   .apos-button--danger-on-hover:hover {
     color: var(--a-danger);
+  }
+
+  @keyframes animateGradient {
+    0% { background-position:0% 50% }
+    50% { background-position:100% 50% }
+    100% { background-position:0% 50% }
   }
 
 </style>
