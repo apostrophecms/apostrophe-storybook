@@ -1,22 +1,42 @@
 <template>
   <div class="apos-loading">
-    <svg xmlns="http://www.w3.org/2000/svg" class="apos-loading__svg" width="38" height="38" viewBox="0 0 38 38">
+    <svg viewBox="0 0 70 20">
       <defs>
-        <linearGradient x1="8.042%" y1="0%" x2="65.682%" y2="23.865%" id="a">
-          <stop stop-color="currentColor" stop-opacity="0" offset="0%"/>
-          <stop stop-color="currentColor" stop-opacity=".631" offset="63.146%"/>
-          <stop stop-color="currentColor" offset="100%"/>
+        <linearGradient id="gradOne"
+          x1="-0.858289931%" y1="100%" x2="100.756836%" y2="0%" spreadMethod="pad">
+          <stop offset="0%"   stop-color="var(--a-brand-gold)" stop-opacity="1"/>
+          <stop offset="100%" stop-color="var(--a-brand-red)" stop-opacity="1"/>
+        </linearGradient>
+        <linearGradient id="gradTwo"
+          x1="-0.858289931%" y1="100%" x2="100.756836%" y2="0%" spreadMethod="pad">
+          <stop offset="0%"   stop-color="var(--a-brand-red)" stop-opacity="1"/>
+          <stop offset="100%" stop-color="var(--a-brand-magenta)" stop-opacity="1"/>
+        </linearGradient>
+        <linearGradient id="gradThree"
+          x1="-0.858289931%" y1="100%" x2="100.756836%" y2="0%" spreadMethod="pad">
+          <stop offset="0%"   stop-color="var(--a-brand-magenta)" stop-opacity="1"/>
+          <stop offset="100%" stop-color="var(--a-brand-blue)" stop-opacity="1"/>
         </linearGradient>
       </defs>
-      <g fill="none" fill-rule="evenodd">
-        <g transform="translate(1 1)">
-          <path d="M36 18c0-9.94-8.06-18-18-18" id="Oval-2" stroke="url(#a)" stroke-width="2" transform="rotate(266.312 18 18)">
-            <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="0.9s" repeatCount="indefinite"/>
-          </path>
-          <circle fill="#fff" cx="36" cy="18" r="1" transform="rotate(266.312 18 18)">
-            <animateTransform attributeName="transform" type="rotate" from="0 18 18" to="360 18 18" dur="0.9s" repeatCount="indefinite"/>
-          </circle>
-        </g>
+      <g>
+        <circle class="apos-loading__first" cx="10" cy="10" stroke-width="0" fill="url('#gradOne')" r="4.08836">
+          <animate attributeName="r" dur="550ms"  values="3;3;4;5;6;5;4;3" repeatCount="indefinite" 
+            keyTimes="0; 0.15; 0.3; 0.45; 0.6; 0.75; 0.9; 1"
+            keySplines=".42 0 1 1; 0 0 .59 1; .42 0 1 1; 0 0 .59 1; .42 0 1 1; 0 0 .59 1; .42 0 1 1; 0 0 .59 1;"
+          />
+        </circle>
+        <circle class="apos-loading__second" cx="30" cy="10" stroke-width="0" fill="url('#gradTwo')" r="5.08836">
+          <animate attributeName="r" dur="550ms" values="4;3;3;4;5;6;5;4" repeatCount="indefinite"
+            keyTimes="0; 0.15; 0.3; 0.45; 0.6; 0.75; 0.9; 1"
+            keySplines=".42 0 1 1; 0 0 .59 1; .42 0 1 1; 0 0 .59 1; .42 0 1 1; 0 0 .59 1; .42 0 1 1; 0 0 .59 1;"
+          />
+        </circle>
+        <circle class="apos-loading__third" cx="50" cy="10" stroke-width="0" fill="url('#gradThree')" r="5.91164">
+          <animate attributeName="r" dur="550ms" values="5;4;3;3;4;5;6;5" repeatCount="indefinite"
+            keyTimes="0; 0.15; 0.3; 0.45; 0.6; 0.75; 0.9; 1"
+            keySplines=".42 0 1 1; 0 0 .59 1; .42 0 1 1; 0 0 .59 1; .42 0 1 1; 0 0 .59 1; .42 0 1 1; 0 0 .59 1;"
+          />
+        </circle>
       </g>
     </svg>
   </div>
@@ -30,12 +50,6 @@ module.exports = {
 
 <style lang="scss">
   .apos-loading {
-    position: relative;
-    width: 17px;
-    height: 17px;
-  }
-  .apos-loading__svg {
-    max-width: 100%;
-    max-height: 100%;
+    max-width: 90px;
   }
 </style>
