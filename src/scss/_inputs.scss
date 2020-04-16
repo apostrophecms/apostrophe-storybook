@@ -55,6 +55,7 @@
   }
 
   &--text,
+  &--time,
   &--textarea,
   &--date,
   &--select {
@@ -74,6 +75,7 @@
 
 .apos-field--small .apos-input {
   font-size: 10px;
+  &--time,
   &--text,
   &--textarea,
   &--date,
