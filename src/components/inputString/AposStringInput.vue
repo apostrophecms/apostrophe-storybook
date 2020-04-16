@@ -31,13 +31,6 @@ export default {
   mixins: [ AposInputMixin ],
   name: 'AposStringInput',
   computed: {
-    iconSize () {
-      if (this.modifiers.includes('small')) {
-        return 14;
-      } else {
-        return 20;
-      }
-    },
     iconComponent () {
       if (this.field.icon) {
         return () => import(`vue-material-design-icons/${this.field.icon}.vue`);
@@ -71,27 +64,5 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.apos-input-icon {
-  position: absolute;
-  right: $input-padding;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--a-base-2);
-  pointer-events: none;
 
-  .apos-field--error & {
-    color: var(--a-danger);
-  }
-}
-
-textarea.apos-input--text {
-  // Some  browser styles set `textarea` to monospace.
-  font-family: inherit;
-  resize: none;
-}
-
-.apos-input-icon svg {
-  // little bit better centering
-  display: flex;
-}
 </style>
