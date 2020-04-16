@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   props: {
     value: Object,
     field: Object,
@@ -26,6 +26,13 @@ module.exports = {
   computed: {
     options () {
       return window.apos.schemas;
+    },
+    iconSize () {
+      if (this.modifiers.includes('small')) {
+        return 14;
+      } else {
+        return 20;
+      }
     }
   },
   watch: {

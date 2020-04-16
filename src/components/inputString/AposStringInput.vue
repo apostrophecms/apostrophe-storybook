@@ -2,12 +2,12 @@
   <AposInputWrapper :modifiers="modifiers" :field="field" :error="status.error" :uid="uid" >
     <template slot="body">
       <div class="apos-input-wrapper">
-        <textarea class="apos-input apos-input--text"
-          v-if="field.type === 'textarea'" rows="5"
+        <textarea :class="classes"
+          v-if="type === 'textarea'" rows="5"
           v-model="next" :placeholder=field.placeholder
           :disabled="status.disabled" :required="field.required" :id="uid"></textarea>
-        <input class="apos-input apos-input--text" v-else
-          v-model="next" :type="field.type" :placeholder=field.placeholder
+        <input :class="classes" v-else
+          v-model="next" :type="type" :placeholder=field.placeholder
           :disabled="status.disabled" :required="field.required" :id="uid">
         <component 
           v-if="iconComponent"
@@ -31,17 +31,29 @@ export default {
   mixins: [ AposInputMixin ],
   name: 'AposStringInput',
   computed: {
-    iconSize () {
-      if (this.modifiers.includes('small')) {
-        return 14;
+    type () {
+      if (this.field.type) {
+        return this.field.type;
       } else {
-        return 20;
+        return 'text';
       }
     },
+    classes () {
+      const classes = ['apos-input'];
+      classes.push(`apos-input--${this.type}`);
+      return classes;
+    },
     iconComponent () {
+      if (this.field.type === 'date') {
+        return () => import(`vue-material-design-icons/Calendar.vue`);
+      }
+      if (this.field.type === 'time') {
+        return () => import(`vue-material-design-icons/Clock.vue`);
+      }
       if (this.field.icon) {
         return () => import(`vue-material-design-icons/${this.field.icon}.vue`);
-      } if (this.status.error) {
+      }
+      if (this.status.error) {
         return () => import(`vue-material-design-icons/CircleMedium.vue`);
       }
       return false;
@@ -71,27 +83,27 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.apos-input-icon {
-  position: absolute;
-  right: $input-padding;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--a-base-2);
-  pointer-events: none;
-
-  .apos-field--error & {
-    color: var(--a-danger);
+  .apos-input--date,
+  .apos-input--time {
+    // lame magic number .. 
+    // height of date/time input is slightly larger than others due to the browser spinner ui
+    height: 46px;
   }
-}
+  .apos-input--date {
+    // padding is lessend to overlap with calendar UI
+    padding-right: $input-padding * 1.4;
+    &::-webkit-calendar-picker-indicator { opacity: 0; }
+    &::-webkit-clear-button { 
+      position: relative;
+      right: 5px;
+    }
+  }
+  .apos-input--time {
+    padding-right: $input-padding * 2.5;
+  }
 
-textarea.apos-input--text {
-  // Some  browser styles set `textarea` to monospace.
-  font-family: inherit;
-  resize: none;
-}
-
-.apos-input-icon svg {
-  // little bit better centering
-  display: flex;
-}
+  .apos-field--small .apos-input--date,
+  .apos-field--small .apos-input--time {
+    height: 33px;
+  }
 </style>

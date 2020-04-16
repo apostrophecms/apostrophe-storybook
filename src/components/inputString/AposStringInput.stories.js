@@ -12,9 +12,16 @@ export default {
 };
 
 export const stringInputs = () => {
-  const hasError = boolean('Has Error?', false);
-  const hasHelpText = boolean('Has Help Text?', false);
-  const isRequired = boolean('Is Required?', false);
+  const type = select(
+    'Field Type', {
+      Text: 'text',
+      Time: 'time',
+      Date: 'date',
+      Textarea: 'textarea'
+    },
+    null
+  );
+
   const icon = select(
     'Icon', {
       None: null,
@@ -26,6 +33,9 @@ export const stringInputs = () => {
     null
   );
 
+  const hasError = boolean('Has Error?', false);
+  const hasHelpText = boolean('Has Help Text?', false);
+  const isRequired = boolean('Is Required?', false);
   const value = {
     data: ''
   };
@@ -40,13 +50,14 @@ export const stringInputs = () => {
 
   const field = {
     name: 'plancksConstant',
-    type: 'text',
     label: 'What is Planck\'s constant?',
     placeholder: 'Enter the number.',
     help: hasHelpText ? 'Sing the Neverending Story theme song.' : false,
     icon: icon,
     required: isRequired
   };
+
+  field.type = type;
 
   return {
     components: { AposStringInput },
