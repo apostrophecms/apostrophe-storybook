@@ -16,14 +16,12 @@
 </template>
 
 <script>
-import AposLoading from '../loading/AposLoading.vue';
 import AposContextMenuItem from './AposContextMenuItem.vue';
 import AposContextMenuTip from './AposContextMenuTip.vue';
 
 export default {
   name: 'AposContextMenu',
   components: {
-    AposLoading,
     AposContextMenuItem,
     AposContextMenuTip
   },
