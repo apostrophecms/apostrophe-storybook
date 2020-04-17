@@ -1,6 +1,6 @@
 <template>
   <button type="button" @click="click" class="apos-button" :class="modifierClass" v-bind:busy="busy" v-bind:disabled="isDisabled">
-    <AposLoading />
+    <AposSpinner :color="spinnerColor" />
     <div class="apos-button__content">
       <component :size="15" class="apos-button__icon" v-if="icon" v-bind:is="iconComponent"></component>
       <span class="apos-button__label" :class="{ 'apos-sr-only' : iconOnly }">
@@ -11,12 +11,12 @@
 </template>
 
 <script>
-import AposLoading from '../loading/AposLoading.vue';
+import AposSpinner from '../loading/AposSpinner.vue';
 
 export default {
   name: 'AposButton',
   components: {
-    AposLoading
+    AposSpinner
   },
   props: {
     label: {
@@ -61,6 +61,17 @@ export default {
     iconComponent () {
       if (this.icon) {
         return () => import(`vue-material-design-icons/${this.icon}.vue`);
+      }
+    },
+    spinnerColor () {
+      if (this.type === 'danger') {
+        return '--a-danger';
+      }
+      if (this.busy && this.disabled) {
+        return '--a-white';
+      }
+      if (this.type === 'outline') {
+        return '--a-base-5';
       }
     },
     isDisabled() {
@@ -110,7 +121,7 @@ export default {
     &[disabled].apos-button--busy {
       border: 1px solid var(--a-base-1);
     }
-    .apos-loading {
+    .apos-spinner {
       position: absolute;
       top: 0;
       right: 0;
@@ -158,11 +169,8 @@ export default {
     .apos-button__label {
       position: relative;
     }
-    &[disabled].apos-button--busy .apos-loading__svg {
-      color: var(--a-white)
-    }
     .apos-button__label,
-    .apos-loading {
+    .apos-spinner {
       z-index: 2;
     }
   }
@@ -213,9 +221,6 @@ export default {
     &[disabled].apos-button--busy {
       border: 1px solid var(--a-primary-button-disabled);
     }
-    .apos-loading__svg {
-      color: var(--a-primary);
-    }
   }
 
   .apos-button--input {
@@ -261,7 +266,7 @@ export default {
     &[disabled].apos-button--busy {
       border: 1px solid var(--a-danger-button-disabled);
     }
-    .apos-loading__svg {
+    .apos-spinner__svg {
       color: var(--a-danger);
     }
   }
@@ -270,7 +275,7 @@ export default {
     .apos-button__content {
       opacity: 0;
     }
-    .apos-loading {
+    .apos-spinner {
       opacity: 1;
     }
   }

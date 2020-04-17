@@ -6,8 +6,7 @@
     margin-top: $spacing-base;
   }
 }
-
-.apos-input {
+@mixin apos-input () {
   width: 100%;
   border: 1px solid var(--a-base-5);
   border-radius: var(--a-border-radius);
@@ -15,6 +14,9 @@
   color: var(--a-text-primary);
   font-size: map-get($font-sizes, input);
   box-sizing: border-box;
+  // Some  browser styles set `textarea` to monospace.
+  font-family: inherit;
+  resize: none;
   @include apos-transition(all);
 
   &::placeholder {
@@ -53,11 +55,16 @@
   }
 
   &--text,
+  &--time,
   &--textarea,
+  &--date,
   &--select {
     padding: $input-padding;
     padding-right: $input-padding * 2;
   }
+}
+.apos-input {
+  @include apos-input();
 }
 
 .apos-field--inverted {
@@ -68,8 +75,10 @@
 
 .apos-field--small .apos-input {
   font-size: 10px;
+  &--time,
   &--text,
   &--textarea,
+  &--date,
   &--select {
     padding-top: 10px;
     padding-bottom: 10px;
@@ -116,6 +125,24 @@ $box-width: 14px;
   &[disabled] ~ .apos-input-indicator:hover{
     cursor: not-allowed;
   }
+}
+
+.apos-input-icon {
+  position: absolute;
+  right: $input-padding;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--a-base-2);
+  pointer-events: none;
+
+  .apos-field--error & {
+    color: var(--a-danger);
+  }
+}
+
+.apos-input-icon svg {
+  // little bit better centering
+  display: flex;
 }
 
 .apos-input-indicator {
