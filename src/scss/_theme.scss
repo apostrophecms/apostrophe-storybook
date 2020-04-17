@@ -31,17 +31,21 @@ $spacing-triple: $spacing-base * 3;
 $input-padding: $spacing-base * 1.5;
 $boolean-padding: $spacing-double;
 
+@mixin apos-primary-mixin ($color) {
+  --a-primary: #{$color};
+  --a-primary-button-hover: #{mix(black, $color, 10%)};
+  --a-primary-button-active: #{mix(black, $color, 15%)};
+  --a-primary-button-disabled: #{mix(white, $color, 10%)};
+}
+
 :root, .apos-theme-light {
 
   --a-danger: #EB443B;
   --a-success: #00BF9A;
-  --a-warning: #FFCE00;
-  --a-primary: #6516DD;
-  
-  --a-primary-button-hover: #5007C0;
-  --a-primary-button-active: #4000A1;
-  --a-primary-button-disabled: #C5A5F4;
+  --a-warning: #ffce00;
 
+  .apos-theme--primary-purple { @include apos-primary-mixin(#6516DD); }
+  
   --a-danger-button-hover: #C00717;
   --a-danger-button-active: #A10000;
   --a-danger-button-disabled: #FF9D98;
@@ -55,7 +59,7 @@ $boolean-padding: $spacing-double;
   --a-base-7: #C9C9C9;
   --a-base-8: #DBDBDB;
   --a-base-9: #EDEDED;
-  --a-base-10: #FFF;
+  --a-base-10: #f4f4f4;
 
   --a-text-primary: #000;
 
@@ -80,24 +84,27 @@ $boolean-padding: $spacing-double;
 }
 
 .apos-theme-dark {
-  --a-primary: #5e6ad2;
-  --a-primary-button-hover: #014FD3;
-  --a-primary-button-active: #0443AF;
-  --a-primary-button-disabled: #6BA1FE;
-
-  --a-base-1: #B4B8C0;
-  --a-base-2: #A3A7AF;
-  --a-base-3: #93969D;
-  --a-base-4: #82858C;
-  --a-base-5: #71747A;
-  --a-base-6: #616369;
-  --a-base-7: #505257;
-  --a-base-8: #3F4146;
-  --a-base-9: #2F3034;
-  --a-base-10: #1E1F23;
+  .apos-theme--primary-blue { @include apos-primary-mixin(#0062ff); }
+  --a-base-1: #7588A0;
+  --a-base-2: #6B7C92;
+  --a-base-3: #607084;
+  --a-base-4: #566477;
+  --a-base-5: #4B5869;
+  --a-base-6: #414D5B;
+  --a-base-7: #36414D;
+  --a-base-8: #2C3540;
+  --a-base-9: #212932;
+  --a-base-10: #171D24;
 
   --a-background-primary: #0b0b0c;
   --a-overlay: #0b0b0c90;
 
   --a-text-primary: #fff;
 }
+
+.apos-theme--primary-blue { @include apos-primary-mixin(#0062ff); }
+.apos-theme--primary-purple { @include apos-primary-mixin(#6516DD); }
+.apos-theme--primary-orange { @include apos-primary-mixin(#e65100); }
+.apos-theme--primary-uber { @include apos-primary-mixin(#1EACC7); }
+.apos-theme--primary-sun { @include apos-primary-mixin(#f7a704); }
+.apos-theme--primary-money { @include apos-primary-mixin(#00b075); }

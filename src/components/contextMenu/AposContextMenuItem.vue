@@ -35,7 +35,7 @@ export default {
     text-align: left;
     font-size: map-get($font-sizes, default);
     letter-spacing: 0.5px;
-    color: var(--a-base-5);
+    color: var(--a-base-3);
     background-color: var(--a-background-primary);
     &:hover {
       cursor: pointer;

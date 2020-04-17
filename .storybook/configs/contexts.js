@@ -15,5 +15,23 @@ export const contexts = [
       disable: false, // disable this contextual environment completely
       cancelable: false, // allow this contextual environment to be opt-out optionally in toolbar
     }
+  },
+  {
+    icon: 'mirror',
+    title: 'Primary Color',
+    components: [Theme],
+    params: [
+      { name: 'Purple', props: { theme: 'apos-theme--primary-purple'}, default: true },
+      { name: 'Blue', props: { theme: 'apos-theme--primary-blue'} },
+      { name: 'Orange', props: { theme: 'apos-theme--primary-orange'} },
+      { name: 'Uber', props: { theme: 'apos-theme--primary-uber'} },
+      { name: 'Sun', props: { theme: 'apos-theme--primary-sun'} },
+      { name: 'Money', props: { theme: 'apos-theme--primary-money'} },
+    ],
+    options: {
+      deep: true, // pass the `props` deeply into all wrapping components
+      disable: false, // disable this contextual environment completely
+      cancelable: false, // allow this contextual environment to be opt-out optionally in toolbar
+    }
   }
 ];

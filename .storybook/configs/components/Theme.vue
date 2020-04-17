@@ -20,6 +20,7 @@ export default {
     padding-top: 30px;
     padding-left: 30px;
     height: 100vh;
+    .sb-theme { padding: 0; }
   }
   .sb-context-rail {
     background-color: var(--a-base-9);

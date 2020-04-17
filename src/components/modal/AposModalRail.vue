@@ -21,7 +21,7 @@ export default {
 <style lang="scss" scoped>
   .apos-modal__rail {
     overflow-y: auto;
-    background-color: var(--a-base-9);
+    background-color: var(--a-base-10);
   }
 
 </style>
