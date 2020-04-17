@@ -50,7 +50,12 @@ export default {
   -moz-appearance: none;
   -webkit-appearance: none;
   background-repeat: no-repeat, repeat;
-
+  &:hover {
+    cursor: pointer;
+  }
+  &:hover ~ .apos-input-icon, &:active ~ .apos-input-icon {
+    color: var(--a-primary);
+  }
 }
 
 .apos-input-icon {
@@ -60,6 +65,7 @@ export default {
   transform: translateY(-50%);
   color: var(--a-base-2);
   pointer-events: none;
+  @include apos-transition();
 
   .apos-field--error & {
     color: var(--a-danger);
