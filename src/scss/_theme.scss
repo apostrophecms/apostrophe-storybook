@@ -1,10 +1,4 @@
-$font-default: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-
-body {
-  font-family: $font-default;
-  font-size: 10px;
-}
-
+$font-default: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 $font-families: (
   default: $font-default
 );
@@ -36,6 +30,12 @@ $boolean-padding: $spacing-double;
   --a-primary-button-hover: #{mix(black, $color, 10%)};
   --a-primary-button-active: #{mix(black, $color, 15%)};
   --a-primary-button-disabled: #{mix(white, $color, 10%)};
+}
+
+body {
+  font-family: $font-default;
+  font-weight: map-get($font-weights, medium);
+  font-size: 10px;
 }
 
 :root, .apos-theme-light {

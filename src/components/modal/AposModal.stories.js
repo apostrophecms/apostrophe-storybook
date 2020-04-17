@@ -10,7 +10,6 @@ import AposModalFooter from './AposModalFooter.vue';
 import AposBreadcrumb from './../modalBreadcrumb/modalBreadcrumb.vue';
 import AposButton from './../button/AposButton.vue';
 import AposStringInput from './../inputString/AposStringInput.vue';
-import AposModalTabs from './../modalTabs/modalTabs.vue';
 
 export default {
   title: 'Modals',
@@ -58,8 +57,7 @@ export const layouts = () => {
       AposModalRail,
       AposModalBody,
       AposStringInput,
-      AposModalFooter,
-      AposModalTabs
+      AposModalFooter
     },
     props: {
 
