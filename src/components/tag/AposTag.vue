@@ -1,7 +1,7 @@
 <template>
   <div class="apos-tag">
-    <button @click="click" class="apos-tag-button">
-      <Close class="apos-tag__close-icon" title="Remove Tag" :size="10" />
+    <button @click="click" class="apos-tag__button">
+      <Close class="apos-tag__remove" title="Remove Tag" :size="10" />
     </button>
     {{ label }}
   </div>
@@ -23,7 +23,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '../../scss/_mixins';
 .apos-tag {
   display: inline-flex;
@@ -37,7 +37,7 @@ export default {
   justify-content: center;
 }
 
-.apos-tag__close-icon {
+.apos-tag__remove {
   position: relative;
   top: 1px;
   margin-right: 5px;
@@ -46,18 +46,18 @@ export default {
   }
 }
 
-.apos-tag-button {
+.apos-tag__button {
   @include apos-button-reset();
 }
 
-.apos-tag-list {
+.apos-tags {
   display: flex;
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
-.apos-tag-list .apos-tag {
+.apos-tags .apos-tag {
   margin-right: 1rem;
 }
 </style>

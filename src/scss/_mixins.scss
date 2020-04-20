@@ -2,6 +2,12 @@
   transition: $what $duration $ease;
 }
 
+@mixin apos-list-reset () {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
 @mixin apos-button-reset () {
   border: none;
   margin: 0;
