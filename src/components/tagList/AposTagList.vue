@@ -31,7 +31,7 @@ export default {
   },
   methods: {
     toggle(slug) {
-      console.log(`hi ${slug}`);
+      // could do something with `slug` here
     }
   }
 }
@@ -41,10 +41,10 @@ export default {
 @import '../../scss/_mixins';
 
 .apos-tag-list {
-  margin: 40px 0 0 10px;
+  margin: 20px 0 0 10px;
 }
 .apos-tag-list__title {
-  margin-left: 10px;
+  margin: 0 0 10px 10px;
   font-weight: 500;
   font-size: map-get($font-sizes, rail-title);
 }
