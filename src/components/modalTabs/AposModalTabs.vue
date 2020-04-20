@@ -14,23 +14,15 @@
 <script>
 export default {
   name: 'AposModalTabs',
-  data () {
-    return {
-      current: 0
-    }
-  },
   props: {
-    groups: Array
-  },
-  mounted: function () {
-    this.current = this.uid;
+    groups: Array,
+    current: Number
   },
   methods: {
     selectTab: function (e) {
       const tab = e.target;
       const id = tab.id;
-      this.current = Number(id);
-      this.$emit('selectTab', id);
+      this.$emit('selectTab', Number(id));
     }
   }
 }

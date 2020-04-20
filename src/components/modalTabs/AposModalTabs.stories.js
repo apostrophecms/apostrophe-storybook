@@ -7,9 +7,9 @@ import AposModalRail from '../modal/AposModalRail.vue';
 import AposModalBody from '../modal/AposModalBody.vue';
 import AposBreadcrumb from './../modalBreadcrumb/modalBreadcrumb.vue';
 import AposButton from './../button/AposButton.vue';
-// import AposStringInput from './../inputString/AposStringInput.vue';
 import AposModalTabs from './AposModalTabs.vue';
 import AposModalTabsBody from './AposModalTabsBody.vue';
+import AposModalTabsMixin from '../../mixins/AposModalTabsMixin';
 
 export default {
   title: 'Modal with Tabs',
@@ -33,6 +33,7 @@ const breadcrumbs = [
 export const tabs = () => {
   const title = text('Modal Title', 'New Piece');
   return {
+    mixins: [ AposModalTabsMixin ],
     components: {
       AposModal,
       AposBreadcrumb,
@@ -42,17 +43,8 @@ export const tabs = () => {
       AposModalTabs,
       AposModalTabsBody
     },
-    methods: {
-      switchPane(id) {
-        this.currentTab = Number(id);
-      }
-    },
-    mounted () {
-      this.currentTab = Number(this.initialTab);
-    },
     data () {
       return {
-        currentTab: null,
         modal: {
           title: title,
           active: true,
@@ -88,11 +80,6 @@ export const tabs = () => {
         breadcrumbs
       };
     },
-    computed: {
-      initialTab () {
-        return this.groups[0].uid;
-      }
-    },
     template: `
       <div>
         <button type="button" class="apos-button">
@@ -110,7 +97,7 @@ export const tabs = () => {
           </template>
           <template #leftRail>
             <AposModalRail>
-              <AposModalTabs :groups="groups" v-on:selectTab="switchPane" />
+              <AposModalTabs :current="currentTab" :groups="groups" v-on:selectTab="switchPane" />
             </AposModalRail>
           </template>
           <template #main>
