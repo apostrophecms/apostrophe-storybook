@@ -2,27 +2,10 @@ import AposJoinInput from './AposJoinInput.vue';
 
 const field = {
   required: false,
-  name: 'mashHousing',
-  type: 'select',
-  label: 'MASH housing?',
-  choices: [
-    {
-      label: 'Mansion',
-      value: 'mansion'
-    },
-    {
-      label: 'Apartment',
-      value: 'apartment'
-    },
-    {
-      label: 'Shack',
-      value: 'shack'
-    },
-    {
-      label: 'House',
-      value: 'house'
-    }
-  ]
+  name: '_people',
+  type: 'join',
+  label: 'Join to People',
+  browseLabel: 'Browse People'
 };
 
 export default {

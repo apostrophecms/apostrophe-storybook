@@ -137,6 +137,10 @@ export default {
     background-color: transparent;
   }
 
+  .apos-button--small {
+    padding: 7.5px 10px;
+  }
+
   .apos-button--gradient-on-hover {
     z-index: 0;
     &:after {
@@ -224,7 +228,7 @@ export default {
   }
 
   .apos-button--input {
-    background-color: var(--a-base-2);
+    background-color: var(--a-base-1);
     color: var(--a-base-10);
     border-color: var(--a-base-4);
     &:hover {
