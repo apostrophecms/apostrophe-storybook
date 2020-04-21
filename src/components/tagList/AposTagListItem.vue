@@ -16,7 +16,10 @@ import Tag from 'vue-material-design-icons/Label.vue';
 import Close from 'vue-material-design-icons/Close.vue';
 export default {
   props: {
-    tag: Object
+    tag: {
+      required: true,
+      type: Object
+    }
   },
   data() {
     return {

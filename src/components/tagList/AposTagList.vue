@@ -5,7 +5,7 @@
       <AposTagListItem 
         v-for="tag in tags" 
         v-bind:key="tag.slug"
-        v-on:click="toggle"
+        v-on:click="click"
         :tag="tag"
       />
     </ul>
@@ -16,7 +16,10 @@
 import AposTagListItem from './AposTagListItem.vue';
 export default {
   props: {
-    tags: Array,
+    tags: {
+      type: Array,
+      required: true
+    },
     title: {
       default: 'Tag List',
       type: String
@@ -30,8 +33,9 @@ export default {
     }
   },
   methods: {
-    toggle(slug) {
-      // could do something with `slug` here
+    click(slug) {
+      // tell parent modal something was clicked
+      this.$emit('tagClick', slug);
     }
   }
 }
