@@ -3,52 +3,34 @@
     <ul class="apos-modal-tabs__tabs">
       <li class="apos-modal-tabs__tab" v-for="(group, i) in groups"
         :key="group.name">
-        <button :id="uid + i" class="apos-modal-tabs__btn" @click="selectTab"
-          :aria-selected="uid + i === current ? true : false"
+        <button :id="group.uid + i" class="apos-modal-tabs__btn" @click="selectTab"
+          :aria-selected="group.uid + i === currentTab ? true : false"
         >{{ group.label }}</button>
       </li>
     </ul>
-    <form class="apos-modal-tabs__wrapper">
-      <fieldset v-for="(group, i) in groups" :key="group.name" :ref="uid + i"
-        :aria-labelledby="uid + i" class="apos-modal-tabs__pane"
-        :aria-hidden="uid + i === current ? false : true"
-      >
-        <!-- Temporary demo content: -->
-        <h2>Tab {{ i }}: {{ group.label }}</h2>
-        <div style="min-height: 70vh"></div>
-      </fieldset>
-    </form>
   </div>
 </template>
 
 <script>
 export default {
   name: 'AposModalTabs',
-  data () {
-    return {
-      uid: (Math.floor(Math.random() * Math.floor(10000))),
-      current: 0
-    }
-  },
   props: {
-    groups: Array
+    groups: {
+      required: true,
+      type: Array
+    },
+    current: Number
   },
-  mounted: function () {
-    this.current = this.uid;
+  computed: {
+    currentTab() {
+      return this.current || this.groups[0].uid;
+    }
   },
   methods: {
     selectTab: function (e) {
       const tab = e.target;
       const id = tab.id;
-      this.current = Number(id);
-      const pane = this.$refs[id][0];
-      const focusable = pane.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
-
-      if (focusable.length > 0) {
-        focusable[0].focus();
-      } else {
-        pane.focus();
-      }
+      this.$emit('selectTab', Number(id));
     }
   }
 }
@@ -63,7 +45,7 @@ export default {
 .apos-modal-tabs__tabs {
   display: flex;
   flex-direction: column;
-  width: 32%;
+  width: 100%;
   margin: 0;
   padding: 0;
   background-color: var(--a-base-9);
@@ -111,19 +93,5 @@ export default {
       width: 6px;
     }
   }
-}
-
-.apos-modal-tabs__wrapper {
-  display: flex;
-  flex-grow: 1;
-}
-
-.apos-modal-tabs__pane {
-  width: 100%;
-  margin: 0;
-  padding: 40px 60px;
-  border-width: 0;
-
-  &[aria-hidden='true'] { display: none; }
 }
 </style>
