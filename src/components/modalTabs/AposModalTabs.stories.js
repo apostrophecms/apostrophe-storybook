@@ -82,9 +82,6 @@ export const tabs = () => {
     },
     template: `
       <div>
-        <button type="button" class="apos-button">
-          Activate modal
-        </button>
         <AposModal :modal="modal">
           <template #secondaryControls>
             <AposButton label="Exit" />

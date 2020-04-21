@@ -5,15 +5,10 @@ export default {
   props: {
 
   },
-  data () {
-    return {
-      currentTab: null
-    };
-  },
-  mounted () {
-    this.currentTab = Number(this.groups[0].uid);
-  },
   computed: {
+    currentTab () {
+      return Number(this.groups[0].uid);
+    },
     options () {
       return window.apos.schemas;
     }

@@ -4,7 +4,7 @@
       <li class="apos-modal-tabs__tab" v-for="(group, i) in groups"
         :key="group.name">
         <button :id="group.uid + i" class="apos-modal-tabs__btn" @click="selectTab"
-          :aria-selected="group.uid + i === current ? true : false"
+          :aria-selected="group.uid + i === currentTab ? true : false"
         >{{ group.label }}</button>
       </li>
     </ul>
@@ -15,8 +15,16 @@
 export default {
   name: 'AposModalTabs',
   props: {
-    groups: Array,
+    groups: {
+      required: true,
+      type: Array
+    },
     current: Number
+  },
+  computed: {
+    currentTab() {
+      return this.current || this.groups[0].uid;
+    }
   },
   methods: {
     selectTab: function (e) {

@@ -3,7 +3,7 @@
     <form class="apos-modal-tabs__wrapper">
       <fieldset v-for="(group, i) in groups" :key="group.name" :ref="group.uid + i"
         :aria-labelledby="group.uid + i" class="apos-modal-tabs__pane"
-        :aria-hidden="group.uid + i === current ? false : true"
+        :aria-hidden="group.uid + i === currentTab ? false : true"
       >
         <!-- Temporary demo content: -->
         <h2>Tab {{ i }}: {{ group.label }}</h2>
@@ -17,8 +17,16 @@
 export default {
   name: 'AposModalTabsBody',
   props: {
-    groups: Array,
+    groups: {
+      type: Array,
+      required: true
+    },
     current: Number
+  },
+  computed: {
+    currentTab() {
+      return this.current || this.groups[0].uid
+    }
   }
 }
 </script>
