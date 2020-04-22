@@ -1,18 +1,26 @@
 ## wip : Apostrophe Storybook
 
-#### Installation
+### Installation
 
 ```
 $ npm install
 ```
 
-#### Getting Started
+### Getting Started
 
 ```
 $ npm run storybook
 ```
 
-#### Technical Approach
+### Deploying to the Static Site
+
+```
+$ npm run deploy-storybook
+```
+
+This script will run the build to the `.out` directory and trigger a deploy to the `gh-pages` branch.
+
+### Technical Approach
 
  Storybook Configuration
 
