@@ -85,11 +85,19 @@ export default {
 <style lang="scss">
   @import '../../scss/_mixins';
   .apos-slat-list__placeholder {
-    height: 2px;
+    height: 5px;
     margin: 5px 0;
-    background-color: var(--a-primary);
+    border: 1px dashed var(--a-primary);
   }
   .apos-slat-list /deep/ .apos-slat {
     margin-bottom: 5px;
+  }
+
+  .vddl-dragging {
+    opacity: 0.2;
+  }
+  
+  .vddl-dragover /deep/ .apos-slat {
+    margin-bottom: 15px;
   }
 </style>

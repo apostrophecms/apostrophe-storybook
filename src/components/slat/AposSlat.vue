@@ -41,9 +41,11 @@ export default {
     @include apos-transition();
     &:hover {
       background-color: var(--a-base-8);
+      cursor: grab;
     }
     &:active {
       background-color: var(--a-base-7);
+      cursor: grabbing;
     }
   }
   .apos-slat__controls {
@@ -67,9 +69,9 @@ export default {
     cursor: pointer;
   }
   .apos-slat__control--drag:hover {
-    cursor: grab;
+    
   }
   .apos-slat__control--drag:active {
-    cursor: grabbing;
+    
   }
 </style>
