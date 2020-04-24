@@ -58,15 +58,24 @@ export default {
     background-color: var(--a-primary);
     color: var(--a-white);
   }
-  &:hover {
+  &:hover,
+  &:focus {
     background-color: var(--a-base-8);
     .apos-tag-list__icon--tag {
       color: var(--a-base-2);
     }
   }
-  &:hover.is-active {
+  &:hover.is-active,
+  &:focus.is-active {
     background-color: var(--a-primary-button-hover);
     color: var(--a-white);
+  }
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 5px var(--a-base-6);
+  }
+  &:focus.is-active {
+    box-shadow: 0 0 5px var(--a-primary-button-active);
   }
 }
 

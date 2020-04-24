@@ -3,10 +3,11 @@
     <template slot="body">
       <label class="apos-choice-label" :for="getChoiceId(uid, choice.value)"
         v-for="choice in field.choices" :key="choice.value">
-        <input type="radio" class="apos-input--choice apos-input--radio"
+        <input type="radio" class="apos-sr-only apos-input--choice apos-input--radio"
           :value="choice.value" :name="field.name"
           :id="getChoiceId(uid, choice.value)"
-          v-model="next" :disabled="status.disabled"/>
+          v-model="next" :disabled="status.disabled"
+          tabindex="1" />
         <span class="apos-input-indicator" aria-hidden="true">
           <component :is="`${
             next === choice.value ? 'CheckBoldIcon' : 'span'}`"
