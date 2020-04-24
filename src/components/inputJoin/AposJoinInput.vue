@@ -4,7 +4,7 @@
       <div class="apos-input-wrapper apos-input-join">
         <div class="apos-input-join__input-wrapper">
           <input class="apos-input apos-input--text apos-input--join"
-            v-model="next" :type="type" :placeholder=field.placeholder
+            v-model="next" type="text" :placeholder=field.placeholder
             :disabled="status.disabled" :required="field.required" :id="uid">
           <AposButton
             :label="field.browseLabel"
@@ -12,28 +12,29 @@
             v-bind:modifiers="['small']"
           />
         </div>
+        <AposSlatList :items="listItems" />
       </div>
     </template>
   </AposInputWrapper>
 </template>
 
 
-
 <script>
 import AposInputWrapper from '../AposInputWrapper';
 import AposButton from '../button/AposButton.vue';
 import AposInputMixin from '../../mixins/AposInputMixin.js';
+import AposSlatList from '../slat/AposSlatList.vue';
 
 export default {
   components: {
     AposInputWrapper,
-    MenuDown,
-    AposButton
+    AposButton,
+    AposSlatList
   },
   mixins: [ AposInputMixin ],
   name: 'AposJoinInput',
-  computed: {
-
+  props: {
+    listItems: Array
   },
   methods: {
     validate(value) {
@@ -51,6 +52,7 @@ export default {
   .apos-input-join__input-wrapper {
     display: flex;
     align-items: center;
+    margin-bottom: 10px;
   }
   .apos-button {
     position: absolute;
