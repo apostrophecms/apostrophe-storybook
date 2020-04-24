@@ -3,9 +3,10 @@
     <template slot="body">
       <label class="apos-choice-label" :for="getChoiceId(uid, choice.value)"
         v-for="choice in field.choices" :key="choice.value">
-        <input type="checkbox" class="apos-input--choice apos-input--checkbox"
+        <input type="checkbox" class="apos-sr-only apos-input--choice apos-input--checkbox"
           :value="choice.value" :name="field.name"
-          :id="getChoiceId(uid, choice.value)"
+          :id="getChoiceId(uid, choice.value)" 
+          tabindex="0"
           v-model="value.data" :disabled="status.disabled"/>
         <span class="apos-input-indicator" aria-hidden="true">
           <component :is="`${

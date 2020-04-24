@@ -112,18 +112,23 @@
 $box-width: 14px;
 
 .apos-input--choice {
-  position: absolute;
   display: inline;
   max-width: $box-width;
   margin: 0;
   padding: 0;
-  visibility: hidden;
   &:hover {
     cursor: pointer;
   }
   &[disabled]:hover,
   &[disabled] ~ .apos-input-indicator:hover{
     cursor: not-allowed;
+  }
+  &:focus ~ .apos-input-indicator {
+    outline: none;
+    box-shadow: 0 0 5px var(--a-base-1);
+  }
+  &:checked:focus ~ .apos-input-indicator {
+    box-shadow: 0 0 10px var(--a-primary);
   }
 }
 
@@ -177,4 +182,8 @@ $box-width: 14px;
 
     .material-design-icon { display: inline-flex; }
   }
+
+  // .apos-input--choice:focus ~ .apos-input-indicator {
+
+  // }
 }

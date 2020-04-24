@@ -75,7 +75,6 @@ export default {
     box-shadow: 0 0 5px var(--a-base-6);
   }
   &:focus.is-active {
-    outline: none;
     box-shadow: 0 0 5px var(--a-primary-button-active);
   }
 }
