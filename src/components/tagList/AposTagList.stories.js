@@ -1,10 +1,10 @@
-import { withKnobs, text } from '@storybook/addon-knobs';
+import { withKnobs } from '@storybook/addon-knobs';
 import AposModal from '../modal/AposModal.vue';
 import AposModalRail from '../modal/AposModalRail.vue';
 import AposModalBody from '../modal/AposModalBody.vue';
 import AposButton from './../button/AposButton.vue';
 import AposTagList from './AposTagList.vue';
-import tagListItems from './tagList.js';
+import tagListItems from './data.js';
 
 export default {
   title: 'Tag List',
