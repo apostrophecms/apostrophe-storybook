@@ -1,103 +1,106 @@
 
 <template>
-  <vddl-list class="apos-slat-list"
-    :list="items"
-    :inserted="handleInserted"
-    :dragover="handleDragover"
-    :drop="handleDrop"
-    :horizontal="false">
-    <vddl-draggable class="apos-slat-list__item" 
-      v-for="(item, index) in items" 
-      :key="item.id"
-      :draggable="item"
-      :index="index"
-      :wrapper="items"
-      effect-allowed="move"
-      :selected="selectedEvent"
-      :dragstart="handleDragstart"
-      :dragend="handleDragend"
-      :canceled="handleCanceled"
-      :moved="handleMoved"
-      v-bind:class="{'selected': selected === item}"
-    >
-      <AposSlat :item="item" />
-    </vddl-draggable>
-    <vddl-placeholder class="apos-slat-list__placeholder"></vddl-placeholder>
-  </vddl-list>
+  <draggable class="apos-slat-list" tag="ul" v-model="items" 
+    v-bind="dragOptions" :move="onMove" @start="isDragging=true" 
+    @end="isDragging=false"
+  >
+    <transition-group type="transition" :name="'flip-list'">
+      <AposSlat 
+        v-on:remove="remove" class="apos-slat-list__item" 
+        v-for="item in items" :key="item.id" :item="item" 
+        :class="{'apos-slat-list__item--disabled' : !editable}"
+      />
+    </transition-group>
+  </draggable>
 </template>
 
 <script>
 import AposSlat from './AposSlat.vue';
-import Vddl from 'vddl';
-import Vue from 'vue';
-Vue.use(Vddl);
+import draggable from 'vuedraggable'
 export default {
   name: 'AposSlatList',
-  components: { AposSlat },
+  components: { 
+    AposSlat,
+    draggable
+  },
   data() {
     return {
-      selected: null
+      isDragging: false,
+      delayedDragging: false,
+      items: this.initialItems
     }
   },
   props: {
-    items: {
+    initialItems: {
       type: Array,
       required: true
+    },
+    editable: {
+      type: Boolean,
+      default: true
+    }
+  },
+  computed: {
+    dragOptions() {
+      return {
+        animation: 0,
+        disabled: !this.editable,
+        ghostClass: 'ghost'
+      };
+    },
+  },
+  watch: {
+    isDragging(newValue) {
+      if (newValue) {
+        this.delayedDragging = true;
+        return;
+      }
+      this.$nextTick(() => {
+        this.delayedDragging = false;
+      });
     }
   },
   methods: {
-    selectedEvent: function(item){
-      this.selected = item;
+    remove(item) {
+      this.items = this.items.filter(i => item.id !== i.id);
+      this.$emit('update', this.items)
     },
-    handleDragstart() {
-      console.log(':v-draggable: dragstart');
-    },
-    handleDragend() {
-      console.log(':v-draggable: dragend');
-    },
-    handleCanceled() {
-      console.log(':v-draggable: canceled');
-    },
-    handleInserted() {
-      console.log(':v-list: inserted');
-    },
-    handleDrop(data) {
-      console.log(':v-list: drop');
-      console.log(data);
-      const { index, list, item } = data;
-      // change the id
-      item.id = new Date().getTime();
-      list.splice(index, 0, item);
-    },
-    handleMoved(item) {
-      console.log(':v-draggable: moved');
-      console.log(item);
-      const { index, list } = item;
-      list.splice(index, 1);
-    },
-    handleDragover() {
-      console.log(':v-list: handleDragover');
-    },
+    onMove({ relatedContext, draggedContext }) {
+      const relatedElement = relatedContext.element;
+      const draggedElement = draggedContext.element;
+      return (
+        (!relatedElement || !relatedElement.fixed) && !draggedElement.fixed
+      );
+    }
   },
 };
 </script>
 
 <style lang="scss">
   @import '../../scss/_mixins';
-  .apos-slat-list__placeholder {
-    height: 5px;
-    margin: 5px 0;
-    border: 1px dashed var(--a-primary);
-  }
+  @import '../../scss/_inputs.scss';
   .apos-slat-list /deep/ .apos-slat {
     margin-bottom: 5px;
+    transition: all 0.4s;
   }
 
-  .vddl-dragging {
-    opacity: 0.2;
+  .flip-list-leave-to {
+    opacity: 0;
   }
-  
-  .vddl-dragover /deep/ .apos-slat {
-    margin-bottom: 15px;
+
+  .no-move {
+    transition: transform 0s;
   }
+
+  .ghost {
+    opacity: 0.5;
+    background: var(--a-base-4);
+  }
+
+  .apos-slat-list {
+    @include apos-list-reset();
+    min-height: 20px;
+    max-width: $input-max-width * 0.75;
+  }
+
 </style>

@@ -11,8 +11,8 @@ export const slatList = () => ({
   },
   data() {
     return {
-      items: data.items
+      initialItems: data.items
     };
   },
-  template: `<AposSlatList :items="items" />`
+  template: `<AposSlatList :initialItems="initialItems" />`
 });
