@@ -11,6 +11,18 @@ export default {
     {
       label: 'Big Bird',
       id: 'ewkl4390'
+    },
+    {
+      label: 'Grover',
+      id: 'wefinofewfe3390'
+    },
+    {
+      label: 'Cookie Monster',
+      id: 'wekjfljfewefwenf'
+    },
+    {
+      label: 'Oscar the Grouch',
+      id: 'ewkl439ewd0'
     }
   ]
 };

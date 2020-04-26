@@ -12,7 +12,7 @@
             v-bind:modifiers="['small']"
           />
         </div>
-        <AposSlatList :items="listItems" />
+        <AposSlatList v-on:update="updated" :initialItems="listItems" />
       </div>
     </template>
   </AposInputWrapper>
@@ -43,6 +43,10 @@ export default {
       }
 
       return false;
+    },
+    updated(items) {
+      console.log('Heard update');
+      console.log(items);
     }
   }
 };
