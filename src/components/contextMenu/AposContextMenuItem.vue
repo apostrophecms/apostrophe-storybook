@@ -3,6 +3,7 @@
     <button 
       class="apos-context-menu__button"
       @click="click"
+      tabindex="0"
     >
       {{ menuItem.label }}
     </button>
@@ -35,17 +36,18 @@ export default {
     text-align: left;
     font-size: map-get($font-sizes, default);
     letter-spacing: 0.5px;
-    color: var(--a-base-3);
+    color: var(--a-base-1);
     background-color: var(--a-background-primary);
     &:hover {
       cursor: pointer;
-      color: var(--a-base-1);
+      color: var(--a-text-primary);
     }
     &:focus {
       outline: none;
+      color: var(--a-text-primary);
     }
     &:active {
-      color: var(--a-base-2);
+      color: var(--a-base-1);
     }
   }
 </style>

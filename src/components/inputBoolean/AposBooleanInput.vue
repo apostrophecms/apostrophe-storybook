@@ -2,13 +2,24 @@
   <AposInputWrapper :field="field" :error="status.error">
     <template slot="body">
       <div :class="classList">
-        <input class="apos-sr-only" type="radio" :id="uid + '-true'" :value="true" v-model="next" :checked="value.data === true">
+        <input 
+          class="apos-sr-only" 
+          type="checkbox" :id="uid + '-true'" 
+          :value="true" v-on:change="setValue(true)"
+          :checked="value.data === true" 
+          ref="true"
+        >
         <label :for="uid + '-true'" class="apos-boolean__label apos-input">
           <CircleIcon :size="12" class="apos-boolean__icon"
             title="" v-show="!field.toggle"></CircleIcon>
             {{ trueLabel || 'Yes' }}
         </label>
-        <input class="apos-sr-only apos-boolean__input--false" type="radio" :id="uid + '-false'" :value="false" v-model="next" :checked="value.data === false">
+        <input class="apos-sr-only apos-boolean__input--false"
+         type="checkbox" :id="uid + '-false'" 
+         :value="false" v-on:change="setValue(false)"
+         :checked="value.data === false"
+         ref="false"
+        >
         <label :for="uid + '-false'" class="apos-boolean__label apos-input">
           <CircleIcon :size="12" class="apos-boolean__icon"
             title="" v-show="!field.toggle"></CircleIcon>
@@ -59,6 +70,10 @@ export default {
     }
   },
   methods: {
+    setValue(val) {
+      this.next = val;
+      this.$refs[(!val).toString()].checked = false;
+    },
     validate(value) {
       if (this.field.required) {
         if (!value) {
@@ -129,7 +144,6 @@ export default {
         border-color: var(--a-base-4);
       }
     }
-
     input + & {
       &:hover {
         cursor: pointer;
@@ -156,5 +170,9 @@ export default {
       top: 1px;
       position: relative;
     }
+  }
+  input:focus + label {
+    border-color: var(--a-base-2);
+    box-shadow: 0 0 5px var(--a-base-6);
   }
 </style>
