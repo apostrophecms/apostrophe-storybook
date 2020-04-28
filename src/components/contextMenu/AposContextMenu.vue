@@ -59,7 +59,6 @@ export default {
   }
 
   .apos-context-menu__inner {
-    padding: 10px 0;
     border-radius: var(--a-border-radius);
     box-shadow: var(--a-box-shadow);
     background-color: var(--a-background-primary);
@@ -73,5 +72,6 @@ export default {
     margin: none;
     margin-block-start: 0;
     margin-block-end: 0;
+    padding: 10px 0;
   }
 </style>

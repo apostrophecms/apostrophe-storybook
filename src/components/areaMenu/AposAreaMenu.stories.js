@@ -1,5 +1,7 @@
 import { 
-  withKnobs, select
+  withKnobs,
+  select,
+  boolean
 } from '@storybook/addon-knobs';
 
 import AposAreaMenu from './AposAreaMenu.vue';
@@ -11,30 +13,24 @@ export default {
 };
 
 export const areaMenu = () => {
-  const choice = select(
-    'List Type', {
-      Groups: 'groups',
-      List: 'list'
-    },
-    null
-  );
+  const menuFormat = boolean('Menu Items Grouped?', true);
   return {
     data() {
       return {
-        groups: null,
-        items: null
       };
+    },
+    computed: {
+      menu() {
+        if (menuFormat) {
+          return data.menu;
+        } else {
+          return data.menu[1].items;
+        }
+      }
     },
     components: {
       AposAreaMenu
     },
-    mounted() {
-      if (choice === 'groups' || !choice) {
-        this.groups = data.groups;
-      } else {
-        this.items = data.list;
-      }
-    },
-    template: `<AposAreaMenu :items="items" :groups="groups" />`
+    template: `<AposAreaMenu :menu="menu" />`
   };
 };

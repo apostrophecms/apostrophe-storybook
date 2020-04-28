@@ -1,53 +1,27 @@
 export default {
-  list: [
-    {
-      label: 'Two Column',
-      action: 'add-two-column'
-    },
-    {
-      label: 'Three Column',
-      action: 'add-three-column'
-    },
-    {
-      label: 'Marquee',
-      action: 'add-marquee'
-    },
-    {
-      label: 'Image',
-      action: 'add-image'
-    },
-    {
-      label: 'Video',
-      action: 'add-video'
-    },
-    {
-      label: 'Instagram Feed',
-      action: 'add-insta-feed'
-    },
-    {
-      label: 'Cool API Thing',
-      action: 'add-api-thing'
-    }
-  ],
-  groups: [
+  menu: [
     {
       label: 'Layouts',
       items: [
         {
           label: 'Two Column',
-          action: 'add-two-column'
+          action: 'add-two-column',
+          icon: 'ViewColumn'
         },
         {
           label: 'Three Column',
-          action: 'add-three-column'
+          action: 'add-three-column',
+          icon: 'ViewColumn'
         },
         {
           label: 'Two Thirds',
-          action: 'add-two-thirds'
+          action: 'add-two-thirds',
+          icon: 'ViewColumn'
         },
         {
           label: 'Quarter',
-          action: 'add-quarters'
+          action: 'add-quarters',
+          icon: 'ViewColumn'
         }
       ]
     },
@@ -56,25 +30,66 @@ export default {
       items: [
         {
           label: 'Marquee',
-          action: 'add-marquee'
+          action: 'add-marquee',
+          icon: 'ImageSizeSelectActual'
         },
         {
           label: 'Image',
-          action: 'add-image'
+          action: 'add-image',
+          icon: 'Image'
         },
         {
           label: 'Video',
-          action: 'add-video'
+          action: 'add-video',
+          icon: 'Video'
         },
         {
           label: 'Instagram Feed',
-          action: 'add-insta-feed'
+          action: 'add-insta-feed',
+          icon: 'Instagram'
         },
         {
           label: 'Cool API Thing',
-          action: 'add-api-thing'
+          action: 'add-api-thing',
+          icon: 'Web'
         }
       ]
+    },
+    {
+      label: 'Two Column',
+      action: 'add-two-column',
+      icon: 'ViewColumn'
+    },
+    {
+      label: 'Three Column',
+      action: 'add-three-column',
+      icon: 'ViewColumn'
+    },
+    {
+      label: 'Marquee',
+      action: 'add-marquee',
+      icon: 'ImageSizeSelectActual'
+    },
+    {
+      label: 'Image',
+      action: 'add-image',
+      icon: 'Image'
+    },
+    {
+      label: 'Video',
+      action: 'add-video',
+      icon: 'Video'
+    },
+    {
+      label: 'Instagram Feed',
+      action: 'add-insta-feed',
+      icon: 'Instagram'
+
+    },
+    {
+      label: 'Cool API Thing',
+      action: 'add-api-thing',
+      icon: 'Web'
     }
   ]
 };
