@@ -19,6 +19,11 @@ export const areaMenu = () => {
       return {
       };
     },
+    methods: {
+      handler(action) {
+        console.log(`heard ${action}`);
+      }
+    },
     computed: {
       menu() {
         if (menuFormat) {
@@ -31,6 +36,6 @@ export const areaMenu = () => {
     components: {
       AposAreaMenu
     },
-    template: `<AposAreaMenu :menu="menu" />`
+    template: `<AposAreaMenu v-on:click="handler" :menu="menu" />`
   };
 };

@@ -1,5 +1,5 @@
 <template>
-  <div class="apos-area-menu">
+  <div class="apos-area-menu" :class="{'apos-area-menu--grouped': groupedMenus}">
     <AposContextMenu tipAlignment="center">
       <ul class="apos-area-menu__wrapper">
         <li class="apos-area-menu__item"
@@ -26,12 +26,12 @@
                 :class="{'is-active': active === index}"
               >
               <li class="apos-area-menu__item"  v-for="child in item.items" v-bind:key="child.action" >
-                <AposAreaMenuItem :item="child" />
+                <AposAreaMenuItem v-on:click="clicked(child)" :item="child" />
               </li>
               </ul>
             </dd>
           </dl>
-          <AposAreaMenuItem v-else :item="item" />
+          <AposAreaMenuItem v-else v-on:click="clicked(item)" :item="item" />
         </li>
       </ul>
     </AposContextMenu>
@@ -78,6 +78,9 @@ export default {
     }
   },
   methods: {
+    clicked(item) {
+      this.$emit('click', item.action);
+    },
     composeGroups() {
       const ungrouped = {
         label: 'Ungrouped Widgets',
@@ -119,6 +122,11 @@ export default {
 
 .apos-area-menu {
   font-size: map-get($font-sizes, default);
+}
+
+.apos-area-menu:not(.apos-area-menu--grouped) .apos-area-menu__wrapper {
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
 .apos-area-menu__wrapper,

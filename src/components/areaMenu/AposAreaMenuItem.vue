@@ -1,5 +1,5 @@
 <template>
-  <button class="apos-area-menu__button" :data-action="item.action">
+  <button @click="click" class="apos-area-menu__button" :data-action="item.action">
     <component 
       v-if="item.icon"
       :size="15"
@@ -29,9 +29,8 @@ export default {
   },
 
   methods: {
-    click(tag) {
-      this.active = !this.active;
-      this.$emit('click', tag.slug)
+    click() {
+      this.$emit('click');
     }
   }
 }
