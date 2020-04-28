@@ -24,7 +24,6 @@
     "sass-loader": "^7.3.1",
     "sass-resources-loader": "^2.0.1",
     "vue": "^2.6.11",
-    "vue-foldable": "^1.0.0",
     "vue-loader": "^15.9.1",
     "vue-material-design-icons": "^3.4.0",
     "vue-template-compiler": "^2.6.11"
