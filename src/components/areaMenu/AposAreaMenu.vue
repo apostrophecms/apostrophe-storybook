@@ -117,7 +117,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '../../scss/_mixins';
 
 .apos-area-menu {
@@ -125,8 +125,8 @@ export default {
 }
 
 .apos-area-menu:not(.apos-area-menu--grouped) .apos-area-menu__wrapper {
-  padding-top: 10px;
-  padding-bottom: 10px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .apos-area-menu__wrapper,
@@ -139,11 +139,6 @@ export default {
   min-width: 250px;
 }
 
-.apos-area-menu__item-icon {
-  @include apos-align-icon();
-  margin-right: 10px;
-}
-
 .apos-area-menu__button {
   @include apos-button-reset();
   display: flex;
@@ -154,7 +149,7 @@ export default {
   &:hover {
     cursor: pointer;
     color: var(--a-text-primary);
-    .apos-area-menu__item-icon {
+    & /deep/ .apos-area-menu__item-icon {
       color: var(--a-primary);
     }
   }

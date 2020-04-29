@@ -1,6 +1,5 @@
 import { 
   withKnobs,
-  select,
   boolean
 } from '@storybook/addon-knobs';
 

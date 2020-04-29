@@ -6,7 +6,7 @@
       class="apos-area-menu__item-icon"
       v-bind:is="icon"
     ></component>
-    <span>{{ item.label }}</span>
+    {{ item.label }}
   </button>
 </template>
 
@@ -36,12 +36,9 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
 @import '../../scss/_mixins';
-.apos-tag-list__item {
-  display: block;
-  margin-bottom: 5px;
-}
+
 .apos-tag-list__button {
   @include apos-button-reset();
   display: flex;
@@ -75,33 +72,9 @@ export default {
   }
 }
 
-.apos-tag-list__icon--remove {
-  position: relative;
-  top: 1px;
-}
-
-.apos-tag-list__icon--tag {
-  color: var(--a-base-6);
-}
-
-.slide-fade-enter-active {
-  transition: all .3s ease;
-}
-.slide-fade-leave-active {
-  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-}
-.slide-fade-enter, .slide-fade-leave-to {
-  transform: translateX(2px);
-  opacity: 0;
-}
-
-.apos-tag-list__icon {
-  display: inline-flex;
-  margin-right: 5px;
-}
-
-.apos-tag-list__label {
-  font-size: map-get($font-sizes, default);
+.apos-area-menu__item-icon {
+  @include apos-align-icon();
+  margin-right: 10px;
 }
 
 </style>
