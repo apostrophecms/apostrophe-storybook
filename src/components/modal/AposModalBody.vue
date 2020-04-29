@@ -27,7 +27,7 @@ export default {
 <style lang="scss" scoped>
   .apos-modal__body {
     overflow-y: auto;
-    padding: 20px 4%;
+    padding: 20px;
   }
 
   .apos-modal__main--no-rails .apos-modal__body {
