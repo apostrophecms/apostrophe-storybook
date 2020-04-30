@@ -4,7 +4,7 @@
     v-bind="dragOptions" :move="onMove" @start="isDragging=true" 
     @end="isDragging=false"
   >
-    <transition-group type="transition" :name="'flip-list'">
+    <transition-group type="transition" name="apos-slat-list-transition">
       <AposSlat 
         v-on:remove="remove" class="apos-slat-list__item" 
         v-for="item in items" :key="item.id" :item="item" 
@@ -45,7 +45,7 @@ export default {
       return {
         animation: 0,
         disabled: !this.editable,
-        ghostClass: 'ghost'
+        ghostClass: 'is-dragging'
       };
     },
   },
@@ -76,7 +76,7 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @import '../../scss/_mixins';
   @import '../../scss/_inputs.scss';
   .apos-slat-list /deep/ .apos-slat {
@@ -84,15 +84,11 @@ export default {
     transition: all 0.4s;
   }
 
-  .flip-list-leave-to {
+  .apos-slat-list-transition-leave-to {
     opacity: 0;
   }
 
-  .no-move {
-    transition: transform 0s;
-  }
-
-  .ghost {
+  .is-dragging {
     opacity: 0.5;
     background: var(--a-base-4);
   }

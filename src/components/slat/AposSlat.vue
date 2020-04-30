@@ -82,10 +82,4 @@ export default {
   .apos-slat__control--remove:hover {
     cursor: pointer;
   }
-  .apos-slat__control--drag:hover {
-    
-  }
-  .apos-slat__control--drag:active {
-    
-  }
 </style>
