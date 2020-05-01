@@ -14,7 +14,7 @@
             }`"
             :size="10" v-if="value.data.includes(choice.value)"></component>
         </span>
-        <span class="apos-choice-label-text">{{ choice.label }}</span>
+        <span v-if="choice.label" class="apos-choice-label-text">{{ choice.label }}</span>
       </label>
     </template>
   </AposInputWrapper>

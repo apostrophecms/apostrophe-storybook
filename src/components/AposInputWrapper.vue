@@ -1,7 +1,7 @@
 <template>
   <component :is="wrapEl" :class="classList">
     <!-- TODO i18n -->
-    <component :is="labelEl" class="apos-field-label" :for="uid">
+    <component v-if="field.label" :is="labelEl" class="apos-field-label" :for="uid">
       {{ field.label }}
       <span v-if="field.required" class="apos-field-required">*</span>
     </component>
