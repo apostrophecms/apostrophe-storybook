@@ -102,7 +102,7 @@ export default {
     },
     click(tag) {
       this.active = !this.active;
-      this.$emit('click', tag.slug)
+      this.$emit('click', tag.slug);
     }
   }
 }
@@ -116,7 +116,7 @@ export default {
       field: {
         name,
         type: 'checkbox',
-        choices: [ { value: 'true' } ]
+        choices: [ { value: 'checked' } ]
       }
     }
   }
