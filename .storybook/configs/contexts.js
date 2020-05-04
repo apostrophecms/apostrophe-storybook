@@ -5,9 +5,9 @@ export const contexts = [
     title: 'Themes',
     components: [Theme],
     params: [
-      { name: 'Dark Theme', props: { theme: 'apos-theme-dark'}, default: true },
+      { name: 'Dark Theme', props: { theme: 'apos-theme-dark'} },
       { name: 'Dark Theme, in Rail', props: { theme: 'apos-theme-dark sb-context-rail'} },
-      { name: 'Light Theme', props: { theme: 'apos-theme-light' } },
+      { name: 'Light Theme', props: { theme: 'apos-theme-light' }, default: true },
       { name: 'Light Theme, in Rail', props: { theme: 'apos-theme-light sb-context-rail' } },
     ],
     options: {
