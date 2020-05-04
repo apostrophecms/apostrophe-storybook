@@ -3,8 +3,9 @@
     <tbody>
       <tr>
         <th v-if="!options.noSelectAll" class="apos-table__header">
-          <AposCheckboxInput :field="checkboxes.all.field" 
-            :value="checkboxes.all.value" :status="checkboxes.all.status"
+          <AposCheckboxInput :field="selectAllField.field" 
+            :value="selectAllField.value" :status="selectAllField.status" 
+            v-on:input="selectAll"
           />
         </th>
         <th v-for="header in headers" scope="col" class="apos-table__header" v-bind:key="header.label">
@@ -20,9 +21,9 @@
         </th>
       </tr>
       <AposTableRow :headers="headers" 
-        :checkbox="checkboxes[row.id]" v-for="row in rows" 
+        v-for="row in rows" 
         :row="row" v-bind:key="row.id"
-        v-on:input="updateCheckbox"
+        :allChecked="allChecked"
       />
     </tbody>
   </table>  
@@ -54,14 +55,7 @@ export default {
     }
   },
   computed: {
-    checkboxes() {
-      const checkboxes = {};
-      this.rows.forEach(row => {
-        checkboxes[row.id] = newCheckbox(row.id)
-      });
-      checkboxes.all = newCheckbox('all');
-      return checkboxes;
-    }
+
   },
   data() {
     const icons = {};
@@ -71,16 +65,37 @@ export default {
       }
     });
     return {
-      icons
+      icons,
+      allChecked: false,
+      selectAllField: {
+        status: {},
+        value: { data: null },
+        field: {
+          name: 'selectAll',
+          type: 'checkbox',
+          choices: [ { value: 'checked' } ]
+        } 
+      }
     }
   },
   mounted() {
-    console.log(this.checkboxes);
   },
   methods: {
     updateCheckbox(id, value) {
       console.log(this.checkboxes[id]);
     },
+
+    selectAll(response) {
+      console.log(response);
+      if (response.data.length) {
+        console.log('all check true');
+        this.allChecked = true;
+      } else {
+        console.log('all check faslse');
+        this.allChecked = false;
+      }
+    },
+
     iconSize(header) {
       if (header.icon) {
         if (header.icon === 'Circle') {
@@ -97,29 +112,12 @@ export default {
         return 'span';
       }
     },
-    newCheckbox() {
-
-    },
     click(tag) {
       this.active = !this.active;
       this.$emit('click', tag.slug);
     }
   }
 }
-
-  function newCheckbox(name) {
-    return {
-      status: {},
-      value: {
-        data: null
-      },
-      field: {
-        name,
-        type: 'checkbox',
-        choices: [ { value: 'checked' } ]
-      }
-    }
-  }
 </script>
 
 <style lang="scss">

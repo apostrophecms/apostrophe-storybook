@@ -5,9 +5,8 @@
         v-for="choice in field.choices" :key="choice.value">
         <input type="checkbox" class="apos-sr-only apos-input--choice apos-input--checkbox"
           :value="choice.value" :name="field.name"
-          :id="getChoiceId(uid, choice.value)"
-          tabindex="0" v-on:change="log(value, choice)"
-          v-model="value.data" :disabled="status.disabled"/>
+          :id="getChoiceId(uid, choice.value)" 
+          tabindex="0" v-model="value.data" :disabled="status.disabled"/>
         <span class="apos-input-indicator" aria-hidden="true">
           <component :is="`${
               choice.indeterminate ? 'MinusIcon' : 'CheckBoldIcon'
@@ -37,9 +36,6 @@ export default {
   methods: {
     getChoiceId(uid, value) {
        return uid + value.replace(/\s/g, '');
-    },
-    log(value, choice) {
-      console.log(value.data.includes(choice.value));
     },
     validate(values) {
       if (!Array.isArray(this.field.choices)) {

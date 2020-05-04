@@ -1,8 +1,8 @@
 <template>
   <tr class="apos-table__row" :class="{'is-selected': false }">
     <td v-if="selectAll" class="apos-table__cell">
-      <AposCheckboxInput :field="checkbox.field" 
-        :value="checkbox.value" :status="checkbox.status" v-on:input="update"
+      <AposCheckboxInput :field="field" 
+        :value="value" :status="status" v-on:input="update"
       />
     </td>
     <td class="apos-table__cell" v-for="header in headers" v-bind:key="row[header.name]">
@@ -25,12 +25,16 @@ export default {
       required: true,
       type: Object
     },
+    allChecked: {
+      type: Boolean,
+      default: false
+    },
     headers: {
       required: true,
       type: Array
     },
-    checkbox: {
-      type: Object
+    id: {
+      type: String
     },
     selectAll: {
       type: Boolean,
@@ -38,16 +42,36 @@ export default {
     }
   },
   mounted() {
-    console.log(this.checkbox);
+    console.log('mounting');
+    console.log(this.allChecked);
+    if (this.allChecked) {
+      this.value.data = 'checked'
+    }
   },
   data() {
+    // const value = {
+    //   data: null
+    // }
+
+    // if (this.allChecked) {
+    //   value.data = 'checked';
+    // }
+
     return {
+      status: {},
+      value: {
+        data: null
+      },
+      field: {
+        name: this.row.id,
+        type: 'checkbox',
+        choices: [ { value: 'checked' } ]
+      }
     }
   },
   methods: {
-    update() {
-      console.log('i heard that');
-      this.$emit('input', this.row.id, this.checkbox.value);
+    update(response) {
+      this.$emit('checked', this.row.id, response.data.length);
     }
   },
   components: { 
