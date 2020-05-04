@@ -1,3 +1,5 @@
+$input-max-width: 460px;
+
 .apos-input,
 .apos-input-wrapper,
 .apos-choice-label {
@@ -87,7 +89,7 @@
 
 .apos-input-wrapper {
   position: relative;
-  max-width: 460px;
+  max-width: $input-max-width;
 }
 
 .apos-choice-label {
@@ -182,8 +184,4 @@ $box-width: 12px;
 
     .material-design-icon { display: inline-flex; }
   }
-
-  // .apos-input--choice:focus ~ .apos-input-indicator {
-
-  // }
 }
