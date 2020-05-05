@@ -18,8 +18,10 @@ export const table = () => ({
     AposButton,
     AposTable
   },
-  mounted() {
-    console.log(this.headers);
+  methods: {
+    log(action) {
+      console.log(`sort by ${action}`);
+    }
   },
   data() {
     return {
@@ -45,7 +47,7 @@ export const table = () => ({
       <template #main>
         <AposModalBody>
           <template #bodyMain>
-            <AposTable :headers="headers" :rows="rows" />
+            <AposTable v-on:sort="log" :headers="headers" :rows="rows" />
           </template>
         </AposModalBody>
       </template>

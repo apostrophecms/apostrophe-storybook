@@ -2,14 +2,14 @@
   <table class="apos-table">  
     <tbody>
       <tr>
-        <th v-if="!options.noSelectAll" class="apos-table__header">
+        <th class="apos-table__header">
           <AposCheckboxInput :field="selectAllField.field" 
             :value="selectAllField.value" :status="selectAllField.status" 
             v-on:input="selectAll"
           />
         </th>
         <th v-for="header in headers" scope="col" class="apos-table__header" v-bind:key="header.label">
-          <component :is="getEl(header)" @click="click" class="apos-table__header-label">
+          <component :is="getEl(header)" @click="sort(header.action)" class="apos-table__header-label">
             <component 
               v-if="header.icon"
               :size="iconSize(header)"
@@ -24,6 +24,8 @@
         v-for="row in rows" 
         :row="row" v-bind:key="row.id"
         :allChecked="allChecked"
+        :someChecked="someChecked"
+        v-on:checked="checkHandler"
       />
     </tbody>
   </table>  
@@ -39,12 +41,6 @@ export default {
     AposCheckboxInput
   },
   props: {
-    options: {
-      type: Object,
-      default () {
-        return {};
-      }
-    },
     headers: {
       type: Array,
       required: true
@@ -54,10 +50,8 @@ export default {
       required: true
     }
   },
-  computed: {
-
-  },
   data() {
+    // fetch all icons used in table headers
     const icons = {};
     this.headers.forEach(h => {
       if (h.icon) {
@@ -67,9 +61,11 @@ export default {
     return {
       icons,
       allChecked: false,
+      someChecked: false,
+      checked: [],
       selectAllField: {
         status: {},
-        value: { data: null },
+        value: { data: [] },
         field: {
           name: 'selectAll',
           type: 'checkbox',
@@ -81,18 +77,68 @@ export default {
   mounted() {
   },
   methods: {
-    updateCheckbox(id, value) {
-      console.log(this.checkboxes[id]);
-    },
 
-    selectAll(response) {
-      console.log(response);
-      if (response.data.length) {
-        console.log('all check true');
-        this.allChecked = true;
-      } else {
-        console.log('all check faslse');
+    // handle state changes caused by checking and unchecking rows
+    checkHandler(id, checked) {
+      if (checked) {
+        this.checked.push(id);
+      }
+      if (!checked) {
+        this.checked = this.checked.filter(checkedId => checkedId !== id);
+      }
+
+      if (this.checked.length === 0) {
+        this.selectAllField.value.data = [];
+        this.someChecked = false;
         this.allChecked = false;
+      }
+
+      if (this.checked.length === this.rows.length) {
+        this.allChecked = true;
+        if (this.selectAllField.field.choices[0].indeterminate) {
+          delete this.selectAllField.field.choices[0].indeterminate;
+        }
+        // don't know why i have to flush this out so hard
+        this.selectAllField.value.data = [];
+        this.selectAllField.value.data = ['checked'];
+      }
+
+      if (!checked && this.allChecked) {
+        this.someChecked = true;
+        this.allChecked = false;
+        this.selectAllField.field.choices[0].indeterminate = true;
+        // don't know why i have to flush this out so hard
+        this.selectAllField.value.data = [];
+        this.selectAllField.value.data = ['checked'];
+      }
+    },
+    selectAll(response) {
+      const checked = response.data.length > 0 ? true : false;
+      const indeterminate = this.selectAllField.field.choices[0].indeterminate;
+
+      // if selectAll is true but also indeterminate, bail out
+      // the checkbox has to be checked to light up the indeterminate ui
+      if (checked && indeterminate) {
+        return;
+      }
+
+      // if selectAll is true but not indeterminate, clear to check all
+      if (checked) {
+        this.allChecked = true;
+      }
+
+      // if selectAll is false AND indeterminate, treat it as Unselect All
+      // UX lifted from GMail
+      if (!checked && indeterminate) {
+        delete this.selectAllField.field.choices[0].indeterminate
+        this.someChecked = false;
+        return;
+      }
+
+      // if selectAll is false but not indeterminate we just toggled. reset the board
+      if (!checked) {
+        this.allChecked = false;
+        this.someChecked = false;
       }
     },
 
@@ -105,6 +151,7 @@ export default {
         }
       }
     },
+
     getEl(header) {
       if (header.action) {
         return 'button';
@@ -112,9 +159,9 @@ export default {
         return 'span';
       }
     },
-    click(tag) {
-      this.active = !this.active;
-      this.$emit('click', tag.slug);
+
+    sort(action) {
+      this.$emit('sort', action);
     }
   }
 }
