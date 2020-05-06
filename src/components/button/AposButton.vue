@@ -96,7 +96,7 @@ export default {
     font-size: map-get($font-sizes, modal);
     letter-spacing: 0.75px; // how do we reuse this
     border: 1px solid var(--a-base-5);
-    transition: all 0.3s ease;
+    transition: all 0.2s ease;
     overflow: hidden;
     &:hover {
       cursor: pointer;
@@ -109,6 +109,10 @@ export default {
       box-shadow: 0 0 0 1px var(--a-base-7), 0 0 0 3px var(--a-base-8);
       outline: none;
       border: 1px solid var(--a-base-3);
+    }
+    &:hover:not([disabled]),
+    &:focus:not([disabled]) {
+      transform: translateY(-1px);
     }
     &[disabled] {
       background-color: var(--a-base-9);

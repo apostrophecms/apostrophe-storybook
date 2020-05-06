@@ -30,7 +30,7 @@ $boolean-padding: $spacing-double;
   --a-primary: #{$color};
   --a-primary-button-hover: #{mix(black, $color, 10%)};
   --a-primary-button-active: #{mix(black, $color, 15%)};
-  --a-primary-button-disabled: #{mix(white, $color, 10%)};
+  --a-primary-button-disabled: #{mix(white, $color, 40%)};
 }
 
 body {
