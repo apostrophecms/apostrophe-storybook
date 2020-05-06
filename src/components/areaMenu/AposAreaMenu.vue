@@ -1,37 +1,61 @@
 <template>
-  <div class="apos-area-menu" :class="{'apos-area-menu--grouped': groupedMenus}">
+  <div class="apos-area-menu" :class="{'apos-area-menu--grouped': groupedMenus, 'is-focused': groupIsFocused}">
     <AposContextMenu tipAlignment="center">
       <ul class="apos-area-menu__wrapper">
         <li class="apos-area-menu__item"
           v-for="(item, index) in myMenu" v-bind:key="item.label"
           :class="{'has-group': item.items}"
+          :ref="'item-' + index"
           >
           <dl v-if="item.items" class="apos-area-menu__group">
             <dt>
-              <label :for="item.label" class="apos-area-menu__group-label" v-if="item.items">
+              <button :for="item.label" class="apos-area-menu__group-label" 
+                v-if="item.items" tabindex="0" :id="menuId + '-trigger-' + index"
+                :aria-controls="menuId + '-group-' + index"
+                @focus="groupFocused"
+                @blur="groupBlurred"
+                @click="toggleGroup(index)"
+                @keydown.prevent.32="toggleGroup(index)"
+                @keydown.prevent.13="toggleGroup(index)"
+                @keydown.prevent.40="switchGroup(index, 1)"
+                @keydown.prevent.38="switchGroup(index, -1)"
+                @keydown.prevent.36="switchGroup(index, 0)"
+                @keydown.prevent.35="switchGroup(index, null)"
+                ref="groupButton"
+              >
                 <span>{{ item.label }}</span>
                 <Chevron class="apos-area-menu__group-chevron" :class="{'is-active': index === active}" :size="13" />
-              </label>
-              <input type="checkbox" class="apos-area-menu__accordion-trigger" 
-                v-if="item.items"
-                :id="item.label" name="menuGroup"
-                :checked="index === active"
-                @change="update($event, item.label + index, index)"
-                :ref="item.label + index"
-                :data-index="index"
-              >
+              </button>
             </dt>
-            <dd class="apos-area-menu__group-list">
+            <dd class="apos-area-menu__group-list" role="region">
               <ul class="apos-area-menu__items apos-area-menu__items--accordion"
                 :class="{'is-active': active === index}"
+                :id="menuId + '-group-' + index"
+                :aria-labelledby="menuId + '-trigger-' + index"
               >
-              <li class="apos-area-menu__item"  v-for="child in item.items" v-bind:key="child.action" >
-                <AposAreaMenuItem v-on:click="clicked(child)" :item="child" />
+              <li class="apos-area-menu__item" 
+                v-for="(child, childIndex) in item.items" 
+                v-bind:key="child.action" 
+                :ref="'child-' + index + '-' + childIndex"
+              >
+                <AposAreaMenuItem 
+                  v-on:click="clicked(child)" 
+                  :item="child" 
+                  :tabbable="index === active"
+                  v-on:up="switchItem('child-' + index + '-' + (childIndex - 1), -1)"
+                  v-on:down="switchItem('child-' + index + '-' + (childIndex + 1), 1)"
+                />
               </li>
               </ul>
             </dd>
           </dl>
-          <AposAreaMenuItem v-else v-on:click="clicked(item)" :item="item" />
+          <AposAreaMenuItem 
+            v-else 
+            v-on:click="clicked(item)"
+            :item="item"
+            v-on:up="switchItem('item-' + (index - 1), -1)"
+            v-on:down="switchItem('item-' + (index + 1), 1)"
+          />
         </li>
       </ul>
     </AposContextMenu>
@@ -56,7 +80,8 @@ export default {
   },
   data() {
     return {
-      active: 0
+      active: 0,
+      groupIsFocused: false
     }
   },
   computed: {
@@ -75,9 +100,18 @@ export default {
       } else {
         return this.menu;
       }
+    },
+    menuId() {
+      return `areaMenu-${(Math.floor(Math.random() * Math.floor(10000)))}`
     }
   },
   methods: {
+    groupFocused() {
+      this.groupIsFocused = true;
+    },
+    groupBlurred() {
+      this.groupIsFocused = false;
+    },
     clicked(item) {
       this.$emit('click', item.action);
     },
@@ -102,16 +136,42 @@ export default {
       return myMenu;
     },
 
-    update(event, refName, index) {
-      if (!event.target.checked) {
-        return this.active = null;
+    toggleGroup(index) {
+      if (this.active !== index) {
+        this.active = index;
+      } else {
+        this.active = null;
       }
-      for (const checkbox in this.$refs) {
-        if (checkbox !== refName) {
-          this.$refs[checkbox].checked = false;
-        }
+    },
+
+    switchGroup(index, dir) {
+      let target;
+
+      if (dir > 0) {
+        target = index < this.$refs.groupButton.length - 1 ? index + 1 : 0;  
+      } 
+      
+      if (dir < 0) {
+        target = index === 0 ? this.$refs.groupButton.length - 1 : index - 1;
       }
-      this.active = index;
+
+      if (dir === 0) {
+        target = 0;
+      }
+
+      if (!dir) {
+        target = this.$refs.groupButton.length - 1;
+      }
+      
+      this.$nextTick(() => {
+        this.$refs.groupButton[target].focus();
+       });
+    },
+
+    switchItem(name, dir) {
+      if (this.$refs[name]) {
+        this.$refs[name][0].querySelector('button').focus();
+      }
     }
   }
 }
@@ -122,6 +182,14 @@ export default {
 
 .apos-area-menu {
   font-size: map-get($font-sizes, default);
+}
+
+.apos-area-menu.is-focused /deep/ .apos-context-menu__inner {
+  border: 1px solid var(--a-base-4);
+}
+
+.apos-area-menu.is-focused /deep/ .apos-context-menu__tip-outline {
+  stroke: var(--a-base-4);
 }
 
 .apos-area-menu:not(.apos-area-menu--grouped) .apos-area-menu__wrapper {
@@ -146,17 +214,24 @@ export default {
   align-items: center;
   width: 100%;
   color: var(--a-base-1);
-  &:hover {
-    cursor: pointer;
-    color: var(--a-text-primary);
+
+  &:hover,
+  &:focus {
     & /deep/ .apos-area-menu__item-icon {
       color: var(--a-primary);
     }
   }
+
+  &:hover {
+    cursor: pointer;
+    color: var(--a-text-primary);
+  }
+
   &:focus {
     outline: none;
     color: var(--a-text-primary);
   }
+
   &:active {
     color: var(--a-base-1);
   }
@@ -169,14 +244,18 @@ export default {
 }
 
 .apos-area-menu__group-label {
-  padding: 10px 20px;
-}
-
-.apos-area-menu__group-label {
+  @include apos-button-reset();
   display: flex;
+  width: 100%;
   justify-content: space-between;
+  padding: 10px 20px;
   &:hover {
     cursor: pointer;
+  }
+
+  &:focus {
+    background-color: var(--a-base-10);
+    outline: 1px solid var(--a-base-4);
   }
 }
 
