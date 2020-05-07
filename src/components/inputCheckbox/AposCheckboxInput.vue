@@ -7,6 +7,7 @@
           :value="choice.value" :name="field.name"
           :id="getChoiceId(uid, choice.value)" 
           tabindex="0"
+          :checked="value.data.includes(choice.value)"
           v-model="value.data" :disabled="status.disabled"/>
         <span class="apos-input-indicator" aria-hidden="true">
           <component :is="`${
@@ -33,6 +34,13 @@ export default {
     AposInputWrapper,
     CheckBoldIcon,
     MinusIcon
+  },
+  watch: {
+    'value.data': function(newVal) {
+      console.log('change');
+      console.log(newVal);
+      console.log(this.value.data);
+    }
   },
   methods: {
     getChoiceId(uid, value) {
