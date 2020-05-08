@@ -10,6 +10,10 @@
       @keydown.prevent.27="disengage"
       @keydown.prevent.40="move(1)"
       @keydown.prevent.38="move(-1)"
+      @keydown.prevent.8="remove(true)"
+      :aria-pressed="engaged"
+      role="listitem"
+      :aria-labelledby="parent"
     >
       <div class="apos-slat__main">
         <Drag class="apos-slat__control apos-slat__control--drag" :size="13"/>
@@ -36,6 +40,10 @@ export default {
   props: {
     item: {
       type: Object,
+      required: true
+    },
+    parent: {
+      type: String,
       required: true
     },
     engaged: {
@@ -70,14 +78,14 @@ export default {
         }
       }
     },
-    remove() {
-      this.$emit('remove', this.item);
+    remove(focusNext) {
+      this.$emit('remove', this.item, focusNext);
     }
   }
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .apos-slat {
     display: flex;
     align-items: center;
@@ -132,5 +140,12 @@ export default {
 
   .apos-slat__control--remove:hover {
     cursor: pointer;
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .5s;
+  }
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
   }
 </style>
