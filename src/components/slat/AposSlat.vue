@@ -79,7 +79,13 @@ export default {
       }
     },
     remove(focusNext) {
-      this.$emit('remove', this.item, focusNext);
+      if (focusNext) {
+        if (this.engaged) {
+          this.$emit('remove', this.item, focusNext);    
+        }
+      } else {
+        this.$emit('remove', this.item);
+      }
     }
   }
 };

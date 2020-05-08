@@ -83,10 +83,13 @@ export default {
       const itemIndex = this.getIndex(item.id);
       this.items = this.items.filter(i => item.id !== i.id);
       this.$emit('update', this.items);
-      if (focusNext) {
+      if (focusNext && this.items[itemIndex]) {
         this.focusElement(this.items[itemIndex].id);
+        return;
       }
-
+      if (focusNext && this.items[itemIndex - 1]) {
+        this.focusElement(this.items[itemIndex - 1].id);
+      }
     },
     move (id, dir) {
       const index = this.getIndex(id);
