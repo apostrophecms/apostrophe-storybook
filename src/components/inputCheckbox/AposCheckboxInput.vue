@@ -1,40 +1,41 @@
 <template>
   <AposInputWrapper :field="field" :error="status.error" >
     <template slot="body">
-      <label class="apos-choice-label" :for="getChoiceId(uid, choice.value)"
-        v-for="choice in field.choices" :key="choice.value">
-        <input type="checkbox" class="apos-sr-only apos-input--choice apos-input--checkbox"
-          :value="choice.value" :name="field.name"
-          :id="getChoiceId(uid, choice.value)" 
-          :aria-label="choice.label"
-          tabindex="0" v-model="value.data" :disabled="status.disabled"/>
-        <span class="apos-input-indicator" aria-hidden="true">
-          <component :is="`${
-              choice.indeterminate ? 'MinusIcon' : 'CheckBoldIcon'
-            }`"
-            :size="10" v-if="value.data.includes(choice.value)"></component>
-        </span>
-        <span v-if="choice.label" class="apos-choice-label-text">{{ choice.label }}</span>
-      </label>
+      <AposCheckbox 
+        :for="getChoiceId(uid, choice.value)"
+        v-for="choice in field.choices" 
+        :key="choice.value" 
+        :id="getChoiceId(uid, choice.value)"
+        :choice="choice"
+        :field="field"
+        :value="value"
+        :status="status"
+        v-on:toggle="update"
+      />
     </template>
   </AposInputWrapper>
 </template>
 
 <script>
+import AposCheckbox from './AposCheckbox';
 import AposInputWrapper from '../AposInputWrapper';
 import AposInputMixin from '../../mixins/AposInputMixin';
-import CheckBoldIcon from "vue-material-design-icons/CheckBold.vue";
-import MinusIcon from "vue-material-design-icons/Minus.vue";
 
 export default {
   name: 'AposCheckboxInput',
   mixins: [ AposInputMixin ],
   components: {
     AposInputWrapper,
-    CheckBoldIcon,
-    MinusIcon
+    AposCheckbox
   },
   methods: {
+    update(newValue) {
+      if (this.value.data.includes(newValue)) {
+        this.value.data = this.value.data.filter(item => item !== newValue);
+      } else {
+        this.value.data.push(newValue);
+      }
+    },
     getChoiceId(uid, value) {
        return uid + value.replace(/\s/g, '');
     },
@@ -64,9 +65,3 @@ export default {
   }
 }
 </script>
-
-<style lang="scss" scoped>
-  .apos-input-indicator {
-    border-radius: 3px;
-  }
-</style>
