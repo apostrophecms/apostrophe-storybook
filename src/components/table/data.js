@@ -78,20 +78,20 @@ export default {
       updatedAt: 'Thursday January 12th, 2020',
       published: true,
       url: '/something cool'
+    },
+    {
+      id: 'wqen23e0re0e',
+      title: lorem.generateSentences(1),
+      updatedAt: 'Thursday January 12th, 2020',
+      published: true,
+      url: '/something cool'
+    },
+    {
+      id: 'wqen098r89023e',
+      title: lorem.generateSentences(1),
+      updatedAt: 'Thursday January 12th, 2020',
+      published: true,
+      url: '/something cool'
     }
-    // {
-    //   id: 'wqen23e0re0e',
-    //   title: lorem.generateSentences(1),
-    //   updatedAt: 'Thursday January 12th, 2020',
-    //   published: true,
-    //   url: '/something cool'
-    // },
-    // {
-    //   id: 'wqen098r89023e',
-    //   title: lorem.generateSentences(1),
-    //   updatedAt: 'Thursday January 12th, 2020',
-    //   published: true,
-    //   url: '/something cool'
-    // }
   ]
 };
