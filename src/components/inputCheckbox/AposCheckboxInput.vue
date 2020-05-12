@@ -6,6 +6,7 @@
         <input type="checkbox" class="apos-sr-only apos-input--choice apos-input--checkbox"
           :value="choice.value" :name="field.name"
           :id="getChoiceId(uid, choice.value)" 
+          :aria-label="choice.label"
           tabindex="0" v-model="value.data" :disabled="status.disabled"/>
         <span class="apos-input-indicator" aria-hidden="true">
           <component :is="`${

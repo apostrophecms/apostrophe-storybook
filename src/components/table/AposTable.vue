@@ -3,10 +3,25 @@
     <tbody>
       <tr>
         <th class="apos-table__header">
-          <AposCheckboxInput :field="selectAllField.field" 
-            :value="selectAllField.value" :status="selectAllField.status" 
-            v-on:input="selectAll"
-          />
+          <label class="apos-choice-label" for="aposSelectAll">
+            <input type="checkbox" class="apos-sr-only apos-input--choice apos-input--checkbox"
+              name="aposSelectAll"
+              ref="input"
+              id="aposSelectAll" aria-label="Toggle Select All Rows"
+              tabindex="0"
+              @input.stop="selectAll"
+              v-model="selectAllValue"
+            />
+            <span class="apos-input-indicator" aria-hidden="true">
+              <component :is="`${
+                  selectAllIndeterminate ? 'MinusIcon' : 'CheckBoldIcon'
+                }`"
+                :size="10" v-if="selectAllValue"></component>
+            </span>
+            <span class="apos-sr-only apos-choice-label-text">
+              Toggle Select All Rows
+            </span>
+          </label>
         </th>
         <th v-for="header in headers" scope="col" class="apos-table__header" v-bind:key="header.label">
           <component :is="getEl(header)" @click="sort(header.action)" class="apos-table__header-label">
@@ -23,9 +38,8 @@
       <AposTableRow :headers="headers" 
         v-for="row in rows" 
         :row="row" v-bind:key="row.id"
-        :allChecked="allChecked"
-        :someChecked="someChecked"
         v-on:checked="checkHandler"
+        :ref="row.id"
       />
     </tbody>
   </table>  
@@ -34,11 +48,15 @@
 <script>
 import AposTableRow from './AposTableRow.vue';
 import AposCheckboxInput from '../inputCheckbox/AposCheckboxInput.vue';
+import CheckBoldIcon from "vue-material-design-icons/CheckBold.vue";
+import MinusIcon from "vue-material-design-icons/Minus.vue";
 
 export default {
   components: {
     AposTableRow,
-    AposCheckboxInput
+    AposCheckboxInput,
+    CheckBoldIcon,
+    MinusIcon
   },
   props: {
     headers: {
@@ -63,6 +81,8 @@ export default {
       allChecked: false,
       someChecked: false,
       checked: [],
+      selectAllValue: false,
+      selectAllIndeterminate: false,
       selectAllField: {
         status: {},
         value: { data: [] },
@@ -74,71 +94,65 @@ export default {
       }
     }
   },
-  mounted() {
+  watch: {
+
   },
   methods: {
+    selectAll(event) {
+      // Must interrupt the checked/unchecked input cycle here to use indeterminate state,
+      // which is technically checked and dependent on UI's state.
+      // Also, instead of directly mutating the `checked` array here, fire a state change
+      // from within the child checkbox. Make the appropriate mutations when those events bubble back up
+      event.preventDefault();
 
-    // handle state changes caused by checking and unchecking rows
-    checkHandler(id, checked) {
-      if (checked) {
+      // select all
+      if (!this.checked.length) {
+        this.rows.forEach((row) => {
+          this.$refs[row.id][0].check();
+        });
+        return;
+      }
+      
+      // unselect all
+      if (this.checked.length <= this.rows.length) {
+        this.rows.forEach((row) => {
+          this.$refs[row.id][0].clear();
+        });
+      }
+    },
+
+    // handle state via the checkbox input event
+    // all state changes are 'heard' through here, even if we prompt them from elswhere
+    checkHandler(id, isChecked) {
+      if (isChecked && !this.checked.includes(id)) {
         this.checked.push(id);
       }
-      if (!checked) {
-        this.checked = this.checked.filter(checkedId => checkedId !== id);
+      if (!isChecked && this.checked.includes(id)) {
+        this.checked = this.checked.filter(rowId => rowId !== id);
       }
 
-      if (this.checked.length === 0) {
-        this.selectAllField.value.data = [];
-        this.someChecked = false;
+      if (!this.checked.length) {
         this.allChecked = false;
+        this.someChecked = false;
+        this.selectAllValue = false;
+        this.selectAllIndeterminate = false;
+        return;
       }
 
       if (this.checked.length === this.rows.length) {
         this.allChecked = true;
-        if (this.selectAllField.field.choices[0].indeterminate) {
-          delete this.selectAllField.field.choices[0].indeterminate;
-        }
-        // don't know why i have to flush this out so hard
-        this.selectAllField.value.data = [];
-        this.selectAllField.value.data = ['checked'];
+        this.someChecked = false;
+        this.selectAllValue = true;
+        this.selectAllIndeterminate = false;
+        return;
       }
 
-      if (!checked && this.allChecked) {
+      if (this.checked.length <= this.rows.length) {
+        this.allChecked = false;
         this.someChecked = true;
-        this.allChecked = false;
-        this.selectAllField.field.choices[0].indeterminate = true;
-        // don't know why i have to flush this out so hard
-        this.selectAllField.value.data = [];
-        this.selectAllField.value.data = ['checked'];
-      }
-    },
-    selectAll(response) {
-      const checked = response.data.length > 0 ? true : false;
-      const indeterminate = this.selectAllField.field.choices[0].indeterminate;
-
-      // if selectAll is true but also indeterminate, bail out
-      // the checkbox has to be checked to light up the indeterminate ui
-      if (checked && indeterminate) {
+        this.selectAllValue = true;
+        this.selectAllIndeterminate = true;
         return;
-      }
-
-      // if selectAll is true but not indeterminate, clear to check all
-      if (checked) {
-        this.allChecked = true;
-      }
-
-      // if selectAll is false AND indeterminate, treat it as Unselect All
-      // UX lifted from GMail
-      if (!checked && indeterminate) {
-        delete this.selectAllField.field.choices[0].indeterminate
-        this.someChecked = false;
-        return;
-      }
-
-      // if selectAll is false but not indeterminate we just toggled. reset the board
-      if (!checked) {
-        this.allChecked = false;
-        this.someChecked = false;
       }
     },
 
@@ -167,7 +181,7 @@ export default {
 }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @import '../../scss/_mixins';
   @import '../../scss/_inputs';
   .apos-table {
@@ -197,5 +211,9 @@ export default {
   }
   span.apos-table__header-label:hover {
     cursor: auto;
+  }
+
+  .apos-table /deep/ .apos-choice-label {
+    margin-top: 0;
   }
 </style>

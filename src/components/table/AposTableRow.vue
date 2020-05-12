@@ -29,36 +29,9 @@
         required: true,
         type: Object
       },
-      allChecked: {
-        type: Boolean,
-        default: false
-      },
-      someChecked: {
-        type: Boolean,
-        default: false
-      },
       headers: {
         required: true,
         type: Array
-      }
-    },
-    watch: {
-      allChecked(newVal, oldVal) {
-        if (newVal) {
-          if (this.value.data && !this.value.data.includes('checked')) {
-            this.value.data.push('checked');
-          }
-        }
-
-        if (!newVal && !this.someChecked) {
-          this.value.data = [];
-        }
-      },
-
-      someChecked(newVal, oldVal) {
-        if (oldVal && !newVal) {
-          this.value.data = [];
-        }
       }
     },
     data() {
@@ -70,19 +43,28 @@
         field: {
           name: this.row.id,
           type: 'checkbox',
-          choices: [ { value: 'checked' } ]
+          choices: [ { value: 'checked' } ],
+          hideLabel: true,
+          label: `Toggle selection of ${this.row.title}`
         }
       }
     },
     methods: {
       update(response) {
-        this.$emit('checked', this.row.id, response.data.length > 0 ? true : false);
+        this.$emit('checked', this.row.id, response.data.length > 0 ? true : false);  
+      },
+      // these methods are run from the table component
+      clear() {
+        this.value.data = [];
+      },
+      check() {
+        this.value.data = ['checked'];
       }
     }
   }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   @import '../../scss/_mixins';
   .apos-table__cell,
   .apos-table__row {
