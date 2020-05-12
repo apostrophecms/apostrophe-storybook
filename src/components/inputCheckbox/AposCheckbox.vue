@@ -6,7 +6,7 @@
     />
     <span class="apos-input-indicator" aria-hidden="true">
       <component :is="`${
-          field.indeterminate ? 'MinusIcon' : 'CheckBoldIcon'
+          choice.indeterminate ? 'MinusIcon' : 'CheckBoldIcon'
         }`"
         :size="10" v-if="value.data.includes(choice.value)"></component>
     </span>
@@ -32,14 +32,13 @@ export default {
   },
   methods: {
     toggle() {
-      this.$emit('toggle', this.value);
+      this.$emit('toggle', this.choice.value);
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-  @import '../../scss/_inputs';
   .apos-input-indicator {
     border-radius: 3px;
   }
