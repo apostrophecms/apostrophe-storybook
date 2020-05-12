@@ -20,6 +20,17 @@ $ npm run deploy-storybook
 
 This script will run the build to the `.out` directory and trigger a deploy to the `gh-pages` branch.
 
+### Using Vue Dev Tools with Storybook
+Storybook operates in a number of layered iframes, obscuring Vue Dev Tools from reading your Vue states. You can use the standalone Electron Vue Dev Tool application to drill into your stories, just
+
+```
+$ npm install -g @vue/devtools
+======================[100%]==
+$ vue-devtools
+```
+
+And make sure the port your `vue-devtools` is looking for matches the one specified in `.storybook/preview-head.html`
+
 ### Technical Approach
 
  Storybook Configuration
