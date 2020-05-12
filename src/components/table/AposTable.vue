@@ -3,25 +3,14 @@
     <tbody>
       <tr>
         <th class="apos-table__header">
-          <label class="apos-choice-label" for="aposSelectAll">
-            <input type="checkbox" class="apos-sr-only apos-input--choice apos-input--checkbox"
-              name="aposSelectAll"
-              ref="input"
-              id="aposSelectAll" aria-label="Toggle Select All Rows"
-              tabindex="0"
-              @input.stop="selectAll"
-              v-model="selectAllValue"
-            />
-            <span class="apos-input-indicator" aria-hidden="true">
-              <component :is="`${
-                  selectAllIndeterminate ? 'MinusIcon' : 'CheckBoldIcon'
-                }`"
-                :size="10" v-if="selectAllValue"></component>
-            </span>
-            <span class="apos-sr-only apos-choice-label-text">
-              Toggle Select All Rows
-            </span>
-          </label>
+          <AposCheckbox 
+            v-on:toggle="selectAll"
+            id="aposSelectAll"
+            :choice="selectAllChoice"
+            :field="selectAllField.field"
+            :value="selectAllValue"
+            :status="selectAllField.status"
+          />
         </th>
         <th v-for="header in headers" scope="col" class="apos-table__header" v-bind:key="header.label">
           <component :is="getEl(header)" @click="sort(header.action)" class="apos-table__header-label">
@@ -35,28 +24,45 @@
           </component>
         </th>
       </tr>
-      <AposTableRow :headers="headers" 
-        v-for="row in rows" 
-        :row="row" v-bind:key="row.id"
-        v-on:checked="checkHandler"
-        :ref="row.id"
-      />
+      <tr class="apos-table__row" 
+        v-for="row in rows"
+        :key="row.id"
+        :class="{'is-selected': false }"
+      >
+        <td class="apos-table__cell">
+          <AposCheckbox 
+            :field="checkboxes[row.id].field" 
+            :value="checkboxes[row.id].value" 
+            :status="checkboxes[row.id].status" 
+            :choice="checkboxes[row.id].choice"
+            v-on:toggle="toggleRowCheck($event, row.id)"
+          />
+        </td>
+        <td class="apos-table__cell" v-for="header in headers" :key="row[header.name]">
+          <a class="apos-table__link" v-if="header.name === 'url'" :href="row[header.name]">
+            <LinkIcon :size="12" />
+          </a>
+          <p v-else class="apos-table__cell-field" :class="`apos-table__cell-field--${header.name}`">
+            {{ row[header.name] }}
+          </p>
+        </td>
+      </tr>
     </tbody>
   </table>  
 </template>
 
 <script>
-import AposTableRow from './AposTableRow.vue';
-import AposCheckboxInput from '../inputCheckbox/AposCheckboxInput.vue';
+import AposCheckbox from '../inputCheckbox/AposCheckbox.vue';
 import CheckBoldIcon from "vue-material-design-icons/CheckBold.vue";
 import MinusIcon from "vue-material-design-icons/Minus.vue";
+import LinkIcon from "vue-material-design-icons/LinkVariant.vue";
 
 export default {
   components: {
-    AposTableRow,
-    AposCheckboxInput,
+    AposCheckbox,
     CheckBoldIcon,
-    MinusIcon
+    MinusIcon,
+    LinkIcon
   },
   props: {
     headers: {
@@ -76,83 +82,71 @@ export default {
         icons[h.icon] = () => import(`vue-material-design-icons/${h.icon}.vue`);
       }
     });
+    // prep row checkbox fields
+    const checkboxes = {};
+    this.rows.forEach((row) => {
+      checkboxes[row.id] = {
+        status: {},
+        value: {
+          data: []
+        },
+        choice: { value: 'checked' },
+        field: {
+          name: row.id,
+          type: 'checkbox',
+          hideLabel: true,
+          label: `Toggle selection of ${row.title}`
+        }
+      }
+    });
     return {
       icons,
-      allChecked: false,
-      someChecked: false,
+      checkboxes,
       checked: [],
-      selectAllValue: false,
-      selectAllIndeterminate: false,
       selectAllField: {
         status: {},
-        value: { data: [] },
         field: {
           name: 'selectAll',
           type: 'checkbox',
-          choices: [ { value: 'checked' } ]
-        } 
+        }
       }
     }
   },
-  watch: {
-
+  computed: {
+    selectAllValue() {
+      return this.checked.length > 0 ? { data: ['checked'] } : { data: [] }
+    },
+    selectAllChoice() {
+      const checkLen = this.checked.length;
+      const rowLen = this.rows.length;
+      return checkLen > 0 && checkLen !== rowLen ? {
+         value: 'checked',
+         indeterminate: true 
+        } : { value: 'checked' }
+    }
   },
   methods: {
-    selectAll(event) {
-      // Must interrupt the checked/unchecked input cycle here to use indeterminate state,
-      // which is technically checked and dependent on UI's state.
-      // Also, instead of directly mutating the `checked` array here, fire a state change
-      // from within the child checkbox. Make the appropriate mutations when those events bubble back up
-      event.preventDefault();
-
-      // select all
-      if (!this.checked.length) {
-        this.rows.forEach((row) => {
-          this.$refs[row.id][0].check();
-        });
-        return;
-      }
-      
-      // unselect all
-      if (this.checked.length <= this.rows.length) {
-        this.rows.forEach((row) => {
-          this.$refs[row.id][0].clear();
-        });
+    toggleRowCheck(event, id) {
+      if (this.checked.includes(id)) {
+        this.checked = this.checked.filter(item => item !== id);
+        this.checkboxes[id].value.data = [];
+      } else {
+        this.checked.push(id);
+        this.checkboxes[id].value.data = ['checked'];
       }
     },
-
-    // handle state via the checkbox input event
-    // all state changes are 'heard' through here, even if we prompt them from elswhere
-    checkHandler(id, isChecked) {
-      if (isChecked && !this.checked.includes(id)) {
-        this.checked.push(id);
-      }
-      if (!isChecked && this.checked.includes(id)) {
-        this.checked = this.checked.filter(rowId => rowId !== id);
-      }
-
+    selectAll(event) {
       if (!this.checked.length) {
-        this.allChecked = false;
-        this.someChecked = false;
-        this.selectAllValue = false;
-        this.selectAllIndeterminate = false;
-        return;
-      }
-
-      if (this.checked.length === this.rows.length) {
-        this.allChecked = true;
-        this.someChecked = false;
-        this.selectAllValue = true;
-        this.selectAllIndeterminate = false;
+        this.rows.forEach((row) => {
+          this.toggleRowCheck('checked', row.id);
+        });
         return;
       }
 
       if (this.checked.length <= this.rows.length) {
-        this.allChecked = false;
-        this.someChecked = true;
-        this.selectAllValue = true;
-        this.selectAllIndeterminate = true;
-        return;
+        this.checked.forEach((id) => {
+          this.toggleRowCheck('checked', id);
+        });
       }
     },
 
@@ -215,5 +209,38 @@ export default {
 
   .apos-table /deep/ .apos-choice-label {
     margin-top: 0;
+  }
+
+  .apos-table__cell,
+  .apos-table__row {
+    @include apos-transition();
+  }
+  .apos-table__cell {
+    padding: 12.5px 4.5px;
+    border-bottom: 1px solid var(--a-base-9);
+  }
+
+  .apos-table__link {
+    color: var(--a-primary);
+  }
+
+  .apos-table__row:hover {
+    box-shadow:  0 8px 12px -12px rgba(0, 0, 0, 0.3);
+  }
+  .apos-table__row:hover .apos-table__cell,
+  .apos-table__row.is-selected .apos-table__cell {
+    background-color: var(--a-base-10);
+    border-bottom: 1px solid var(--a-base-7)
+  }
+  
+  .apos-table__cell-field {
+    margin: 0;
+  }
+  // might have to be expanded kinda magic
+  .apos-table__cell-field--title {
+    max-width: 400px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 </style>
