@@ -175,7 +175,10 @@ $box-width: 14px;
     border-color: var(--a-base-4);
     background-color: var(--a-base-4);
   }
-
+  .apos-input--choice:checked,
+  .apos-input--choice[checked] {
+    position: relative !important;
+  }
   .apos-input--choice:checked + &,
   .apos-input--choice[checked] + & {
     background-color: var(--a-primary);

@@ -17,8 +17,9 @@ export const tagApplyTagMenu = () => ({
   },
   data() {
     return {
-      tags: data.tags
+      tags: data.tags,
+      applyTo: data.applyTo
     };
   },
-  template: `<AposTagApply v-on:add-tag="log" :tags="tags" />`
+  template: `<AposTagApply v-on:add-tag="log" :tags="tags" :applyTo="applyTo" v-on:update="log" />`
 });

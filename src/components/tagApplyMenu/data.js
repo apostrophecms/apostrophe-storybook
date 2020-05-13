@@ -1,27 +1,43 @@
 export default {
+  applyTo: [
+    'reduce-earning-muscle-wonder-deciding',
+    'lose-boyd-inside-tries-descartes',
+    'oriented-smear-bodies-hedge-vermont'
+  ],
   tags: [
     {
       label: 'Nature',
       slug: 'nature',
-      checked: true
+      checked: [
+        'reduce-earning-muscle-wonder-deciding',
+        'lose-boyd-inside-tries-descartes',
+        'oriented-smear-bodies-hedge-vermont'
+      ]
     },
     {
       label: 'Nurture',
       slug: 'nurture',
-      checked: true
+      checked: [
+        'reduce-earning-muscle-wonder-deciding',
+        'lose-boyd-inside-tries-descartes',
+        'oriented-smear-bodies-hedge-vermont'
+      ]
     },
     {
       label: 'Natural',
-      slug: 'natuwral',
-      partial: true
+      slug: 'natural',
+      checked: [
+        'reduce-earning-muscle-wonder-deciding',
+        'oriented-smear-bodies-hedge-vermont'
+      ]
     },
     {
       label: 'Niceness',
-      slug: 'wefwef'
+      slug: 'niceness'
     },
     {
-      label: 'Nastyness',
-      slug: 'wefwfefff'
+      label: 'Nastiness',
+      slug: 'nastiness'
     }
   ]
 };
