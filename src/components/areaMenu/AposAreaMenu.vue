@@ -32,6 +32,7 @@
                 :class="{'is-active': active === index}"
                 :id="menuId + '-group-' + index"
                 :aria-labelledby="menuId + '-trigger-' + index"
+                :aria-expanded="active === index ? 'true' : 'false'"
               >
               <li class="apos-area-menu__item" 
                 v-for="(child, childIndex) in item.items" 
