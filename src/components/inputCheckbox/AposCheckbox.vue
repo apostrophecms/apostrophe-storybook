@@ -32,7 +32,6 @@ export default {
   },
   methods: {
     readOnly() {
-      console.log('hi read only');
       event.preventDefault();
       event.stopPropagation();
       this.$emit('toggle', this.choice.value);
