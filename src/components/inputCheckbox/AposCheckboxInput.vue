@@ -28,13 +28,6 @@ export default {
     AposInputWrapper,
     AposCheckbox
   },
-  // watch: {
-  //   'value.data': function(newVal) {
-  //     console.log('change');
-  //     console.log(newVal);
-  //     console.log(this.value.data);
-  //   }
-  // },
   methods: {
     update(newValue) {
       if (this.value.data.includes(newValue)) {
@@ -52,7 +45,7 @@ export default {
       }
 
       if (this.field.required &&
-        !Array.isArray(values) && values.length === 0) {
+        !Array.isArray(values) && (!values || !values.length)) {
         return 'required';
       }
 

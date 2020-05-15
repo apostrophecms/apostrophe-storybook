@@ -2,35 +2,36 @@
   <div class="apos-apply-tag-menu">
     <AposContextMenu :tipAlignment="tipAlignment">
       <div class="apos-apply-tag-menu__inner">
-        <input type="checkbox" @click.stop="dd">
-        <AposStringInput v-on:input="updateInput" :field="field" :value="value" :status="status" />
-        <ol v-if="tags" class="apos-apply-tag-menu__tags">
-          <!-- <AposTagApplyTagItem v-for="tag in tags" :tag="tag" :key="tag.slug" /> -->
-          <li v-for="(box, key) in checkboxes" :key="key">
-            <AposCheckbox 
-              :id="generateId(box.choice.value)" 
-              :field="box.field" 
-              :status="box.status" 
-              :value="box.value" 
-              :choice="box.choice"
-              v-on:toggle="update"
-            />
-          </li>
-        </ol>
-        <div class="apos-apply-tag-menu__primary-action">
+`        <AposStringInput v-on:input="updateSearchInput" 
+          :field="searchField" :value="searchValue" :status="searchStatus" ref="textInput"
+        />
+        <div class="apos-apply-tag__create">
           <AposButton 
-            v-on:click="$emit(primaryAction.action, inputValue)" 
-            :label="primaryAction.label"
-            type="primary"
+            v-on:click="create" 
+            :label='createLabel'
+            type="quiet"
+            :disabled="disabledCreate"
           />
         </div>
+        <ol v-if="tags" class="apos-apply-tag-menu__tags">
+          <transition-group name="fade" tag="li">
+            <li class="apos-apply-tag-menu__tag" v-for="tag in searchTags" :key="tag.slug">
+              <AposCheckbox 
+                :field="checkboxes[tag.slug].field" 
+                :status="checkboxes[tag.slug].status" 
+                :value="checkboxes[tag.slug].value"
+                :choice="checkboxes[tag.slug].choice"
+                v-on:toggle="update"
+              />
+            </li>
+          </transition-group>
+        </ol>
       </div>
     </AposContextMenu>
   </div>
 </template>
 
 <script>
-  import AposTagApplyTagItem from './AposTagApplyTagItem.vue';
   import AposContextMenu from '../contextMenu/AposContextMenu.vue';
   import AposStringInput from '../inputString/AposStringInput.vue';
   import AposCheckbox from '../inputCheckbox/AposCheckbox.vue';
@@ -63,88 +64,138 @@
       AposContextMenu,
       AposStringInput,
       AposButton,
-      AposTagApplyTagItem,
       AposCheckbox
     },
     data() {
       const checkboxes = {};
       this.tags.forEach((tag) => {
-        const box = {
-          field: {
-            type: 'checkbox',
-          },
-          status: {},
-          value: { data: [] }
-        };
-        box.choice = {
-          label: tag.label,
-          value: tag.slug
-        }
-        if (tag.checked && tag.checked.length) {
-          if (tag.checked.length !== this.applyTo.length) {
-            box.choice.indeterminate = true;
-          }
-          box.value.data.push(tag.slug)
-        }
-        checkboxes[tag.slug] = box;
+        checkboxes[tag.slug] = createCheckbox(tag, this.applyTo);
       });
       return {
+        creating: false,
+        searchValue: { data: '' },
+        searchStatus: {},
         checkboxes,
-        // previousData: JSON.parse(JSON.stringify(checkboxes.value.data)),
         myTags: this.tags,
-        inputValue: '',
-        skipNext: false,
-        field: {
+        searchInputValue: ''
+      }
+    },
+    computed: {
+      disabledCreate() {
+        const matches = this.myTags.filter((tag) => {
+          return tag.slug === this.searchInputValue;
+        });
+        if (matches.length) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+      searchTags() {
+        if (this.creating) {
+          return;
+        }
+        if (this.searchInputValue.length > 2) {
+          return this.myTags.filter((tag) => {
+            return tag.slug.includes(this.searchInputValue);
+          });
+        } else {
+          return this.myTags;
+        }
+      },
+      createLabel() {
+        if (this.searchInputValue.length) {
+          return `Create tag "${this.searchInputValue}"`
+        } else {
+          return 'Create new tag'
+        }
+      },
+      searchField() {
+        return {
           name: 'tagSearch',
-          label: 'Add Tags',
+          label: 'Apply Tags',
           placeholder: 'Tags...',
           help: 'Find an existing tag or add a new one',
-          icon: 'Magnify'
-        },
-        value: { data: '' },
-        status: {},
+          icon: (!this.searchTags || !this.searchTags.length) ? 'Pencil' : 'Magnify'
+        }
       }
     },
     methods: {
-      dd(event) {
-        event.stopPropagation();
-        event.preventDefault();
+      create() {
+        if (!this.searchInputValue || !this.searchInputValue.length) {
+          this.creating = true;
+          this.searchValue.data = 'New Tag';
+          this.$refs.textInput.$el.querySelector('input').focus();
+          this.$refs.textInput.$el.querySelector('input').select();
+        } else {
+          this.$emit('createTag', this.searchInputValue);
+          const tag = {
+            label: this.searchInputValue,
+            slug: this.searchInputValue,
+            checked: this.applyTo
+          }
+          this.checkboxes[tag.slug] = createCheckbox(tag, this.applyTo)
+          this.myTags.unshift(tag);
+          this.creating = false;
+          this.emitState();
+        }
       },
       update(slug) {
         const tag = this.myTags.find(tag => tag.slug === slug);
         const box = this.checkboxes[slug];
         if (!tag.checked) {
           tag.checked = this.applyTo;
+          box.value.data.push(slug);
         } else {
           if (tag.checked.length === this.applyTo.length) {
             // previously full check, unapply to all
             delete tag.checked;
+            box.value.data = [];
           } else {
             // mixed check, check all
-            // reinforce checked state
-            // this.$nextTick(() => {
-              tag.checked = this.applyTo;
-              box.value.data.push(slug);
-              delete box.choice.indeterminate;
-            // });
+            tag.checked = this.applyTo;
+            this.checkboxes[slug].value.data = [slug];
+            delete box.status.readOnly;
+            delete box.choice.indeterminate;
           }
         }
 
-        // update previousData for future comparison
-        // this.previousData = [...this.checkboxes.value.data];
         // done, emit
         this.emitState();
       },
       emitState() {
         this.$emit('update', this.myTags)
       },
-      updateInput(value) {
-        this.inputValue = value.data;
-      },
-      // emitPrimaryAction() {
-      //   this.$emit()
-      // }
+      updateSearchInput(value) {
+        this.searchInputValue = value.data; 
+        if (!this.searchInputValue) {
+          this.creating = false;
+        }       
+      }
     }
+  }
+
+  function createCheckbox(tag, applyTo) {
+    const checkbox = {
+      field: {
+        type: 'checkbox',
+        name: tag.slug
+      },
+      status: {},
+      value: { data: [] },
+      choice: {
+        label: tag.label,
+        value: tag.slug
+      }
+    }
+    if (tag.checked && tag.checked.length) {
+      if (tag.checked.length !== applyTo.length) {
+        checkbox.choice.indeterminate = true;
+        checkbox.status.readOnly = true;
+      }
+      checkbox.value.data.push(tag.slug)
+    }
+    return checkbox;
   }
 </script>
 
@@ -161,8 +212,29 @@
     margin-top: 10px;
   }
 
+  .apos-apply-tag__create {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+  }
+
   .apos-apply-tag-menu__tags {
     @include apos-list-reset();
-    // margin-top: 20px;
+    max-height: 160px;
+    overflow-y: scroll;
+    margin-top: 15px;
   }
+
+  .apos-apply-tag-menu__tag {
+    margin-top: 10px;
+  }
+
+  .fade-enter-active, .fade-leave-active {
+    transition: opacity .2s;
+  }
+
+  .fade-enter, .fade-leave-to {
+    opacity: 0;
+  }
+  
 </style>

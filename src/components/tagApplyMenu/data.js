@@ -38,6 +38,34 @@ export default {
     {
       label: 'Nastiness',
       slug: 'nastiness'
+    },
+    {
+      label: 'Nuance',
+      slug: 'nuance'
+    },
+    {
+      label: 'Nightly',
+      slug: 'nightly'
+    },
+    {
+      label: 'Napkins',
+      slug: 'napkins'
+    },
+    {
+      label: 'Neurons',
+      slug: 'neurons'
+    },
+    {
+      label: 'Neurosis',
+      slug: 'neurosis'
+    },
+    {
+      label: 'New Wave',
+      slug: 'new-wave'
+    },
+    {
+      label: 'Nespresso',
+      slug: 'nespresso'
     }
   ]
 };

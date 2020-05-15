@@ -2,7 +2,7 @@
   <label class="apos-choice-label" :for="id">
     <input type="checkbox" class="apos-sr-only apos-input--choice apos-input--checkbox"
       :value="choice.value" :name="field.name" :id="id" :aria-label="choice.label"
-      tabindex="0" :disabled="status.disabled" @input.stop="toggle" v-model="value.data"
+      tabindex="0" :disabled="status.disabled" v-on="{ 'click': status.readOnly ? readOnly : toggle }" v-model="value.data"
     />
     <span class="apos-input-indicator" aria-hidden="true">
       <component :is="`${
@@ -31,7 +31,13 @@ export default {
     id: String,
   },
   methods: {
-    toggle() {
+    readOnly() {
+      console.log('hi read only');
+      event.preventDefault();
+      event.stopPropagation();
+      this.$emit('toggle', this.choice.value);
+    },
+    toggle(event) {
       this.$emit('toggle', this.choice.value);
     }
   }
