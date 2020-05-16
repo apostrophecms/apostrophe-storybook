@@ -4,10 +4,10 @@
       <div class="apos-input-wrapper">
         <textarea :class="classes"
           v-if="type === 'textarea'" rows="5"
-          v-model="next" :placeholder=field.placeholder
+          v-model="next" :placeholder=field.placeholder @keydown.13="$emit('return')"
           :disabled="status.disabled" :required="field.required" :id="uid"></textarea>
         <input :class="classes" v-else
-          v-model="next" :type="type" :placeholder=field.placeholder
+          v-model="next" :type="type" :placeholder=field.placeholder @keydown.13="$emit('return')"
           :disabled="status.disabled" :required="field.required" :id="uid">
         <component 
           v-if="iconComponent"

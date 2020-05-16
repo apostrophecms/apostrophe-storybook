@@ -2,7 +2,9 @@
   <div class="apos-apply-tag-menu">
     <AposContextMenu :tipAlignment="tipAlignment">
       <div class="apos-apply-tag-menu__inner">
-`        <AposStringInput v-on:input="updateSearchInput" 
+        <AposStringInput 
+          v-on:input="updateSearchInput"
+          v-on:return="create"
           :field="searchField" :value="searchValue" :status="searchStatus" ref="textInput"
         />
         <div class="apos-apply-tag__create">
@@ -13,9 +15,9 @@
             :disabled="disabledCreate"
           />
         </div>
-        <ol v-if="tags" class="apos-apply-tag-menu__tags">
-          <transition-group name="fade" tag="li">
-            <li class="apos-apply-tag-menu__tag" v-for="tag in searchTags" :key="tag.slug">
+        <transition name="fade">
+          <ol v-if="searchTags.length && !creating" class="apos-apply-tag-menu__tags">
+            <li class="apos-apply-tag-menu__tag" v-for="tag in searchTags" :key="keyPrefix + '-' + tag.slug">
               <AposCheckbox 
                 :field="checkboxes[tag.slug].field" 
                 :status="checkboxes[tag.slug].status" 
@@ -24,8 +26,20 @@
                 v-on:toggle="update"
               />
             </li>
-          </transition-group>
-        </ol>
+          </ol>
+          <div v-if="!searchTags.length && !creating" class="apos-apply-tag-menu__empty">
+            <p class="apos-apply-tag-menu__empty-message">
+              We couldn't find any matching tags. Perhaps 
+              <AposButton 
+                v-on:click="create" 
+                :label="'create ' + searchInputValue + '?'"
+                type="quiet"
+                :disabled="disabledCreate"
+              />
+            </p>
+            <span class="apos-apply-tag-menu__empty-icon">🌾</span>
+          </div>
+        </transition>
       </div>
     </AposContextMenu>
   </div>
@@ -37,6 +51,7 @@
   import AposCheckbox from '../inputCheckbox/AposCheckbox.vue';
   import AposButton from '../button/AposButton.vue';
   import AposHelpers from '../../mixins/AposHelpersMixin';
+  // import Icon from 'vue-material-design-icons/TailWind.vue';
 
   export default {
     mixins: [AposHelpers],
@@ -64,7 +79,8 @@
       AposContextMenu,
       AposStringInput,
       AposButton,
-      AposCheckbox
+      AposCheckbox,
+      // GaugeEmpty
     },
     data() {
       const checkboxes = {};
@@ -77,10 +93,12 @@
         searchStatus: {},
         checkboxes,
         myTags: this.tags,
-        searchInputValue: ''
+        searchInputValue: '',
+        keyPrefix: this.generateId('key') // used to keep checkboxes in sync w state
       }
     },
     computed: {
+      
       disabledCreate() {
         const matches = this.myTags.filter((tag) => {
           return tag.slug === this.searchInputValue;
@@ -93,7 +111,7 @@
       },
       searchTags() {
         if (this.creating) {
-          return;
+          return [];
         }
         if (this.searchInputValue.length > 2) {
           return this.myTags.filter((tag) => {
@@ -126,7 +144,9 @@
           this.creating = true;
           this.searchValue.data = 'New Tag';
           this.$refs.textInput.$el.querySelector('input').focus();
-          this.$refs.textInput.$el.querySelector('input').select();
+          this.$nextTick(() => {
+            this.$refs.textInput.$el.querySelector('input').select();
+          })
         } else {
           this.$emit('createTag', this.searchInputValue);
           const tag = {
@@ -134,7 +154,7 @@
             slug: this.searchInputValue,
             checked: this.applyTo
           }
-          this.checkboxes[tag.slug] = createCheckbox(tag, this.applyTo)
+          this.checkboxes[tag.slug] = createCheckbox(tag, this.applyTo);
           this.myTags.unshift(tag);
           this.creating = false;
           this.emitState();
@@ -149,8 +169,10 @@
         } else {
           if (tag.checked.length === this.applyTo.length) {
             // previously full check, unapply to all
-            delete tag.checked;
-            box.value.data = [];
+            
+              delete tag.checked;
+              box.value.data = [];
+            
           } else {
             // mixed check, check all
             tag.checked = this.applyTo;
@@ -159,7 +181,8 @@
             delete box.choice.indeterminate;
           }
         }
-
+        // refresh checkboxes :}
+        this.keyPrefix = this.generateId('key');
         // done, emit
         this.emitState();
       },
@@ -167,7 +190,7 @@
         this.$emit('update', this.myTags)
       },
       updateSearchInput(value) {
-        this.searchInputValue = value.data; 
+        this.searchInputValue = value.data.toLowerCase(); 
         if (!this.searchInputValue) {
           this.creating = false;
         }       
@@ -229,12 +252,37 @@
     margin-top: 10px;
   }
 
+  .apos-apply-tag-menu__empty {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 40px 0 20px;
+  }
+
+  .apos-apply-tag-menu__empty-message {
+    text-align: center;
+    margin-bottom: 20px;
+    max-width: 240px;
+    font-size: map-get($font-sizes, default);
+  }
+
+  .apos-apply-tag-menu__empty-icon {
+    color: var(--a-base-5);
+  }
+
+  .apos-apply-tag-menu__empty-icon {
+    font-size: 32px;
+  }
+
   .fade-enter-active, .fade-leave-active {
-    transition: opacity .2s;
+    transition: all .5s;
   }
 
   .fade-enter, .fade-leave-to {
+    position: absolute;
+    width: 100%;
     opacity: 0;
+    transform: translateY(-5px);
   }
   
 </style>
