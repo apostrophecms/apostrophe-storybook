@@ -1,13 +1,17 @@
 <template>
-  <button type="button" @click="click" class="apos-button" :class="modifierClass" v-bind:busy="busy" v-bind:disabled="isDisabled">
-    <AposSpinner :color="spinnerColor" />
-    <div class="apos-button__content">
-      <component :size="15" class="apos-button__icon" v-if="icon" v-bind:is="iconComponent"></component>
-      <span class="apos-button__label" :class="{ 'apos-sr-only' : iconOnly }">
-        {{ label }}
-      </span>
-    </div>
-  </button>
+  <div class="apos-button__wrapper">
+    <button type="button" @click="click" class="apos-button" :class="modifierClass" v-bind:busy="busy" v-bind:disabled="isDisabled">
+      <AposSpinner :color="spinnerColor" />
+      <div class="apos-button__content">
+        <component :size="15" class="apos-button__icon" v-if="icon" v-bind:is="iconComponent"></component>
+        <span class="apos-button__label" :class="{ 'apos-sr-only' : iconOnly }">
+          {{ label }}
+        </span>
+      </div>
+    </button>
+    <slot v-if="hasContextMenu" v-slot="contextMenuOpen" :open="contextMenuOpen" name="contextMenu"></slot>
+  </div>
+
 </template>
 
 <script>
@@ -28,9 +32,18 @@ export default {
     busy: Boolean,
     icon: String,
     type: String,
-    iconOnly: Boolean
+    iconOnly: Boolean,
+    state: Array
+  },
+  data() {
+    return {
+      contextMenuOpen: true
+    }
   },
   computed: {
+    hasContextMenu() {
+      return !!this.$slots.contextMenu;
+    },
     modifierClass() {
       const modifiers = [];
 
@@ -50,6 +63,12 @@ export default {
 
       if (this.iconOnly) {
         modifiers.push(`apos-button--icon`);
+      }
+
+      if (this.state && this.state.length) {
+        this.state.forEach((state) => {
+          modifiers.push(`is-${state}`);
+        });
       }
 
       if (modifiers.length > 0) {
@@ -81,12 +100,18 @@ export default {
   methods: {
     click() {
       this.$emit('click');
+
     }
   }
 }
 </script>
 
 <style lang="scss">
+  .apos-button__wrapper {
+    position: relative;
+    display: inline;
+  }
+
   .apos-button {
     position: relative;
     color: var(--a-text-primary);
@@ -94,7 +119,7 @@ export default {
     padding: 10px 20px;
     border-radius: var(--a-border-radius);
     font-size: map-get($font-sizes, modal);
-    letter-spacing: 0.75px; // how do we reuse this
+    letter-spacing: 0.75px;
     border: 1px solid var(--a-base-5);
     transition: all 0.2s ease;
     overflow: hidden;
@@ -102,7 +127,7 @@ export default {
       cursor: pointer;
       background-color: var(--a-base-8);
     }
-    &:active {
+    &:active, &.is-active {
       background-color: var(--a-base-7);
     }
     &:focus {
@@ -153,6 +178,7 @@ export default {
     font-weight: 500;
     &:hover,
     &:active,
+    &.is-active
     &:focus {
       background-color: transparent;
       text-decoration: underline;
@@ -225,7 +251,8 @@ export default {
     &:hover {
       background-color: var(--a-base-9);
     }
-    &:active {
+    &:active,
+    &.is-active {
       background-color: var(--a-base-8);
     }
     &:focus {
@@ -248,7 +275,8 @@ export default {
     &:hover {
       background-color: var(--a-primary-button-hover);
     }
-    &:active {
+    &:active,
+    &.is-active {
       background-color: var(--a-primary-button-active);
     }
     &:focus {
@@ -271,7 +299,8 @@ export default {
     &:hover {
       background-color: var(--a-base-1);
     }
-    &:active {
+    &:active,
+    &.is-active {
       background-color: var(--a-base-1);
     }
     &:focus {
@@ -293,7 +322,8 @@ export default {
     &:hover {
       background-color: var(--a-danger-button-hover);
     }
-    &:active {
+    &:active,
+    &.is-active {
       background-color: var(--a-danger-button-active);
     }
     &:focus {

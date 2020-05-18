@@ -1,34 +1,32 @@
 <template>
-  <div class="apos-apply-tag-menu">
-    <AposContextMenu :tipAlignment="tipAlignment">
-      <div class="apos-apply-tag-menu__inner">
+  <AposContextMenu :button="button" :tipAlignment="tipAlignment" :origin="origin">
+    <div class="apos-apply-tag-menu__inner">
 `        <AposStringInput v-on:input="updateSearchInput" 
-          :field="searchField" :value="searchValue" :status="searchStatus" ref="textInput"
+        :field="searchField" :value="searchValue" :status="searchStatus" ref="textInput"
+      />
+      <div class="apos-apply-tag__create">
+        <AposButton 
+          v-on:click="create" 
+          :label='createLabel'
+          type="quiet"
+          :disabled="disabledCreate"
         />
-        <div class="apos-apply-tag__create">
-          <AposButton 
-            v-on:click="create" 
-            :label='createLabel'
-            type="quiet"
-            :disabled="disabledCreate"
-          />
-        </div>
-        <ol v-if="tags" class="apos-apply-tag-menu__tags">
-          <transition-group name="fade" tag="li">
-            <li class="apos-apply-tag-menu__tag" v-for="tag in searchTags" :key="tag.slug">
-              <AposCheckbox 
-                :field="checkboxes[tag.slug].field" 
-                :status="checkboxes[tag.slug].status" 
-                :value="checkboxes[tag.slug].value"
-                :choice="checkboxes[tag.slug].choice"
-                v-on:toggle="update"
-              />
-            </li>
-          </transition-group>
-        </ol>
       </div>
-    </AposContextMenu>
-  </div>
+      <ol v-if="tags" class="apos-apply-tag-menu__tags">
+        <transition-group name="fade" tag="li">
+          <li class="apos-apply-tag-menu__tag" v-for="tag in searchTags" :key="tag.slug">
+            <AposCheckbox 
+              :field="checkboxes[tag.slug].field" 
+              :status="checkboxes[tag.slug].status" 
+              :value="checkboxes[tag.slug].value"
+              :choice="checkboxes[tag.slug].choice"
+              v-on:toggle="update"
+            />
+          </li>
+        </transition-group>
+      </ol>
+    </div>
+  </AposContextMenu>
 </template>
 
 <script>
@@ -41,10 +39,6 @@
   export default {
     mixins: [AposHelpers],
     props: {
-      tipAlignment: {
-        type: String,
-        default: 'left'
-      },
       primaryAction: {
         type: Object,
         default() {
@@ -54,10 +48,17 @@
           }
         }
       },
-      tags: Array,
+      tags: {
+        type: Array,
+        default: []
+      },
       applyTo: {
         type: Array,
         required: true
+      },
+      open: {
+        type: Boolean,
+        default: false
       }
     },
     components: { 
@@ -77,7 +78,15 @@
         searchStatus: {},
         checkboxes,
         myTags: this.tags,
-        searchInputValue: ''
+        searchInputValue: '',
+        tipAlignment: 'left',
+        origin: 'below',
+        button: {
+          label: 'Context Menu Label',
+          iconOnly: true,
+          icon: 'Label',
+          type: 'outline'
+        }
       }
     },
     computed: {
