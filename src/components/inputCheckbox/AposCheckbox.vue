@@ -32,18 +32,12 @@ export default {
   },
   methods: {
     readOnly(event) {
-      this.$nextTick(() => {
-        event.preventDefault();
-        event.stopPropagation();
-        console.log('readonlying');
-        this.$emit('toggle', this.choice.value);
-      })
+      event.preventDefault();
+      event.stopPropagation();
+      this.$emit('toggle', this.choice.value);
     },
     toggle(event) {
-      this.$nextTick(() => {
-        console.log('toggling');
-        this.$emit('toggle', this.choice.value);
-      })
+      this.$emit('toggle', this.choice.value);
     }
   }
 }
