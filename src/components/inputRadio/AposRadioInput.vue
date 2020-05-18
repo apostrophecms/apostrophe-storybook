@@ -38,7 +38,7 @@ export default {
       return uid + value.replace(/\s/g, '');
     },
     validate(value) {
-      if (this.field.required && !value.length) {
+      if (this.field.required && (!value || !value.length)) {
         return 'required';
       }
 

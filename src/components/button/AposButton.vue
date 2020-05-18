@@ -145,6 +145,39 @@ export default {
     padding: 7.5px 10px;
   }
 
+  .apos-button--quiet {
+    border: none;
+    padding: 0;
+    color: var(--a-primary);
+    background-color: transparent;
+    font-weight: 500;
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: transparent;
+      text-decoration: underline;
+      color: var(--a-primary-button-hover);
+    }
+    &:hover:not([disabled]),
+    &:focus:not([disabled]) {
+      transform: none;
+    }
+    &:focus {
+      box-shadow: none;
+      outline: none;
+      border: none;
+    }
+    &[disabled] {
+      background-color: transparent;
+      border: none;
+      &:hover {
+        text-decoration: none;
+        cursor: not-allowed;
+        color: var(--a-base-5);
+      }
+    }
+  }
+
   .apos-button--gradient-on-hover {
     z-index: 0;
     &:after {

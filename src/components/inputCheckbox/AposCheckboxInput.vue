@@ -45,7 +45,7 @@ export default {
       }
 
       if (this.field.required &&
-        !Array.isArray(values) && values.length === 0) {
+        !Array.isArray(values) && (!values || !values.length)) {
         return 'required';
       }
 

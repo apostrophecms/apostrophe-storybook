@@ -23,7 +23,8 @@ export const buttons = () => ({
             Primary: 'primary',
             Outline: 'outline',
             Input: 'input',
-            Danger: 'danger'
+            Danger: 'danger',
+            Quiet: 'quiet'
           },
           null
         )

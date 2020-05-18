@@ -100,6 +100,7 @@ $input-max-width: 460px;
   color: var(--a-base-2);
   &:hover {
     cursor: pointer;
+    color: var(--a-primary-text);
   }
   & + &,
   .apos-legend + & {
@@ -175,7 +176,10 @@ $box-width: 12px;
     border-color: var(--a-base-4);
     background-color: var(--a-base-4);
   }
-
+  .apos-input--choice:checked,
+  .apos-input--choice[checked] {
+    position: relative !important;
+  }
   .apos-input--choice:checked + &,
   .apos-input--choice[checked] + & {
     background-color: var(--a-primary);
