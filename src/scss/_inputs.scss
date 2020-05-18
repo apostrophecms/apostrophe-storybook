@@ -112,7 +112,7 @@ $input-max-width: 460px;
   color: var(--a-base-3);
 }
 
-$box-width: 14px;
+$box-width: 12px;
 
 .apos-input--choice {
   display: inline;
@@ -153,6 +153,10 @@ $box-width: 14px;
   display: flex;
 }
 
+.apos-choice-label-text {
+  margin-left: $spacing-base;
+}
+
 .apos-input-indicator {
   @include apos-transition(all, .1s, ease-in-out);
   display: inline-flex;
@@ -162,10 +166,6 @@ $box-width: 14px;
   height: $box-width;
   border: 1px solid var(--a-base-4);
   background-color: var(--a-base-10);
-
-  .apos-choice-label > & {
-    margin-right: $spacing-base;
-  }
 
   .apos-choice-label:hover > &,
   .apos-choice-label:focus > & {
