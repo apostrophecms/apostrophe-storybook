@@ -31,7 +31,7 @@ export default {
     id: String,
   },
   methods: {
-    readOnly() {
+    readOnly(event) {
       event.preventDefault();
       event.stopPropagation();
       this.$emit('toggle', this.choice.value);

@@ -2,11 +2,7 @@
   <AposModalToolbar className="apos-media-manager-toolbar">
     <template #leftControls>
       <AposButton label="Exit" :iconOnly="true" icon="CheckboxBlankOutline" type="outline" />
-      <AposButton label="Tags" :iconOnly="true" icon="Label" type="outline">
-        <template #contextMenu>
-          <AposTagApply />
-        </template>
-      </AposButton>
+      <AposTagApply />
       <AposButton label="Delete" :iconOnly="true" icon="Delete" type="outline" />
       <AposButton label="More" :iconOnly="true" icon="DotsVertical" type="outline" />
     </template>

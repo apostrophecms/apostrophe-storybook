@@ -1,95 +1,35 @@
-export default {
-  menu: [
-    {
-      label: 'Layouts',
-      items: [
-        {
-          label: 'Two Column',
-          action: 'add-two-column',
-          icon: 'ViewColumn'
-        },
-        {
-          label: 'Three Column',
-          action: 'add-three-column',
-          icon: 'ViewColumn'
-        },
-        {
-          label: 'Two Thirds',
-          action: 'add-two-thirds',
-          icon: 'ViewColumn'
-        },
-        {
-          label: 'Quarter',
-          action: 'add-quarters',
-          icon: 'ViewColumn'
-        }
-      ]
-    },
-    {
-      label: 'Content Widgets',
-      items: [
-        {
-          label: 'Marquee',
-          action: 'add-marquee',
-          icon: 'ImageSizeSelectActual'
-        },
-        {
-          label: 'Image',
-          action: 'add-image',
-          icon: 'Image'
-        },
-        {
-          label: 'Video',
-          action: 'add-video',
-          icon: 'Video'
-        },
-        {
-          label: 'Instagram Feed',
-          action: 'add-insta-feed',
-          icon: 'Instagram'
-        },
-        {
-          label: 'Cool API Thing',
-          action: 'add-api-thing',
-          icon: 'Web'
-        }
-      ]
-    },
-    {
-      label: 'Two Column',
-      action: 'add-two-column',
-      icon: 'ViewColumn'
-    },
-    {
-      label: 'Three Column',
-      action: 'add-three-column',
-      icon: 'ViewColumn'
-    },
-    {
-      label: 'Marquee',
-      action: 'add-marquee',
-      icon: 'ImageSizeSelectActual'
-    },
-    {
-      label: 'Image',
-      action: 'add-image',
-      icon: 'Image'
-    },
-    {
-      label: 'Video',
-      action: 'add-video',
-      icon: 'Video'
-    },
-    {
-      label: 'Instagram Feed',
-      action: 'add-insta-feed',
-      icon: 'Instagram'
+import { LoremIpsum } from 'lorem-ipsum';
+import _ from 'underscore';
+import tags from './../tagApplyMenu/data';
+const lorem = new LoremIpsum({
+  wordsPerSentence: {
+    max: 6,
+    min: 1
+  }
+});
 
-    },
-    {
-      label: 'Cool API Thing',
-      action: 'add-api-thing',
-      icon: 'Web'
-    }
-  ]
+function randomTags() {
+  const randTags = [];
+  randTags.push(_.shuffle(tags.tags)[0]);
+  randTags.push(_.shuffle(tags.tags)[0]);
+  return randTags;
+};
+
+function createImages(num) {
+  const images = [];
+  for (let i = 0; i < num; i++) {
+    const title = lorem.generateSentences(1);
+    images.push({
+      id: `lesk-${Math.floor(Math.random() * Math.floor(10000)).toString()}`,
+      path: `https://source.unsplash.com/random/300x300?q=${Math.floor(Math.random() * Math.floor(1000)).toString()}`,
+      title,
+      slug: title.replace(' ', '-').toLowerCase(),
+      tags: randomTags()
+    });
+  };
+  return images;
+}
+
+export default {
+  images: createImages(30)
 };

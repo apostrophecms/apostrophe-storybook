@@ -38,7 +38,11 @@ export default {
     justify-content: space-between;
   }
 
-  .apos-toolbar__group--left .apos-button {
+  .apos-toolbar__group--left /deep/ .apos-button {
     margin-right: 5px;
+  }
+
+  .apos-toolbar__group {
+    display: flex;
   }
 </style>

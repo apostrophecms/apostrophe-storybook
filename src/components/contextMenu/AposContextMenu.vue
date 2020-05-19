@@ -1,5 +1,5 @@
 <template>
-  <div class="apos-context-menu" :class="classList">
+  <div class="apos-context-menu" :class="classList" ref="component">
     <!-- TODO refactor buttons to take a single config obj -->
     <AposButton 
       v-on:click="buttonClicked" :label="button.label" 
@@ -89,13 +89,20 @@
         document.removeEventListener('keydown', this.keyboard);
       },
       keyboard(event) {
+        // if user hits esc, close menu
         if (event.keyCode === 27) {
           this.open = false;
           this.unbind();
         }
       },
       clicks (event) {
-        if (!this.$refs.popup.contains(event.target) && !this.$refs.button.$el.contains(event.target)) {
+        // if user clicks outside menu component, close menu
+        const result = event.path.filter((item) => {
+          if (item.hasAttribute && item.hasAttribute(this.vueId)) {
+            return item;
+          }
+        });
+        if (!result.length) {
           this.open = false;
           this.unbind();
         }

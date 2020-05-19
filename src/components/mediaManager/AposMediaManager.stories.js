@@ -9,7 +9,9 @@ import AposModalRail from './../modal/AposModalRail.vue';
 import AposModalBody from './../modal/AposModalBody.vue';
 import AposTagList from './../tagList/AposTagList.vue';
 import AposMediaManagerToolbar from './AposMediaManagerToolbar.vue';
+import AposMediaManagerDisplay from './AposMediaManagerDisplay.vue';
 
+import mediaData from './data.js';
 import tagData from './../tagList/data.js';
 import TagApplyData from './../tagApplyMenu/data.js';
 
@@ -28,7 +30,8 @@ export const mediaManager = () => {
       AposModalRail,
       AposModalBody,
       AposTagList,
-      AposMediaManagerToolbar
+      AposMediaManagerToolbar,
+      AposMediaManagerDisplay
     },
     props: {
 
@@ -42,7 +45,8 @@ export const mediaManager = () => {
           showModal: true
         },
         tags: tagData,
-        applyTags: TagApplyData
+        applyTags: TagApplyData,
+        images: mediaData.images
       };
     },
     template: `
@@ -65,7 +69,7 @@ export const mediaManager = () => {
                 <AposMediaManagerToolbar />
               </template>
               <template #bodyMain>
-                body
+                <AposMediaManagerDisplay :images="images" />
               </template>
             </AposModalBody>
           </template>

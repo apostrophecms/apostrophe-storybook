@@ -9,7 +9,6 @@
         </span>
       </div>
     </button>
-    <slot v-if="hasContextMenu" v-slot="contextMenuOpen" :open="contextMenuOpen" name="contextMenu"></slot>
   </div>
 
 </template>
@@ -41,9 +40,6 @@ export default {
     }
   },
   computed: {
-    hasContextMenu() {
-      return !!this.$slots.contextMenu;
-    },
     modifierClass() {
       const modifiers = [];
 
@@ -100,7 +96,6 @@ export default {
   methods: {
     click() {
       this.$emit('click');
-
     }
   }
 }
