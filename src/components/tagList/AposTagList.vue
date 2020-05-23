@@ -12,15 +12,19 @@
       </ul>
     </div>
     <div v-else class="apos-tag-list__empty">
-      <p class="apos-hint apos-tag-list__empty-text">Tag your images to make searching and filtering the media manager easier!</p>
-      <span class="apos-emoji apos-tag-list__empty-icon">🗂️</span>
+      <AposEmptyState :emptyState="emptyState" />
     </div>
   </div>
 </template>
 
 <script>
 import AposTagListItem from './AposTagListItem.vue';
+import AposEmptyState from './../emptyState/AposEmptyState.vue';
 export default {
+  components: {
+    AposEmptyState,
+    AposTagListItem
+  },
   props: {
     tags: {
       type: Array
@@ -31,10 +35,12 @@ export default {
     },
 
   },
-  components: { AposTagListItem },
   data() {
     return {
-      active: []
+      active: [],
+      emptyState: {
+        message: 'Tag your images to make searching and filtering the media manager easier'
+      }
     }
   },
   methods: {
@@ -71,8 +77,9 @@ export default {
 .apos-tag-list__empty {
   display: flex;
   flex-direction: column;
-  height: 100%;
+  margin: 0 1rem;
   width: 100%;
+  height: 100%;
   justify-content: center;
   align-items: center;
 }

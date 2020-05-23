@@ -1,5 +1,5 @@
 <template>
-    <AposContextMenu :tipAlignment="tipAlignment">
+    <AposContextMenu :origin="origin" :tipAlignment="tipAlignment">
       <div class="apos-apply-tag-menu__inner">
         <AposStringInput 
           v-on:input="updateSearchInput"
@@ -64,7 +64,9 @@
       },
       tags: {
         type: Array,
-        default: []
+        default() {
+          return []
+        }
       },
       applyTo: {
         type: Array,

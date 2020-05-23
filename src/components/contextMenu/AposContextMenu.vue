@@ -6,8 +6,11 @@
       :type="button.type" :icon="button.icon" 
       :iconOnly="button.iconOnly" :state="buttonState" ref="button"
     />
-    <div class="apos-context-menu__popup" :class="{'is-visible': open}"
-    ref="popup" :aria-hidden="open ? 'false' : 'true'" role="dialog">
+    <div 
+      class="apos-primary-scrollbar apos-context-menu__popup" 
+      :class="{'is-visible': open}" ref="popup" :aria-hidden="open ? 'false' : 'true'" 
+      role="dialog" :style="position"
+    >
       <AposContextMenuTip 
         :align="tipAlignment"
         :origin="origin"
@@ -65,8 +68,22 @@
     data() {
       return {
         open: false,
-        vueId: this.$options._scopeId
+        vueId: this.$options._scopeId,
+        position: ''
       }
+    },
+    watch: {
+      open(newVal, oldVal) {
+        if (newVal) {
+          const top = 
+          this.position = this.calculatePosition();
+        }
+      }
+    },
+    mounted() {
+      // console.log(this.$refs.button);
+      // console.log(this.$refs.button.$el.offsetTop);
+      // console.log(this.$refs.button.$el.offsetLeft);
     },
     computed: {
       classList() {
@@ -83,10 +100,12 @@
       bind() {
         document.addEventListener('click', this.clicks);
         document.addEventListener('keydown', this.keyboard);
+        window.addEventListener('resize', this.positionPopup);
       },
       unbind() {
         document.removeEventListener('click', this.clicks);
         document.removeEventListener('keydown', this.keyboard);
+        window.removeEventListener('resize', this.positionPopup);
       },
       keyboard(event) {
         // if user hits esc, close menu
@@ -115,7 +134,38 @@
       },
       menuItemClicked(action) {
         this.$emit('itemClicked', action);
-      }
+      },
+      positionPopup() {
+        this.position = this.calculatePosition();
+      },
+      calculatePosition() {
+        const button = this.$refs.button.$el.querySelector('button');
+        const popup = this.$refs.popup
+        const rect = button.getBoundingClientRect();
+        const buttonHeight = button.offsetHeight;
+        let top, left;
+
+        if (this.origin === 'above') {
+          // menu appears above button
+          top = rect.top - popup.offsetHeight - 40;
+        } else {
+          // menu should appear below the button
+          top = rect.top + buttonHeight;
+        }
+
+        if (this.tipAlignment === 'center') {
+          // center
+          left = rect.left - (popup.offsetWidth / 2);
+        } else if (this.tipAlignment === 'right') {
+          //right
+          left = rect.left - popup.offsetWidth + 31;
+        } else {
+          // left
+          left = rect.left - 37;
+        }
+
+        return `top: ${top}px; left: ${left}px`;
+      },
     }
   }
 </script>
@@ -129,14 +179,15 @@
   }
 
   .apos-context-menu__popup {
-    position: absolute;
+    z-index: 10;
+    position: fixed;
     display: inline-block;
     color: var(--a-text-primary);
     opacity: 0;
     pointer-events: none;
     transform: scale(0.98) translateY(-8px);
     transform-origin: top left;
-    transition: all 0.15s ease;
+    transition: scale 0.15s ease, translateY 0.15s ease;
   }
 
   .apos-context-menu__popup.is-visible {
@@ -170,24 +221,24 @@
     padding: 10px 0;
   }
 
-  .apos-context-menu--tip-alignment-left .apos-context-menu__popup {
-    left: -15px;
-  }
+  // .apos-context-menu--tip-alignment-left .apos-context-menu__popup {
+  //   left: -15px;
+  // }
 
-  .apos-context-menu--tip-alignment-right .apos-context-menu__popup {
-    right: -12px
-  }
+  // .apos-context-menu--tip-alignment-right .apos-context-menu__popup {
+  //   right: -12px
+  // }
 
-  .apos-context-menu--tip-alignment-center .apos-context-menu__popup {
-    transform: translateX(-50%);
-    left: 50%;
-  }
+  // .apos-context-menu--tip-alignment-center .apos-context-menu__popup {
+  //   transform: translateX(-50%);
+  //   left: 50%;
+  // }
 
-  .apos-context-menu--origin-below .apos-context-menu__popup {
-    top: 40px;
-  }
+  // .apos-context-menu--origin-below .apos-context-menu__popup {
+  //   top: 40px;
+  // }
 
-  .apos-context-menu--origin-above .apos-context-menu__popup {
-    bottom: calc(100% + 35px);
-  }
+  // .apos-context-menu--origin-above .apos-context-menu__popup {
+  //   bottom: calc(100% + 35px);
+  // }
 </style>

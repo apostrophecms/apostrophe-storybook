@@ -2,6 +2,10 @@
   transition: $what $duration $ease;
 }
 
+@mixin apos-p-reset () {
+  margin: 0;
+}
+
 @mixin apos-align-icon () {
   display: flex;
   align-items: center;

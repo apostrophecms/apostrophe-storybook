@@ -2,7 +2,7 @@
   <AposModalToolbar className="apos-media-manager-toolbar">
     <template #leftControls>
       <AposButton label="Exit" :iconOnly="true" icon="CheckboxBlankOutline" type="outline" />
-      <AposTagApply />
+      <AposTagApply :tags="applyTags" :applyTo="[]"/>
       <AposButton label="Delete" :iconOnly="true" icon="Delete" type="outline" />
       <AposButton label="More" :iconOnly="true" icon="DotsVertical" type="outline" />
     </template>
@@ -29,10 +29,7 @@ export default {
     AposTagApply
   },
   props: {
-    menu: {
-      type: Array,
-      required: true
-    }
+    applyTags: Array 
   },
 
   data() {
@@ -44,7 +41,7 @@ export default {
           icon: 'Magnify',
         },
         status: {},
-        value: ''
+        value: { data: '' }
       }
     }
   },

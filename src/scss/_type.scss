@@ -15,14 +15,3 @@
   font-size: map-get($font-sizes, heading);
   font-weight: 500;
 }
-
-.apos-hint {
-  font-size: map-get($font-sizes, default);
-  font-weight: 600;
-  color: var(--a-base-3);
-  line-height: 1.6;
-}
-
-.apos-emoji {
-  font-size: 38px;
-}
