@@ -4,22 +4,22 @@
       <div class="apos-media-manager-display__cell apos-media-manager-display__cell--media-drop">
         media here
       </div>
-      <div class="apos-media-manager-display__cell" v-for="media in myMedia" :key="generateId(media.id)"
-        :class="{'is-selected': !!media.checkbox.value.data.length}"
+      <div class="apos-media-manager-display__cell" v-for="item in media" :key="generateId(item.id)"
+        :class="{'is-selected': !!item.checkbox.value.data.length}"
       >
         <div class="apos-media-manager-display__checkbox">
           <AposCheckbox 
-            :field="media.checkbox.field" 
-            :value="media.checkbox.value" 
-            :status="media.checkbox.status" 
-            :choice="media.checkbox.choice"
+            :field="item.checkbox.field" 
+            :value="item.checkbox.value" 
+            :status="item.checkbox.status" 
+            :choice="item.checkbox.choice"
           />
         </div>
-        <img class="apos-media-manager-display__media" :src="media.path" :alt="media.title">
+        <img class="apos-media-manager-display__media" :src="item.path" alt="">
         <button class="apos-media-manager-display__select"
-          @click.exact="select(media.id)"
-          @click.shift="selectSeries(media.id)"
-          @click.meta="selectAnother(media.id)"
+          @click.exact="$emit('select', item.id)"
+          @click.shift="$emit('selectSeries', item.id)"
+          @click.meta="$emit('selectAnother', item.id)"
         ></button>
       </div>
     </div>
@@ -30,7 +30,6 @@
 import AposButton from './../button/AposButton.vue';
 import AposCheckbox from './../inputCheckbox/AposCheckbox.vue';
 import AposHelpers from '../../mixins/AposHelpersMixin';
-// import AposStringInput from './../inputString/AposStringInput.vue';
 
 export default {
   mixins: [ AposHelpers ],
@@ -44,74 +43,7 @@ export default {
   },
 
   data() {
-    const myMedia = []
-    this.media.forEach((media) => {
-      const newMedia = { ...media };
-      newMedia.checkbox = {
-        status: {},
-        value: {
-          data: []
-        },
-        choice: { value: 'checked' },
-        field: {
-          name: media.id,
-          type: 'checkbox',
-          hideLabel: true,
-          label: `Toggle selection of ${media.title}`
-        }
-      };
-      myMedia.push(newMedia);
-    });
     return {
-      myMedia,
-      lastSelected: null
-    }
-  },
-  computed: {
-    selected() {
-      return this.myMedia.filter(item => item.checkbox.value.data.length)
-    }
-  },
-  watch: {
-    selected(newVal) {
-      this.$emit('selected', this.selected);
-    }
-  },
-  methods: {
-    // select setters
-    select(id) {
-      this.myMedia.map((media) => {
-        media.checkbox.value.data = media.id === id ? ['checked'] : [];
-      });
-      this.lastSelected = id;
-      this.editing = id;
-      this.$emit('edit', id);
-    },
-
-    selectAnother(id) {
-      this.myMedia.forEach((media) => {
-        if (media.id === id) {
-          media.checkbox.value.data = ['checked'];
-        }
-      });
-      this.lastSelected = id;
-    },
-    selectSeries(id) {
-      if (!this.lastSelected) {
-        this.select(id);
-        return;
-      }
-
-      let beginIndex = this.myMedia.findIndex(media => media.id === this.lastSelected);
-      let endIndex = this.myMedia.findIndex(media => media.id === id);
-      const direction = beginIndex > endIndex ? -1 : 1;
-      if (direction < 0) {
-        [beginIndex, endIndex] = [endIndex, beginIndex];
-      } else {
-        endIndex++;
-      }
-      const sliced = this.myMedia.slice(beginIndex, endIndex);
-      sliced.forEach(media => this.selectAnother(media.id));
     }
   }
 }

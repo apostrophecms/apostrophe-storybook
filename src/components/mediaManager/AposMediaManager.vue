@@ -1,3 +1,9 @@
+<!-- 
+  AposMediaManager will be in charge of all media-related state
+  this includes doing the selecting and deselecting of items, deciding the editor/selection view,
+  emitting batch action events, etc. All sub views will recieve `media` as a prop
+-->
+
 <template>
   <AposModal :modal="modal">
     <template #primaryControls>
@@ -15,8 +21,11 @@
         </template>
         <template #bodyMain>
           <AposMediaManagerDisplay 
-            v-if="!!media.length" :media="media" v-on:selected="updateSelected" 
-            ref="display" v-on:edit="updateEditing"
+            v-if="!!myMedia.length" :media="myMedia" ref="display"
+            v-on:edit="updateEditing"
+            v-on:select="select"
+            v-on:selectSeries="selectSeries"
+            v-on:selectAnother="selectAnother"
           />
           <div v-else class="apos-media-manager__empty">
             <AposEmptyState :emptyState="emptyDisplay" />
@@ -27,7 +36,7 @@
     <template #rightRail v-if="!!media.length">
       <AposModalRail type="right">
         <div class="apos-media-manager__sidebar">
-          <AposMediaManagerEditor v-show="editing" :media="currentlyEditing" />
+          <AposMediaManagerEditor v-show="editing" :media="editing" />
           <AposMediaManagerSelections 
             :items="selected" v-on:clear="clearSelected" v-on:edit="updateEditing"
             v-show="!editing"
@@ -84,6 +93,24 @@ export default {
     }
   },
   data() {
+    const myMedia = []
+    this.media.forEach((media) => {
+      const newMedia = { ...media };
+      newMedia.checkbox = {
+        status: {},
+        value: {
+          data: []
+        },
+        choice: { value: 'checked' },
+        field: {
+          name: media.id,
+          type: 'checkbox',
+          hideLabel: true,
+          label: `Toggle selection of ${media.title}`
+        }
+      };
+      myMedia.push(newMedia);
+    });
     return {
       modal: {
         title: 'Manage Media',
@@ -91,9 +118,9 @@ export default {
         type: 'overlay',
         showModal: true
       },
-      sidebar: 'selections',
-      selected: [],
       editing: null,
+      lastSelected: null,
+      myMedia,
       emptyDisplay: {
         title: 'No Media Found',
         message: 'Uploaded media will appear here',
@@ -102,24 +129,66 @@ export default {
     }
   },
   computed: {
-    currentlyEditing() {
-      return this.media.find(item => item.id === this.editing);
+    selected() {
+      return this.myMedia.filter(item => item.checkbox.value.data.length)
+    }
+  },
+  watch: {
+    selected(newVal) {
+      if (newVal.length === 1) {
+        this.editing = newVal[0];
+      }
+      if (!newVal.length) {
+        this.editing = null;
+      }
     }
   },
   methods: {
-    updateSelected(selected) {
-      this.selected = selected;
-      if (selected.length > 1) {
-        this.editing = null;
-      }
-    },
     clearSelected() {
       // select(null) will match nothing and deselect all
-      this.$refs.display.select(null);
+      this.select(null);
+      this.editing = null;
     },
     updateEditing(id) {
       this.editing = id;
+    },
+
+    // select setters
+    select(id) {
+      this.myMedia.map((media) => {
+        media.checkbox.value.data = media.id === id ? ['checked'] : [];
+      });
+      this.lastSelected = id;
+    },
+
+    selectAnother(id) {
+      this.myMedia.forEach((media) => {
+        if (media.id === id) {
+          media.checkbox.value.data = ['checked'];
+        }
+      });
+      this.lastSelected = id;
+      this.editing = null;
+    },
+
+    selectSeries(id) {
+      if (!this.lastSelected) {
+        this.select(id);
+        return;
+      }
+      let beginIndex = this.myMedia.findIndex(media => media.id === this.lastSelected);
+      let endIndex = this.myMedia.findIndex(media => media.id === id);
+      const direction = beginIndex > endIndex ? -1 : 1;
+      if (direction < 0) {
+        [beginIndex, endIndex] = [endIndex, beginIndex];
+      } else {
+        endIndex++;
+      }
+      const sliced = this.myMedia.slice(beginIndex, endIndex);
+      sliced.forEach(media => this.selectAnother(media.id));
+      this.editing = null;
     }
+
   }
 }
 </script>
