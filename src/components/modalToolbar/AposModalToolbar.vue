@@ -24,9 +24,6 @@ export default {
     hasRightControls() {
       return !!this.$slots.rightControls;
     }
-  },
-  methods: {
-
   }
 }
 </script>

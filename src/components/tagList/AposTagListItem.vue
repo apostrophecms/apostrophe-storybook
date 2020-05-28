@@ -56,7 +56,6 @@ export default {
   background: transparent;
   @include apos-transition(all, .1s, ease-in-out);
   &.is-active {
-    // background-color: var(--a-primary);
     color: var(--a-primary);
     .apos-tag-list__icon {
       opacity: 1;
@@ -64,7 +63,6 @@ export default {
   }
   &:hover,
   &:focus {
-    // background-color: var(--a-base-8);
     color: var(--a-primary);
     .apos-tag-list__icon {
       color: var(--a-primary);
@@ -73,16 +71,11 @@ export default {
   }
   &:hover.is-active,
   &:focus.is-active {
-    // background-color: var(--a-primary-button-hover);
     color: var(--a-primary);
   }
   &:focus {
     outline: none;
     color: var(--a-primary-button-active);
-    // box-shadow: 0 0 5px var(--a-base-6);
-  }
-  &:focus.is-active {
-    // box-shadow: 0 0 5px var(--a-primary-button-active);
   }
 }
 

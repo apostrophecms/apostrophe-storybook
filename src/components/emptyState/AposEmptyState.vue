@@ -10,25 +10,11 @@
 
 
 export default {
-  components: { 
-
-  },
   props: {
     emptyState: {
       type: Object,
       required: true
     }
-  },
-
-  data() {
-    return {
-    }
-  },
-  computed: {
-
-  },
-  methods: {
-
   }
 }
 </script>
@@ -53,7 +39,6 @@ export default {
   }
 
   .apos-emoji {
-    // margin-top: 5px;
     font-size: 42px;
   }
 </style>

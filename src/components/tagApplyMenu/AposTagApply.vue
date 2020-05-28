@@ -107,9 +107,6 @@
       }
     },
     computed: {
-      // initiallyEmpty() {
-      //   return myTags.length ? false : true;
-      // },
       disabledCreate() {
         const matches = this.myTags.filter((tag) => {
           return tag.slug === this.searchInputValue;

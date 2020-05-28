@@ -84,11 +84,6 @@
         this.$emit('open', newVal);
       }
     },
-    mounted() {
-      // console.log(this.$refs.button);
-      // console.log(this.$refs.button.$el.offsetTop);
-      // console.log(this.$refs.button.$el.offsetLeft);
-    },
     computed: {
       classList() {
         const classes = [];
@@ -142,6 +137,8 @@
         this.open = !this.open;
         if (this.open) {
           this.bind();
+        } else {
+          this.unbind();
         }
       },
       menuItemClicked(action) {
@@ -249,25 +246,4 @@
     margin-block-end: 0;
     padding: 10px 0;
   }
-
-  // .apos-context-menu--tip-alignment-left .apos-context-menu__popup {
-  //   left: -15px;
-  // }
-
-  // .apos-context-menu--tip-alignment-right .apos-context-menu__popup {
-  //   right: -12px
-  // }
-
-  // .apos-context-menu--tip-alignment-center .apos-context-menu__popup {
-  //   transform: translateX(-50%);
-  //   left: 50%;
-  // }
-
-  // .apos-context-menu--origin-below .apos-context-menu__popup {
-  //   top: 40px;
-  // }
-
-  // .apos-context-menu--origin-above .apos-context-menu__popup {
-  //   bottom: calc(100% + 35px);
-  // }
 </style>
