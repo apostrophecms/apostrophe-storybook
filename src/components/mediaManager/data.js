@@ -15,6 +15,10 @@ function randomTags() {
   return randTags;
 };
 
+function randomNum() {
+  return (Math.floor(Math.random() * (6 - 2) + 2)).toString();
+}
+
 function createImages(num) {
   const images = [];
   for (let i = 0; i < num; i++) {
@@ -22,7 +26,7 @@ function createImages(num) {
     const alt = lorem.generateSentences(1);
     const credit = lorem.generateSentences(1);
     const creditUrl = lorem.generateSentences(1);
-    const dim = `${Math.floor(Math.random() * Math.floor(5)).toString()}00/${Math.floor(Math.random() * Math.floor(5)).toString()}00`;
+    const dim = `${randomNum()}00/${randomNum()}00`;
     images.push({
       id: `lesk-${Math.floor(Math.random() * Math.floor(10000)).toString()}`,
       path: `https://picsum.photos/${dim}?q=${Math.floor(Math.random() * Math.floor(1000)).toString()}`,
@@ -38,5 +42,5 @@ function createImages(num) {
 }
 
 export default {
-  media: createImages(60)
+  media: createImages(30)
 };

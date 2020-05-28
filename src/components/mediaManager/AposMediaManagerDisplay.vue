@@ -1,14 +1,27 @@
 <template>
   <div class="apos-media-manager-display">
+    
     <div class="apos-media-manager-display__grid">
-      <div class="apos-media-manager-display__cell apos-media-manager-display__cell--media-drop">
-        media here
-      </div>
+      <button class="apos-media-manager-display__cell apos-media-manager-display__media-drop">
+        <div class="apos-media-manager-display__media-drop__inner">
+          <div class="apos-media-manager-display__media-drop__icon">
+            <CloudUpload :size="64" />
+          </div>
+          <div class="apos-media-manager-display__media-drop__instructions">
+            <p class="apos-media-manager-display__media-drop__primary">
+              Drop new media here
+            </p>
+            <p class="apos-media-manager-display__media-drop__secondary">
+              Or click to open the file explorer
+            </p>
+          </div>
+        </div>
+      </button>
       <div class="apos-media-manager-display__cell" v-for="item in media" :key="generateId(item.id)"
         :class="{'is-selected': !!item.checkbox.value.data.length}"
       >
         <div class="apos-media-manager-display__checkbox">
-          <AposCheckbox 
+          <AposCheckbox tabindex="-1"
             :field="item.checkbox.field" 
             :value="item.checkbox.value" 
             :status="item.checkbox.status" 
@@ -30,16 +43,21 @@
 import AposButton from './../button/AposButton.vue';
 import AposCheckbox from './../inputCheckbox/AposCheckbox.vue';
 import AposHelpers from '../../mixins/AposHelpersMixin';
+import CloudUpload from "vue-material-design-icons/CloudUpload.vue";
 
 export default {
   mixins: [ AposHelpers ],
   components: {
-    AposCheckbox
+    AposCheckbox,
+    CloudUpload
   },
   props: {
     media: {
       type: Array
     }
+  },
+  methods: {
+
   },
 
   data() {
@@ -74,6 +92,14 @@ export default {
       height: 0;
       padding-bottom: calc(100% / (1/1));
     }
+
+    &:hover,
+    &.is-selected,
+    &:focus {
+      .apos-media-manager-display__media {
+        opacity: 1;
+      }
+    }
   }
 
   .apos-media-manager-display__checkbox {
@@ -96,6 +122,8 @@ export default {
     max-width: 100%;
     max-height: 100%;
     pointer-events: none;
+    opacity: 0.85;
+    @include apos-transition();
   }
 
   .apos-media-manager-display__select {
@@ -107,6 +135,10 @@ export default {
     width: 100%;
     height: 100%;
     border: 1px solid var(--a-base-7);
+    @include apos-transition();
+    &:active + .apos-media-manager-display__checkbox {
+      opacity: 1 !important;
+    }
   }
 
   .apos-media-manager-display__cell.is-selected .apos-media-manager-display__select,
@@ -115,13 +147,60 @@ export default {
   .apos-media-manager-display__checkbox:hover ~ .apos-media-manager-display__select {
     border-color: var(--a-primary);
     outline: 1px solid var(--a-primary);
+    box-shadow: 0 0px 10px 1px var(--a-base-7);
   }
 
-  .apos-media-manager-display__cell--media-drop {
-    border: 1px dashed var(--a-base-3);
+  .apos-media-manager-display__media-drop {
+    @include apos-button-reset();
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed var(--a-base-3);
     grid-column-start: 1;
     grid-column-end: 3;
     grid-row-start: 1;
     grid-row-end: span 2;
+    @include apos-transition();
+    &:hover, &:active, &:focus {
+      border: 2px dashed var(--a-primary);
+      box-shadow: 0 0px 10px -4px var(--a-primary-button-active);
+      .apos-media-manager-display__media-drop__icon {
+        color: var(--a-primary);
+        filter: drop-shadow(0px 0px 5px var(--a-primary-50));
+        transform: translateY(-2px);
+      }
+    }
+    &:active, &:focus {
+      outline: 1px solid var(--a-primary);
+    }
+  }
+
+  .apos-media-manager-display__media-drop__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .apos-media-manager-display__media-drop__icon {
+    color: var(--a-base-5);
+    height: 55px;
+    margin-bottom: 5px;
+    @include apos-transition();
+  }
+
+  .apos-media-manager-display__media-drop__instructions {
+    padding: 0 5px;
+  }
+
+  .apos-media-manager-display__media-drop__primary,
+  .apos-media-manager-display__media-drop__secondary {
+    @include apos-p-reset();
+    text-align: center;
+  }
+  .apos-media-manager-display__media-drop__primary {
+    font-size: map-get($font-sizes, input-label);
+    max-width: 100px;
+    margin: 5px auto 10px;
   }
 </style>

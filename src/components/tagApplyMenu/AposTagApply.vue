@@ -1,5 +1,5 @@
 <template>
-    <AposContextMenu :origin="origin" :tipAlignment="tipAlignment">
+    <AposContextMenu v-on:open="open = $event" :origin="origin" :tipAlignment="tipAlignment">
       <div class="apos-apply-tag-menu__inner">
         <AposStringInput 
           v-on:input="updateSearchInput"
@@ -12,6 +12,7 @@
             :label='createLabel'
             type="quiet"
             :disabled="disabledCreate"
+            :disableFocus="!open"
           />
         </div>
         <transition name="fade">
@@ -23,6 +24,7 @@
                 :value="checkboxes[tag.slug].value"
                 :choice="checkboxes[tag.slug].choice"
                 v-on:toggle="update"
+                :disableFocus="!open"
               />
             </li>
           </ol>
@@ -34,6 +36,7 @@
                 :label="'create ' + searchInputValue + '?'"
                 type="quiet"
                 :disabled="disabledCreate"
+                :disableFocus="!open"
               />
             </p>
             <span class="apos-apply-tag-menu__empty-icon">🌾</span>
@@ -72,10 +75,6 @@
         type: Array,
         required: true
       },
-      open: {
-        type: Boolean,
-        default: false
-      }
     },
     components: { 
       AposContextMenu,
@@ -98,6 +97,7 @@
         keyPrefix: this.generateId('key'), // used to keep checkboxes in sync w state
         tipAlignment: 'left',
         origin: 'below',
+        open: false,
         button: {
           label: 'Context Menu Label',
           iconOnly: true,
@@ -145,7 +145,8 @@
           label: 'Apply Tags',
           placeholder: 'Tags...',
           help: 'Find an existing tag or add a new one',
-          icon: (!this.searchTags || !this.searchTags.length) ? 'Pencil' : 'Magnify'
+          icon: (!this.searchTags || !this.searchTags.length) ? 'Pencil' : 'Magnify',
+          disableFocus: !this.open
         }
       }
     },
@@ -236,7 +237,6 @@
 <style lang="scss" scoped>
   @import '../../scss/_mixins';
   .apos-apply-tag-menu__inner {
-    padding: 20px;
     min-width: 280px;
   }
 

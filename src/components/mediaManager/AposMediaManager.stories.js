@@ -18,8 +18,10 @@ export const mediaManager = () => {
     components: {
       AposMediaManager
     },
-    props: {
-
+    methods: {
+      handleTrash(selected) {
+        console.log(`trash ${selected}`);
+      }
     },
     data () {
       return {
@@ -28,6 +30,11 @@ export const mediaManager = () => {
         applyTags: applyTagData.applyTo
       };
     },
-    template: `<AposMediaManager :media="media" :tagList="tagList" :applyTags="applyTags" />`
+    template: `<AposMediaManager 
+      :media="media" 
+      :tagList="tagList" 
+      :applyTags="applyTags"
+      v-on:trash="handleTrash"
+    />`
   };
 };

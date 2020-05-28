@@ -17,6 +17,12 @@
   padding: 0;
 }
 
+@mixin apos-fieldset-reset () {
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
 @mixin apos-button-reset () {
   border: none;
   margin: 0;

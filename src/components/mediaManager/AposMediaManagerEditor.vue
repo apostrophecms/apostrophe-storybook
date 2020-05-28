@@ -1,6 +1,5 @@
 <template>
-  <div class="apos-media-manager-editor">
-    <div class="apos-media-manager-editor__inner" v-if="media">
+  <div class="apos-media-manager-editor"> <div class="apos-media-manager-editor__inner" v-if="media">
       <div class="apos-media-manager-editor__thumb-wrapper">
         <img class="apos-media-manager-editor__thumb" :src="media.path" alt="">
       </div>
@@ -18,23 +17,42 @@
         :modifiers="['small', 'inverted']"
       />
     </div>
+    <AposModalLip :refresh="lipKey">
+      <div class="apos-media-manager-editor__lip" :class="{'apos-media-manager-editor__lip--two-controls': selected.length > 1}">
+        <AposButton @click="$emit('back')" v-if="selected.length > 1" class="apos-media-manager-editor__back" type="outline" label="Back" />
+        <AposButton @click="save" class="apos-media-manager-editor__save" label="Save" type="primary" v-on:click="save" />
+      </div>
+    </AposModalLip>
   </div>
 </template>
+
 
 <script>
 import AposButton from './../button/AposButton.vue';
 import AposStringInput from './../inputString/AposStringInput.vue';
 import AposBooleanInput from './../inputBoolean/AposBooleanInput.vue';
+import AposModalLip from './../modal/AposModalLip.vue';
+import AposHelpers from '../../mixins/AposHelpersMixin';
 
 export default {
-  components: { 
+  mixins: [AposHelpers],
+  components: {
     AposButton,
     AposStringInput,
-    AposBooleanInput
+    AposBooleanInput,
+    AposModalLip
   },
   props: {
     media: {
       type: Object
+    },
+    selected: {
+      type: Array
+    }
+  },
+  watch: {
+    media() {
+      this.lipKey = this.generateId();
     }
   },
 
@@ -64,8 +82,9 @@ export default {
         status: {},
         value: {
           data: true
-        }
-      }
+        },
+      },
+      lipKey: this.generateId()
     }
   },
   computed: {
@@ -88,6 +107,7 @@ export default {
   },
   methods: {
     save() {
+      // TODO I have no idea what to bundle up and send back to parent at this point in dev -SR
       this.$emit('save');
     }
   }
@@ -98,6 +118,7 @@ export default {
 @import '../../scss/_mixins';
 
   .apos-media-manager-editor {
+    position: relative;
     height: 100%;
     padding: 20px;
   }
@@ -125,6 +146,19 @@ export default {
     color: var(--a-base-4);
     font-weight: 500;
     margin-bottom: 20px;
+  }
+
+  .apos-media-manager-editor__controls {
+    margin-bottom: 20px;
+  }
+
+  .apos-media-manager-editor__lip {
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .apos-media-manager-editor__lip--two-controls {
+    justify-content: space-between;
   }
 
 </style>

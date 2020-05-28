@@ -1,5 +1,5 @@
 <!-- 
-  AposMediaManager will be in charge of all media-related state
+  AposMediaManager will be in charge of all media-related state logic
   this includes doing the selecting and deselecting of items, deciding the editor/selection view,
   emitting batch action events, etc. All sub views will recieve `media` as a prop
 -->
@@ -7,7 +7,7 @@
 <template>
   <AposModal :modal="modal">
     <template #primaryControls>
-      <AposButton type="primary" label="Finished" />
+      <AposButton type="default" label="Finished" />
     </template>
     <template #leftRail v-if="!!media.length">
       <AposModalRail>
@@ -17,7 +17,12 @@
     <template #main>
       <AposModalBody>
         <template #bodyHeader v-if="!!media.length">
-          <AposMediaManagerToolbar />
+          <AposMediaManagerToolbar 
+            :selected="selected" :media="myMedia" 
+            v-on:selectClick="selectClick"
+            v-on:trashClick="trashClick"
+            v-on:search="search"
+          />
         </template>
         <template #bodyMain>
           <AposMediaManagerDisplay 
@@ -35,8 +40,11 @@
     </template>
     <template #rightRail v-if="!!media.length">
       <AposModalRail type="right">
-        <div class="apos-media-manager__sidebar">
-          <AposMediaManagerEditor v-show="editing" :media="editing" />
+        <div class="apos-media-manager__sidebar" :class="{'apos-media-manager__sidebar--empty' : !selected.length}">
+          <AposMediaManagerEditor 
+            v-show="editing" :media="editing" :selected="selected" 
+            v-on:back="updateEditing(null)" v-on:save="saveMedia"
+          />
           <AposMediaManagerSelections 
             :items="selected" v-on:clear="clearSelected" v-on:edit="updateEditing"
             v-show="!editing"
@@ -106,7 +114,8 @@ export default {
           name: media.id,
           type: 'checkbox',
           hideLabel: true,
-          label: `Toggle selection of ${media.title}`
+          label: `Toggle selection of ${media.title}`,
+          disableFocus: true
         }
       };
       myMedia.push(newMedia);
@@ -136,7 +145,7 @@ export default {
   watch: {
     selected(newVal) {
       if (newVal.length === 1) {
-        this.editing = newVal[0];
+        this.editing = this.myMedia.find(item => item.id === newVal[0].id);
       }
       if (!newVal.length) {
         this.editing = null;
@@ -150,7 +159,7 @@ export default {
       this.editing = null;
     },
     updateEditing(id) {
-      this.editing = id;
+      this.editing = this.myMedia.find(item => item.id === id);
     },
 
     // select setters
@@ -164,7 +173,12 @@ export default {
     selectAnother(id) {
       this.myMedia.forEach((media) => {
         if (media.id === id) {
-          media.checkbox.value.data = ['checked'];
+          // meta deselect one
+          if (this.selected.find(item => item.id === id)) {
+            media.checkbox.value.data = [];
+          } else {
+            media.checkbox.value.data = ['checked'];
+          }
         }
       });
       this.lastSelected = id;
@@ -187,6 +201,33 @@ export default {
       const sliced = this.myMedia.slice(beginIndex, endIndex);
       sliced.forEach(media => this.selectAnother(media.id));
       this.editing = null;
+    },
+
+    // Toolbar handlers
+    selectClick() {
+      if (this.selected.length === this.myMedia.length) {
+        // unselect all
+        this.select(null);
+      } else {
+        // select all
+        this.lastSelected = this.myMedia[0].id;
+        this.selectSeries(this.myMedia[this.myMedia.length - 1].id);
+      }
+    },
+
+    // TODO stub
+    trashClick() {
+      this.$emit('trash', this.selected);
+    },
+
+    // TODO stub
+    saveMedia() {
+      this.$emit('save')
+    },
+
+    search(query) {
+      // TODO stub
+      this.$emit('search', query);
     }
 
   }
@@ -207,6 +248,9 @@ export default {
 .apos-media-manager__sidebar {
   position: relative;
   width: 100%;
+}
+
+.apos-media-manager__sidebar--empty {
   height: 100%;
 }
 

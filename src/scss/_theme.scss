@@ -28,6 +28,7 @@ $boolean-padding: $spacing-double;
 
 @mixin apos-primary-mixin ($color) {
   --a-primary: #{$color};
+  --a-primary-50: #{transparentize($color, 0.5)};
   --a-primary-button-hover: #{mix(black, $color, 10%)};
   --a-primary-button-active: #{mix(black, $color, 15%)};
   --a-primary-button-disabled: #{mix(white, $color, 40%)};

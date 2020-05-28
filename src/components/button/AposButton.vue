@@ -1,6 +1,8 @@
 <template>
   <div class="apos-button__wrapper">
-    <button type="button" @click="click" class="apos-button" :class="modifierClass" v-bind:busy="busy" v-bind:disabled="isDisabled">
+    <button type="button" @click="click" class="apos-button" 
+      :class="modifierClass" v-bind:busy="busy" v-bind:disabled="isDisabled" :tabindex="tabindex"
+    >
       <AposSpinner :color="spinnerColor" />
       <div class="apos-button__content">
         <component :size="15" class="apos-button__icon" v-if="icon" v-bind:is="iconComponent"></component>
@@ -32,7 +34,9 @@ export default {
     icon: String,
     type: String,
     iconOnly: Boolean,
-    state: Array
+    iconPosition: String,
+    state: Array,
+    disableFocus: Boolean
   },
   data() {
     return {
@@ -40,6 +44,9 @@ export default {
     }
   },
   computed: {
+    tabindex() {
+      return this.disableFocus ? '-1' : '0';
+    },
     modifierClass() {
       const modifiers = [];
 
@@ -173,7 +180,7 @@ export default {
     font-weight: 500;
     &:hover,
     &:active,
-    &.is-active
+    &.is-active,
     &:focus {
       background-color: transparent;
       text-decoration: underline;
@@ -251,7 +258,7 @@ export default {
       background-color: var(--a-base-8);
     }
     &:focus {
-      box-shadow: 0 0 0 1px var(--a-base-8), 0 0 0 3px var(--a-base--7);
+      box-shadow: 0 0 3px var(--a-base-2);
     }
     &[disabled] {
       background-color: transparent;
@@ -260,6 +267,16 @@ export default {
     }
     &.apos-button--busy {
       color: var(--a-base-5);
+    }
+  }
+
+  .apos-button--icon-right {
+    .apos-button__content {
+      flex-direction: row-reverse;
+    }
+    .apos-button__icon {
+      margin-right: 0;
+      margin-left: 5px;
     }
   }
 

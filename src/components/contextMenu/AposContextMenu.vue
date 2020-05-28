@@ -5,6 +5,7 @@
       v-on:click="buttonClicked" :label="button.label" 
       :type="button.type" :icon="button.icon" 
       :iconOnly="button.iconOnly" :state="buttonState" ref="button"
+      :modifiers="button.modifiers"
     />
     <div 
       class="apos-primary-scrollbar apos-context-menu__popup" 
@@ -23,6 +24,7 @@
               :key="item.action" 
               :menuItem="item" 
               v-on:clicked="menuItemClicked"
+              :open="open"
             />
           </ul>
         </slot>
@@ -45,6 +47,7 @@
     },
     props: {
       menu: Array,
+      modifiers: Array,
       button: {
         type: Object,
         default() {
@@ -78,6 +81,7 @@
           const top = 
           this.position = this.calculatePosition();
         }
+        this.$emit('open', newVal);
       }
     },
     mounted() {
@@ -90,6 +94,14 @@
         const classes = [];
         classes.push(`apos-context-menu--origin-${this.origin}`);
         classes.push(`apos-context-menu--tip-alignment-${this.tipAlignment}`);
+        if (this.modifiers) {
+          this.modifiers.forEach((m) => {
+            classes.push(`apos-context-menu--${m}`);
+          });
+        }
+        if (this.menu) {
+          classes.push('apos-context-menu--unpadded');
+        }
         return classes.join(' ');
       },
       buttonState() {
@@ -143,25 +155,36 @@
         const popup = this.$refs.popup
         const rect = button.getBoundingClientRect();
         const buttonHeight = button.offsetHeight;
+        // getBoundingClientRect gives us the true x,y,etc of an el from the viewport but 
+        // position:fixed inside position:fixed is positioned relatively to the first, account for it
+        let contextRect = {
+          top: 0,
+          left: 0
+        };
+        if (button.closest('[data-apos-modal-inner]')) {
+          contextRect = button.closest('[data-apos-modal-inner]').getBoundingClientRect();
+        }
         let top, left;
 
         if (this.origin === 'above') {
-          // menu appears above button
-          top = rect.top - popup.offsetHeight - 40;
+          // above
+          top = rect.top - contextRect.top - popup.offsetHeight - 15;
         } else {
-          // menu should appear below the button
-          top = rect.top + buttonHeight;
+          // below
+          top = rect.top - contextRect.top + buttonHeight + 15;
         }
 
         if (this.tipAlignment === 'center') {
           // center
-          left = rect.left - (popup.offsetWidth / 2);
+          const buttonCenter = rect.left - contextRect.left + (button.offsetWidth / 2);
+          left = buttonCenter - (popup.offsetWidth / 2);
+
         } else if (this.tipAlignment === 'right') {
-          //right
-          left = rect.left - popup.offsetWidth + 31;
+          // right
+          left = rect.left - contextRect.left + button.offsetWidth - popup.offsetWidth + 15;
         } else {
           // left
-          left = rect.left - 37;
+          left = rect.left - contextRect.left - 15;
         }
 
         return `top: ${top}px; left: ${left}px`;
@@ -176,6 +199,10 @@
   .apos-context-menu {
     position: relative;
     display: inline;
+  }
+
+  .apos-context-menu--unpadded .apos-context-menu__pane  {
+    padding: 0;
   }
 
   .apos-context-menu__popup {
@@ -204,6 +231,8 @@
   }
 
   .apos-context-menu__pane {
+    padding: 20px;
+    font-size: map-get($font-sizes, default);
     border-radius: var(--a-border-radius);
     box-shadow: var(--a-box-shadow);
     background-color: var(--a-background-primary);

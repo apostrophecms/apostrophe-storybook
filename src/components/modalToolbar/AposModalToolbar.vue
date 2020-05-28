@@ -39,11 +39,11 @@ export default {
   }
 
   .apos-toolbar__group--left > * {
-    margin-right: 5px;
+    margin-right: 7.5px;
   }
 
   .apos-toolbar__group--right > * {
-    margin-left: 5px;
+    margin-left: 7.5px;
   }
 
   .apos-toolbar__group {

@@ -41,7 +41,7 @@ export default {
     },
     validate(values) {
       if (!Array.isArray(this.field.choices)) {
-        return 'choices';
+        return 'malformed';
       }
 
       if (this.field.required &&
@@ -51,7 +51,7 @@ export default {
 
       if (Array.isArray(values)) {
         values.forEach(chosen => {
-          if (!this.field.choices.includes(chosen)) {
+          if (!this.field.choices.map(choice => { return choice.value}).includes(chosen)) {
             return 'selected'
           }
         });

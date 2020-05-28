@@ -1,9 +1,9 @@
 <template>
   <div class="apos-media-manager-selections">
-    <div v-if="!!items.length">
+    <div v-if="items.length">
       <p class="apos-media-manager-selections__heading">
         {{ items.length }} items selected
-        <AposButton label="Clear Selection" type="quiet" v-on:click="clear" />
+        <AposButton label="Clear" type="quiet" v-on:click="clear" />
       </p>
       <ol class="apos-media-manager-selections__items">
         <li v-for="item in items" :key="item.id" class="apos-media-manager-selections__item">
@@ -100,7 +100,7 @@ export default {
     height: 50px;
     min-width: 50px;
     background-color: var(--a-primary-background);
-    outline: 2px solid var(--a-primary);
+    border: 1px solid var(--a-base-7);
   }
 
   .apos-media-manager-selections__item-thumb {
@@ -109,7 +109,7 @@ export default {
   }
 
   .apos-media-manager-selections__item-info {
-    margin-left: 20px;
+    margin-left: 10px;
   }
 
   .apos-media-manager-selections__item-title {
@@ -118,7 +118,7 @@ export default {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
   }
 
   .apos-media-manager-selection__empty {
