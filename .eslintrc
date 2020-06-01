@@ -1,3 +1,17 @@
 {
-  "extends": "apostrophe"
+  "extends": [
+    "apostrophe",
+    "plugin:vue/vue3-recommended"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.vue",
+        "*.js"
+      ]
+    }
+  ],
+  "rules": {
+    "no-console": 0
+  }
 }
