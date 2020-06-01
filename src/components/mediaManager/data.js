@@ -26,13 +26,16 @@ function createImages(num) {
     const alt = lorem.generateSentences(1);
     const credit = lorem.generateSentences(1);
     const creditUrl = lorem.generateSentences(1);
-    const dim = `${randomNum()}00/${randomNum()}00`;
+    const dim = [`${randomNum()}00`, `${randomNum()}00`];
     images.push({
       id: `lesk-${Math.floor(Math.random() * Math.floor(10000)).toString()}`,
-      path: `https://picsum.photos/${dim}?q=${Math.floor(Math.random() * Math.floor(1000)).toString()}`,
+      path: `https://picsum.photos/${dim[0]}/${dim[1]}?q=${Math.floor(Math.random() * Math.floor(1000)).toString()}`,
       title,
       alt,
       credit,
+      uploadedAt: 'Uploaded: March 6th, 2018',
+      fileSize: '345KB',
+      dim: `${dim[0]} x ${dim[1]}`,
       creditUrl,
       slug: title.replace(' ', '-').toLowerCase(),
       tags: randomTags()

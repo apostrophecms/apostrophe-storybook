@@ -55,14 +55,6 @@ export default {
     media: {
       type: Array
     }
-  },
-  methods: {
-
-  },
-
-  data() {
-    return {
-    }
   }
 }
 </script>

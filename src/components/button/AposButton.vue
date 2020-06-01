@@ -1,18 +1,15 @@
 <template>
-  <div class="apos-button__wrapper">
-    <button type="button" @click="click" class="apos-button" 
-      :class="modifierClass" v-bind:busy="busy" v-bind:disabled="isDisabled" :tabindex="tabindex"
-    >
-      <AposSpinner :color="spinnerColor" />
-      <div class="apos-button__content">
-        <component :size="15" class="apos-button__icon" v-if="icon" v-bind:is="iconComponent"></component>
-        <span class="apos-button__label" :class="{ 'apos-sr-only' : iconOnly }">
-          {{ label }}
-        </span>
-      </div>
-    </button>
-  </div>
-
+  <button type="button" @click="click" class="apos-button" 
+    :class="modifierClass" v-bind:busy="busy" v-bind:disabled="isDisabled" :tabindex="tabindex"
+  >
+    <AposSpinner :color="spinnerColor" />
+    <div class="apos-button__content">
+      <component :size="15" class="apos-button__icon" v-if="icon" v-bind:is="iconComponent"></component>
+      <span class="apos-button__label" :class="{ 'apos-sr-only' : iconOnly }">
+        {{ label }}
+      </span>
+    </div>
+  </button>
 </template>
 
 <script>
@@ -34,7 +31,6 @@ export default {
     icon: String,
     type: String,
     iconOnly: Boolean,
-    iconPosition: String,
     state: Array,
     disableFocus: Boolean
   },
@@ -109,11 +105,6 @@ export default {
 </script>
 
 <style lang="scss">
-  .apos-button__wrapper {
-    position: relative;
-    display: inline;
-  }
-
   .apos-button {
     position: relative;
     color: var(--a-text-primary);

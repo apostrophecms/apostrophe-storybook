@@ -83,9 +83,7 @@ export default {
   props: {
     media: {
       type: Array,
-      default() {
-        return [];
-      }
+      required: true
     },
     tagList: {
       type: Array,
@@ -199,7 +197,9 @@ export default {
         endIndex++;
       }
       const sliced = this.myMedia.slice(beginIndex, endIndex);
-      sliced.forEach(media => this.selectAnother(media.id));
+      // always want to check, never toggle
+      sliced.forEach(media => media.checkbox.value.data = ['checked']);
+      this.lastSelected = sliced[sliced.length - 1].id;
       this.editing = null;
     },
 

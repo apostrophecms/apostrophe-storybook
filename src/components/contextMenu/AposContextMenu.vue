@@ -78,7 +78,6 @@
     watch: {
       open(newVal, oldVal) {
         if (newVal) {
-          const top = 
           this.position = this.calculatePosition();
         }
         this.$emit('open', newVal);
@@ -123,12 +122,7 @@
       },
       clicks (event) {
         // if user clicks outside menu component, close menu
-        const result = event.path.filter((item) => {
-          if (item.hasAttribute && item.hasAttribute(this.vueId)) {
-            return item;
-          }
-        });
-        if (!result.length) {
+        if (!event.target.closest(`[${this.vueId}]`)) {
           this.open = false;
           this.unbind();
         }
@@ -203,7 +197,7 @@
   }
 
   .apos-context-menu__popup {
-    z-index: 10;
+    z-index: 2;
     position: fixed;
     display: inline-block;
     color: var(--a-text-primary);

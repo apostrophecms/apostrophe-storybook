@@ -1,7 +1,5 @@
 import {
-  withKnobs,
-  text,
-  boolean
+  withKnobs
 } from '@storybook/addon-knobs';
 import AposMediaManager from './AposMediaManager.vue';
 import mediaData from './data.js';

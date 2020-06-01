@@ -4,9 +4,9 @@
         <img class="apos-media-manager-editor__thumb" :src="media.path" alt="">
       </div>
       <ul class="apos-media-manager-editor__details">
-        <li class="apos-media-manager-editor__detail">Uploaded: March 6th, 2018</li>
-        <li class="apos-media-manager-editor__detail">File Size 345KB</li>
-        <li class="apos-media-manager-editor__detail">Dimensions: 1600 x 800</li>
+        <li class="apos-media-manager-editor__detail">{{ media.uploadedAt }}</li>
+        <li class="apos-media-manager-editor__detail">File Size: {{ media.fileSize }}</li>
+        <li class="apos-media-manager-editor__detail">{{ media.dim }}</li>
       </ul>
       <AposStringInput
         v-for="input in inputs" :field="input.field" :status="input.status" :value="input.value" 
@@ -52,7 +52,7 @@ export default {
   },
   watch: {
     media() {
-      this.lipKey = this.generateId();
+      this.generateLipKey();
     }
   },
 
@@ -84,7 +84,7 @@ export default {
           data: true
         },
       },
-      lipKey: this.generateId()
+      lipKey: ''
     }
   },
   computed: {
@@ -105,17 +105,23 @@ export default {
       }
     }
   },
+  mounted() {
+    this.generateLipKey();
+  },
   methods: {
     save() {
       // TODO I have no idea what to bundle up and send back to parent at this point in dev -SR
       this.$emit('save');
+    },
+    generateLipKey() {
+      this.lipKey = this.generateId();
     }
   }
 }
 </script>
 
 <style lang="scss" scoped>
-@import '../../scss/_mixins';
+  @import '../../scss/_mixins';
 
   .apos-media-manager-editor {
     position: relative;

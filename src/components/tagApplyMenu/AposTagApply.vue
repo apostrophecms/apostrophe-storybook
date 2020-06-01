@@ -75,6 +75,10 @@
         type: Array,
         required: true
       },
+      tipAlignment: {
+        type: String,
+        default: 'left'
+      }
     },
     components: { 
       AposContextMenu,
@@ -95,7 +99,6 @@
         myTags: this.tags,
         searchInputValue: '',
         keyPrefix: this.generateId('key'), // used to keep checkboxes in sync w state
-        tipAlignment: 'left',
         origin: 'below',
         open: false,
         button: {

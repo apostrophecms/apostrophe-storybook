@@ -29,7 +29,7 @@
       </svg>
     </div>
     <div class="apos-modal-lip__content">
-      <slot>Put something in the lip</slot>
+      <slot><!-- TODO: some default here --></slot>
     </div>
   </div>
 </template>

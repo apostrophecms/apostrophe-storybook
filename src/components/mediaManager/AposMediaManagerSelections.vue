@@ -50,9 +50,6 @@ export default {
       }
     }
   },
-  computed: {
-
-  },
   methods: {
     edit(id) {
       this.$emit('edit', id);
@@ -78,7 +75,7 @@ export default {
     margin-bottom: 20px;
   }
 
-  .apos-media-manager-selections__heading /deep/ .apos-button__wrapper{
+  .apos-media-manager-selections__heading /deep/ .apos-button {
     margin-left: 10px;
   }
 

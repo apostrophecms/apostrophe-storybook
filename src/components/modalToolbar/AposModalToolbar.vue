@@ -12,8 +12,6 @@
 <script>
 
 export default {
-  components: { 
-  },
   props: {
     className: String
   },

@@ -2,10 +2,10 @@
   <AposModalToolbar className="apos-media-manager-toolbar">
     <template #leftControls>
       <AposButton label="Select" :iconOnly="true" :icon="checkboxIcon" type="outline" v-on:click="$emit('selectClick')" />
-      <AposTagApply :tags="applyTags" :applyTo="[]"/>
-      <!-- TODO trash component needs to be worked out with confirm, maybe separate into its own component --->
+      <AposTagApply tipAlignment="right" :tags="applyTags" :applyTo="[]"/>
+      <!-- TODO trash component needs to be worked out with confirm, maybe separate into its own component -->
       <AposButton label="Delete" v-on:click="$emit('trashClick')" :iconOnly="true" icon="Delete" type="outline" />
-      <AposContextMenu :button="more.button" :menu="more.menu" />
+      <AposContextMenu :button="more.button" :menu="more.menu" tipAlignment="right" />
     </template>
     <template #rightControls>
       <AposContextMenu :button="filterFields.button" tipAlignment="center">

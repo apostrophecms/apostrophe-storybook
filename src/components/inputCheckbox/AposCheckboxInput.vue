@@ -52,7 +52,7 @@ export default {
       if (Array.isArray(values)) {
         values.forEach(chosen => {
           if (!this.field.choices.map(choice => { return choice.value}).includes(chosen)) {
-            return 'selected'
+            return 'invalid'
           }
         });
       }
