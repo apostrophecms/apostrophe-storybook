@@ -2,7 +2,7 @@
   <li class="apos-tag-list__item">
     <button :class="{'is-active' : active}" class="apos-tag-list__button" @click="click(tag)">
       <transition name="slide-fade" mode="out-in" duration="100">
-        <Close v-if="this.active" class="apos-tag-list__icon apos-tag-list__icon--remove" :size="13"/>
+        <Close v-if="active" class="apos-tag-list__icon apos-tag-list__icon--remove" :size="13" />
         <Tag v-else class="apos-tag-list__icon apos-tag-list__icon--tag" :size="13" />
       </transition>
       <span class="apos-tag-list__label">{{ tag.label }}</span>
@@ -11,10 +11,13 @@
 </template>
 
 <script>
-import AposTagListItem from './AposTagListItem.vue';
 import Tag from 'vue-material-design-icons/Label.vue';
 import Close from 'vue-material-design-icons/Close.vue';
 export default {
+  components: {
+    Tag,
+    Close
+  },
   props: {
     tag: {
       required: true,
@@ -24,20 +27,15 @@ export default {
   data() {
     return {
       active: false
-    }
-  },
-  components: { 
-    AposTagListItem,
-    Tag,
-    Close
+    };
   },
   methods: {
     click(tag) {
       this.active = !this.active;
-      this.$emit('click', tag.slug)
+      this.$emit('click', tag.slug);
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
