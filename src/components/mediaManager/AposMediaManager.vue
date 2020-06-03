@@ -29,8 +29,8 @@
             v-if="!!myMedia.length" :media="myMedia" ref="display"
             @edit="updateEditing"
             @select="select"
-            @selectSeries="selectSeries"
-            @selectAnother="selectAnother"
+            @selectSeries="select-series"
+            @selectAnother="select-another"
           />
           <div v-else class="apos-media-manager__empty">
             <AposEmptyState :empty-state="emptyDisplay" />

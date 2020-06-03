@@ -3,10 +3,14 @@
     <template slot="body">
       <div class="apos-input-wrapper">
         <select class="apos-input apos-input--select" :id="uid" v-model="next">
-          <option v-for="choice in field.choices" :key="choice.value"
-            :value="choice.value">{{ choice.label }}</option>
+          <option
+            v-for="choice in field.choices" :key="choice.value"
+            :value="choice.value"
+          >
+            {{ choice.label }}
+          </option>
         </select>
-        <MenuDown :size="24" class="apos-input-icon" ></MenuDown>
+        <MenuDown :size="24" class="apos-input-icon" />
       </div>
     </template>
   </AposInputWrapper>
@@ -18,12 +22,12 @@ import AposInputMixin from '../../mixins/AposInputMixin.js';
 import MenuDown from "vue-material-design-icons/MenuDown.vue";
 
 export default {
+  name: 'AposSelectInput',
   components: {
     AposInputWrapper,
     MenuDown
   },
   mixins: [ AposInputMixin ],
-  name: 'AposSelectInput',
   computed: {
     hasIcon: function () {
       return this.status.error || (this.field.icon && this.field.icon !== null);
@@ -36,7 +40,7 @@ export default {
       }
 
       if (!this.field.choices.includes(value)) {
-        return 'invalid'
+        return 'invalid';
       }
 
       return false;

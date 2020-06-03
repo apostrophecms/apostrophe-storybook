@@ -3,7 +3,7 @@
     <div v-if="items.length">
       <p class="apos-media-manager-selections__heading">
         {{ items.length }} items selected
-        <AposButton label="Clear" type="quiet" v-on:click="clear" />
+        <AposButton label="Clear" type="quiet" @click="clear" />
       </p>
       <ol class="apos-media-manager-selections__items">
         <li v-for="item in items" :key="item.id" class="apos-media-manager-selections__item">
@@ -12,13 +12,13 @@
           </div>
           <div class="apos-media-manager-selections__item-info">
             <div class="apos-media-manager-selections__item-title">{{ item.title }}</div>
-            <AposButton label="Edit" type="quiet" v-on:click="edit(item.id)" />
+            <AposButton label="Edit" type="quiet" @click="edit(item.id)" />
           </div>
         </li>
       </ol>
     </div>
     <div v-else class="apos-media-manager-selection__empty">
-      <AposEmptyState :emptyState="emptyState" />
+      <AposEmptyState :empty-state="emptyState" />
     </div>
   </div>
 </template>
@@ -28,7 +28,7 @@ import AposButton from './../button/AposButton.vue';
 import AposEmptyState from './../emptyState/AposEmptyState.vue';
 
 export default {
-  components: { 
+  components: {
     AposButton,
     AposEmptyState
   },
@@ -48,7 +48,7 @@ export default {
         label: 'Clear Selection',
         type: 'quiet'
       }
-    }
+    };
   },
   methods: {
     edit(id) {
@@ -58,7 +58,7 @@ export default {
       this.$emit('clear');
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

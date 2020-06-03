@@ -2,10 +2,10 @@
   <div class="apos-modal__body">
     <div class="apos-modal__body-inner">
       <div v-if="hasHeader" class="apos-modal__body-header">
-        <slot name="bodyHeader"></slot>
+        <slot name="bodyHeader" />
       </div>
       <div class="apos-modal__body-main">
-        <slot name="bodyMain"></slot>
+        <slot name="bodyMain" />
       </div>
     </div>
   </div>
@@ -21,7 +21,7 @@ export default {
       return !!this.$slots.bodyHeader;
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

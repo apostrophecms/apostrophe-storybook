@@ -1,6 +1,5 @@
 <template>
   <div class="apos-media-manager-display">
-    
     <div class="apos-media-manager-display__grid">
       <button class="apos-media-manager-display__cell apos-media-manager-display__media-drop">
         <div class="apos-media-manager-display__media-drop__inner">
@@ -17,46 +16,52 @@
           </div>
         </div>
       </button>
-      <div class="apos-media-manager-display__cell" v-for="item in media" :key="generateId(item.id)"
+      <div
+        class="apos-media-manager-display__cell" v-for="item in media"
+        :key="generateId(item.id)"
         :class="{'is-selected': !!item.checkbox.value.data.length}"
       >
         <div class="apos-media-manager-display__checkbox">
-          <AposCheckbox tabindex="-1"
-            :field="item.checkbox.field" 
-            :value="item.checkbox.value" 
-            :status="item.checkbox.status" 
+          <AposCheckbox
+            tabindex="-1"
+            :field="item.checkbox.field"
+            :value="item.checkbox.value"
+            :status="item.checkbox.status"
             :choice="item.checkbox.choice"
           />
         </div>
         <img class="apos-media-manager-display__media" :src="item.path" alt="">
-        <button class="apos-media-manager-display__select"
+        <button
+          class="apos-media-manager-display__select"
           @click.exact="$emit('select', item.id)"
-          @click.shift="$emit('selectSeries', item.id)"
-          @click.meta="$emit('selectAnother', item.id)"
-        ></button>
+          @click.shift="$emit('select-series', item.id)"
+          @click.meta="$emit('select-another', item.id)"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import AposButton from './../button/AposButton.vue';
 import AposCheckbox from './../inputCheckbox/AposCheckbox.vue';
 import AposHelpers from '../../mixins/AposHelpersMixin';
 import CloudUpload from "vue-material-design-icons/CloudUpload.vue";
 
 export default {
-  mixins: [ AposHelpers ],
   components: {
     AposCheckbox,
     CloudUpload
   },
+  mixins: [ AposHelpers ],
   props: {
     media: {
-      type: Array
+      type: Array,
+      default() {
+        return [];
+      }
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

@@ -1,5 +1,4 @@
 import {
-  withKnobs,
   select,
   optionsKnob as options,
   boolean
@@ -77,7 +76,7 @@ export const stringInputs = () => {
       };
     },
     template: `
-      <AposStringInput 
+      <AposStringInput
         :field="field"
         :value="value"
         :status="status"
