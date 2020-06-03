@@ -145,7 +145,7 @@
       // Ideally we'd be using absolute positioning to anchor to the button and float above or below
       // to display the menu pane. Initial attempts at this proved difficult for z-index and overflow clipping reasons.
       calculatePosition() {
-        const button = this.$refs.button.$el.querySelector('button');
+        const button = this.$refs.button.$el;
         const popup = this.$refs.popup
         const rect = button.getBoundingClientRect();
         const buttonHeight = button.offsetHeight;

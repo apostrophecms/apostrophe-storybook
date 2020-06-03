@@ -144,8 +144,7 @@ export default {
     selected(newVal) {
       if (newVal.length === 1) {
         this.editing = this.myMedia.find(item => item.id === newVal[0].id);
-      }
-      if (!newVal.length) {
+      } else {
         this.editing = null;
       }
     }
