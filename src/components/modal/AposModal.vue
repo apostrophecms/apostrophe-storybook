@@ -14,7 +14,7 @@
       :aria-labelledby="id"
     >
       <transition :name="transitionType" @after-leave="modal.active = false">
-        <div class="apos-modal__inner"
+        <div class="apos-modal__inner" data-apos-modal-inner
           v-if="modal.showModal">
           <header class="apos-modal__header">
             <div class="apos-modal__header__main">

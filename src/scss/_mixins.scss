@@ -1,5 +1,9 @@
-@mixin apos-transition ($what: all, $duration:0.15s, $ease: ease-in-out) {
+@mixin apos-transition ($what: all, $duration:0.1s, $ease: ease-in-out) {
   transition: $what $duration $ease;
+}
+
+@mixin apos-p-reset () {
+  margin: 0;
 }
 
 @mixin apos-align-icon () {
@@ -11,6 +15,12 @@
   list-style-type: none;
   margin: 0;
   padding: 0;
+}
+
+@mixin apos-fieldset-reset () {
+  margin: 0;
+  padding: 0;
+  border: none;
 }
 
 @mixin apos-button-reset () {

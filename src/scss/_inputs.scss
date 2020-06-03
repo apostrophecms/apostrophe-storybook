@@ -10,7 +10,7 @@ $input-max-width: 460px;
 }
 @mixin apos-input () {
   width: 100%;
-  border: 1px solid var(--a-base-5);
+  border: 1px solid var(--a-base-8);
   border-radius: var(--a-border-radius);
   background-color: var(--a-base-9);
   color: var(--a-text-primary);
@@ -75,15 +75,19 @@ $input-max-width: 460px;
   }
 }
 
-.apos-field--small .apos-input {
-  font-size: 10px;
-  &--time,
-  &--text,
-  &--textarea,
-  &--date,
-  &--select {
-    padding-top: 10px;
-    padding-bottom: 10px;
+.apos-field--small {
+  .apos-input, .apos-field-label {
+    font-size: map-get($font-sizes, default);
+  }
+  .apos-input {
+    &--time,
+    &--text,
+    &--textarea,
+    &--date,
+    &--select {
+      padding-top: 10px;
+      padding-bottom: 10px;
+    }
   }
 }
 

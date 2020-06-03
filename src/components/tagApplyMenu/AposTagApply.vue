@@ -1,6 +1,5 @@
 <template>
-  <div class="apos-apply-tag-menu">
-    <AposContextMenu :tipAlignment="tipAlignment">
+    <AposContextMenu v-on:open="open = $event" :origin="origin" :tipAlignment="tipAlignment">
       <div class="apos-apply-tag-menu__inner">
         <AposStringInput 
           v-on:input="updateSearchInput"
@@ -13,6 +12,7 @@
             :label='createLabel'
             type="quiet"
             :disabled="disabledCreate"
+            :disableFocus="!open"
           />
         </div>
         <transition name="fade">
@@ -24,10 +24,11 @@
                 :value="checkboxes[tag.slug].value"
                 :choice="checkboxes[tag.slug].choice"
                 v-on:toggle="update"
+                :disableFocus="!open"
               />
             </li>
           </ol>
-          <div v-if="!searchTags.length && !creating" class="apos-apply-tag-menu__empty">
+          <div v-if="(!searchTags.length && myTags.length) && !creating" class="apos-apply-tag-menu__empty">
             <p class="apos-apply-tag-menu__empty-message">
               We couldn't find any matching tags. Perhaps 
               <AposButton 
@@ -35,14 +36,14 @@
                 :label="'create ' + searchInputValue + '?'"
                 type="quiet"
                 :disabled="disabledCreate"
+                :disableFocus="!open"
               />
             </p>
             <span class="apos-apply-tag-menu__empty-icon">🌾</span>
           </div>
         </transition>
       </div>
-    </AposContextMenu>
-  </div>
+  </AposContextMenu>
 </template>
 
 <script>
@@ -51,15 +52,10 @@
   import AposCheckbox from '../inputCheckbox/AposCheckbox.vue';
   import AposButton from '../button/AposButton.vue';
   import AposHelpers from '../../mixins/AposHelpersMixin';
-  // import Icon from 'vue-material-design-icons/TailWind.vue';
 
   export default {
     mixins: [AposHelpers],
     props: {
-      tipAlignment: {
-        type: String,
-        default: 'left'
-      },
       primaryAction: {
         type: Object,
         default() {
@@ -69,18 +65,26 @@
           }
         }
       },
-      tags: Array,
+      tags: {
+        type: Array,
+        default() {
+          return []
+        }
+      },
       applyTo: {
         type: Array,
         required: true
+      },
+      tipAlignment: {
+        type: String,
+        default: 'left'
       }
     },
     components: { 
       AposContextMenu,
       AposStringInput,
       AposButton,
-      AposCheckbox,
-      // GaugeEmpty
+      AposCheckbox
     },
     data() {
       const checkboxes = {};
@@ -94,11 +98,18 @@
         checkboxes,
         myTags: this.tags,
         searchInputValue: '',
-        keyPrefix: this.generateId('key') // used to keep checkboxes in sync w state
+        keyPrefix: this.generateId('key'), // used to keep checkboxes in sync w state
+        origin: 'below',
+        open: false,
+        button: {
+          label: 'Context Menu Label',
+          iconOnly: true,
+          icon: 'Label',
+          type: 'outline'
+        } 
       }
     },
     computed: {
-      
       disabledCreate() {
         const matches = this.myTags.filter((tag) => {
           return tag.slug === this.searchInputValue;
@@ -134,7 +145,8 @@
           label: 'Apply Tags',
           placeholder: 'Tags...',
           help: 'Find an existing tag or add a new one',
-          icon: (!this.searchTags || !this.searchTags.length) ? 'Pencil' : 'Magnify'
+          icon: (!this.searchTags || !this.searchTags.length) ? 'Pencil' : 'Magnify',
+          disableFocus: !this.open
         }
       }
     },
@@ -225,7 +237,6 @@
 <style lang="scss" scoped>
   @import '../../scss/_mixins';
   .apos-apply-tag-menu__inner {
-    padding: 20px;
     min-width: 280px;
   }
 

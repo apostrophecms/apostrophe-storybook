@@ -43,6 +43,7 @@ export default {
 <style lang="scss">
 @import '../../scss/_mixins';
 .apos-tag-list__item {
+  position: relative;
   display: block;
   margin-bottom: 5px;
 }
@@ -50,38 +51,37 @@ export default {
   @include apos-button-reset();
   display: flex;
   align-items: center;
-  padding: 7.5px 10px;
+  padding: 2px 0px;
   border-radius: 5px;
   background: transparent;
   @include apos-transition(all, .1s, ease-in-out);
   &.is-active {
-    background-color: var(--a-primary);
-    color: var(--a-white);
+    color: var(--a-primary);
+    .apos-tag-list__icon {
+      opacity: 1;
+    }
   }
   &:hover,
   &:focus {
-    background-color: var(--a-base-8);
-    .apos-tag-list__icon--tag {
-      color: var(--a-base-2);
+    color: var(--a-primary);
+    .apos-tag-list__icon {
+      color: var(--a-primary);
+      opacity: 1;
     }
   }
   &:hover.is-active,
   &:focus.is-active {
-    background-color: var(--a-primary-button-hover);
-    color: var(--a-white);
+    color: var(--a-primary);
   }
   &:focus {
     outline: none;
-    box-shadow: 0 0 5px var(--a-base-6);
-  }
-  &:focus.is-active {
-    box-shadow: 0 0 5px var(--a-primary-button-active);
+    color: var(--a-primary-button-active);
   }
 }
 
 .apos-tag-list__icon--remove {
   position: relative;
-  top: 1px;
+  top: 3px;
 }
 
 .apos-tag-list__icon--tag {
@@ -100,8 +100,11 @@ export default {
 }
 
 .apos-tag-list__icon {
+  position: absolute;
   display: inline-flex;
-  margin-right: 5px;
+  left: -20px;
+  opacity: 0;
+  @include apos-transition();
 }
 
 .apos-tag-list__label {

@@ -1,35 +1,46 @@
 <template>
   <div class="apos-tag-list">
-    <h3 class="apos-tag-list__title">{{ title }}</h3>
-    <ul class="apos-tag-list__items">
-      <AposTagListItem 
-        v-for="tag in tags" 
-        v-bind:key="tag.slug"
-        v-on:click="click"
-        :tag="tag"
-      />
-    </ul>
+    <div v-if="tags && tags.length" class="apos-tag-list__inner">
+      <h3 class="apos-tag-list__title">{{ title }}</h3>
+      <ul class="apos-tag-list__items">
+        <AposTagListItem 
+          v-for="tag in tags" 
+          v-bind:key="tag.slug"
+          v-on:click="click"
+          :tag="tag"
+        />
+      </ul>
+    </div>
+    <div v-else class="apos-tag-list__empty">
+      <AposEmptyState :emptyState="emptyState" />
+    </div>
   </div>
 </template>
 
 <script>
 import AposTagListItem from './AposTagListItem.vue';
+import AposEmptyState from './../emptyState/AposEmptyState.vue';
 export default {
+  components: {
+    AposEmptyState,
+    AposTagListItem
+  },
   props: {
     tags: {
-      type: Array,
-      required: true
+      type: Array
     },
     title: {
-      default: 'Tag List',
+      default: 'Filter by Tag',
       type: String
     },
 
   },
-  components: { AposTagListItem },
   data() {
     return {
-      active: []
+      active: [],
+      emptyState: {
+        message: 'Tag your images to make searching and filtering the media manager easier'
+      }
     }
   },
   methods: {
@@ -45,15 +56,36 @@ export default {
 @import '../../scss/_mixins';
 
 .apos-tag-list {
-  margin: 20px 0 0 10px;
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+.apos-tag-list__inner {
+  margin: 30px 0 0 30px;
 }
 .apos-tag-list__title {
-  margin: 0 0 10px 10px;
+  margin-bottom: 15px;
   font-weight: 500;
-  font-size: map-get($font-sizes, rail-title);
+  font-size: map-get($font-sizes, default);
+  color: var(--a-base-3);
+  font-weight: 700;
 }
 .apos-tag-list__items {
   @include apos-list-reset();
+}
+
+.apos-tag-list__empty {
+  display: flex;
+  flex-direction: column;
+  margin: 0 1rem;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+
+.apos-tag-list__empty-text {
+  text-align: center;
 }
 
 </style>
