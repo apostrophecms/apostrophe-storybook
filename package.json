@@ -35,6 +35,7 @@
   "scripts": {
     "test": "npx eslint . --ext .js,.vue",
     "storybook": "start-storybook -s ./public -p 9001 -c .storybook",
+    "dev": "start-storybook -s ./public -p 9001 -c .storybook",
     "deploy-storybook": "npm run build-storybook && storybook-to-ghpages -- --out=.out && rm -rf .out",
     "build-storybook": "build-storybook -s ./public -o .out"
   },
