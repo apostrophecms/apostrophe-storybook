@@ -1,6 +1,6 @@
 <template>
   <div class="apos-area-menu" :class="{'apos-area-menu--grouped': groupedMenus, 'is-focused': groupIsFocused}">
-    <AposContextMenu tipAlignment="center">
+    <AposContextMenu tipAlignment="center" :modifiers="['unpadded']" >
       <ul class="apos-area-menu__wrapper">
         <li class="apos-area-menu__item"
           v-for="(item, index) in myMenu" v-bind:key="item.label"

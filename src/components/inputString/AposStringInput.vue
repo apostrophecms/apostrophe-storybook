@@ -5,10 +5,11 @@
         <textarea :class="classes"
           v-if="type === 'textarea'" rows="5"
           v-model="next" :placeholder=field.placeholder @keydown.13="$emit('return')"
-          :disabled="status.disabled" :required="field.required" :id="uid"></textarea>
+          :disabled="status.disabled" :required="field.required" :id="uid" :tabindex="tabindex"
+          ></textarea>
         <input :class="classes" v-else
           v-model="next" :type="type" :placeholder=field.placeholder @keydown.13="$emit('return')"
-          :disabled="status.disabled" :required="field.required" :id="uid">
+          :disabled="status.disabled" :required="field.required" :id="uid" :tabindex="tabindex">
         <component 
           v-if="iconComponent"
           :size="iconSize"
@@ -31,6 +32,9 @@ export default {
   mixins: [ AposInputMixin ],
   name: 'AposStringInput',
   computed: {
+    tabindex () {
+      return this.field.disableFocus ? '-1' : '0';
+    },
     type () {
       if (this.field.type) {
         return this.field.type;

@@ -36,7 +36,7 @@ export default {
       }
 
       if (!this.field.choices.includes(value)) {
-        return 'selected'
+        return 'invalid'
       }
 
       return false;

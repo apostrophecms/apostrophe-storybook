@@ -1,8 +1,8 @@
 <template>
-  <label class="apos-choice-label" :for="id">
+  <label class="apos-choice-label" :for="id" :tabindex="{'-1' : field.hideLabel}">
     <input type="checkbox" class="apos-sr-only apos-input--choice apos-input--checkbox"
-      :value="choice.value" :name="field.name" :id="id" :aria-label="choice.label"
-      tabindex="0" :disabled="status.disabled" v-on="{ 'click': status.readOnly ? readOnly : toggle }" v-model="value.data"
+      :value="choice.value" :name="field.name" :id="id" :aria-label="choice.label" :tabindex="tabindex"
+      :disabled="status.disabled" v-on="{ 'click': status.readOnly ? readOnly : toggle }" v-model="value.data"
     />
     <span class="apos-input-indicator" aria-hidden="true">
       <component :is="`${
@@ -29,6 +29,11 @@ export default {
     value: Object,
     status: Object,
     id: String,
+  },
+  data() {
+    return {
+      tabindex: this.field.disableFocus ? '-1' : '0'
+    }
   },
   methods: {
     readOnly(event) {

@@ -3,7 +3,7 @@
     <button 
       class="apos-context-menu__button"
       @click="click"
-      tabindex="0"
+      :tabindex="tabindex"
     >
       {{ menuItem.label }}
     </button>
@@ -15,9 +15,13 @@
 export default {
   name: 'AposContextMenuItem',
   props: {
-    menuItem: Object
+    menuItem: Object,
+    open: Boolean
   },
   computed: {
+    tabindex() {
+      return this.open ? '0' : '-1';
+    }
   },
   methods: {
     click() {

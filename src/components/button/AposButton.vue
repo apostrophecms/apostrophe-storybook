@@ -1,5 +1,7 @@
 <template>
-  <button type="button" @click="click" class="apos-button" :class="modifierClass" v-bind:busy="busy" v-bind:disabled="isDisabled">
+  <button type="button" @click="click" class="apos-button" 
+    :class="modifierClass" v-bind:busy="busy" v-bind:disabled="isDisabled" :tabindex="tabindex"
+  >
     <AposSpinner :color="spinnerColor" />
     <div class="apos-button__content">
       <component :size="15" class="apos-button__icon" v-if="icon" v-bind:is="iconComponent"></component>
@@ -28,9 +30,19 @@ export default {
     busy: Boolean,
     icon: String,
     type: String,
-    iconOnly: Boolean
+    iconOnly: Boolean,
+    state: Array,
+    disableFocus: Boolean
+  },
+  data() {
+    return {
+      contextMenuOpen: true
+    }
   },
   computed: {
+    tabindex() {
+      return this.disableFocus ? '-1' : '0';
+    },
     modifierClass() {
       const modifiers = [];
 
@@ -50,6 +62,12 @@ export default {
 
       if (this.iconOnly) {
         modifiers.push(`apos-button--icon`);
+      }
+
+      if (this.state && this.state.length) {
+        this.state.forEach((state) => {
+          modifiers.push(`is-${state}`);
+        });
       }
 
       if (modifiers.length > 0) {
@@ -94,7 +112,7 @@ export default {
     padding: 10px 20px;
     border-radius: var(--a-border-radius);
     font-size: map-get($font-sizes, modal);
-    letter-spacing: 0.75px; // how do we reuse this
+    letter-spacing: 0.75px;
     border: 1px solid var(--a-base-5);
     transition: all 0.2s ease;
     overflow: hidden;
@@ -102,7 +120,7 @@ export default {
       cursor: pointer;
       background-color: var(--a-base-8);
     }
-    &:active {
+    &:active, &.is-active {
       background-color: var(--a-base-7);
     }
     &:focus {
@@ -153,6 +171,7 @@ export default {
     font-weight: 500;
     &:hover,
     &:active,
+    &.is-active,
     &:focus {
       background-color: transparent;
       text-decoration: underline;
@@ -225,11 +244,12 @@ export default {
     &:hover {
       background-color: var(--a-base-9);
     }
-    &:active {
+    &:active,
+    &.is-active {
       background-color: var(--a-base-8);
     }
     &:focus {
-      box-shadow: 0 0 0 1px var(--a-base-8), 0 0 0 3px var(--a-base--7);
+      box-shadow: 0 0 3px var(--a-base-2);
     }
     &[disabled] {
       background-color: transparent;
@@ -241,6 +261,16 @@ export default {
     }
   }
 
+  .apos-button--icon-right {
+    .apos-button__content {
+      flex-direction: row-reverse;
+    }
+    .apos-button__icon {
+      margin-right: 0;
+      margin-left: 5px;
+    }
+  }
+
   .apos-button--primary {
     color: var(--a-white);
     background: var(--a-primary);
@@ -248,7 +278,8 @@ export default {
     &:hover {
       background-color: var(--a-primary-button-hover);
     }
-    &:active {
+    &:active,
+    &.is-active {
       background-color: var(--a-primary-button-active);
     }
     &:focus {
@@ -271,7 +302,8 @@ export default {
     &:hover {
       background-color: var(--a-base-1);
     }
-    &:active {
+    &:active,
+    &.is-active {
       background-color: var(--a-base-1);
     }
     &:focus {
@@ -293,7 +325,8 @@ export default {
     &:hover {
       background-color: var(--a-danger-button-hover);
     }
-    &:active {
+    &:active,
+    &.is-active {
       background-color: var(--a-danger-button-active);
     }
     &:focus {

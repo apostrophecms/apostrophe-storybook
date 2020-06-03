@@ -42,8 +42,9 @@ export default {
         return 'required';
       }
 
-      if (!this.field.choices.includes(value)) {
-        return 'selected'
+
+      if (!this.field.choices.map(choice => {return choice.value}).includes(value)) {
+        return 'invalid'
       }
 
       return false;
