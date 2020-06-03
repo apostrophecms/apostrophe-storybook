@@ -1,10 +1,10 @@
 <template>
   <div :class="className" class="apos-toolbar">
     <div v-if="hasLeftControls" class="apos-toolbar__group apos-toolbar__group--left">
-      <slot name="leftControls"></slot>
+      <slot name="leftControls" />
     </div>
     <div v-if="hasRightControls" class="apos-toolbar__group apos-toolbar__group--right">
-      <slot name="rightControls"></slot>
+      <slot name="rightControls" />
     </div>
   </div>
 </template>
@@ -13,7 +13,10 @@
 
 export default {
   props: {
-    className: String
+    className: {
+      type: String,
+      default: ''
+    }
   },
   computed: {
     hasLeftControls() {
@@ -23,7 +26,7 @@ export default {
       return !!this.$slots.rightControls;
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

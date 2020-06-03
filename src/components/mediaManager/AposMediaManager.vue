@@ -1,4 +1,4 @@
-<!-- 
+<!--
   AposMediaManager will be in charge of all media-related state logic
   this includes doing the selecting and deselecting of items, deciding the editor/selection view,
   emitting batch action events, etc. All sub views will recieve `media` as a prop
@@ -17,23 +17,23 @@
     <template #main>
       <AposModalBody>
         <template #bodyHeader v-if="!!media.length">
-          <AposMediaManagerToolbar 
-            :selected="selected" :media="myMedia" 
-            v-on:selectClick="selectClick"
-            v-on:trashClick="trashClick"
-            v-on:search="search"
+          <AposMediaManagerToolbar
+            :selected="selected" :media="myMedia"
+            @select-click="selectClick"
+            @trash-click="trashClick"
+            @search="search"
           />
         </template>
         <template #bodyMain>
-          <AposMediaManagerDisplay 
+          <AposMediaManagerDisplay
             v-if="!!myMedia.length" :media="myMedia" ref="display"
-            v-on:edit="updateEditing"
-            v-on:select="select"
-            v-on:selectSeries="selectSeries"
-            v-on:selectAnother="selectAnother"
+            @edit="updateEditing"
+            @select="select"
+            @selectSeries="selectSeries"
+            @selectAnother="selectAnother"
           />
           <div v-else class="apos-media-manager__empty">
-            <AposEmptyState :emptyState="emptyDisplay" />
+            <AposEmptyState :empty-state="emptyDisplay" />
           </div>
         </template>
       </AposModalBody>
@@ -41,12 +41,12 @@
     <template #rightRail v-if="!!media.length">
       <AposModalRail type="right">
         <div class="apos-media-manager__sidebar" :class="{'apos-media-manager__sidebar--empty' : !selected.length}">
-          <AposMediaManagerEditor 
-            v-show="editing" :media="editing" :selected="selected" 
-            v-on:back="updateEditing(null)" v-on:save="saveMedia"
+          <AposMediaManagerEditor
+            v-show="editing" :media="editing" :selected="selected"
+            @back="updateEditing(null)" @save="saveMedia"
           />
-          <AposMediaManagerSelections 
-            :items="selected" v-on:clear="clearSelected" v-on:edit="updateEditing"
+          <AposMediaManagerSelections
+            :items="selected" @clear="clearSelected" @edit="updateEditing"
             v-show="!editing"
           />
         </div>
@@ -68,7 +68,7 @@ import AposMediaManagerSelections from './AposMediaManagerSelections.vue';
 import AposMediaManagerEditor from './AposMediaManagerEditor.vue';
 
 export default {
-  components: { 
+  components: {
     AposModal,
     AposModalRail,
     AposModalBody,
@@ -99,7 +99,7 @@ export default {
     }
   },
   data() {
-    const myMedia = []
+    const myMedia = [];
     this.media.forEach((media) => {
       const newMedia = { ...media };
       newMedia.checkbox = {
@@ -133,11 +133,11 @@ export default {
         message: 'Uploaded media will appear here',
         emoji: '🖼'
       }
-    }
+    };
   },
   computed: {
     selected() {
-      return this.myMedia.filter(item => item.checkbox.value.data.length)
+      return this.myMedia.filter(item => item.checkbox.value.data.length);
     }
   },
   watch: {
@@ -197,7 +197,7 @@ export default {
       }
       const sliced = this.myMedia.slice(beginIndex, endIndex);
       // always want to check, never toggle
-      sliced.forEach(media => media.checkbox.value.data = ['checked']);
+      sliced.forEach(media => (media.checkbox.value.data = ['checked']));
       this.lastSelected = sliced[sliced.length - 1].id;
       this.editing = null;
     },
@@ -221,7 +221,7 @@ export default {
 
     // TODO stub
     saveMedia() {
-      this.$emit('save')
+      this.$emit('save');
     },
 
     search(query) {
@@ -230,7 +230,7 @@ export default {
     }
 
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

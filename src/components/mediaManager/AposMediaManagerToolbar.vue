@@ -1,29 +1,32 @@
 <template>
-  <AposModalToolbar className="apos-media-manager-toolbar">
+  <AposModalToolbar class-name="apos-media-manager-toolbar">
     <template #leftControls>
-      <AposButton label="Select" :iconOnly="true" :icon="checkboxIcon" type="outline" v-on:click="$emit('selectClick')" />
-      <AposTagApply :tags="applyTags" :applyTo="[]"/>
+      <AposButton label="Select" :icon-only="true" :icon="checkboxIcon" type="outline" @click="$emit('select-click')" />
+      <AposTagApply :tags="applyTags" :apply-to="[]" />
       <!-- TODO trash component needs to be worked out with confirm, maybe separate into its own component -->
-      <AposButton label="Delete" v-on:click="$emit('trashClick')" :iconOnly="true" icon="Delete" type="outline" />
-      <AposContextMenu :button="more.button" :menu="more.menu" tipAlignment="right" />
+      <AposButton label="Delete" @click="$emit('trash-click')" :icon-only="true" icon="Delete" type="outline" />
+      <AposContextMenu :button="more.button" :menu="more.menu" tip-alignment="right" />
     </template>
     <template #rightControls>
-      <AposContextMenu :button="filterFields.button" tipAlignment="center">
+      <AposContextMenu :button="filterFields.button" tip-alignment="center">
         <div class="apos-media-manager-toolbar__filters">
           <div class="apos-media-manager-toolbar__filter-set">
-            <AposRadioInput v-on:input="filter($event, 'published')" 
-              :field="filterFields.published.field" :status="filterFields.published.status" 
-              :value="filterFields.published.value" 
+            <AposRadioInput
+              @input="filter($event, 'published')"
+              :field="filterFields.published.field" :status="filterFields.published.status"
+              :value="filterFields.published.value"
             />
           </div>
           <div class="apos-media-manager-toolbar__filter-set">
-            <AposRadioInput v-on:input="filter($event, 'trash')" :field="filterFields.trash.field"
-             :status="filterFields.trash.status" :value="filterFields.trash.value" 
+            <AposRadioInput
+              @input="filter($event, 'trash')" :field="filterFields.trash.field"
+              :status="filterFields.trash.status" :value="filterFields.trash.value"
             />
           </div>
         </div>
       </AposContextMenu>
-      <AposStringInput v-on:input="search" :field="searchField.field" 
+      <AposStringInput
+        @input="search" :field="searchField.field"
         :status="searchField.status" :value="searchField.value" :modifiers="['small']"
       />
     </template>
@@ -39,7 +42,7 @@ import AposRadioInput from './../inputRadio/AposRadioInput.vue';
 import AposModalToolbar from './../modalToolbar/AposModalToolbar.vue';
 
 export default {
-  components: { 
+  components: {
     AposButton,
     AposModalToolbar,
     AposStringInput,
@@ -48,9 +51,24 @@ export default {
     AposRadioInput
   },
   props: {
-    selected: Array,
-    media: Array,
-    applyTags: Array 
+    selected: {
+      type: Array,
+      default () {
+        return [];
+      }
+    },
+    media: {
+      type: Array,
+      default () {
+        return [];
+      }
+    },
+    applyTags: {
+      type: Array,
+      default () {
+        return [];
+      }
+    }
   },
 
   data() {
@@ -60,7 +78,7 @@ export default {
           label: 'More operations',
           iconOnly: true,
           icon: 'DotsVertical',
-          type: 'outline',
+          type: 'outline'
         },
         menu: [
           {
@@ -73,7 +91,7 @@ export default {
         field: {
           name: 'search',
           placeholder: 'Search Images',
-          icon: 'Magnify',
+          icon: 'Magnify'
         },
         status: {},
         value: { data: '' }
@@ -124,17 +142,17 @@ export default {
           status: {}
         }
       }
-    }
+    };
   },
   computed: {
     checkboxIcon() {
       if (this.selected.length === this.media.length) {
-        return 'CheckboxMarked'
+        return 'CheckboxMarked';
       }
       if (this.selected.length < this.media.length && this.selected.length !== 0) {
-        return 'MinusBox'
+        return 'MinusBox';
       }
-      return 'CheckboxBlankOutline'
+      return 'CheckboxBlankOutline';
     }
   },
   methods: {
@@ -145,7 +163,7 @@ export default {
       this.$emit('search', value.data);
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

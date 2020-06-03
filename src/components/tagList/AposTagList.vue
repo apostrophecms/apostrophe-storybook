@@ -5,14 +5,14 @@
       <ul class="apos-tag-list__items">
         <AposTagListItem
           v-for="tag in tags"
-          v-bind:key="tag.slug"
-          v-on:click="click"
+          :key="tag.slug"
+          @click="click"
           :tag="tag"
         />
       </ul>
     </div>
     <div v-else class="apos-tag-list__empty">
-      <AposEmptyState :emptyState="emptyState" />
+      <AposEmptyState :empty-state="emptyState" />
     </div>
   </div>
 </template>
@@ -27,7 +27,10 @@ export default {
   },
   props: {
     tags: {
-      type: Array
+      type: Array,
+      default() {
+        return [];
+      }
     },
     title: {
       default: 'Filter by Tag',
@@ -40,7 +43,7 @@ export default {
       emptyState: {
         message: 'Tag your images to make searching and filtering the media manager easier'
       }
-    }
+    };
   },
   methods: {
     click(slug) {
