@@ -1,16 +1,16 @@
 <template>
-  <AposInputWrapper :field="field" :error="status.error" >
-    <template slot="body">
-      <AposCheckbox 
+  <AposInputWrapper :field="field" :error="status.error">
+    <template #body>
+      <AposCheckbox
         :for="getChoiceId(uid, choice.value)"
-        v-for="choice in field.choices" 
-        :key="choice.value" 
+        v-for="choice in field.choices"
+        :key="choice.value"
         :id="getChoiceId(uid, choice.value)"
         :choice="choice"
         :field="field"
         :value="value"
         :status="status"
-        v-on:toggle="update"
+        @toggle="update"
       />
     </template>
   </AposInputWrapper>
@@ -23,10 +23,13 @@ import AposInputMixin from '../../mixins/AposInputMixin';
 
 export default {
   name: 'AposCheckboxInput',
-  mixins: [ AposInputMixin ],
   components: {
     AposInputWrapper,
     AposCheckbox
+  },
+  mixins: [ AposInputMixin ],
+  beforeMount: function () {
+    this.value.data = Array.isArray(this.value.data) ? this.value.data : [];
   },
   methods: {
     update(newValue) {
@@ -37,7 +40,7 @@ export default {
       }
     },
     getChoiceId(uid, value) {
-       return uid + value.replace(/\s/g, '');
+      return uid + value.replace(/\s/g, '');
     },
     validate(values) {
       if (!Array.isArray(this.field.choices)) {
@@ -51,17 +54,16 @@ export default {
 
       if (Array.isArray(values)) {
         values.forEach(chosen => {
-          if (!this.field.choices.map(choice => { return choice.value}).includes(chosen)) {
-            return 'invalid'
+          if (!this.field.choices.map(choice => {
+            return choice.value;
+          }).includes(chosen)) {
+            return 'invalid';
           }
         });
       }
 
       return false;
     }
-  },
-  beforeMount: function () {
-    this.value.data = Array.isArray(this.value.data) ? this.value.data : [];
   }
-}
+};
 </script>

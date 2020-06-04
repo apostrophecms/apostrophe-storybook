@@ -1,6 +1,6 @@
 <template>
   <AposInputWrapper :field="field" :error="status.error" :uid="uid">
-    <template slot="body">
+    <template #body>
       <div class="apos-input-wrapper">
         <select class="apos-input apos-input--select" :id="uid" v-model="next">
           <option

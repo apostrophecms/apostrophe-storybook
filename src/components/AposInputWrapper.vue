@@ -1,13 +1,13 @@
 <template>
   <component :is="wrapEl" :class="classList">
     <!-- TODO i18n -->
-    <component v-if="field.label" :class="{'apos-sr-only': field.hideLabel }"  :is="labelEl" class="apos-field-label" :for="uid">
+    <component v-if="field.label" :class="{'apos-sr-only': field.hideLabel }" :is="labelEl" class="apos-field-label" :for="uid">
       {{ field.label }}
       <span v-if="field.required" class="apos-field-required">*</span>
     </component>
     <!-- TODO i18n -->
     <p v-if="field.help" class="apos-field-help">{{ field.help }}</p>
-    <slot name="body"></slot>
+    <slot name="body" />
     <!-- TODO i18n -->
     <div v-if="errorMessage" class="apos-field-error">
       {{ errorMessage }}
@@ -21,22 +21,30 @@
 export default {
   name: 'AposInputWrapper',
   props: {
-    field: Object,
-    error: [ String, Boolean, Object ],
-    uid: Number,
-    modifiers: Array
+    field: {
+      type: Object,
+      required: true
+    },
+    error: {
+      type: [ String, Boolean, Object ],
+      default: null
+    },
+    uid: {
+      type: Number,
+      required: true
+    },
+    modifiers: {
+      type: Array,
+      default() {
+        return [];
+      }
+    }
   },
   data () {
     return {
       wrapEl: 'div',
       labelEl: 'label'
-    }
-  },
-  mounted: function () {
-    if (this.field.type === 'radio' || this.field.type === 'checkbox') {
-      this.wrapEl = 'fieldset';
-      this.labelEl = 'legend';
-    }
+    };
   },
   computed: {
     classList: function () {
@@ -65,7 +73,7 @@ export default {
 
       let error = 'unknown';
 
-      if (typeof this.error === 'String') {
+      if (typeof this.error === 'string') {
         error = this.error;
       } else if (this.error.type) {
         error = this.error.type;
@@ -78,11 +86,17 @@ export default {
         if (this.error.message) {
           return this.error.message;
         } else {
-          return 'Error'
+          return 'Error';
         }
       } else {
         return false;
       }
+    }
+  },
+  mounted: function () {
+    if (this.field.type === 'radio' || this.field.type === 'checkbox') {
+      this.wrapEl = 'fieldset';
+      this.labelEl = 'legend';
     }
   }
 };

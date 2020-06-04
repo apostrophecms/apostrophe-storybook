@@ -1,14 +1,19 @@
 <template>
-  <label class="apos-choice-label" :for="id" :tabindex="{'-1' : field.hideLabel}">
-    <input type="checkbox" class="apos-sr-only apos-input--choice apos-input--checkbox"
+  <label
+    class="apos-choice-label" :for="id" :tabindex="{'-1' : field.hideLabel}"
+  >
+    <input
+      type="checkbox" class="apos-sr-only apos-input--choice apos-input--checkbox"
       :value="choice.value" :name="field.name" :id="id" :aria-label="choice.label" :tabindex="tabindex"
       :disabled="status.disabled" v-on="{ 'click': status.readOnly ? readOnly : toggle }" v-model="value.data"
-    />
+    >
     <span class="apos-input-indicator" aria-hidden="true">
-      <component :is="`${
+      <component
+        :is="`${
           choice.indeterminate ? 'MinusIcon' : 'CheckBoldIcon'
         }`"
-        :size="10" v-if="value.data.includes(choice.value)"></component>
+        :size="10" v-if="value.data.includes(choice.value)"
+      />
     </span>
     <span :class="{'apos-sr-only': field.hideLabel }" v-if="choice.label" class="apos-choice-label-text">{{ choice.label }}</span>
   </label>
@@ -24,16 +29,31 @@ export default {
     MinusIcon
   },
   props: {
-    choice: Object,
-    field: Object,
-    value: Object,
-    status: Object,
-    id: String,
+    choice: {
+      type: Object,
+      required: true
+    },
+    field: {
+      type: Object,
+      required: true
+    },
+    value: {
+      type: Object,
+      required: true
+    },
+    status: {
+      type: Object,
+      required: true
+    },
+    id: {
+      type: String,
+      required: true
+    }
   },
   data() {
     return {
       tabindex: this.field.disableFocus ? '-1' : '0'
-    }
+    };
   },
   methods: {
     readOnly(event) {
@@ -45,7 +65,7 @@ export default {
       this.$emit('toggle', this.choice.value);
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

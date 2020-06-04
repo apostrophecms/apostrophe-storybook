@@ -1,29 +1,34 @@
 <template>
   <AposInputWrapper :field="field" :error="status.error">
-    <template slot="body">
+    <template #body>
       <div :class="classList">
-        <input 
-          class="apos-sr-only" 
-          type="checkbox" :id="uid + '-true'" 
-          :value="true" v-on:change="setValue(true)"
-          :checked="value.data === true" 
+        <input
+          class="apos-sr-only"
+          type="checkbox" :id="uid + '-true'"
+          :value="true" @change="setValue(true)"
+          :checked="value.data === true"
           ref="true"
         >
         <label :for="uid + '-true'" class="apos-boolean__label apos-input">
-          <CircleIcon :size="12" class="apos-boolean__icon"
-            title="" v-show="!field.toggle"></CircleIcon>
-            {{ trueLabel || 'Yes' }}
+          <CircleIcon
+            :size="12" class="apos-boolean__icon"
+            title="" v-show="!field.toggle"
+          />
+          {{ trueLabel || 'Yes' }}
         </label>
-        <input class="apos-sr-only apos-boolean__input--false"
-         type="checkbox" :id="uid + '-false'" 
-         :value="false" v-on:change="setValue(false)"
-         :checked="value.data === false"
-         ref="false"
+        <input
+          class="apos-sr-only apos-boolean__input--false"
+          type="checkbox" :id="uid + '-false'"
+          :value="false" @change="setValue(false)"
+          :checked="value.data === false"
+          ref="false"
         >
         <label :for="uid + '-false'" class="apos-boolean__label apos-input">
-          <CircleIcon :size="12" class="apos-boolean__icon"
-            title="" v-show="!field.toggle"></CircleIcon>
-            {{ falseLabel || 'No' }}
+          <CircleIcon
+            :size="12" class="apos-boolean__icon"
+            title="" v-show="!field.toggle"
+          />
+          {{ falseLabel || 'No' }}
         </label>
       </div>
     </template>
@@ -36,12 +41,12 @@ import AposInputMixin from '../../mixins/AposInputMixin';
 import CircleIcon from 'vue-material-design-icons/Circle.vue';
 
 export default {
+  name: 'AposBooleanField',
   components: {
     AposInputWrapper,
     CircleIcon
   },
   mixins: [ AposInputMixin ],
-  name: 'AposBooleanField',
   computed: {
     classList: function () {
       return [
@@ -53,16 +58,16 @@ export default {
       ];
     },
     trueLabel: function () {
-      if (this.field.toggle && this.field.toggle.true
-        && typeof this.field.toggle.true === 'string') {
+      if (this.field.toggle && this.field.toggle.true &&
+        typeof this.field.toggle.true === 'string') {
         return this.field.toggle.true;
       } else {
         return false;
       }
     },
     falseLabel: function () {
-      if (this.field.toggle && this.field.toggle
-        && typeof this.field.toggle.false === 'string') {
+      if (this.field.toggle && this.field.toggle &&
+        typeof this.field.toggle.false === 'string') {
         return this.field.toggle.false;
       } else {
         return false;
@@ -153,7 +158,7 @@ export default {
       &:focus {
         background-color: var(--a-base-10);
       }
-    } 
+    }
 
     input:checked.apos-boolean__input--false + & {
       .apos-boolean__icon {

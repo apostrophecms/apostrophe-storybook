@@ -1,6 +1,6 @@
 <template>
   <AposInputWrapper :field="field" :error="status.error">
-    <template slot="body">
+    <template #body>
       <label
         class="apos-choice-label" :for="getChoiceId(uid, choice.value)"
         v-for="choice in field.choices" :key="choice.value"

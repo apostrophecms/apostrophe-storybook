@@ -1,6 +1,6 @@
 <template>
   <li class="apos-context-menu__item">
-    <button 
+    <button
       class="apos-context-menu__button"
       @click="click"
       :tabindex="tabindex"
@@ -9,7 +9,6 @@
     </button>
   </li>
 </template>
-
 
 <script>
 export default {
