@@ -1,17 +1,22 @@
 <template>
-  <AposInputWrapper :field="field" :error="status.error" >
-    <template slot="body">
-      <label class="apos-choice-label" :for="getChoiceId(uid, choice.value)"
-        v-for="choice in field.choices" :key="choice.value">
-        <input type="radio" class="apos-sr-only apos-input--choice apos-input--radio"
+  <AposInputWrapper :field="field" :error="status.error">
+    <template #body>
+      <label
+        class="apos-choice-label" :for="getChoiceId(uid, choice.value)"
+        v-for="choice in field.choices" :key="choice.value"
+      >
+        <input
+          type="radio" class="apos-sr-only apos-input--choice apos-input--radio"
           :value="choice.value" :name="field.name"
           :id="getChoiceId(uid, choice.value)"
           v-model="next" :disabled="status.disabled"
-          tabindex="1" />
+          tabindex="1"
+        >
         <span class="apos-input-indicator" aria-hidden="true">
-          <component :is="`${
-            next === choice.value ? 'CheckBoldIcon' : 'span'}`"
-            :size="8" v-if="next === choice.value"></component>
+          <component
+            :is="`${next === choice.value ? 'CheckBoldIcon' : 'span'}`"
+            :size="8" v-if="next === choice.value"
+          />
         </span>
         <span class="apos-choice-label-text">{{ choice.label }}</span>
       </label>
@@ -27,12 +32,12 @@ import MinusIcon from "vue-material-design-icons/Minus.vue";
 
 export default {
   name: 'AposRadioInput',
-  mixins: [ AposInputMixin ],
   components: {
     AposInputWrapper,
     CheckBoldIcon,
     MinusIcon
   },
+  mixins: [ AposInputMixin ],
   methods: {
     getChoiceId(uid, value) {
       return uid + value.replace(/\s/g, '');
@@ -42,15 +47,16 @@ export default {
         return 'required';
       }
 
-
-      if (!this.field.choices.map(choice => {return choice.value}).includes(value)) {
-        return 'invalid'
+      if (!this.field.choices.map(choice => {
+        return choice.value;
+      }).includes(value)) {
+        return 'invalid';
       }
 
       return false;
     }
   }
-}
+};
 </script>
 
 <style lang="scss">

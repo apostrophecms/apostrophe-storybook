@@ -1,15 +1,17 @@
 <template>
   <div class="apos-area-menu" :class="{'apos-area-menu--grouped': groupedMenus, 'is-focused': groupIsFocused}">
-    <AposContextMenu tipAlignment="center" :modifiers="['unpadded']" >
+    <AposContextMenu tip-alignment="center" :modifiers="['unpadded']">
       <ul class="apos-area-menu__wrapper">
-        <li class="apos-area-menu__item"
-          v-for="(item, index) in myMenu" v-bind:key="item.label"
+        <li
+          class="apos-area-menu__item"
+          v-for="(item, index) in myMenu" :key="item.label"
           :class="{'has-group': item.items}"
           :ref="'item-' + index"
-          >
+        >
           <dl v-if="item.items" class="apos-area-menu__group">
             <dt>
-              <button :for="item.label" class="apos-area-menu__group-label" 
+              <button
+                :for="item.label" class="apos-area-menu__group-label"
                 v-if="item.items" tabindex="0" :id="menuId + '-trigger-' + index"
                 :aria-controls="menuId + '-group-' + index"
                 @focus="groupFocused"
@@ -28,34 +30,36 @@
               </button>
             </dt>
             <dd class="apos-area-menu__group-list" role="region">
-              <ul class="apos-area-menu__items apos-area-menu__items--accordion"
+              <ul
+                class="apos-area-menu__items apos-area-menu__items--accordion"
                 :class="{'is-active': active === index}"
                 :id="menuId + '-group-' + index"
                 :aria-labelledby="menuId + '-trigger-' + index"
                 :aria-expanded="active === index ? 'true' : 'false'"
               >
-              <li class="apos-area-menu__item" 
-                v-for="(child, childIndex) in item.items" 
-                v-bind:key="child.action" 
-                :ref="'child-' + index + '-' + childIndex"
-              >
-                <AposAreaMenuItem 
-                  v-on:click="clicked(child)" 
-                  :item="child" 
-                  :tabbable="index === active"
-                  v-on:up="switchItem('child-' + index + '-' + (childIndex - 1), -1)"
-                  v-on:down="switchItem('child-' + index + '-' + (childIndex + 1), 1)"
-                />
-              </li>
+                <li
+                  class="apos-area-menu__item"
+                  v-for="(child, childIndex) in item.items"
+                  :key="child.action"
+                  :ref="'child-' + index + '-' + childIndex"
+                >
+                  <AposAreaMenuItem
+                    @click="clicked(child)"
+                    :item="child"
+                    :tabbable="index === active"
+                    @up="switchItem('child-' + index + '-' + (childIndex - 1), -1)"
+                    @down="switchItem('child-' + index + '-' + (childIndex + 1), 1)"
+                  />
+                </li>
               </ul>
             </dd>
           </dl>
-          <AposAreaMenuItem 
-            v-else 
-            v-on:click="clicked(item)"
+          <AposAreaMenuItem
+            v-else
+            @click="clicked(item)"
             :item="item"
-            v-on:up="switchItem('item-' + (index - 1), -1)"
-            v-on:down="switchItem('item-' + (index + 1), 1)"
+            @up="switchItem('item-' + (index - 1), -1)"
+            @down="switchItem('item-' + (index + 1), 1)"
           />
         </li>
       </ul>
@@ -68,22 +72,22 @@ import AposContextMenu from '../contextMenu/AposContextMenu.vue';
 import AposAreaMenuItem from './AposAreaMenuItem.vue';
 import Chevron from 'vue-material-design-icons/ChevronUp.vue';
 export default {
+  components: {
+    AposContextMenu,
+    AposAreaMenuItem,
+    Chevron
+  },
   props: {
     menu: {
       type: Array,
       required: true
     }
   },
-  components: { 
-    AposContextMenu,
-    AposAreaMenuItem,
-    Chevron
-  },
   data() {
     return {
       active: 0,
       groupIsFocused: false
-    }
+    };
   },
   computed: {
     groupedMenus() {
@@ -103,7 +107,7 @@ export default {
       }
     },
     menuId() {
-      return `areaMenu-${(Math.floor(Math.random() * Math.floor(10000)))}`
+      return `areaMenu-${(Math.floor(Math.random() * Math.floor(10000)))}`;
     }
   },
   methods: {
@@ -149,9 +153,9 @@ export default {
       let target;
 
       if (dir > 0) {
-        target = index < this.$refs.groupButton.length - 1 ? index + 1 : 0;  
-      } 
-      
+        target = index < this.$refs.groupButton.length - 1 ? index + 1 : 0;
+      }
+
       if (dir < 0) {
         target = index === 0 ? this.$refs.groupButton.length - 1 : index - 1;
       }
@@ -163,10 +167,10 @@ export default {
       if (!dir) {
         target = this.$refs.groupButton.length - 1;
       }
-      
+
       this.$nextTick(() => {
         this.$refs.groupButton[target].focus();
-       });
+      });
     },
 
     switchItem(name, dir) {
@@ -175,7 +179,7 @@ export default {
       }
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

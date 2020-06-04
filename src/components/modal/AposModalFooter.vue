@@ -1,13 +1,13 @@
 <template>
   <div class="apos-modal__footer">
-    <slot></slot>
+    <slot />
   </div>
 </template>
 
 <script>
 export default {
   name: 'AposModalFooter'
-}
+};
 </script>
 
 <style lang="scss" scoped>

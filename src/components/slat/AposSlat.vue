@@ -1,22 +1,23 @@
 
 <template>
   <transition name="fade">
-    <li class="apos-slat" 
-      :data-id="item.id" 
+    <li
+      class="apos-slat"
+      :data-id="item.id"
       tabindex="0"
       :class="{'is-engaged': engaged}"
-      @keydown.prevent.32="toggleEngage"
-      @keydown.prevent.13="toggleEngage"
-      @keydown.prevent.27="disengage"
-      @keydown.prevent.40="move(1)"
-      @keydown.prevent.38="move(-1)"
-      @keydown.prevent.8="remove(true)"
+      @keydown.prevent.space="toggleEngage"
+      @keydown.prevent.enter="toggleEngage"
+      @keydown.prevent.escape="disengage"
+      @keydown.prevent.arrow-down="move(1)"
+      @keydown.prevent.arrow-up="move(-1)"
+      @keydown.prevent.backspace="remove(true)"
       :aria-pressed="engaged"
       role="listitem"
       :aria-labelledby="parent"
     >
       <div class="apos-slat__main">
-        <Drag class="apos-slat__control apos-slat__control--drag" :size="13"/>
+        <Drag class="apos-slat__control apos-slat__control--drag" :size="13" />
         <div class="apos-slat__label">
           {{ item.label }}
         </div>
@@ -53,7 +54,7 @@ export default {
   },
   data() {
     return {
-    }
+    };
   },
   methods: {
     toggleEngage() {
@@ -81,7 +82,7 @@ export default {
     remove(focusNext) {
       if (focusNext) {
         if (this.engaged) {
-          this.$emit('remove', this.item, focusNext);    
+          this.$emit('remove', this.item, focusNext);
         }
       } else {
         this.$emit('remove', this.item);
@@ -137,7 +138,7 @@ export default {
     margin-left: 10px;
   }
 
-  .apos-slat__control { 
+  .apos-slat__control {
     display: flex;
     align-content: center;
     margin-right: 5

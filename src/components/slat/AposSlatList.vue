@@ -1,18 +1,18 @@
 
 <template>
   <div ref="root">
-    <draggable 
+    <draggable
       class="apos-slat-list" tag="ol" v-model="items" role="list"
-      v-bind="dragOptions" :move="onMove" @start="isDragging=true" 
+      v-bind="dragOptions" :move="onMove" @start="isDragging=true"
       @end="isDragging=false" :id="listId"
     >
       <transition-group type="transition" name="apos-slat-list-transition">
-        <AposSlat 
-          v-on:remove="remove" class="apos-slat-list__item" 
-          v-on:engage="engage"
-          v-on:disengage="disengage"
-          v-on:move="move"
-          v-for="item in items" :key="item.id" :item="item" 
+        <AposSlat
+          @remove="remove" class="apos-slat-list__item"
+          @engage="engage"
+          @disengage="disengage"
+          @move="move"
+          v-for="item in items" :key="item.id" :item="item"
           :class="{'apos-slat-list__item--disabled' : !editable}"
           :engaged="engaged === item.id"
           :parent="listId"
@@ -24,20 +24,12 @@
 
 <script>
 import AposSlat from './AposSlat.vue';
-import draggable from 'vuedraggable'
+import draggable from 'vuedraggable';
 export default {
   name: 'AposSlatList',
-  components: { 
+  components: {
     AposSlat,
     draggable
-  },
-  data() {
-    return {
-      isDragging: false,
-      delayedDragging: false,
-      items: this.initialItems,
-      engaged: null
-    }
   },
   props: {
     initialItems: {
@@ -49,9 +41,17 @@ export default {
       default: true
     }
   },
+  data() {
+    return {
+      isDragging: false,
+      delayedDragging: false,
+      items: this.initialItems,
+      engaged: null
+    };
+  },
   computed: {
     listId() {
-      return `sortableList-${(Math.floor(Math.random() * Math.floor(10000)))}`
+      return `sortableList-${(Math.floor(Math.random() * Math.floor(10000)))}`;
     },
     dragOptions() {
       return {
@@ -59,7 +59,7 @@ export default {
         disabled: !this.editable,
         ghostClass: 'is-dragging'
       };
-    },
+    }
   },
   watch: {
     isDragging(newValue) {
@@ -103,7 +103,7 @@ export default {
       let i = null;
       this.items.forEach((item, index) => {
         if (item.id === id) {
-          i = index
+          i = index;
         }
       });
       return i;
@@ -124,7 +124,7 @@ export default {
         (!relatedElement || !relatedElement.fixed) && !draggedElement.fixed
       );
     }
-  },
+  }
 };
 </script>
 

@@ -12,6 +12,9 @@
 <script>
 import ChevronRightIcon from 'vue-material-design-icons/ChevronRight.vue';
 export default {
+  components: {
+    ChevronRightIcon
+  },
   props: {
     label: {
       default: 'Set a label',
@@ -22,25 +25,27 @@ export default {
       type: String
     },
     items: {
-      default: [],
+      default() {
+        return [];
+      },
       type: Array
     },
-    variant: String
+    variant: {
+      type: String,
+      default: null
+    }
   },
   computed: {
     last() {
-       return Object.keys(this.items).length - 1;
+      return Object.keys(this.items).length - 1;
     },
     classObj: function () {
       return {
         'apos-breadcrumb--dark': this.variant === 'dark'
       };
     }
-  },
-  components: {
-    ChevronRightIcon
   }
-}
+};
 </script>
 
 <style lang="scss">

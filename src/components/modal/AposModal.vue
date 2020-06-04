@@ -1,51 +1,51 @@
 <template>
-  <transition 
-    :name="transitionType" 
-    @enter="modal.showModal = true"
-    v-on:enter="bindEventListeners"
-    v-on:leave="removeEventListeners"
+  <transition
+    :name="transitionType"
+    @enter="finishEnter"
+    @leave="removeEventListeners"
     :duration="250"
   >
-    <section 
+    <section
       v-if="modal.active"
       :class="classes"
-      role="dialog" 
+      role="dialog"
       aria-modal="true"
       :aria-labelledby="id"
     >
       <transition :name="transitionType" @after-leave="modal.active = false">
-        <div class="apos-modal__inner" data-apos-modal-inner
-          v-if="modal.showModal">
+        <div
+          class="apos-modal__inner" data-apos-modal-inner v-if="modal.showModal"
+        >
           <header class="apos-modal__header">
             <div class="apos-modal__header__main">
               <div v-if="hasSecondaryControls" class="apos-modal__controls--secondary">
-                <slot name="secondaryControls"></slot>
+                <slot name="secondaryControls" />
               </div>
               <h2 :id="id" class="apos-modal__heading o-heading">
                 {{ modal.title }}
               </h2>
-              <div class="apos-modal__controls--primary"
-                v-if="hasPrimaryControls">
-                <slot name="primaryControls"></slot>
+              <div
+                class="apos-modal__controls--primary" v-if="hasPrimaryControls"
+              >
+                <slot name="primaryControls" />
               </div>
             </div>
             <div class="apos-modal__breadcrumbs" v-if="hasBreadcrumbs">
-              <slot class="apos-modal__breadcrumbs" name="breadcrumbs"></slot>
+              <slot class="apos-modal__breadcrumbs" name="breadcrumbs" />
             </div>
           </header>
           <div class="apos-modal__main" :class="gridModifier">
-            <slot v-if="hasLeftRail" name="leftRail"></slot>
-            <slot name="main"></slot>
-            <slot name="rightRail"></slot>
+            <slot v-if="hasLeftRail" name="leftRail" />
+            <slot name="main" />
+            <slot name="rightRail" />
           </div>
           <footer v-if="hasFooter" class="apos-modal__footer">
-            <slot name="footer"></slot>
+            <slot name="footer" />
           </footer>
         </div>
       </transition>
       <transition :name="transitionType">
-        <div class="apos-modal__overlay"
-          v-if="modal.showModal"></div>
+        <div class="apos-modal__overlay" v-if="modal.showModal" />
       </transition>
     </section>
   </transition>
@@ -55,29 +55,16 @@
 export default {
   name: 'AposModal',
   props: {
-    modal: Object,
-  },
-  mounted() {
-    
-  },
-  methods: {
-    esc (e) {
-      if (e.keyCode === 27) {
-        this.$emit('esc');
-      }
-    },
-    bindEventListeners () {
-      window.addEventListener('keydown', this.esc);
-    },
-    removeEventListeners () {
-      window.removeEventListener('keydown', this.esc);
+    modal: {
+      type: Object,
+      required: true
     }
   },
   computed: {
     id() {
       const rand = (Math.floor(Math.random() * Math.floor(10000)));
       // replace everything not A-Za-z0-9_ with _
-      const title = this.modal.title.replace(/\W/g,'_');
+      const title = this.modal.title.replace(/\W/g, '_');
       return `${title}-${rand}`;
     },
     transitionType: function () {
@@ -109,7 +96,7 @@ export default {
       const classes = ['apos-modal'];
       classes.push(`apos-modal--${this.modal.type}`);
       if (this.modal.type === 'slide') {
-        classes.push(`apos-modal--full-height`);  
+        classes.push(`apos-modal--full-height`);
       }
       return classes.join(' ');
     },
@@ -125,8 +112,25 @@ export default {
       }
       return false;
     }
+  },
+  methods: {
+    esc (e) {
+      if (e.keyCode === 27) {
+        this.$emit('esc');
+      }
+    },
+    finishEnter () {
+      this.modal.showModal = true;
+      this.bindEventListeners();
+    },
+    bindEventListeners () {
+      window.addEventListener('keydown', this.esc);
+    },
+    removeEventListeners () {
+      window.removeEventListener('keydown', this.esc);
+    }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

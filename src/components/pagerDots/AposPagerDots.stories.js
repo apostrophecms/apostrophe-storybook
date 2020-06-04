@@ -1,4 +1,4 @@
-import { withKnobs, select } from '@storybook/addon-knobs';
+import { select } from '@storybook/addon-knobs';
 
 import AposPagerDots from './AposPagerDots.vue';
 

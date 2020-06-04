@@ -35,17 +35,17 @@ storiesOf('Context Menu', module)
       <div>
         <AposContextMenu
           v-bind:menu="menu"
-          v-on:itemClicked="log"
+          v-on:item-clicked="log"
         />
         <AposContextMenu
           tipAlignment="center"
           v-bind:menu="menu"
-          v-on:itemClicked="log"
+          v-on:item-clicked="log"
         />
           <AposContextMenu
           tipAlignment="right"
           v-bind:menu="menu"
-          v-on:itemClicked="log"
+          v-on:item-clicked="log"
         />
       </div>
     `,
@@ -64,19 +64,19 @@ storiesOf('Context Menu', module)
       <div>
         <AposContextMenu
           v-bind:menu="menu"
-          v-on:itemClicked="log"
+          v-on:item-clicked="log"
           origin="above"
         />
         <AposContextMenu
           tipAlignment="center"
           v-bind:menu="menu"
-          v-on:itemClicked="log"
+          v-on:item-clicked="log"
           origin="above"
         />
           <AposContextMenu
           tipAlignment="right"
           v-bind:menu="menu"
-          v-on:itemClicked="log"
+          v-on:item-clicked="log"
           origin="above"
         />
       </div>

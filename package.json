@@ -20,8 +20,9 @@
     "eslint-plugin-node": "^8.0.1",
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-standard": "^4.0.1",
+    "eslint-plugin-vue": "^7.0.0-alpha.5",
     "lorem-ipsum": "^2.0.3",
-    "node-sass": "^4.13.1",
+    "node-sass": "^4.14.1",
     "sass-loader": "^7.3.1",
     "sass-resources-loader": "^2.0.1",
     "underscore": "^1.10.2",
@@ -32,8 +33,9 @@
     "vuedraggable": "^2.23.2"
   },
   "scripts": {
-    "test": "npx eslint .",
+    "test": "npx eslint . --ext .js,.vue",
     "storybook": "start-storybook -s ./public -p 9001 -c .storybook",
+    "dev": "start-storybook -s ./public -p 9001 -c .storybook",
     "deploy-storybook": "npm run build-storybook && storybook-to-ghpages -- --out=.out && rm -rf .out",
     "build-storybook": "build-storybook -s ./public -o .out"
   },
@@ -48,6 +50,6 @@
   },
   "homepage": "https://github.com/apostrophecms/apostrophe-storybook#readme",
   "devDependencies": {
-    "@storybook/storybook-deployer": "^2.8.3"
+    "@storybook/storybook-deployer": "^2.8.6"
   }
 }

@@ -1,29 +1,29 @@
 <template>
   <div class="apos-context-menu" :class="classList" ref="component">
     <!-- TODO refactor buttons to take a single config obj -->
-    <AposButton 
-      v-on:click="buttonClicked" :label="button.label" 
-      :type="button.type" :icon="button.icon" 
-      :iconOnly="button.iconOnly" :state="buttonState" ref="button"
+    <AposButton
+      @click="buttonClicked" :label="button.label"
+      :type="button.type" :icon="button.icon"
+      :icon-only="button.iconOnly" :state="buttonState" ref="button"
       :modifiers="button.modifiers"
     />
-    <div 
-      class="apos-primary-scrollbar apos-context-menu__popup" 
-      :class="{'is-visible': open}" ref="popup" :aria-hidden="open ? 'false' : 'true'" 
+    <div
+      class="apos-primary-scrollbar apos-context-menu__popup"
+      :class="{'is-visible': open}" ref="popup" :aria-hidden="open ? 'false' : 'true'"
       role="dialog" :style="position"
     >
-      <AposContextMenuTip 
+      <AposContextMenuTip
         :align="tipAlignment"
         :origin="origin"
       />
       <div class="apos-context-menu__pane">
         <slot>
           <ul class="apos-context-menu__items">
-            <AposContextMenuItem 
-              v-for="item in menu" 
-              :key="item.action" 
-              :menuItem="item" 
-              v-on:clicked="menuItemClicked"
+            <AposContextMenuItem
+              v-for="item in menu"
+              :key="item.action"
+              :menu-item="item"
+              @clicked="menuItemClicked"
               :open="open"
             />
           </ul>
@@ -34,157 +34,157 @@
 </template>
 
 <script>
-  import AposContextMenuItem from './AposContextMenuItem';
-  import AposContextMenuTip from './AposContextMenuTip';
-  import AposButton from './../button/AposButton';
+import AposContextMenuItem from './AposContextMenuItem';
+import AposContextMenuTip from './AposContextMenuTip';
+import AposButton from './../button/AposButton';
 
-  export default {
-    name: 'AposContextMenu',
-    components: {
-      AposContextMenuItem,
-      AposContextMenuTip,
-      AposButton
-    },
-    props: {
-      menu: Array,
-      modifiers: Array,
-      button: {
-        type: Object,
-        default() {
-          return {
-            label: 'Context Menu Label',
-            iconOnly: true,
-            icon: 'Label',
-            type: 'outline',
-          }
-        }
-      },
-      tipAlignment: {
-        type: String,
-        default: 'left'
-      },
-      origin: {
-        type: String,
-        default: 'below'
-      }
-    },
-    data() {
-      return {
-        open: false,
-        vueId: this.$options._scopeId,
-        position: ''
-      }
-    },
-    watch: {
-      open(newVal, oldVal) {
-        if (newVal) {
-          this.position = this.calculatePosition();
-        }
-        this.$emit('open', newVal);
-      }
-    },
-    computed: {
-      classList() {
-        const classes = [];
-        classes.push(`apos-context-menu--origin-${this.origin}`);
-        classes.push(`apos-context-menu--tip-alignment-${this.tipAlignment}`);
-        if (this.modifiers) {
-          this.modifiers.forEach((m) => {
-            classes.push(`apos-context-menu--${m}`);
-          });
-        }
-        if (this.menu) {
-          classes.push('apos-context-menu--unpadded');
-        }
-        return classes.join(' ');
-      },
-      buttonState() {
-        return this.open ? ['active'] : null;
-      }
-    },
-    methods: {
-      bind() {
-        document.addEventListener('click', this.clicks);
-        document.addEventListener('keydown', this.keyboard);
-        window.addEventListener('resize', this.positionPopup);
-      },
-      unbind() {
-        document.removeEventListener('click', this.clicks);
-        document.removeEventListener('keydown', this.keyboard);
-        window.removeEventListener('resize', this.positionPopup);
-      },
-      keyboard(event) {
-        // if user hits esc, close menu
-        if (event.keyCode === 27) {
-          this.open = false;
-          this.unbind();
-        }
-      },
-      clicks (event) {
-        // if user clicks outside menu component, close menu
-        if (!event.target.closest(`[${this.vueId}]`)) {
-          this.open = false;
-          this.unbind();
-        }
-      },
-      buttonClicked() {
-        this.open = !this.open;
-        if (this.open) {
-          this.bind();
-        } else {
-          this.unbind();
-        }
-      },
-      menuItemClicked(action) {
-        this.$emit('itemClicked', action);
-      },
-      positionPopup() {
-        this.position = this.calculatePosition();
-      },
-      // TODO this is proving a difficult way to handle positioning.
-      // Ideally we'd be using absolute positioning to anchor to the button and float above or below
-      // to display the menu pane. Initial attempts at this proved difficult for z-index and overflow clipping reasons.
-      calculatePosition() {
-        const button = this.$refs.button.$el;
-        const popup = this.$refs.popup
-        const rect = button.getBoundingClientRect();
-        const buttonHeight = button.offsetHeight;
-        // getBoundingClientRect gives us the true x,y,etc of an el from the viewport but 
-        // position:fixed inside position:fixed is positioned relatively to the first, account for it
-        let contextRect = {
-          top: 0,
-          left: 0
+export default {
+  name: 'AposContextMenu',
+  components: {
+    AposContextMenuItem,
+    AposContextMenuTip,
+    AposButton
+  },
+  props: {
+    menu: Array,
+    modifiers: Array,
+    button: {
+      type: Object,
+      default() {
+        return {
+          label: 'Context Menu Label',
+          iconOnly: true,
+          icon: 'Label',
+          type: 'outline'
         };
-        if (button.closest('[data-apos-modal-inner]')) {
-          contextRect = button.closest('[data-apos-modal-inner]').getBoundingClientRect();
-        }
-        let top, left;
+      }
+    },
+    tipAlignment: {
+      type: String,
+      default: 'left'
+    },
+    origin: {
+      type: String,
+      default: 'below'
+    }
+  },
+  data() {
+    return {
+      open: false,
+      vueId: this.$options._scopeId,
+      position: ''
+    };
+  },
+  computed: {
+    classList() {
+      const classes = [];
+      classes.push(`apos-context-menu--origin-${this.origin}`);
+      classes.push(`apos-context-menu--tip-alignment-${this.tipAlignment}`);
+      if (this.modifiers) {
+        this.modifiers.forEach((m) => {
+          classes.push(`apos-context-menu--${m}`);
+        });
+      }
+      if (this.menu) {
+        classes.push('apos-context-menu--unpadded');
+      }
+      return classes.join(' ');
+    },
+    buttonState() {
+      return this.open ? ['active'] : null;
+    }
+  },
+  watch: {
+    open(newVal, oldVal) {
+      if (newVal) {
+        this.position = this.calculatePosition();
+      }
+      this.$emit('open', newVal);
+    }
+  },
+  methods: {
+    bind() {
+      document.addEventListener('click', this.clicks);
+      document.addEventListener('keydown', this.keyboard);
+      window.addEventListener('resize', this.positionPopup);
+    },
+    unbind() {
+      document.removeEventListener('click', this.clicks);
+      document.removeEventListener('keydown', this.keyboard);
+      window.removeEventListener('resize', this.positionPopup);
+    },
+    keyboard(event) {
+      // if user hits esc, close menu
+      if (event.keyCode === 27) {
+        this.open = false;
+        this.unbind();
+      }
+    },
+    clicks (event) {
+      // if user clicks outside menu component, close menu
+      if (!event.target.closest(`[${this.vueId}]`)) {
+        this.open = false;
+        this.unbind();
+      }
+    },
+    buttonClicked() {
+      this.open = !this.open;
+      if (this.open) {
+        this.bind();
+      } else {
+        this.unbind();
+      }
+    },
+    menuItemClicked(action) {
+      this.$emit('item-clicked', action);
+    },
+    positionPopup() {
+      this.position = this.calculatePosition();
+    },
+    // TODO this is proving a difficult way to handle positioning.
+    // Ideally we'd be using absolute positioning to anchor to the button and float above or below
+    // to display the menu pane. Initial attempts at this proved difficult for z-index and overflow clipping reasons.
+    calculatePosition() {
+      const button = this.$refs.button.$el;
+      const popup = this.$refs.popup;
+      const rect = button.getBoundingClientRect();
+      const buttonHeight = button.offsetHeight;
+      // getBoundingClientRect gives us the true x,y,etc of an el from the viewport but
+      // position:fixed inside position:fixed is positioned relatively to the first, account for it
+      let contextRect = {
+        top: 0,
+        left: 0
+      };
+      if (button.closest('[data-apos-modal-inner]')) {
+        contextRect = button.closest('[data-apos-modal-inner]').getBoundingClientRect();
+      }
+      let top, left;
 
-        if (this.origin === 'above') {
-          // above
-          top = rect.top - contextRect.top - popup.offsetHeight - 15;
-        } else {
-          // below
-          top = rect.top - contextRect.top + buttonHeight + 15;
-        }
+      if (this.origin === 'above') {
+        // above
+        top = rect.top - contextRect.top - popup.offsetHeight - 15;
+      } else {
+        // below
+        top = rect.top - contextRect.top + buttonHeight + 15;
+      }
 
-        if (this.tipAlignment === 'center') {
-          // center
-          const buttonCenter = rect.left - contextRect.left + (button.offsetWidth / 2);
-          left = buttonCenter - (popup.offsetWidth / 2);
+      if (this.tipAlignment === 'center') {
+        // center
+        const buttonCenter = rect.left - contextRect.left + (button.offsetWidth / 2);
+        left = buttonCenter - (popup.offsetWidth / 2);
 
-        } else if (this.tipAlignment === 'right') {
-          // right
-          left = rect.left - contextRect.left + button.offsetWidth - popup.offsetWidth + 15;
-        } else {
-          // left
-          left = rect.left - contextRect.left - 15;
-        }
+      } else if (this.tipAlignment === 'right') {
+        // right
+        left = rect.left - contextRect.left + button.offsetWidth - popup.offsetWidth + 15;
+      } else {
+        // left
+        left = rect.left - contextRect.left - 15;
+      }
 
-        return `top: ${top}px; left: ${left}px`;
-      },
+      return `top: ${top}px; left: ${left}px`;
     }
   }
+};
 </script>
 
 <style lang="scss" scoped>

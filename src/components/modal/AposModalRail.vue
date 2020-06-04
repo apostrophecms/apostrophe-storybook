@@ -1,6 +1,6 @@
 <template>
   <div class="apos-modal__rail" :class="`apos-modal__rail--${type}`">
-    <slot></slot>
+    <slot />
   </div>
 </template>
 <script>
@@ -15,7 +15,7 @@ export default {
   computed: {
 
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

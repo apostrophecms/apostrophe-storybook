@@ -1,9 +1,9 @@
 <template>
-  <table class="apos-table">  
+  <table class="apos-table">
     <tbody>
       <tr>
         <th class="apos-table__header">
-          <AposCheckbox 
+          <AposCheckbox
             v-on:toggle="selectAll"
             id="aposSelectAll"
             :choice="selectAllChoice"
@@ -14,7 +14,7 @@
         </th>
         <th v-for="header in headers" scope="col" class="apos-table__header" v-bind:key="header.label">
           <component :is="getEl(header)" @click="sort(header.action)" class="apos-table__header-label">
-            <component 
+            <component
               v-if="header.icon"
               :size="iconSize(header)"
               class="apos-table__header-icon"
@@ -24,16 +24,16 @@
           </component>
         </th>
       </tr>
-      <tr class="apos-table__row" 
+      <tr class="apos-table__row"
         v-for="row in rows"
         :key="row.id"
         :class="{'is-selected': false }"
       >
         <td class="apos-table__cell">
-          <AposCheckbox 
-            :field="checkboxes[row.id].field" 
-            :value="checkboxes[row.id].value" 
-            :status="checkboxes[row.id].status" 
+          <AposCheckbox
+            :field="checkboxes[row.id].field"
+            :value="checkboxes[row.id].value"
+            :status="checkboxes[row.id].status"
             :choice="checkboxes[row.id].choice"
             v-on:toggle="toggleRowCheck($event, row.id)"
           />
@@ -48,7 +48,7 @@
         </td>
       </tr>
     </tbody>
-  </table>  
+  </table>
 </template>
 
 <script>
@@ -79,6 +79,8 @@ export default {
     const icons = {};
     this.headers.forEach(h => {
       if (h.icon) {
+        // TODO: Replaces this import usage. Maybe import icons we use globally.
+        // https://medium.com/bitbond/vue-load-dynamic-components-based-on-a-string-variable-52f54860a0d
         icons[h.icon] = () => import(`vue-material-design-icons/${h.icon}.vue`);
       }
     });
@@ -121,7 +123,7 @@ export default {
       const rowLen = this.rows.length;
       return checkLen > 0 && checkLen !== rowLen ? {
          value: 'checked',
-         indeterminate: true 
+         indeterminate: true
         } : { value: 'checked' }
     }
   },
@@ -179,7 +181,7 @@ export default {
   @import '../../scss/_mixins';
   @import '../../scss/_inputs';
   .apos-table {
-    width: 100%; 
+    width: 100%;
     font-size: map-get($font-sizes, default);
     border-collapse: collapse;
   }
@@ -232,7 +234,7 @@ export default {
     background-color: var(--a-base-10);
     border-bottom: 1px solid var(--a-base-7)
   }
-  
+
   .apos-table__cell-field {
     margin: 0;
   }

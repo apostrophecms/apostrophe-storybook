@@ -10,17 +10,23 @@
 <script>
 import Close from 'vue-material-design-icons/Close.vue';
 export default {
-  props: {
-    label: String,
-    slug: String
-  },
   components: { Close },
+  props: {
+    label: {
+      type: String,
+      required: true
+    },
+    slug: {
+      type: String,
+      required: true
+    }
+  },
   methods: {
     click() {
-      this.$emit('click', this.slug)
+      this.$emit('click', this.slug);
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

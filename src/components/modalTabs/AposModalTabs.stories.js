@@ -94,7 +94,7 @@ export const tabs = () => {
           </template>
           <template #leftRail>
             <AposModalRail>
-              <AposModalTabs :current="currentTab" :groups="groups" v-on:selectTab="switchPane" />
+              <AposModalTabs :current="currentTab" :groups="groups" v-on:select-tab="switchPane" />
             </AposModalRail>
           </template>
           <template #main>

@@ -1,5 +1,6 @@
 <template>
-  <div class="apos-media-manager-editor"> <div class="apos-media-manager-editor__inner" v-if="media">
+  <div class="apos-media-manager-editor">
+    <div class="apos-media-manager-editor__inner" v-if="media">
       <div class="apos-media-manager-editor__thumb-wrapper">
         <img class="apos-media-manager-editor__thumb" :src="media.path" alt="">
       </div>
@@ -9,23 +10,22 @@
         <li class="apos-media-manager-editor__detail">{{ media.dim }}</li>
       </ul>
       <AposStringInput
-        v-for="input in inputs" :field="input.field" :status="input.status" :value="input.value" 
+        v-for="input in inputs" :field="input.field" :status="input.status" :value="input.value"
         :key="input.field.name" :modifiers="['small', 'inverted']"
       />
-      <AposBooleanInput 
-        :field="published.field" :status="published.status" :value="published.value" 
+      <AposBooleanInput
+        :field="published.field" :status="published.status" :value="published.value"
         :modifiers="['small', 'inverted']"
       />
     </div>
     <AposModalLip :refresh="lipKey">
       <div class="apos-media-manager-editor__lip" :class="{'apos-media-manager-editor__lip--two-controls': selected.length > 1}">
         <AposButton @click="$emit('back')" v-if="selected.length > 1" class="apos-media-manager-editor__back" type="outline" label="Back" />
-        <AposButton @click="save" class="apos-media-manager-editor__save" label="Save" type="primary" v-on:click="save" />
+        <AposButton @click="save" class="apos-media-manager-editor__save" label="Save" type="primary" />
       </div>
     </AposModalLip>
   </div>
 </template>
-
 
 <script>
 import AposButton from './../button/AposButton.vue';
@@ -35,34 +35,47 @@ import AposModalLip from './../modal/AposModalLip.vue';
 import AposHelpers from '../../mixins/AposHelpersMixin';
 
 export default {
-  mixins: [AposHelpers],
   components: {
     AposButton,
     AposStringInput,
     AposBooleanInput,
     AposModalLip
   },
+  mixins: [AposHelpers],
   props: {
     media: {
-      type: Object
+      type: Object,
+      default: null
     },
     selected: {
-      type: Array
+      type: Array,
+      default() {
+        return [];
+      }
     }
   },
-  watch: {
-    media() {
-      this.generateLipKey();
-    }
-  },
-
   data() {
-    const fields =[
-      { label: 'Image Title', property: 'title' },
-      { label: 'Alt Text', property: 'alt' },
-      { label: 'Credit', property: 'credit' },
-      { label: 'Credit URL', property: 'creditUrl' },
-      { label: 'Slug', property: 'slug' }
+    const fields = [
+      {
+        label: 'Image Title',
+        property: 'title'
+      },
+      {
+        label: 'Alt Text',
+        property: 'alt'
+      },
+      {
+        label: 'Credit',
+        property: 'credit'
+      },
+      {
+        label: 'Credit URL',
+        property: 'creditUrl'
+      },
+      {
+        label: 'Slug',
+        property: 'slug'
+      }
     ];
 
     return {
@@ -82,10 +95,10 @@ export default {
         status: {},
         value: {
           data: true
-        },
+        }
       },
       lipKey: ''
-    }
+    };
   },
   computed: {
     inputs() {
@@ -100,9 +113,16 @@ export default {
             },
             value: { data: value },
             status: {}
-          }
-        }); 
+          };
+        });
+      } else {
+        return [];
       }
+    }
+  },
+  watch: {
+    media() {
+      this.generateLipKey();
     }
   },
   mounted() {
@@ -117,7 +137,7 @@ export default {
       this.lipKey = this.generateId();
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

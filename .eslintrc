@@ -1,3 +1,49 @@
 {
-  "extends": "apostrophe"
+  "extends": [
+    "apostrophe",
+    "plugin:vue/vue3-recommended"
+  ],
+  "overrides": [
+    {
+      "files": [
+        "*.vue",
+        "*.js"
+      ]
+    }
+  ],
+  "rules": {
+    "no-console": 0,
+    "vue/component-tags-order": [
+      "warning",
+      {
+        "order": [
+          "template",
+          "script",
+          "style"
+        ]
+      }
+    ],
+    "vue/max-attributes-per-line": [
+      "warning",
+      {
+        "singleline": 2,
+        "multiline": 2
+      }
+    ],
+    "vue/singleline-html-element-content-newline": [
+      "warning",
+      {
+        "ignoreWhenNoAttributes": true,
+        "ignoreWhenEmpty": true,
+        "ignores": [
+          "h1",
+          "h2",
+          "h3",
+          "pre",
+          "textarea"
+        ]
+      }
+    ],
+    "vue/attributes-order": false
+  }
 }

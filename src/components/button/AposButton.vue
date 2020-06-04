@@ -1,5 +1,5 @@
 <template>
-  <button type="button" @click="click" class="apos-button" 
+  <button type="button" @click="click" class="apos-button"
     :class="modifierClass" v-bind:busy="busy" v-bind:disabled="isDisabled" :tabindex="tabindex"
   >
     <AposSpinner :color="spinnerColor" />
