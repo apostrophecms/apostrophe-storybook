@@ -1,0 +1,23 @@
+// For more this naming system:
+// http://alexbea.com/blog/ergonomic-breakpoint-variables
+$breakpoints: (
+  palm: 320px,
+  hands: 600px,
+  // hands-wide: 850px,
+  lap: 1200px,
+  desk: 1600px
+);
+
+// We default to mobile first, but make a max-with option available as well.
+@mixin media-up ($bp) {
+  $bpVal: map-get($breakpoints, $bp);
+  @media screen and (min-width: $bpVal) {
+    @content;
+  }
+}
+@mixin media-down ($bp) {
+  $bpVal: map-get($breakpoints, $bp);
+  @media screen and (max-width: $bpVal - 1px) {
+    @content;
+  }
+}
