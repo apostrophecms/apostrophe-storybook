@@ -68,9 +68,14 @@ export default {
   @import '../../scss/_mixins';
   .apos-media-manager-display__grid {
     display: grid;
-    grid-template-columns: repeat(7, 12.22%);
     grid-template-rows: repeat(3, auto);
+    grid-template-columns: repeat(5, 17.1%);
     gap: 2.4% 2.4%;
+
+    @include media-up(lap) {
+      grid-template-columns: repeat(7, 12.22%);
+      gap: 2.4% 2.4%;
+    }
   }
 
   .apos-media-manager-display__cell {
