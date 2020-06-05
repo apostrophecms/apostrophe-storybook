@@ -1,5 +1,5 @@
 <template>
-  <AposInputWrapper :field="field" :error="status.error">
+  <AposInputWrapper :field="field" :error="status.error" :uid="uid">
     <template #body>
       <label
         class="apos-choice-label" :for="getChoiceId(uid, choice.value)"
