@@ -255,7 +255,7 @@ export default {
   }
 
   .apos-modal__main--with-rails {
-    grid-template-columns: 22% 60% 18%;
+    grid-template-columns: 18% 60% 22%;
   }
 
   .apos-modal__main--with-left-rail {

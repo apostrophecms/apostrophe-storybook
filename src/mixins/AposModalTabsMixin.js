@@ -8,16 +8,11 @@ export default {
     };
   },
   mounted() {
-    this.currentTab = Number(this.groups[0].uid);
-  },
-  computed: {
-    options () {
-      return window.apos.schemas;
-    }
+    this.currentTab = this.tabs[0].name;
   },
   methods: {
     switchPane(id) {
-      this.currentTab = Number(id);
+      this.currentTab = id;
     }
   }
 };

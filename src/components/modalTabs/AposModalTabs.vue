@@ -1,12 +1,12 @@
 <template>
   <div class="apos-modal-tabs">
     <ul class="apos-modal-tabs__tabs">
-      <li class="apos-modal-tabs__tab" v-for="(group, i) in groups"
-          :key="group.name"
+      <li class="apos-modal-tabs__tab" v-for="group in groups"
+        :key="group.name"
       >
         <button
-          :id="group.uid + i" class="apos-modal-tabs__btn" @click="selectTab"
-          :aria-selected="group.uid + i === currentTab ? true : false"
+          :id="group.name" class="apos-modal-tabs__btn" @click="selectTab"
+          :aria-selected="group.name === currentTab ? true : false"
         >
           {{ group.label }}
         </button>
@@ -24,20 +24,20 @@ export default {
       type: Array
     },
     current: {
-      type: Number,
-      default: 0
+      type: String,
+      default: ''
     }
   },
   computed: {
     currentTab() {
-      return this.current || this.groups[0].uid;
+      return this.current || this.groups[0].name;
     }
   },
   methods: {
     selectTab: function (e) {
       const tab = e.target;
       const id = tab.id;
-      this.$emit('select-tab', Number(id));
+      this.$emit('select-tab', id);
     }
   }
 };
@@ -90,9 +90,21 @@ export default {
   }
 
   &[aria-selected='true'],
+  &[aria-selected='true']:hover,
+  &[aria-selected='true']:focus {
+    background-color: var(--a-background-primary);
+    &::before {
+      background-color: var(--a-primary);
+    }
+  }
+
   &:hover,
   &:focus {
-    background-color: var(--a-background-primary);
+    background-color: var(--a-base-10);
+    &::before {
+      width: 3px;
+      background-color: var(--a-base-5);
+    }
   }
 
   &[aria-selected='true'] {

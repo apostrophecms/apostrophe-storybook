@@ -3,7 +3,7 @@
     <template slot="body">
       <div class="apos-input-wrapper">
         <textarea :class="classes"
-          v-if="type === 'textarea'" rows="5"
+          v-if="field.textarea" rows="5"
           v-model="next" :placeholder=field.placeholder @keydown.13="$emit('return')"
           :disabled="status.disabled" :required="field.required" :id="uid" :tabindex="tabindex"
           ></textarea>
