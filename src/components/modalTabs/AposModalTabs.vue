@@ -1,14 +1,14 @@
 <template>
   <div class="apos-modal-tabs">
     <ul class="apos-modal-tabs__tabs">
-      <li class="apos-modal-tabs__tab" v-for="group in groups"
-        :key="group.name"
+      <li class="apos-modal-tabs__tab" v-for="tab in tabs"
+        :key="tab.name"
       >
         <button
-          :id="group.name" class="apos-modal-tabs__btn" @click="selectTab"
-          :aria-selected="group.name === currentTab ? true : false"
+          :id="tab.name" class="apos-modal-tabs__btn" @click="selectTab"
+          :aria-selected="tab.name === currentTab ? true : false"
         >
-          {{ group.label }}
+          {{ tab.label }}
         </button>
       </li>
     </ul>
@@ -19,7 +19,7 @@
 export default {
   name: 'AposModalTabs',
   props: {
-    groups: {
+    tabs: {
       required: true,
       type: Array
     },
@@ -30,7 +30,7 @@ export default {
   },
   computed: {
     currentTab() {
-      return this.current || this.groups[0].name;
+      return this.current || this.tabs[0].name;
     }
   },
   methods: {
