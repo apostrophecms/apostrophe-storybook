@@ -8,23 +8,7 @@
       <AposContextMenu :button="more.button" :menu="more.menu" tip-alignment="right" />
     </template>
     <template #rightControls>
-      <AposContextMenu :button="filterFields.button" tip-alignment="center">
-        <div class="apos-media-manager-toolbar__filters">
-          <div class="apos-media-manager-toolbar__filter-set">
-            <AposRadioInput
-              @input="filter($event, 'published')"
-              :field="filterFields.published.field" :status="filterFields.published.status"
-              :value="filterFields.published.value"
-            />
-          </div>
-          <div class="apos-media-manager-toolbar__filter-set">
-            <AposRadioInput
-              @input="filter($event, 'trash')" :field="filterFields.trash.field"
-              :status="filterFields.trash.status" :value="filterFields.trash.value"
-            />
-          </div>
-        </div>
-      </AposContextMenu>
+      <AposFilterMenu :menu="filterFields" @input="filter" />
       <AposStringInput
         @input="search" :field="searchField.field"
         :status="searchField.status" :value="searchField.value" :modifiers="['small']"
@@ -35,6 +19,7 @@
 
 <script>
 import AposContextMenu from './../contextMenu/AposContextMenu.vue';
+import AposFilterMenu from './../filterMenu/AposFilterMenu.vue';
 import AposTagApply from './../tagApplyMenu/AposTagApply.vue';
 import AposButton from './../button/AposButton.vue';
 import AposStringInput from './../inputString/AposStringInput.vue';
@@ -48,7 +33,7 @@ export default {
     AposStringInput,
     AposContextMenu,
     AposTagApply,
-    AposRadioInput
+    AposFilterMenu
   },
   props: {
     selected: {
@@ -97,12 +82,6 @@ export default {
         value: { data: '' }
       },
       filterFields: {
-        button: {
-          label: 'Filter',
-          icon: 'ChevronDown',
-          modifiers: ['icon-right'],
-          type: 'outline'
-        },
         published: {
           field: {
             name: 'published',
