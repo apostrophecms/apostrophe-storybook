@@ -47,7 +47,7 @@ body {
   --a-warning: #ffce00;
 
   .apos-theme--primary-purple { @include apos-primary-mixin(#6516DD); }
-  
+
   --a-danger-button-hover: #C00717;
   --a-danger-button-active: #A10000;
   --a-danger-button-disabled: #FF9D98;
@@ -107,6 +107,7 @@ body {
 .apos-theme--primary-blue { @include apos-primary-mixin(#0062ff); }
 .apos-theme--primary-purple { @include apos-primary-mixin(rgb(2, 2, 2)); }
 .apos-theme--primary-orange { @include apos-primary-mixin(#e65100); }
-.apos-theme--primary-uber { @include apos-primary-mixin(#1EACC7); }
+.apos-theme--primary-light-blue { @include apos-primary-mixin(#1EACC7); }
 .apos-theme--primary-sun { @include apos-primary-mixin(#f7a704); }
 .apos-theme--primary-money { @include apos-primary-mixin(#00b075); }
+.apos-theme--primary-pink { @include apos-primary-mixin(#FD9EC0); }
