@@ -34,18 +34,18 @@ storiesOf('Context Menu', module)
     template: `
       <div>
         <AposContextMenu
-          v-bind:menu="menu"
-          v-on:item-clicked="log"
+          :menu="menu"
+          @item-clicked="log"
         />
         <AposContextMenu
-          tipAlignment="center"
-          v-bind:menu="menu"
-          v-on:item-clicked="log"
+          tip-alignment="center"
+          :menu="menu"
+          @item-clicked="log"
         />
-          <AposContextMenu
-          tipAlignment="right"
-          v-bind:menu="menu"
-          v-on:item-clicked="log"
+        <AposContextMenu
+          tip-alignment="right"
+          :menu="menu"
+          @item-clicked="log"
         />
       </div>
     `,
@@ -61,22 +61,22 @@ storiesOf('Context Menu', module)
       return { menu };
     },
     template: `
-      <div>
+      <div style="margin-top: 200px">
         <AposContextMenu
-          v-bind:menu="menu"
-          v-on:item-clicked="log"
+          :menu="menu"
+          @item-clicked="log"
           origin="above"
         />
         <AposContextMenu
-          tipAlignment="center"
-          v-bind:menu="menu"
-          v-on:item-clicked="log"
+          tip-alignment="center"
+          :menu="menu"
+          @item-clicked="log"
           origin="above"
         />
-          <AposContextMenu
-          tipAlignment="right"
-          v-bind:menu="menu"
-          v-on:item-clicked="log"
+        <AposContextMenu
+          tip-alignment="right"
+          :menu="menu"
+          @item-clicked="log"
           origin="above"
         />
       </div>
