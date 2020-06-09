@@ -18,7 +18,7 @@
       />
       <div class="apos-context-menu__pane">
         <slot>
-          <ul class="apos-context-menu__items">
+          <ul class="apos-context-menu__items" v-if="menu">
             <AposContextMenuItem
               v-for="item in menu"
               :key="item.action"
@@ -46,8 +46,16 @@ export default {
     AposButton
   },
   props: {
-    menu: Array,
-    modifiers: Array,
+    menu: {
+      type: Array,
+      default: null
+    },
+    modifiers: {
+      type: Array,
+      default() {
+        return [];
+      }
+    },
     button: {
       type: Object,
       default() {
