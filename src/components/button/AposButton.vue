@@ -208,7 +208,7 @@ export default {
       width: 100%;
       height: 100%;
       background-size: 100%;
-      background-image: linear-gradient(46deg, #CC9300 0%, #EA433A 26%, #B327BF 47%, #6666FF 76%, #00BF9A 100%);
+      background-image: linear-gradient(46deg, var(--a-brand-gold) 0%, var(--a-brand-red) 26%, var(--a-brand-magenta) 47%, var(--a-brand-blue) 76%, var(--a-brand-green) 100%);
       opacity: 0;
       transition: all 0.3s ease;
     }
