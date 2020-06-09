@@ -147,29 +147,9 @@ export default {
 
 <style lang="scss" scoped>
   @import '../../scss/_mixins';
-  .apos-media-manager-toolbar__filters {
-    min-width: 140px;
-  }
 
   .apos-media-manager-toolbar /deep/ .apos-field-search {
     width: 250px;
-  }
-
-  .apos-media-manager-toolbar__filters /deep/ .apos-field-label {
-    display: block;
-    width: 100%;
-    padding-bottom: 10px;
-    border-bottom: 1px solid var(--a-base-9);
-    color: var(--a-base-3);
-    font-weight: 400;
-    margin-bottom: 10px;
-  }
-
-  .apos-media-manager-toolbar__filter-set {
-    margin-bottom: 30px;
-    &:last-child {
-      margin-bottom: 0;
-    }
   }
 
 </style>
