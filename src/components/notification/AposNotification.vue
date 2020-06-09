@@ -8,12 +8,14 @@
       />
     </span>
     <span class="apos-notification__label">{{ label }}</span>
-    <div class="apos-notification__progress" v-if="progress">
+    <div class="apos-notification__progress"
+      v-if="progress && progress.current"
+    >
       <div class="apos-notification__progress-bar">
         <div
           class="apos-notification__progress-now" role="progressbar"
-          :aria-valuenow="progressState" :style="`width: ${progressPercent}`"
-          aria-valuemin="0" :aria-valuemax="progressMax"
+          :aria-valuenow="progress.current" :style="`width: ${progressPercent}`"
+          aria-valuemin="0" :aria-valuemax="100"
         />
       </div>
       <span class="apos-notification__progress-value">
@@ -50,16 +52,8 @@ export default {
       type: String
     },
     progress: {
-      type: Boolean,
-      default: false
-    },
-    progressState: {
-      type: Number,
-      default: 0
-    },
-    progressMax: {
-      type: Number,
-      default: 100
+      type: Object,
+      default: null
     }
   },
   computed: {
@@ -69,7 +63,7 @@ export default {
         classes.push(`apos-notification--${this.type}`);
       }
 
-      if (this.progress) {
+      if (this.progress && this.progress.current) {
         classes.push('apos-notification--progress');
       }
 
@@ -83,7 +77,7 @@ export default {
       }
     },
     progressPercent () {
-      return `${Math.floor((this.progressState / this.progressMax) * 100)}%`;
+      return `${Math.floor((this.progress.current / 100) * 100)}%`;
     }
   },
   methods: {

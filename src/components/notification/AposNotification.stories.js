@@ -64,9 +64,9 @@ export const notifications = () => ({
       :label="label"
       :type="type"
       :icon="icon"
-      :progress="progress"
-      :progressState="progressState"
-      :progressMax="100"
+      :progress="progress ? {
+        current: progressState
+      } : false"
     />
   `
 });
