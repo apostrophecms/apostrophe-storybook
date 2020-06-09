@@ -1,7 +1,9 @@
 import {
   withKnobs,
   text,
-  select
+  select,
+  boolean,
+  number
 } from '@storybook/addon-knobs';
 import AposNotification from './AposNotification.vue';
 
@@ -19,11 +21,12 @@ export const notifications = () => ({
     type: {
       default:
         select(
-          'Type', {
+          'Indicator Type', {
             Default: null,
             Warning: 'warning',
             Success: 'success',
-            Danger: 'danger'
+            Danger: 'danger',
+            None: 'none'
           },
           null
         )
@@ -44,13 +47,26 @@ export const notifications = () => ({
           },
           null
         )
+    },
+    progress: {
+      default: boolean('Progress Meter', false)
+    },
+    progressState: {
+      default: number('Progress State', 42, {
+        range: true,
+        min: 0,
+        max: 100
+      })
     }
   },
   template: `
-    <AposNotification 
+    <AposNotification
       :label="label"
       :type="type"
       :icon="icon"
+      :progress="progress ? {
+        current: progressState
+      } : false"
     />
   `
 });

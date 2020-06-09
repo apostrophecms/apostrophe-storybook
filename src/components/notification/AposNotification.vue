@@ -1,18 +1,32 @@
 <template>
   <div role="alert" :class="classList">
-    <span class="apos-notification__indicator">
-      <component 
-        :decorative=true 
-        :size="icon ? 16 : 12" 
-        v-bind:is="iconComponent"
-      ></component>
+    <span class="apos-notification__indicator" v-if="type !== 'none'">
+      <component
+        :is="iconComponent"
+        :decorative="true"
+        :size="icon ? 16 : 12"
+      />
     </span>
     <span class="apos-notification__label">{{ label }}</span>
+    <div class="apos-notification__progress"
+      v-if="progress && progress.current"
+    >
+      <div class="apos-notification__progress-bar">
+        <div
+          class="apos-notification__progress-now" role="progressbar"
+          :aria-valuenow="progress.current" :style="`width: ${progressPercent}`"
+          aria-valuemin="0" :aria-valuemax="100"
+        />
+      </div>
+      <span class="apos-notification__progress-value">
+        {{ progressPercent }}
+      </span>
+    </div>
     <button @click="close" class="apos-notification__button">
-      <Close 
-        class="apos-notification__close-icon" 
-        title="Close Notification" 
-        :size="14" 
+      <Close
+        class="apos-notification__close-icon"
+        title="Close Notification"
+        :size="14"
       />
     </button>
   </div>
@@ -20,22 +34,37 @@
 
 <script>
 import Close from 'vue-material-design-icons/Close.vue';
+
 export default {
   name: 'AposNotification',
   components: { Close },
   props: {
-    type: String,
-    icon: String,
+    type: {
+      type: String,
+      default: null
+    },
+    icon: {
+      type: String,
+      default: null
+    },
     label: {
       default: 'Set a label',
       type: String
+    },
+    progress: {
+      type: Object,
+      default: null
     }
   },
   computed: {
     classList() {
       const classes = ['apos-notification'];
-      if (this.type) {
+      if (this.type && this.type!== 'none') {
         classes.push(`apos-notification--${this.type}`);
+      }
+
+      if (this.progress && this.progress.current) {
+        classes.push('apos-notification--progress');
       }
 
       return classes.join(' ');
@@ -46,6 +75,9 @@ export default {
       } else {
         return () => import(`vue-material-design-icons/Circle.vue`);
       }
+    },
+    progressPercent () {
+      return `${Math.floor((this.progress.current / 100) * 100)}%`;
     }
   },
   methods: {
@@ -53,7 +85,7 @@ export default {
       this.$emit('close', this);
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
@@ -111,9 +143,39 @@ export default {
     height: 12px;
   }
 
-  .apos-notification__label {
+  .apos-notification__label,
+  .apos-notification__progress-value {
     font-size: map-get($font-sizes, default);
+  }
+
+  .apos-notification__label {
     letter-spacing: 0.75px;
     color: var(--a-text-primary);
+  }
+
+  .apos-notification__progress {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .apos-notification__progress-bar {
+    width: 70px;
+    height: 4px;
+    margin-left: 20px;
+    // BG color consistent between themes.
+    background-color: #2c354d;
+    border-width: 0;
+
+  }
+  .apos-notification__progress-now {
+    height: 100%;
+    background-color: var(--a-brand-green);
+    background-image: linear-gradient(46deg, var(--a-brand-gold) 0%, var(--a-brand-red) 26%, var(--a-brand-magenta) 47%, var(--a-brand-blue) 76%, var(--a-brand-green) 100%);
+    transition: width 0.2s ease-out;
+  }
+
+  .apos-notification__progress-value {
+    margin-left: 20px;
   }
 </style>
