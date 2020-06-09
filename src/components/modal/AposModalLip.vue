@@ -66,10 +66,11 @@ export default {
 <style lang="scss" scoped>
   .apos-modal-lip {
     position: fixed;
+    right: 0;
     bottom: 0;
     box-sizing: border-box;
-    transform: translateX(-20px);
     width: 18%;
+    min-width: 250px;
   }
 
   .apos-modal-lip__shadow {

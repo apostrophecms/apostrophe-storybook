@@ -24,9 +24,10 @@ export const contexts = [
       { name: 'Purple', props: { theme: 'apos-theme--primary-purple'}, default: true },
       { name: 'Blue', props: { theme: 'apos-theme--primary-blue'} },
       { name: 'Orange', props: { theme: 'apos-theme--primary-orange'} },
-      { name: 'Uber', props: { theme: 'apos-theme--primary-uber'} },
+      { name: 'Light Blue', props: { theme: 'apos-theme--primary-light-blue'} },
       { name: 'Sun', props: { theme: 'apos-theme--primary-sun'} },
       { name: 'Money', props: { theme: 'apos-theme--primary-money'} },
+      { name: 'Pink', props: { theme: 'apos-theme--primary-pink'} },
     ],
     options: {
       deep: true, // pass the `props` deeply into all wrapping components
