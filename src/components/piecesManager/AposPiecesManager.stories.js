@@ -1,20 +1,20 @@
 import {
   withKnobs
 } from '@storybook/addon-knobs';
-import AposDocsManager from './AposDocsManager.vue';
+import AposPiecesManager from './AposPiecesManager.vue';
 import docsData from '../table/data';
-import tagListData from './../tagList/data.js';
-import applyTagData from './../tagApplyMenu/data.js';
+import tagListData from '../tagList/data.js';
+import applyTagData from '../tagApplyMenu/data.js';
 
 export default {
-  title: 'Docs Manager',
+  title: 'Pieces Manager',
   decorators: [withKnobs]
 };
 
-export const mediaManager = () => {
+export const piecesManager = () => {
   return {
     components: {
-      AposDocsManager
+      AposPiecesManager
     },
     methods: {
       handleTrash(selected) {
@@ -30,7 +30,7 @@ export const mediaManager = () => {
         docType: 'Documents'
       };
     },
-    template: `<AposDocsManager
+    template: `<AposPiecesManager
       :headers="data.headers"
       :docs="data.rows"
       :tagList="tagList"

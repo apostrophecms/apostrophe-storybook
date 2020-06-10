@@ -6,12 +6,12 @@
     <template #main>
       <AposModalBody>
         <template #bodyHeader v-if="!!docs.length">
-          <!-- <AposDocsManagerToolbar
+          <AposPiecesManagerToolbar
             :selected="selected" :media="myMedia"
             @select-click="selectClick"
             @trash-click="trashClick"
             @search="search"
-          /> -->
+          />
         </template>
         <template #bodyMain>
           <AposTable
@@ -32,7 +32,7 @@ import AposModal from './../modal/AposModal.vue';
 import AposModalBody from './../modal/AposModalBody.vue';
 import AposButton from './../button/AposButton.vue';
 import AposEmptyState from './../emptyState/AposEmptyState.vue';
-// import AposDocsManagerToolbar from './AposDocsManagerToolbar.vue';
+import AposPiecesManagerToolbar from './AposPiecesManagerToolbar.vue';
 import AposTable from '../table/AposTable.vue';
 
 export default {
@@ -40,7 +40,7 @@ export default {
     AposModal,
     AposModalBody,
     AposButton,
-    // AposDocsManagerToolbar,
+    AposPiecesManagerToolbar,
     AposTable,
     AposEmptyState
   },
@@ -102,6 +102,7 @@ export default {
     log(action) {
       console.log(`sort by ${action}`);
     },
+
     clearSelected() {
       // select(null) will match nothing and deselect all
       this.select(null);
