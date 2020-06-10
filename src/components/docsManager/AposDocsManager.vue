@@ -111,61 +111,6 @@ export default {
       this.editing = this.myMedia.find(item => item.id === id);
     },
 
-    // // select setters
-    // select(id) {
-    //   this.myMedia.map((media) => {
-    //     media.checkbox.value.data = media.id === id ? ['checked'] : [];
-    //   });
-    //   this.lastSelected = id;
-    // },
-
-    // selectAnother(id) {
-    //   this.myMedia.forEach((media) => {
-    //     if (media.id === id) {
-    //       // meta deselect one
-    //       if (this.selected.find(item => item.id === id)) {
-    //         media.checkbox.value.data = [];
-    //       } else {
-    //         media.checkbox.value.data = ['checked'];
-    //       }
-    //     }
-    //   });
-    //   this.lastSelected = id;
-    //   this.editing = null;
-    // },
-
-    // selectSeries(id) {
-    //   if (!this.lastSelected) {
-    //     this.select(id);
-    //     return;
-    //   }
-    //   let beginIndex = this.myMedia.findIndex(media => media.id === this.lastSelected);
-    //   let endIndex = this.myMedia.findIndex(media => media.id === id);
-    //   const direction = beginIndex > endIndex ? -1 : 1;
-    //   if (direction < 0) {
-    //     [beginIndex, endIndex] = [endIndex, beginIndex];
-    //   } else {
-    //     endIndex++;
-    //   }
-    //   const sliced = this.myMedia.slice(beginIndex, endIndex);
-    //   // always want to check, never toggle
-    //   sliced.forEach(media => (media.checkbox.value.data = ['checked']));
-    //   this.lastSelected = sliced[sliced.length - 1].id;
-    //   this.editing = null;
-    // },
-
-    // // Toolbar handlers
-    // selectClick() {
-    //   if (this.selected.length === this.myMedia.length) {
-    //     // unselect all
-    //     this.select(null);
-    //   } else {
-    //     // select all
-    //     this.lastSelected = this.myMedia[0].id;
-    //     this.selectSeries(this.myMedia[this.myMedia.length - 1].id);
-    //   }
-    // },
-
     // TODO stub
     trashClick() {
       this.$emit('trash', this.selected);
