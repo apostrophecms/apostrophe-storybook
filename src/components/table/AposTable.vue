@@ -4,7 +4,7 @@
       <tr>
         <th class="apos-table__header">
           <AposCheckbox
-            v-on:toggle="selectAll"
+            @toggle="selectAll"
             id="aposSelectAll"
             :choice="selectAllChoice"
             :field="selectAllField.field"
@@ -12,19 +12,23 @@
             :status="selectAllField.status"
           />
         </th>
-        <th v-for="header in headers" scope="col" class="apos-table__header" v-bind:key="header.label">
+        <th
+          v-for="header in headers" scope="col" class="apos-table__header"
+          :key="header.label"
+        >
           <component :is="getEl(header)" @click="sort(header.action)" class="apos-table__header-label">
             <component
               v-if="header.icon"
               :size="iconSize(header)"
               class="apos-table__header-icon"
-              v-bind:is="icons[header.icon]"
-            ></component>
+              :is="icons[header.icon]"
+            />
             {{ header.label }}
           </component>
         </th>
       </tr>
-      <tr class="apos-table__row"
+      <tr
+        class="apos-table__row"
         v-for="row in rows"
         :key="row.id"
         :class="{'is-selected': false }"
@@ -35,7 +39,7 @@
             :value="checkboxes[row.id].value"
             :status="checkboxes[row.id].status"
             :choice="checkboxes[row.id].choice"
-            v-on:toggle="toggleRowCheck($event, row.id)"
+            @toggle="toggleRowCheck($event, row.id)"
           />
         </td>
         <td class="apos-table__cell" v-for="header in headers" :key="row[header.name]">
@@ -99,7 +103,7 @@ export default {
           hideLabel: true,
           label: `Toggle selection of ${row.title}`
         }
-      }
+      };
     });
     return {
       icons,
@@ -109,22 +113,25 @@ export default {
         status: {},
         field: {
           name: 'selectAll',
-          type: 'checkbox',
+          type: 'checkbox'
         }
       }
-    }
+    };
   },
   computed: {
     selectAllValue() {
-      return this.checked.length > 0 ? { data: ['checked'] } : { data: [] }
+      return this.checked.length > 0 ? { data: ['checked'] } : { data: [] };
     },
     selectAllChoice() {
       const checkLen = this.checked.length;
       const rowLen = this.rows.length;
+
       return checkLen > 0 && checkLen !== rowLen ? {
-         value: 'checked',
-         indeterminate: true
-        } : { value: 'checked' }
+        value: 'checked',
+        indeterminate: true
+      } : {
+        value: 'checked'
+      };
     }
   },
   methods: {
@@ -174,7 +181,7 @@ export default {
       this.$emit('sort', action);
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
