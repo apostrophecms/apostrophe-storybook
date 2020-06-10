@@ -51,30 +51,26 @@ export const tabs = () => {
           type: 'overlay',
           showModal: true
         },
-        groups: [
+        tabs: [
           {
             name: 'admin',
             label: 'Admin',
-            fields: [],
-            uid: (Math.floor(Math.random() * Math.floor(10000)))
+            fields: []
           },
           {
             name: 'basic',
             label: 'Basic stuff',
-            fields: [],
-            uid: (Math.floor(Math.random() * Math.floor(10000)))
+            fields: []
           },
           {
             name: 'advanced',
             label: 'Advanced configuration',
-            fields: [],
-            uid: (Math.floor(Math.random() * Math.floor(10000)))
+            fields: []
           },
           {
             name: 'seo',
             label: 'SEO',
-            fields: [],
-            uid: (Math.floor(Math.random() * Math.floor(10000)))
+            fields: []
           }
         ],
         breadcrumbs
@@ -94,13 +90,15 @@ export const tabs = () => {
           </template>
           <template #leftRail>
             <AposModalRail>
-              <AposModalTabs :current="currentTab" :groups="groups" v-on:select-tab="switchPane" />
+              <AposModalTabs :current="currentTab" :tabs="tabs" v-on:select-tab="switchPane" />
             </AposModalRail>
           </template>
           <template #main>
             <AposModalBody>
               <template #bodyMain>
-                <AposModalTabsBody :groups="groups" :current="currentTab" />
+                <AposModalTabsBody>
+                  Content for {{ currentTab }}
+                </AposModalTabsBody>
               </template>
             </AposModalBody>
           </template>
