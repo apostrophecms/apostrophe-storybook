@@ -76,7 +76,6 @@ import AposTableMixin from '../../mixins/AposTableMixin';
 import AposButton from './../button/AposButton.vue';
 import AposEmptyState from './../emptyState/AposEmptyState.vue';
 import AposPiecesManagerToolbar from './AposPiecesManagerToolbar.vue';
-import AposTable from '../table/AposTable.vue';
 import AposCheckbox from '../inputCheckbox/AposCheckbox.vue';
 import CheckBoldIcon from "vue-material-design-icons/CheckBold.vue";
 import MinusIcon from "vue-material-design-icons/Minus.vue";
@@ -88,7 +87,6 @@ export default {
     AposModalBody,
     AposButton,
     AposPiecesManagerToolbar,
-    AposTable,
     AposEmptyState,
     AposCheckbox,
     CheckBoldIcon,

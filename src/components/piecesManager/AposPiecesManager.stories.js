@@ -29,7 +29,6 @@ export const piecesManager = () => {
         data: docsData,
         tagList: tagListData,
         applyTags: applyTagData.applyTo,
-        // TODO: use Storybook knob for doc type name
         docType: 'Documents'
       };
     },
