@@ -18,7 +18,7 @@
         >
           <component :is="getEl(header)" @click="sort(header.action)" class="apos-table__header-label">
             <component
-              v-if="header.icon"
+              v-if="header.icon && icons[header.icon]"
               :size="iconSize(header)"
               class="apos-table__header-icon"
               :is="icons[header.icon]"

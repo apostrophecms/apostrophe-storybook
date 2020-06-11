@@ -5,20 +5,71 @@
     </template>
     <template #main>
       <AposModalBody>
-        <template #bodyHeader v-if="!!docs.length">
+        <template #bodyHeader v-if="!!rows.length">
           <AposPiecesManagerToolbar
-            :selected="selected" :media="myMedia"
+            :selected="selected"
             @select-click="selectClick"
             @trash-click="trashClick"
             @search="search"
           />
         </template>
         <template #bodyMain>
-          <AposTable
-            @sort="log" v-if="docs.length > 0"
-            :headers="headers" :rows="docs"
-          />
-          <div v-else class="apos-media-manager__empty">
+          <table class="apos-table" v-if="rows.length > 0">
+            <tbody>
+              <tr>
+                <th class="apos-table__header">
+                  <AposCheckbox
+                    @toggle="selectAll"
+                    id="aposSelectAll"
+                    :choice="selectAllChoice"
+                    :field="selectAllField.field"
+                    :value="selectAllValue"
+                    :status="selectAllField.status"
+                  />
+                </th>
+                <th
+                  v-for="header in headers" scope="col" class="apos-table__header"
+                  :key="header.label"
+                >
+                  <component :is="getEl(header)" @click="sort(header.action)" class="apos-table__header-label">
+                    <component
+                      v-if="header.icon"
+                      :size="iconSize(header)"
+                      class="apos-table__header-icon"
+                      :is="icons[header.icon]"
+                    />
+                    {{ header.label }}
+                  </component>
+                </th>
+              </tr>
+              <tr
+                class="apos-table__row"
+                v-for="row in rows"
+                :key="row.id"
+                :class="{'is-selected': false }"
+              >
+                <td class="apos-table__cell">
+                  <AposCheckbox
+                    :field="checkboxes[row.id].field"
+                    :value="checkboxes[row.id].value"
+                    :status="checkboxes[row.id].status"
+                    :choice="checkboxes[row.id].choice"
+                    :id="row.id"
+                    @toggle="toggleRowCheck($event, row.id)"
+                  />
+                </td>
+                <td class="apos-table__cell" v-for="header in headers" :key="row[header.name]">
+                  <a class="apos-table__link" v-if="header.name === 'url'" :href="row[header.name]">
+                    <LinkIcon :size="12" />
+                  </a>
+                  <p v-else class="apos-table__cell-field" :class="`apos-table__cell-field--${header.name}`">
+                    {{ row[header.name] }}
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div v-else class="apos-pieces-manager__empty">
             <AposEmptyState :empty-state="emptyDisplay" />
           </div>
         </template>
@@ -30,10 +81,15 @@
 <script>
 import AposModal from './../modal/AposModal.vue';
 import AposModalBody from './../modal/AposModalBody.vue';
+import AposTableMixin from '../../mixins/AposTableMixin';
 import AposButton from './../button/AposButton.vue';
 import AposEmptyState from './../emptyState/AposEmptyState.vue';
 import AposPiecesManagerToolbar from './AposPiecesManagerToolbar.vue';
 import AposTable from '../table/AposTable.vue';
+import AposCheckbox from '../inputCheckbox/AposCheckbox.vue';
+import CheckBoldIcon from "vue-material-design-icons/CheckBold.vue";
+import MinusIcon from "vue-material-design-icons/Minus.vue";
+import LinkIcon from "vue-material-design-icons/LinkVariant.vue";
 
 export default {
   components: {
@@ -42,17 +98,14 @@ export default {
     AposButton,
     AposPiecesManagerToolbar,
     AposTable,
-    AposEmptyState
+    AposEmptyState,
+    AposCheckbox,
+    CheckBoldIcon,
+    MinusIcon,
+    LinkIcon
   },
+  mixins: [ AposTableMixin ],
   props: {
-    headers: {
-      type: Array,
-      required: true
-    },
-    docs: {
-      type: Array,
-      required: true
-    },
     tagList: {
       type: Array,
       default() {
@@ -92,7 +145,7 @@ export default {
   watch: {
     selected(newVal) {
       if (newVal.length === 1) {
-        this.editing = this.myMedia.find(item => item.id === newVal[0].id);
+        // this.editing = this.myMedia.find(item => item.id === newVal[0].id);
       } else {
         this.editing = null;
       }
@@ -108,8 +161,17 @@ export default {
       this.select(null);
       this.editing = null;
     },
-    updateEditing(id) {
-      this.editing = this.myMedia.find(item => item.id === id);
+
+    // Toolbar handlers
+    selectClick() {
+      if (this.selected.length === this.myMedia.length) {
+        // unselect all
+        this.select(null);
+      } else {
+        // select all
+        this.lastSelected = this.myMedia[0].id;
+        this.selectSeries(this.myMedia[this.myMedia.length - 1].id);
+      }
     },
 
     // TODO stub
@@ -132,23 +194,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-@import '../../scss/_mixins';
-.apos-media-manager__empty {
+@import '../../sharedScss/_tables';
+// TODO: .apos-pieces-manager__empty is shared with `apos-media-manager__empty`.
+// We should combine somehow.
+.apos-pieces-manager__empty {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
   margin-top: 130px;
-}
-
-.apos-media-manager__sidebar {
-  position: relative;
-  width: 100%;
-}
-
-.apos-media-manager__sidebar--empty {
-  height: 100%;
 }
 
 </style>

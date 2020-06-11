@@ -19,6 +19,9 @@ export const piecesManager = () => {
     methods: {
       handleTrash(selected) {
         console.log(`trash ${selected}`);
+      },
+      log(action) {
+        console.log(`sort by ${action}`);
       }
     },
     data () {
@@ -26,17 +29,18 @@ export const piecesManager = () => {
         data: docsData,
         tagList: tagListData,
         applyTags: applyTagData.applyTo,
-        // TODO: use Storybook knob for doc type
+        // TODO: use Storybook knob for doc type name
         docType: 'Documents'
       };
     },
     template: `<AposPiecesManager
       :headers="data.headers"
-      :docs="data.rows"
+      :rows="data.rows"
       :tagList="tagList"
       :applyTags="applyTags"
       :docType="docType"
-      v-on:trash="handleTrash"
+      @trash="handleTrash"
+      @sort="log"
     />`
   };
 };
