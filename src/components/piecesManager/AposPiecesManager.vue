@@ -7,8 +7,8 @@
       <AposModalBody>
         <template #bodyHeader v-if="!!rows.length">
           <AposPiecesManagerToolbar
-            :selected="selected"
-            @select-click="selectClick"
+            :selected-state="selectAllState"
+            @select-click="selectAll"
             @trash-click="trashClick"
             @search="search"
           />
@@ -17,16 +17,7 @@
           <table class="apos-table" v-if="rows.length > 0">
             <tbody>
               <tr>
-                <th class="apos-table__header">
-                  <AposCheckbox
-                    @toggle="selectAll"
-                    id="aposSelectAll"
-                    :choice="selectAllChoice"
-                    :field="selectAllField.field"
-                    :value="selectAllValue"
-                    :status="selectAllField.status"
-                  />
-                </th>
+                <th class="apos-table__header" />
                 <th
                   v-for="header in headers" scope="col" class="apos-table__header"
                   :key="header.label"
@@ -137,9 +128,14 @@ export default {
     };
   },
   computed: {
-    selected() {
-      return []; // TEMP
-      // return this.myMedia.filter(item => item.checkbox.value.data.length);
+    selectAllState() {
+      if (this.selectAllValue.data.length && !this.selectAllChoice.indeterminate) {
+        return 'checked';
+      }
+      if (this.selectAllValue.data.length && this.selectAllChoice.indeterminate) {
+        return 'indeterminate';
+      }
+      return 'empty';
     }
   },
   watch: {
@@ -163,17 +159,6 @@ export default {
     },
 
     // Toolbar handlers
-    selectClick() {
-      if (this.selected.length === this.myMedia.length) {
-        // unselect all
-        this.select(null);
-      } else {
-        // select all
-        this.lastSelected = this.myMedia[0].id;
-        this.selectSeries(this.myMedia[this.myMedia.length - 1].id);
-      }
-    },
-
     // TODO stub
     trashClick() {
       this.$emit('trash', this.selected);

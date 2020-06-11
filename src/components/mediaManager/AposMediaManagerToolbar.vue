@@ -23,7 +23,6 @@ import AposFilterMenu from './../filterMenu/AposFilterMenu.vue';
 import AposTagApply from './../tagApplyMenu/AposTagApply.vue';
 import AposButton from './../button/AposButton.vue';
 import AposStringInput from './../inputString/AposStringInput.vue';
-import AposRadioInput from './../inputRadio/AposRadioInput.vue';
 import AposModalToolbar from './../modalToolbar/AposModalToolbar.vue';
 
 export default {

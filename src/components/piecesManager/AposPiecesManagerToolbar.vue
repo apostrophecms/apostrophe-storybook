@@ -1,5 +1,5 @@
 <template>
-  <AposModalToolbar class-name="apos-media-manager-toolbar">
+  <AposModalToolbar class-name="apos-pieces-manager-toolbar">
     <template #leftControls>
       <AposButton label="Select" :icon-only="true" :icon="checkboxIcon" type="outline" @click="$emit('select-click')" />
       <AposTagApply :tags="applyTags" :apply-to="[]" />
@@ -23,7 +23,6 @@ import AposFilterMenu from './../filterMenu/AposFilterMenu.vue';
 import AposTagApply from './../tagApplyMenu/AposTagApply.vue';
 import AposButton from './../button/AposButton.vue';
 import AposStringInput from './../inputString/AposStringInput.vue';
-import AposRadioInput from './../inputRadio/AposRadioInput.vue';
 import AposModalToolbar from './../modalToolbar/AposModalToolbar.vue';
 
 export default {
@@ -36,17 +35,9 @@ export default {
     AposFilterMenu
   },
   props: {
-    selected: {
-      type: Array,
-      default () {
-        return [];
-      }
-    },
-    media: {
-      type: Array,
-      default () {
-        return [];
-      }
+    selectedState: {
+      type: String,
+      required: true
     },
     applyTags: {
       type: Array,
@@ -55,7 +46,6 @@ export default {
       }
     }
   },
-
   data() {
     return {
       more: {
@@ -125,13 +115,13 @@ export default {
   },
   computed: {
     checkboxIcon() {
-      if (this.selected.length === this.media.length) {
+      if (this.selectedState === 'checked') {
         return 'CheckboxMarked';
-      }
-      if (this.selected.length < this.media.length && this.selected.length !== 0) {
+      } else if (this.selectedState === 'indeterminate') {
         return 'MinusBox';
+      } else {
+        return 'CheckboxBlankOutline';
       }
-      return 'CheckboxBlankOutline';
     }
   },
   methods: {
@@ -148,7 +138,7 @@ export default {
 <style lang="scss" scoped>
   @import '../../scss/_mixins';
 
-  .apos-media-manager-toolbar /deep/ .apos-field-search {
+  .apos-pieces-manager-toolbar /deep/ .apos-field-search {
     width: 250px;
   }
 
