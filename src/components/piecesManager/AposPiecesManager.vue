@@ -164,11 +164,6 @@ export default {
       this.$emit('trash', this.selected);
     },
 
-    // TODO stub
-    saveMedia() {
-      this.$emit('save');
-    },
-
     search(query) {
       // TODO stub
       this.$emit('search', query);
