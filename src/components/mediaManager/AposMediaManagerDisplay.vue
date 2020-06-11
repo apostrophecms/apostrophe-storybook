@@ -28,6 +28,9 @@
             :value="item.checkbox.value"
             :status="item.checkbox.status"
             :choice="item.checkbox.choice"
+            @toggle.exact="$emit('toggle', item.id)"
+            @toggle.shift="$emit('select-series', item.id)"
+            @toggle.meta="$emit('select-another', item.id)"
           />
         </div>
         <img class="apos-media-manager-display__media" :src="item.path" alt="">
