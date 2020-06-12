@@ -2,7 +2,7 @@
   <transition
     :name="transitionType"
     @enter="finishEnter"
-    @leave="removeEventListeners"
+    @leave="finishExit"
     :duration="250"
   >
     <section
@@ -12,7 +12,7 @@
       aria-modal="true"
       :aria-labelledby="id"
     >
-      <transition :name="transitionType" @after-leave="modal.active = false">
+      <transition :name="transitionType" @after-leave="$emit('inactive')">
         <div
           class="apos-modal__inner" data-apos-modal-inner v-if="modal.showModal"
         >
@@ -122,8 +122,12 @@ export default {
       }
     },
     finishEnter () {
-      this.modal.showModal = true;
+      this.$emit('show-modal');
       this.bindEventListeners();
+    },
+    finishExit () {
+      this.removeEventListeners();
+      this.$emit('no-modal');
     },
     bindEventListeners () {
       window.addEventListener('keydown', this.esc);

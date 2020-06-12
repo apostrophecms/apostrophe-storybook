@@ -19,15 +19,9 @@ export const widgetEditor = () => {
     data () {
       return {
         schema: data.schema,
-        groups: data.groups,
         doc: data.doc,
+        active: false,
         typeLabel,
-        modal: {
-          title: `Edit ${typeLabel}`,
-          active: true,
-          type: 'slide',
-          showModal: true
-        },
         breadcrumbs: [
           {
             href: '#',
@@ -37,9 +31,24 @@ export const widgetEditor = () => {
       };
     },
     template: `
-    <AposWidgetEditor
-      :modal="modal" :schema="schema" :groups="groups" :doc="doc"
-      :breadcrumbs="breadcrumbs" :typeLabel="typeLabel"
-    />`
+    <div>
+      <button type="button" class="apos-button" @click="toggleActive">
+        Activate modal {{ active }}
+      </button>
+      <AposWidgetEditor
+        v-if="active" :schema="schema" :doc="doc"
+        :breadcrumbs="breadcrumbs" :typeLabel="typeLabel"
+        @safe-close="finishExit"
+      />
+    </div>
+    `,
+    methods: {
+      toggleActive: function () {
+        this.active = !this.active;
+      },
+      finishExit: function () {
+        this.active = false;
+      }
+    }
   };
 };

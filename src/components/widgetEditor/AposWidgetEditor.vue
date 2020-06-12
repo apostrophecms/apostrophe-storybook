@@ -1,5 +1,9 @@
 <template>
-  <AposModal class="apos-widget-editor" :modal="modal">
+  <AposModal
+    class="apos-widget-editor" :modal="modal"
+    @inactive="modal.active = false" @show-modal="modal.showModal = true"
+    @esc="cancel" @no-modal="$emit('safe-close')"
+  >
     <template #breadcrumbs>
       <AposBreadcrumbs :items="breadcrumbs" />
     </template>
@@ -36,10 +40,6 @@ export default {
     AposModalBody
   },
   props: {
-    modal: {
-      type: Object,
-      required: true
-    },
     breadcrumbs: {
       type: Array,
       default: function () {
@@ -57,35 +57,17 @@ export default {
     schema: {
       type: Array,
       required: true
-    },
-    groups: {
-      type: Object,
-      default() {
-        return {};
-      }
     }
   },
   data() {
-    const tabs = [];
-    for (const key in this.groups) {
-      if (key !== 'utility') {
-        const temp = { ...this.groups[key] };
-        temp.name = key;
-        tabs.push(temp);
-      }
-    };
-
-    const utility = [];
-    if (this.groups.utility && this.groups.utility.fields) {
-      this.groups.utility.fields.forEach((field) => {
-        utility.push(this.schema.find(item => item.name === field));
-      });
-    }
-
     return {
-      utility,
-      tabs,
-      myDoc: { ...this.doc }
+      myDoc: { ...this.doc },
+      modal: {
+        title: `Edit ${this.typeLabel}`,
+        active: false,
+        type: 'slide',
+        showModal: false
+      }
     };
   },
   computed: {
@@ -96,12 +78,15 @@ export default {
       return 'Save';
     }
   },
+  mounted () {
+    this.modal.active = true;
+  },
   methods: {
     update(name, value) {
       this.myDoc[name] = value.data;
     },
     cancel() {
-      this.$emit('cancel');
+      this.modal.showModal = false;
     },
     save() {
       this.$emit('save', this.myDoc);
