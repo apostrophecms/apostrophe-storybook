@@ -5,7 +5,7 @@
     </template>
     <template #leftRail>
       <AposModalRail>
-        <AposModalTabs :current="currentTab" :groups="tabs" @select-tab="switchPane" />
+        <AposModalTabs :current="currentTab" :tabs="tabs" @select-tab="switchPane" />
       </AposModalRail>
     </template>
     <template #main>

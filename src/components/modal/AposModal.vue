@@ -40,7 +40,9 @@
             <slot name="rightRail" />
           </div>
           <footer v-if="hasFooter" class="apos-modal__footer">
-            <slot name="footer" />
+            <div class="apos-modal__footer__inner">
+              <slot name="footer" />
+            </div>
           </footer>
         </div>
       </transition>
@@ -226,11 +228,40 @@ export default {
     }
   }
 
+  .apos-modal__footer {
+    position: relative;
+    z-index: 0;
+
+    &::before {
+      content: '';
+      position: absolute;
+      z-index: 0;
+      left: 0;
+      top: 0;
+      display: block;
+      width: 100%;
+      height: 0;
+      box-shadow: var(--a-box-shadow);
+    }
+  }
+
+  .apos-modal__footer__inner,
   .apos-modal__header__main {
     display: flex;
     padding: $spacing-double;
     align-items: center;
+  }
+
+  .apos-modal__header__main {
     border-bottom: 1px solid var(--a-base-4);
+  }
+
+  .apos-modal__footer__inner {
+    position: relative;
+    z-index: 1;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: var(--a-white);
   }
 
   .apos-modal__controls--primary {
