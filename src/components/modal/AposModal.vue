@@ -256,6 +256,10 @@ export default {
     border-bottom: 1px solid var(--a-base-4);
   }
 
+  .apos-modal__footer {
+    grid-row: 3 / 4;
+  }
+
   .apos-modal__footer__inner {
     position: relative;
     z-index: 1;

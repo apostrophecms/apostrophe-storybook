@@ -1,5 +1,8 @@
 <template>
   <AposModal class="apos-widget-editor" :modal="modal">
+    <template #breadcrumbs>
+      <AposBreadcrumbs :items="breadcrumbs" />
+    </template>
     <template #main>
       <AposModalBody>
         <template #bodyMain>
@@ -10,10 +13,8 @@
       </AposModalBody>
     </template>
     <template #footer>
-      <AposModalFooter>
-        <AposButton type="default" label="Cancel" @click="cancel" />
-        <AposButton type="primary" label="Save" @click="save" />
-      </AposModalFooter>
+      <AposButton type="default" label="Cancel" @click="cancel" />
+      <AposButton type="primary" @click="save" :label="saveLabel" />
     </template>
   </AposModal>
 </template>
@@ -22,8 +23,8 @@
 import AposButton from './../button/AposButton';
 import AposSchema from './../schema/AposSchema';
 import AposModal from './../modal/AposModal';
+import AposBreadcrumbs from '../modalBreadcrumb/modalBreadcrumb';
 import AposModalBody from './../modal/AposModalBody';
-import AposModalFooter from '../modal/AposModalFooter';
 
 export default {
   name: 'AposWidgetEditor',
@@ -31,13 +32,23 @@ export default {
     AposButton,
     AposSchema,
     AposModal,
-    AposModalBody,
-    AposModalFooter
+    AposBreadcrumbs,
+    AposModalBody
   },
   props: {
     modal: {
       type: Object,
       required: true
+    },
+    breadcrumbs: {
+      type: Array,
+      default: function () {
+        return [];
+      }
+    },
+    typeLabel: {
+      type: String,
+      default: ''
     },
     doc: {
       type: Object,
@@ -77,7 +88,14 @@ export default {
       myDoc: { ...this.doc }
     };
   },
-  // computed: {},
+  computed: {
+    saveLabel: function () {
+      if (this.typeLabel) {
+        return `Save ${this.typeLabel}`;
+      }
+      return 'Save';
+    }
+  },
   methods: {
     update(name, value) {
       this.myDoc[name] = value.data;
@@ -96,15 +114,4 @@ export default {
   .apos-widget-editor /deep/ .apos-modal__inner {
     max-width: 458px;
   }
-
-  // .apos-doc-editor__body {
-  //   padding-top: 20px;
-  //   max-width: 90%;
-  //   margin-right: auto;
-  //   margin-left: auto;
-  // }
-
-  // .apos-doc-editor__utility {
-  //   padding: 40px 20px;
-  // }
 </style>

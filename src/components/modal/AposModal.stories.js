@@ -6,7 +6,6 @@ import {
 import AposModal from './AposModal.vue';
 import AposModalRail from './AposModalRail.vue';
 import AposModalBody from './AposModalBody.vue';
-import AposModalFooter from './AposModalFooter.vue';
 import AposBreadcrumb from './../modalBreadcrumb/modalBreadcrumb.vue';
 import AposButton from './../button/AposButton.vue';
 import AposStringInput from './../inputString/AposStringInput.vue';
@@ -56,8 +55,7 @@ export const layouts = () => {
       AposButton,
       AposModalRail,
       AposModalBody,
-      AposStringInput,
-      AposModalFooter
+      AposStringInput
     },
     props: {
 
@@ -129,9 +127,7 @@ export const layouts = () => {
         ` : ''}
           ${hasFooter ? `
           <template #footer>
-            <AposModalFooter>
-              I am the footer
-            </AposModalFooter>
+            I am the footer
           </template>
         ` : ''}
         </AposModal>

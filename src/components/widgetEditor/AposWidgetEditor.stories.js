@@ -9,6 +9,8 @@ export default {
   decorators: [withKnobs]
 };
 
+const typeLabel = 'Marquee';
+
 export const widgetEditor = () => {
   return {
     components: {
@@ -19,14 +21,25 @@ export const widgetEditor = () => {
         schema: data.schema,
         groups: data.groups,
         doc: data.doc,
+        typeLabel,
         modal: {
-          title: 'Edit Marquee',
+          title: `Edit ${typeLabel}`,
           active: true,
           type: 'slide',
           showModal: true
-        }
+        },
+        breadcrumbs: [
+          {
+            href: '#',
+            label: 'Marquee'
+          }
+        ]
       };
     },
-    template: `<AposWidgetEditor :modal="modal" :schema="schema" :groups="groups" :doc="doc" />`
+    template: `
+    <AposWidgetEditor
+      :modal="modal" :schema="schema" :groups="groups" :doc="doc"
+      :breadcrumbs="breadcrumbs" :typeLabel="typeLabel"
+    />`
   };
 };
