@@ -23,17 +23,4 @@ export default {
       textarea: true
     }
   ]
-  // groups: {
-  //   firstTab: {
-  //     label: 'First Tab',
-  //     fields: ['title', 'description']
-  //   },
-  //   seoTab: {
-  //     label: 'SEO Tab',
-  //     fields: ['seoTitle', 'seoDescription']
-  //   },
-  //   utility: {
-  //     fields: ['published', 'slug', 'trash']
-  //   }
-  // }
 };
