@@ -54,6 +54,15 @@
 </template>
 
 <script>
+// NOTE:
+// To get the desired transition effect, modal props have two properties,
+// `active` and `showModal`, which control their visibility. Basically,
+// `active` starts the transition process for the overlay and the body of the
+// modal, which enter at different speeds. `showModal` is what actually
+// displays the modal.
+// So as the modal exits, they should change in reverse. `showModal` becomes
+// `false`, then `active` is set to `false` once the modal has finished its
+// transition.
 export default {
   name: 'AposModal',
   props: {

@@ -20,7 +20,7 @@ export const widgetEditor = () => {
       return {
         schema: data.schema,
         doc: data.doc,
-        active: false,
+        active: true,
         typeLabel,
         breadcrumbs: [
           {
@@ -33,7 +33,7 @@ export const widgetEditor = () => {
     template: `
     <div>
       <button type="button" class="apos-button" @click="toggleActive">
-        Activate modal {{ active }}
+        Activate modal
       </button>
       <AposWidgetEditor
         v-if="active" :schema="schema" :doc="doc"

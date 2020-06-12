@@ -29,6 +29,7 @@ import AposSchema from './../schema/AposSchema';
 import AposModal from './../modal/AposModal';
 import AposBreadcrumbs from '../modalBreadcrumb/modalBreadcrumb';
 import AposModalBody from './../modal/AposModalBody';
+import AposModalParentMixin from '../../mixins/AposModalParentMixin';
 
 export default {
   name: 'AposWidgetEditor',
@@ -39,6 +40,7 @@ export default {
     AposBreadcrumbs,
     AposModalBody
   },
+  mixins: [AposModalParentMixin],
   props: {
     breadcrumbs: {
       type: Array,
@@ -78,15 +80,9 @@ export default {
       return 'Save';
     }
   },
-  mounted () {
-    this.modal.active = true;
-  },
   methods: {
     update(name, value) {
       this.myDoc[name] = value.data;
-    },
-    cancel() {
-      this.modal.showModal = false;
     },
     save() {
       this.$emit('save', this.myDoc);

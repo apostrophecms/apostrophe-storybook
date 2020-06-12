@@ -158,7 +158,11 @@ export const fullScreen = () => ({
       <button type="button" class="apos-button" @click="startEnter">
         Activate modal
       </button>
-      <AposModal :modal="modal" v-on:esc="startExit">
+      <AposModal
+        :modal="modal"
+        @inactive="modal.active = false" @show-modal="modal.showModal = true"
+        @esc="startExit"
+      >
         <template #secondaryControls>
           <AposButton @click="startExit" label="Exit" />
         </template>
@@ -208,7 +212,12 @@ export const slideOut = () => ({
       <button type="button" class="apos-button" @click="startEnter">
         Activate modal
       </button>
-      <AposModal :modal="modal" v-on:esc="startExit">
+
+      <AposModal
+        :modal="modal"
+        @inactive="modal.active = false" @show-modal="modal.showModal = true"
+        @esc="startExit"
+      >
         <template #secondaryControls>
           <AposButton @click="startExit" label="Exit" />
         </template>
