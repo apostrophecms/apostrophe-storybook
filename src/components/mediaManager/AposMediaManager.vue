@@ -28,7 +28,7 @@
           <AposMediaManagerDisplay
             v-if="!!myMedia.length" :media="myMedia" ref="display"
             @edit="updateEditing"
-            @toggle="toggle"
+            @toggle="selectAnother"
             @select="select"
             @select-series="selectSeries"
             @select-another="selectAnother"
@@ -161,21 +161,6 @@ export default {
     },
 
     // select setters
-    toggle(id) {
-      // Toggling using the checkbox element.
-      // REVIEW: Should this simply use part of `selectAnother` to deselect?
-      const index = this.myMedia.findIndex(m => {
-        return m.id === id && m.checkbox.value.data.length > 0;
-      });
-
-      if (index > -1) {
-        this.myMedia[index].checkbox.value.data = [];
-        this.lastSelected = id;
-      } else {
-        this.select(id);
-      }
-    },
-
     select(id) {
       this.myMedia.map((media) => {
         media.checkbox.value.data = media.id === id ? ['checked'] : [];
