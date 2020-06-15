@@ -37,14 +37,7 @@ export default {
     return {
       icons,
       checkboxes,
-      checked: [],
-      selectAllField: {
-        status: {},
-        field: {
-          name: 'selectAll',
-          type: 'checkbox'
-        }
-      }
+      checked: []
     };
   },
   computed: {

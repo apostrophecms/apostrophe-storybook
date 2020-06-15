@@ -1,49 +1,97 @@
 import { LoremIpsum } from 'lorem-ipsum';
-import _ from 'underscore';
-import tags from './../tagApplyMenu/data';
 const lorem = new LoremIpsum({
   wordsPerSentence: {
-    max: 6,
-    min: 1
+    max: 16,
+    min: 4
   }
 });
 
-function randomTags() {
-  const randTags = [];
-  randTags.push(_.shuffle(tags.tags)[0]);
-  randTags.push(_.shuffle(tags.tags)[0]);
-  return randTags;
-};
-
-function randomNum() {
-  return (Math.floor(Math.random() * (6 - 2) + 2)).toString();
-}
-
-function createImages(num) {
-  const images = [];
-  for (let i = 0; i < num; i++) {
-    const title = lorem.generateSentences(1);
-    const alt = lorem.generateSentences(1);
-    const credit = lorem.generateSentences(1);
-    const creditUrl = lorem.generateSentences(1);
-    const dim = [`${randomNum()}00`, `${randomNum()}00`];
-    images.push({
-      id: `lesk-${Math.floor(Math.random() * Math.floor(10000)).toString()}`,
-      path: `https://picsum.photos/${dim[0]}/${dim[1]}?q=${Math.floor(Math.random() * Math.floor(1000)).toString()}`,
-      title,
-      alt,
-      credit,
-      uploadedAt: 'Uploaded: March 6th, 2018',
-      fileSize: '345KB',
-      dim: `${dim[0]} x ${dim[1]}`,
-      creditUrl,
-      slug: title.replace(' ', '-').toLowerCase(),
-      tags: randomTags()
-    });
-  };
-  return images;
-}
-
 export default {
-  media: createImages(30)
+  headers: [
+    {
+      label: 'Title',
+      action: 'title-desc',
+      name: 'title'
+    },
+    {
+      label: 'Last Updated',
+      action: 'updated-at-desc',
+      icon: 'Calendar',
+      name: 'updatedAt'
+    },
+    {
+      label: 'Published',
+      action: 'published-desc',
+      name: 'published'
+    },
+    {
+      label: 'Link',
+      name: 'url'
+    }
+  ],
+  rows: [
+    {
+      id: 'pathways-triggers-30th-gaelic-fighting',
+      title: lorem.generateSentences(1),
+      updatedAt: 'Thursday January 12th, 2020',
+      published: true,
+      url: '/something cool'
+    },
+    {
+      id: 'jealous-uptake-fostered-keller-legitimate',
+      title: lorem.generateSentences(1),
+      updatedAt: 'Thursday January 12th, 2020',
+      published: true,
+      url: '/something cool'
+    },
+    {
+      id: 'besieged-worn-strikes-reckon-seeker',
+      title: lorem.generateSentences(1),
+      updatedAt: 'Thursday January 12th, 2020',
+      published: true,
+      url: '/something cool'
+    },
+    {
+      id: 'willed-industries-roller-watery-weighing',
+      title: lorem.generateSentences(1),
+      updatedAt: 'Thursday January 12th, 2020',
+      published: true,
+      url: '/something cool'
+    },
+    {
+      id: 'medicinal-recourse-award-educating-venerable',
+      title: lorem.generateSentences(1),
+      updatedAt: 'Thursday January 12th, 2020',
+      published: true,
+      url: '/something cool'
+    },
+    {
+      id: 'defeats-kinetic-recent-conjecture-premiums',
+      title: lorem.generateSentences(1),
+      updatedAt: 'Thursday January 12th, 2020',
+      published: true,
+      url: '/something cool'
+    },
+    {
+      id: 'putative-apology-doyle-holden-ascribed',
+      title: lorem.generateSentences(1),
+      updatedAt: 'Thursday January 12th, 2020',
+      published: true,
+      url: '/something cool'
+    },
+    {
+      id: 'wqen23e0re0e',
+      title: lorem.generateSentences(1),
+      updatedAt: 'Thursday January 12th, 2020',
+      published: true,
+      url: '/something cool'
+    },
+    {
+      id: 'wqen098r89023e',
+      title: lorem.generateSentences(1),
+      updatedAt: 'Thursday January 12th, 2020',
+      published: true,
+      url: '/something cool'
+    }
+  ]
 };

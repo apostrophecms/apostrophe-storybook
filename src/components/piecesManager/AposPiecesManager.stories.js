@@ -2,7 +2,7 @@ import {
   withKnobs
 } from '@storybook/addon-knobs';
 import AposPiecesManager from './AposPiecesManager.vue';
-import docsData from '../table/data';
+import docsData from './data';
 import tagListData from '../tagList/data.js';
 import applyTagData from '../tagApplyMenu/data.js';
 
@@ -29,7 +29,6 @@ export const piecesManager = () => {
         data: docsData,
         tagList: tagListData,
         applyTags: applyTagData.applyTo,
-        // TODO: use Storybook knob for doc type name
         docType: 'Documents'
       };
     },
