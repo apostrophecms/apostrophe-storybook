@@ -4,7 +4,9 @@
   >
     <AposSpinner :color="spinnerColor" />
     <div class="apos-button__content">
-      <component :size="15" class="apos-button__icon" v-if="icon" v-bind:is="iconComponent"></component>
+      <component
+        :size="15" class="apos-button__icon" v-if="icon" v-bind:is="iconComponent" :fillColor="iconColor"
+      />
       <span class="apos-button__label" :class="{ 'apos-sr-only' : iconOnly }">
         {{ label }}
       </span>
@@ -31,6 +33,10 @@ export default {
     icon: String,
     type: String,
     iconOnly: Boolean,
+    iconColor: {
+      type: String,
+      default: ''
+    },
     state: Array,
     disableFocus: Boolean
   },

@@ -1,7 +1,7 @@
 <template>
   <AposModalToolbar class-name="apos-pieces-manager-toolbar">
     <template #leftControls>
-      <AposButton label="Select" :icon-only="true" :icon="checkboxIcon" type="outline" @click="$emit('select-click')" />
+      <AposButton label="Select" :icon-only="true" :icon="checkboxIcon" type="outline" @click="$emit('select-click')" :icon-color="iconColor" />
       <AposTagApply :tags="applyTags" :apply-to="[]" />
       <!-- TODO trash component needs to be worked out with confirm, maybe separate into its own component -->
       <AposButton label="Delete" @click="$emit('trash-click')" :icon-only="true" icon="Delete" type="outline" />
@@ -122,6 +122,13 @@ export default {
       } else {
         return 'CheckboxBlankOutline';
       }
+    },
+    iconColor() {
+      if (this.selectedState === 'checked' || this.selectedState === 'indeterminate') {
+        return 'var(--a-primary)';
+      }
+
+      return null;
     }
   },
   methods: {
