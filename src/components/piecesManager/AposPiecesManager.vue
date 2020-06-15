@@ -116,7 +116,6 @@ export default {
         type: 'overlay',
         showModal: true
       },
-      editing: null,
       lastSelected: null,
       emptyDisplay: {
         title: 'No Documents Found',
@@ -136,26 +135,7 @@ export default {
       return 'empty';
     }
   },
-  watch: {
-    selected(newVal) {
-      if (newVal.length === 1) {
-        // this.editing = this.myMedia.find(item => item.id === newVal[0].id);
-      } else {
-        this.editing = null;
-      }
-    }
-  },
   methods: {
-    log(action) {
-      console.log(`sort by ${action}`);
-    },
-
-    clearSelected() {
-      // select(null) will match nothing and deselect all
-      this.select(null);
-      this.editing = null;
-    },
-
     // Toolbar handlers
     // TODO stub
     trashClick() {
