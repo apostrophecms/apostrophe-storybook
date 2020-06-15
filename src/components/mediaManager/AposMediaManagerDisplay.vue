@@ -30,13 +30,15 @@
             :choice="item.checkbox.choice"
           />
         </div>
-        <img class="apos-media-manager-display__media" :src="item.path" alt="">
         <button
           class="apos-media-manager-display__select"
           @click.exact="$emit('select', item.id)"
           @click.shift="$emit('select-series', item.id)"
           @click.meta="$emit('select-another', item.id)"
-        />
+        >
+          <!-- TODO make sure using TITLE is the correct alt tag application here. -->
+          <img class="apos-media-manager-display__media" :src="item.path" :alt="item.title">
+        </button>
       </div>
     </div>
   </div>
@@ -68,7 +70,7 @@ export default {
   @import '../../scss/_mixins';
   .apos-media-manager-display__grid {
     display: grid;
-    grid-template-rows: repeat(3, auto);
+    grid-auto-rows: 140px;
     grid-template-columns: repeat(5, 17.1%);
     gap: 2.4% 2.4%;
 
@@ -119,21 +121,17 @@ export default {
   }
 
   .apos-media-manager-display__media {
-    z-index: 0;
-    position: relative;
     max-width: 100%;
     max-height: 100%;
-    pointer-events: none;
     opacity: 0.85;
     @include apos-transition();
   }
 
   .apos-media-manager-display__select {
     @include apos-button-reset();
-    z-index: 1;
-    position: absolute;
-    top: 0;
-    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
     height: 100%;
     border: 1px solid var(--a-base-7);
