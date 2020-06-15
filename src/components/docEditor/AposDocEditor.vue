@@ -1,11 +1,15 @@
 <template>
-  <AposModal class="apos-doc-editor" :modal="modal">
+  <AposModal
+    class="apos-doc-editor" :modal="modal"
+    @inactive="modal.active = false" @show-modal="modal.showModal = true"
+    @esc="cancel" @no-modal="$emit('safe-close')"
+  >
     <template #primaryControls>
       <AposButton type="primary" label="Save" @save="submit" />
     </template>
     <template #leftRail>
       <AposModalRail>
-        <AposModalTabs :current="currentTab" :groups="tabs" @select-tab="switchPane" />
+        <AposModalTabs :current="currentTab" :tabs="tabs" @select-tab="switchPane" />
       </AposModalRail>
     </template>
     <template #main>
@@ -38,6 +42,7 @@ import AposModalBody from './../modal/AposModalBody';
 import AposModalTabs from './../modalTabs/AposModalTabs';
 import AposModalTabsBody from './../modalTabs/AposModalTabsBody';
 import AposModalTabsMixin from '../../mixins/AposModalTabsMixin';
+import AposModalParentMixin from '../../mixins/AposModalParentMixin';
 
 export default {
   name: 'AposDocEditor',
@@ -50,10 +55,13 @@ export default {
     AposModalTabsBody,
     AposModalTabs
   },
-  mixins: [ AposModalTabsMixin ],
+  mixins: [
+    AposModalTabsMixin,
+    AposModalParentMixin
+  ],
   props: {
-    modal: {
-      type: Object,
+    typeLabel: {
+      type: String,
       required: true
     },
     doc: {
@@ -91,7 +99,13 @@ export default {
     return {
       utility,
       tabs,
-      myDoc: { ...this.doc }
+      myDoc: { ...this.doc },
+      modal: {
+        title: `Edit ${this.typeLabel}`,
+        active: false,
+        type: 'overlay',
+        showModal: false
+      }
     };
   },
 

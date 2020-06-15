@@ -19,20 +19,36 @@ export const mediaManager = () => {
     methods: {
       handleTrash(selected) {
         console.log(`trash ${selected}`);
+      },
+      toggleActive: function () {
+        this.active = !this.active;
+      },
+      finishExit: function () {
+        this.active = false;
       }
     },
     data () {
       return {
         media: mediaData.media,
         tagList: tagListData,
+        active: true,
         applyTags: applyTagData.applyTo
       };
     },
-    template: `<AposMediaManager 
-      :media="media" 
-      :tagList="tagList" 
-      :applyTags="applyTags"
-      v-on:trash="handleTrash"
-    />`
+    template: `
+    <div>
+      <button type="button" class="apos-button" @click="toggleActive">
+        Activate modal
+      </button>
+      <AposMediaManager
+        v-if="active"
+        :media="media"
+        :tagList="tagList"
+        :applyTags="applyTags"
+        @trash="handleTrash"
+        @safe-close="finishExit"
+      />
+    </div>
+    `
   };
 };

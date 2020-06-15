@@ -13,18 +13,30 @@ storiesOf('Doc Editor', module)
         schema: data.schema,
         groups: data.groups,
         doc: data.doc,
-        modal: {
-          title: 'Edit Article',
-          active: true,
-          type: 'overlay',
-          showModal: true
-        }
+        typeLabel: 'Article',
+        active: true
       };
     },
-    template: `<AposDocEditor :modal="modal" :schema="schema" :groups="groups" :doc="doc" />`,
+    template: `
+    <div>
+      <button type="button" class="apos-button" @click="toggleActive">
+        Activate modal
+      </button>
+      <AposDocEditor
+        v-if="active" @safe-close="finishExit" :typeLabel="typeLabel"
+        :schema="schema" :groups="groups" :doc="doc"
+      />
+    </div>
+    `,
     methods: {
       log (action) {
         console.log(`Story heard ${action} was clicked`);
+      },
+      toggleActive: function () {
+        this.active = !this.active;
+      },
+      finishExit: function () {
+        this.active = false;
       }
     }
   }));
