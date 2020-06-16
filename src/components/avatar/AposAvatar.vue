@@ -1,11 +1,10 @@
-
 <template>
-  <img :src="src" class="apos-avatar" :style="{ width: size }" :alt=alt>
+  <img :src="src" class="apos-avatar" :style="{ width: size }" :alt="alt">
 </template>
 
 <script>
 export default {
-  name: 'AposAvatar',
+  name: "AposAvatar",
   props: {
     src: {
       type: String,
@@ -13,16 +12,19 @@ export default {
     },
     size: {
       type: [String],
+      default: "30px"
     },
-    alt: String
+    alt: {
+      type: String,
+      default: "User Avatar Imge"
+    }
   }
 };
 </script>
 
 <style lang="scss">
-  .apos-avatar {
-    display: inline-block;
-    border-radius: 100%;
-    width: 30px;
-  }
+.apos-avatar {
+  display: inline-block;
+  border-radius: 100%;
+}
 </style>

@@ -17,12 +17,12 @@
                 @focus="groupFocused"
                 @blur="groupBlurred"
                 @click="toggleGroup(index)"
-                @keydown.prevent.32="toggleGroup(index)"
-                @keydown.prevent.13="toggleGroup(index)"
-                @keydown.prevent.40="switchGroup(index, 1)"
-                @keydown.prevent.38="switchGroup(index, -1)"
-                @keydown.prevent.36="switchGroup(index, 0)"
-                @keydown.prevent.35="switchGroup(index, null)"
+                @keydown.prevent.space="toggleGroup(index)"
+                @keydown.prevent.enter="toggleGroup(index)"
+                @keydown.prevent.arrow-down="switchGroup(index, 1)"
+                @keydown.prevent.arrow-up="switchGroup(index, -1)"
+                @keydown.prevent.home="switchGroup(index, 0)"
+                @keydown.prevent.end="switchGroup(index, null)"
                 ref="groupButton"
               >
                 <span>{{ item.label }}</span>

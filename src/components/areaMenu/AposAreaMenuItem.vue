@@ -1,21 +1,23 @@
 <template>
-  <button @click="click" class="apos-area-menu__button" :data-action="item.action" 
-    v-bind:tabindex="String(tabindex)"
-    @keydown.prevent.40="$emit('down')"
-    @keydown.prevent.38="$emit('up')"
+  <button
+    @click="click"
+    class="apos-area-menu__button"
+    :data-action="item.action"
+    :tabindex="String(tabindex)"
+    @keydown.prevent.arrow-down="$emit('down')"
+    @keydown.prevent.arrow-up="$emit('up')"
   >
-    <component 
+    <component
       v-if="item.icon"
       :size="15"
       class="apos-area-menu__item-icon"
-      v-bind:is="icon"
-    ></component>
+      :is="icon"
+    />
     {{ item.label }}
   </button>
 </template>
 
 <script>
-
 export default {
   props: {
     item: {
@@ -31,7 +33,7 @@ export default {
   computed: {
     icon() {
       if (this.item.icon) {
-        return () => import(`vue-material-design-icons/${this.item.icon}.vue`);  
+        return () => import(`vue-material-design-icons/${this.item.icon}.vue`);
       }
     },
     tabindex() {
@@ -45,14 +47,14 @@ export default {
 
   methods: {
     click() {
-      this.$emit('click');
+      this.$emit("click");
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>
-@import '../../scss/_mixins';
+@import "../../scss/_mixins";
 
 .apos-tag-list__button {
   @include apos-button-reset();
@@ -61,7 +63,7 @@ export default {
   padding: 7.5px 10px;
   border-radius: 5px;
   background: transparent;
-  @include apos-transition(all, .1s, ease-in-out);
+  @include apos-transition(all, 0.1s, ease-in-out);
   &.is-active {
     background-color: var(--a-primary);
     color: var(--a-white);
@@ -91,5 +93,4 @@ export default {
   @include apos-align-icon();
   margin-right: 10px;
 }
-
 </style>

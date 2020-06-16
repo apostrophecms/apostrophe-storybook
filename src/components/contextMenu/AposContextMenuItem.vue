@@ -12,45 +12,48 @@
 
 <script>
 export default {
-  name: 'AposContextMenuItem',
+  name: "AposContextMenuItem",
   props: {
-    menuItem: Object,
+    menuItem: {
+      type: Object,
+      default: null
+    },
     open: Boolean
   },
   computed: {
     tabindex() {
-      return this.open ? '0' : '-1';
+      return this.open ? "0" : "-1";
     }
   },
   methods: {
     click() {
-      this.$emit('clicked', this.menuItem.action);
+      this.$emit("clicked", this.menuItem.action);
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
-  .apos-context-menu__button {
-    display: inline-block;
-    width: 100%;
-    padding: 10px 20px;
-    border: none;
-    text-align: left;
-    font-size: map-get($font-sizes, default);
-    letter-spacing: 0.5px;
-    color: var(--a-base-1);
-    background-color: var(--a-background-primary);
-    &:hover {
-      cursor: pointer;
-      color: var(--a-text-primary);
-    }
-    &:focus {
-      outline: none;
-      color: var(--a-text-primary);
-    }
-    &:active {
-      color: var(--a-base-1);
-    }
+.apos-context-menu__button {
+  display: inline-block;
+  width: 100%;
+  padding: 10px 20px;
+  border: none;
+  text-align: left;
+  font-size: map-get($font-sizes, default);
+  letter-spacing: 0.5px;
+  color: var(--a-base-1);
+  background-color: var(--a-background-primary);
+  &:hover {
+    cursor: pointer;
+    color: var(--a-text-primary);
   }
+  &:focus {
+    outline: none;
+    color: var(--a-text-primary);
+  }
+  &:active {
+    color: var(--a-base-1);
+  }
+}
 </style>

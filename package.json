@@ -4,9 +4,17 @@
   "description": "",
   "main": "index.js",
   "dependencies": {
+    "vue": "^2.6.11",
+    "vue-loader": "^15.9.1",
+    "vue-material-design-icons": "^3.4.0",
+    "vue-template-compiler": "^2.6.11",
+    "vuedraggable": "^2.23.2"
+  },
+  "devDependencies": {
     "@babel/core": "^7.8.7",
     "@storybook/addon-a11y": "^5.3.17",
     "@storybook/addon-contexts": "^5.3.17",
+    "@storybook/storybook-deployer": "^2.8.6",
     "@storybook/addon-knobs": "^5.3.17",
     "@storybook/addon-storysource": "^5.3.17",
     "@storybook/vue": "^5.3.17",
@@ -25,12 +33,7 @@
     "node-sass": "^4.14.1",
     "sass-loader": "^7.3.1",
     "sass-resources-loader": "^2.0.1",
-    "underscore": "^1.10.2",
-    "vue": "^2.6.11",
-    "vue-loader": "^15.9.1",
-    "vue-material-design-icons": "^3.4.0",
-    "vue-template-compiler": "^2.6.11",
-    "vuedraggable": "^2.23.2"
+    "underscore": "^1.10.2"
   },
   "scripts": {
     "test": "npx eslint . --ext .js,.vue",
@@ -43,13 +46,10 @@
     "type": "git",
     "url": "git+https://github.com/apostrophecms/apostrophe-storybook.git"
   },
-  "author": "P'unk Avenue",
+  "author": "Apostrophe Technologies, Inc.",
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/apostrophecms/apostrophe-storybook/issues"
   },
-  "homepage": "https://github.com/apostrophecms/apostrophe-storybook#readme",
-  "devDependencies": {
-    "@storybook/storybook-deployer": "^2.8.6"
-  }
+  "homepage": "https://github.com/apostrophecms/apostrophe-storybook#readme"
 }
