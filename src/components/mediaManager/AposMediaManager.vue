@@ -32,6 +32,7 @@
           <AposMediaManagerDisplay
             v-if="!!myMedia.length" :media="myMedia" ref="display"
             @edit="updateEditing"
+            @toggle="selectAnother"
             @select="select"
             @select-series="selectSeries"
             @select-another="selectAnother"
