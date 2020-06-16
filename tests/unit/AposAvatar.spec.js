@@ -1,3 +1,11 @@
+/* NOTE:
+   This component does not show up in the coverage report
+   because it doesn't have a data property. But it is still testable..
+
+   More on why it's missing from the coverage report here:
+   https://github.com/vuejs/vue-jest/issues/32#issuecomment-361602308
+*/
+
 import { shallowMount } from "@vue/test-utils";
 import AposAvatar from "@/components/avatar/AposAvatar.vue";
 
