@@ -1,7 +1,7 @@
 <template>
-  <AposModalToolbar class-name="apos-media-manager-toolbar">
+  <AposModalToolbar class-name="apos-pieces-manager-toolbar">
     <template #leftControls>
-      <AposButton label="Select" :icon-only="true" :icon="checkboxIcon" type="outline" @click="$emit('select-click')" />
+      <AposButton label="Select" :icon-only="true" :icon="checkboxIcon" type="outline" @click="$emit('select-click')" :icon-color="iconColor" />
       <AposTagApply :tags="applyTags" :apply-to="[]" />
       <!-- TODO trash component needs to be worked out with confirm, maybe separate into its own component -->
       <AposButton label="Delete" @click="$emit('trash-click')" :icon-only="true" icon="Delete" type="outline" />
@@ -35,17 +35,9 @@ export default {
     AposFilterMenu
   },
   props: {
-    selected: {
-      type: Array,
-      default () {
-        return [];
-      }
-    },
-    media: {
-      type: Array,
-      default () {
-        return [];
-      }
+    selectedState: {
+      type: String,
+      required: true
     },
     applyTags: {
       type: Array,
@@ -54,7 +46,6 @@ export default {
       }
     }
   },
-
   data() {
     return {
       more: {
@@ -124,13 +115,20 @@ export default {
   },
   computed: {
     checkboxIcon() {
-      if (this.selected.length === this.media.length) {
+      if (this.selectedState === 'checked') {
         return 'CheckboxMarked';
-      }
-      if (this.selected.length < this.media.length && this.selected.length !== 0) {
+      } else if (this.selectedState === 'indeterminate') {
         return 'MinusBox';
+      } else {
+        return 'CheckboxBlankOutline';
       }
-      return 'CheckboxBlankOutline';
+    },
+    iconColor() {
+      if (this.selectedState === 'checked' || this.selectedState === 'indeterminate') {
+        return 'var(--a-primary)';
+      }
+
+      return null;
     }
   },
   methods: {
@@ -147,7 +145,7 @@ export default {
 <style lang="scss" scoped>
   @import '../../scss/_mixins';
 
-  .apos-media-manager-toolbar /deep/ .apos-field-search {
+  .apos-pieces-manager-toolbar /deep/ .apos-field-search {
     width: 250px;
   }
 

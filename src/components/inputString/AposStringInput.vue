@@ -10,7 +10,7 @@
         <input :class="classes" v-else
           v-model="next" :type="type" :placeholder=field.placeholder @keydown.13="$emit('return')"
           :disabled="status.disabled" :required="field.required" :id="uid" :tabindex="tabindex">
-        <component 
+        <component
           v-if="iconComponent"
           :size="iconSize"
           class="apos-input-icon"
@@ -89,7 +89,7 @@ export default {
 <style lang="scss" scoped>
   .apos-input--date,
   .apos-input--time {
-    // lame magic number .. 
+    // lame magic number ..
     // height of date/time input is slightly larger than others due to the browser spinner ui
     height: 46px;
   }
@@ -97,7 +97,7 @@ export default {
     // padding is lessend to overlap with calendar UI
     padding-right: $input-padding * 1.4;
     &::-webkit-calendar-picker-indicator { opacity: 0; }
-    &::-webkit-clear-button { 
+    &::-webkit-clear-button {
       position: relative;
       right: 5px;
     }
