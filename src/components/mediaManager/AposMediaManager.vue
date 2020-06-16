@@ -5,9 +5,13 @@
 -->
 
 <template>
-  <AposModal :modal="modal">
+  <AposModal
+    :modal="modal"
+    @inactive="modal.active = false" @show-modal="modal.showModal = true"
+    @esc="cancel" @no-modal="$emit('safe-close')"
+  >
     <template #primaryControls>
-      <AposButton type="default" label="Finished" />
+      <AposButton type="default" label="Finished" @click="cancel" />
     </template>
     <template #leftRail v-if="!!media.length">
       <AposModalRail>
@@ -67,6 +71,7 @@ import AposMediaManagerToolbar from './AposMediaManagerToolbar.vue';
 import AposMediaManagerDisplay from './AposMediaManagerDisplay.vue';
 import AposMediaManagerSelections from './AposMediaManagerSelections.vue';
 import AposMediaManagerEditor from './AposMediaManagerEditor.vue';
+import AposModalParentMixin from '../../mixins/AposModalParentMixin';
 
 export default {
   components: {
@@ -81,6 +86,7 @@ export default {
     AposMediaManagerEditor,
     AposMediaManagerSelections
   },
+  mixins: [AposModalParentMixin],
   props: {
     media: {
       type: Array,
@@ -122,9 +128,9 @@ export default {
     return {
       modal: {
         title: 'Manage Media',
-        active: true,
+        active: false,
         type: 'overlay',
-        showModal: true
+        showModal: false
       },
       editing: null,
       lastSelected: null,

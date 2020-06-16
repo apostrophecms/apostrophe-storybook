@@ -2,7 +2,7 @@
   <transition
     :name="transitionType"
     @enter="finishEnter"
-    @leave="removeEventListeners"
+    @leave="finishExit"
     :duration="250"
   >
     <section
@@ -12,7 +12,7 @@
       aria-modal="true"
       :aria-labelledby="id"
     >
-      <transition :name="transitionType" @after-leave="modal.active = false">
+      <transition :name="transitionType" @after-leave="$emit('inactive')">
         <div
           class="apos-modal__inner" data-apos-modal-inner v-if="modal.showModal"
         >
@@ -40,7 +40,9 @@
             <slot name="rightRail" />
           </div>
           <footer v-if="hasFooter" class="apos-modal__footer">
-            <slot name="footer" />
+            <div class="apos-modal__footer__inner">
+              <slot name="footer" />
+            </div>
           </footer>
         </div>
       </transition>
@@ -52,6 +54,15 @@
 </template>
 
 <script>
+// NOTE:
+// To get the desired transition effect, modal props have two properties,
+// `active` and `showModal`, which control their visibility. Basically,
+// `active` starts the transition process for the overlay and the body of the
+// modal, which enter at different speeds. `showModal` is what actually
+// displays the modal.
+// So as the modal exits, they should change in reverse. `showModal` becomes
+// `false`, then `active` is set to `false` once the modal has finished its
+// transition.
 export default {
   name: 'AposModal',
   props: {
@@ -120,8 +131,12 @@ export default {
       }
     },
     finishEnter () {
-      this.modal.showModal = true;
+      this.$emit('show-modal');
       this.bindEventListeners();
+    },
+    finishExit () {
+      this.removeEventListeners();
+      this.$emit('no-modal');
     },
     bindEventListeners () {
       window.addEventListener('keydown', this.esc);
@@ -226,11 +241,44 @@ export default {
     }
   }
 
+  .apos-modal__footer {
+    position: relative;
+    z-index: 0;
+
+    &::before {
+      content: '';
+      position: absolute;
+      z-index: 0;
+      left: 0;
+      top: 0;
+      display: block;
+      width: 100%;
+      height: 0;
+      box-shadow: var(--a-box-shadow);
+    }
+  }
+
+  .apos-modal__footer__inner,
   .apos-modal__header__main {
     display: flex;
     padding: $spacing-double;
     align-items: center;
+  }
+
+  .apos-modal__header__main {
     border-bottom: 1px solid var(--a-base-4);
+  }
+
+  .apos-modal__footer {
+    grid-row: 3 / 4;
+  }
+
+  .apos-modal__footer__inner {
+    position: relative;
+    z-index: 1;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: var(--a-white);
   }
 
   .apos-modal__controls--primary {

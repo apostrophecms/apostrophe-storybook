@@ -6,7 +6,6 @@ import {
 import AposModal from './AposModal.vue';
 import AposModalRail from './AposModalRail.vue';
 import AposModalBody from './AposModalBody.vue';
-import AposModalFooter from './AposModalFooter.vue';
 import AposBreadcrumb from './../modalBreadcrumb/modalBreadcrumb.vue';
 import AposButton from './../button/AposButton.vue';
 import AposStringInput from './../inputString/AposStringInput.vue';
@@ -56,8 +55,7 @@ export const layouts = () => {
       AposButton,
       AposModalRail,
       AposModalBody,
-      AposStringInput,
-      AposModalFooter
+      AposStringInput
     },
     props: {
 
@@ -129,9 +127,7 @@ export const layouts = () => {
         ` : ''}
           ${hasFooter ? `
           <template #footer>
-            <AposModalFooter>
-              I am the footer
-            </AposModalFooter>
+            I am the footer
           </template>
         ` : ''}
         </AposModal>
@@ -162,7 +158,11 @@ export const fullScreen = () => ({
       <button type="button" class="apos-button" @click="startEnter">
         Activate modal
       </button>
-      <AposModal :modal="modal" v-on:esc="startExit">
+      <AposModal
+        :modal="modal"
+        @inactive="modal.active = false" @show-modal="modal.showModal = true"
+        @esc="startExit"
+      >
         <template #secondaryControls>
           <AposButton @click="startExit" label="Exit" />
         </template>
@@ -212,7 +212,12 @@ export const slideOut = () => ({
       <button type="button" class="apos-button" @click="startEnter">
         Activate modal
       </button>
-      <AposModal :modal="modal" v-on:esc="startExit">
+
+      <AposModal
+        :modal="modal"
+        @inactive="modal.active = false" @show-modal="modal.showModal = true"
+        @esc="startExit"
+      >
         <template #secondaryControls>
           <AposButton @click="startExit" label="Exit" />
         </template>
