@@ -1,7 +1,10 @@
 <template>
-  <AposModal :modal="modal">
+  <AposModal
+    :modal="modal" @esc="cancel" @no-modal="$emit('safe-close')"
+    @inactive="modal.active = false" @show-modal="modal.showModal = true"
+  >
     <template #primaryControls>
-      <AposButton type="default" label="Finished" />
+      <AposButton type="default" label="Finished" @click="cancel" />
     </template>
     <template #main>
       <AposModalBody>
@@ -73,6 +76,7 @@
 import AposModal from './../modal/AposModal.vue';
 import AposModalBody from './../modal/AposModalBody.vue';
 import AposTableMixin from '../../mixins/AposTableMixin';
+import AposModalParentMixin from '../../mixins/AposModalParentMixin';
 import AposButton from './../button/AposButton.vue';
 import AposEmptyState from './../emptyState/AposEmptyState.vue';
 import AposPiecesManagerToolbar from './AposPiecesManagerToolbar.vue';
@@ -93,8 +97,12 @@ export default {
     MinusIcon,
     LinkIcon
   },
-  mixins: [ AposTableMixin ],
+  mixins: [ AposTableMixin, AposModalParentMixin ],
   props: {
+    pieceType: {
+      type: Object,
+      required: true
+    },
     tagList: {
       type: Array,
       default() {
@@ -111,14 +119,14 @@ export default {
   data() {
     return {
       modal: {
-        title: 'Manage Documents',
-        active: true,
+        title: `Manage ${this.pieceType.pluralLabel || this.pieceType.label}`,
+        active: false,
         type: 'overlay',
-        showModal: true
+        showModal: false
       },
       lastSelected: null,
       emptyDisplay: {
-        title: 'No Documents Found',
+        title: `No ${this.pieceType.pluralLabel || this.pieceType.label} Found`,
         message: '',
         emoji: '📄'
       }

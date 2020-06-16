@@ -22,24 +22,38 @@ export const piecesManager = () => {
       },
       log(action) {
         console.log(`sort by ${action}`);
+      },
+      toggleActive: function () {
+        this.active = !this.active;
+      },
+      finishExit: function () {
+        this.active = false;
       }
     },
     data () {
       return {
         data: docsData,
+        active: true,
         tagList: tagListData,
         applyTags: applyTagData.applyTo,
-        docType: 'Documents'
+        pieceType: {
+          label: 'Document',
+          pluralLabel: 'Documents'
+        }
       };
     },
-    template: `<AposPiecesManager
-      :headers="data.headers"
-      :rows="data.rows"
-      :tagList="tagList"
-      :applyTags="applyTags"
-      :docType="docType"
-      @trash="handleTrash"
-      @sort="log"
-    />`
+    template: `
+      <div>
+        <button type="button" class="apos-button" @click="toggleActive">
+          Activate modal
+        </button>
+        <AposPiecesManager
+          v-if="active" @safe-close="finishExit"
+          :headers="data.headers" :rows="data.rows" :tagList="tagList"
+          :applyTags="applyTags" :pieceType="pieceType" @trash="handleTrash"
+          @sort="log"
+        />
+      </div>
+    `
   };
 };
