@@ -5,7 +5,7 @@ import AposBreadcrumb from './modalBreadcrumb.vue';
 storiesOf('Breadcrumb', module)
   .add('Primary', () => ({
     components: { AposBreadcrumb },
-    template: '<AposBreadcrumb :items="items"/>',
+    template: `<AposBreadcrumb :items="items"/>`,
     data () {
       return {
         items: [

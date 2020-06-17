@@ -107,7 +107,7 @@ export default {
       const classes = ['apos-modal'];
       classes.push(`apos-modal--${this.modal.type}`);
       if (this.modal.type === 'slide') {
-        classes.push('apos-modal--full-height');
+        classes.push(`apos-modal--full-height`);
       }
       return classes.join(' ');
     },

@@ -20,5 +20,5 @@ export const filterContextMenu = () => ({
       button: data.button
     };
   },
-  template: '<AposFilterMenu :button="button" :menu="menu" @input="log" />'
+  template: `<AposFilterMenu :button="button" :menu="menu" @input="log" />`
 });

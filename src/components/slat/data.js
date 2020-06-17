@@ -1,5 +1,5 @@
 export default {
-  'items': [
+  "items": [
     {
       label: 'Ernie',
       id: 'wefino3390'

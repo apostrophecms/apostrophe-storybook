@@ -27,7 +27,7 @@ const field = {
   ]
 };
 
-const baseTemplate = '<AposSelectInput :field="field" :value="value" :status="status"/>';
+const baseTemplate = `<AposSelectInput :field="field" :value="value" :status="status"/>`;
 
 storiesOf('Inputs (Select)', module)
   .add('Select', () => ({

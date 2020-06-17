@@ -35,6 +35,6 @@ export const areaMenu = () => {
     components: {
       AposAreaMenu
     },
-    template: '<AposAreaMenu v-on:click="handler" :menu="menu" />'
+    template: `<AposAreaMenu v-on:click="handler" :menu="menu" />`
   };
 };

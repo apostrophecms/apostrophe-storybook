@@ -28,7 +28,7 @@ const field = {
   ]
 };
 
-const baseTemplate = '<AposRadioInput :field="field" :value="value" :status="status"/>';
+const baseTemplate = `<AposRadioInput :field="field" :value="value" :status="status"/>`;
 
 storiesOf('Inputs (Radio)', module)
   .add('Radio', () => ({

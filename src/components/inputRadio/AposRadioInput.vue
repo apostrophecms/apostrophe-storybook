@@ -27,8 +27,8 @@
 <script>
 import AposInputWrapper from '../AposInputWrapper';
 import AposInputMixin from '../../mixins/AposInputMixin';
-import CheckBoldIcon from 'vue-material-design-icons/CheckBold.vue';
-import MinusIcon from 'vue-material-design-icons/Minus.vue';
+import CheckBoldIcon from "vue-material-design-icons/CheckBold.vue";
+import MinusIcon from "vue-material-design-icons/Minus.vue";
 
 export default {
   name: 'AposRadioInput',

@@ -19,7 +19,7 @@
 <script>
 import AposInputWrapper from '../AposInputWrapper';
 import AposInputMixin from '../../mixins/AposInputMixin.js';
-import MenuDown from 'vue-material-design-icons/MenuDown.vue';
+import MenuDown from "vue-material-design-icons/MenuDown.vue";
 
 export default {
   name: 'AposSelectInput',
