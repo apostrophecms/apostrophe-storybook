@@ -12,6 +12,18 @@ $ npm install
 $ npm run storybook
 ```
 
+### Unit Testing
+
+Unit Tests can be written in [Jest](https://jestjs.io/) which is one of Vue's recommended testing frameworks. 
+
+To run the test suite:
+
+```
+$ npm run test:unit
+```
+
+As a general rule of thumb, components should have tests that assert their public interface. For more on Vue's best practices regarding testing see: https://vue-test-utils.vuejs.org/guides/#common-tips.
+
 ### Deploying to the Static Site
 
 ```
