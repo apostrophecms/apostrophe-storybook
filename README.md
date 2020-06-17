@@ -24,6 +24,10 @@ $ npm run test:unit
 
 As a general rule of thumb, components should have tests that assert their public interface. For more on Vue's best practices regarding testing see: https://vue-test-utils.vuejs.org/guides/#common-tips.
 
+You may also view a coverage report after running the test suite by opening `coverage/index.html`. 
+
+*Note:* Components that don't have a data prop will not be included in the report. More on that here: https://github.com/vuejs/vue-jest/issues/32#issuecomment-361602308
+
 ### Deploying to the Static Site
 
 ```
