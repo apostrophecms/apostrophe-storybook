@@ -81,9 +81,9 @@ import AposButton from './../button/AposButton.vue';
 import AposEmptyState from './../emptyState/AposEmptyState.vue';
 import AposPiecesManagerToolbar from './AposPiecesManagerToolbar.vue';
 import AposCheckbox from '../inputCheckbox/AposCheckbox.vue';
-import CheckBoldIcon from "vue-material-design-icons/CheckBold.vue";
-import MinusIcon from "vue-material-design-icons/Minus.vue";
-import LinkIcon from "vue-material-design-icons/LinkVariant.vue";
+import CheckBoldIcon from 'vue-material-design-icons/CheckBold.vue';
+import MinusIcon from 'vue-material-design-icons/Minus.vue';
+import LinkIcon from 'vue-material-design-icons/LinkVariant.vue';
 
 export default {
   components: {

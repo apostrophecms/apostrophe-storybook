@@ -32,7 +32,7 @@ storiesOf('Inputs (Boolean)', module)
         }
       };
     },
-    template: `<AposBooleanInput :field="field" :value="value" :status="status"/>`
+    template: '<AposBooleanInput :field="field" :value="value" :status="status"/>'
   }))
   .add('Boolean (prechecked)', () => ({
     components: { AposBooleanInput },
@@ -45,7 +45,7 @@ storiesOf('Inputs (Boolean)', module)
         }
       };
     },
-    template: `<AposBooleanInput :field="field" :value="value" :status="status"/>`
+    template: '<AposBooleanInput :field="field" :value="value" :status="status"/>'
   }))
   .add('Toggle', () => ({
     components: { AposBooleanInput },
@@ -58,5 +58,5 @@ storiesOf('Inputs (Boolean)', module)
         }
       };
     },
-    template: `<AposBooleanInput :field="field" :value="value" :status="status"/>`
+    template: '<AposBooleanInput :field="field" :value="value" :status="status"/>'
   }));

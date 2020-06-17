@@ -28,7 +28,7 @@ const field = {
   ]
 };
 
-const baseTemplate = `<AposCheckboxInput :field="field" :value="value" :status="status"/>`;
+const baseTemplate = '<AposCheckboxInput :field="field" :value="value" :status="status"/>';
 
 storiesOf('Inputs (Checkbox)', module)
   .add('Checkbox', () => ({

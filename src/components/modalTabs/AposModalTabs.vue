@@ -2,7 +2,7 @@
   <div class="apos-modal-tabs">
     <ul class="apos-modal-tabs__tabs">
       <li class="apos-modal-tabs__tab" v-for="tab in tabs"
-          :key="tab.name"
+        :key="tab.name"
       >
         <button
           :id="tab.name" class="apos-modal-tabs__btn" @click="selectTab"

@@ -46,7 +46,7 @@
 <script>
 import AposCheckbox from './../inputCheckbox/AposCheckbox.vue';
 import AposHelpers from '../../mixins/AposHelpersMixin';
-import CloudUpload from "vue-material-design-icons/CloudUpload.vue";
+import CloudUpload from 'vue-material-design-icons/CloudUpload.vue';
 
 export default {
   components: {

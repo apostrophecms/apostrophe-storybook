@@ -1,5 +1,8 @@
 {
-  "extends": ["apostrophe", "plugin:vue/vue3-recommended"],
+  "extends": [
+    "apostrophe",
+    "plugin:vue/vue3-recommended"
+  ],
   "overrides": [
     {
       "files": ["tests/**/*.spec.js"],
@@ -20,7 +23,11 @@
     "vue/component-tags-order": [
       "warning",
       {
-        "order": ["template", "script", "style"]
+        "order": [
+          "template",
+          "script",
+          "style"
+        ]
       }
     ],
     "vue/max-attributes-per-line": [
@@ -35,7 +42,13 @@
       {
         "ignoreWhenNoAttributes": true,
         "ignoreWhenEmpty": true,
-        "ignores": ["h1", "h2", "h3", "pre", "textarea"]
+        "ignores": [
+          "h1",
+          "h2",
+          "h3",
+          "pre",
+          "textarea"
+        ]
       }
     ],
     "vue/attributes-order": false
