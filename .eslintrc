@@ -21,7 +21,7 @@
   "rules": {
     "no-console": 0,
     "vue/component-tags-order": [
-      "warning",
+      "warn",
       {
         "order": [
           "template",
@@ -31,14 +31,14 @@
       }
     ],
     "vue/max-attributes-per-line": [
-      "warning",
+      "warn",
       {
         "singleline": 2,
         "multiline": 2
       }
     ],
     "vue/singleline-html-element-content-newline": [
-      "warning",
+      "warn",
       {
         "ignoreWhenNoAttributes": true,
         "ignoreWhenEmpty": true,
@@ -51,6 +51,6 @@
         ]
       }
     ],
-    "vue/attributes-order": false
+    "vue/attributes-order": 0
   }
 }
