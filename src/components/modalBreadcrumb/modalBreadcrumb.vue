@@ -1,9 +1,19 @@
 <template>
   <nav :class="['apos-breadcrumb', classObj]" aria-label="breadcrumb">
     <ol class="apos-breadcrumb__items">
-      <li v-for="(item, index) in items" :key="index" :class="`apos-breadcrumb__item ${modifier}`">
-        <component :is="item.href ? 'a' : 'span'" :href="item.href">{{ item.label }}</component>
-        <ChevronRightIcon class="apos-breadcrumb__chevron" :size="13" v-if="index !== last" />
+      <li
+        v-for="(item, index) in items" :key="index"
+        :class="`apos-breadcrumb__item ${modifier}`"
+      >
+        <component
+          :is="item.href ? 'a' : 'span'" :href="item.href"
+        >
+          {{ item.label }}
+        </component>
+        <ChevronRightIcon
+          class="apos-breadcrumb__chevron" :size="13"
+          v-if="index !== last"
+        />
       </li>
     </ol>
   </nav>
@@ -76,6 +86,10 @@ export default {
       .apos-breadcrumb--dark & {
         color: inherit;
       }
+    }
+
+    a:focus {
+      text-decoration: underline;
     }
   }
   .apos-breadcrumb__chevron {
