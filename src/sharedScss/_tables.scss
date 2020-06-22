@@ -33,7 +33,7 @@ span.apos-table__header-label:hover {
 
 .apos-table__cell,
 .apos-table__row {
-  @include apos-transition();
+  @include apos-transition(all, 0.05s);
 }
 .apos-table__cell {
   padding: 12.5px 4.5px;
