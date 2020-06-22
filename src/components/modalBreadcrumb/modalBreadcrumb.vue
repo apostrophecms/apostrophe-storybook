@@ -6,7 +6,8 @@
         :class="`apos-breadcrumb__item ${modifier}`"
       >
         <component
-          :is="item.href ? 'a' : 'span'" :href="item.href"
+          :is="item.href ? 'button' : 'span'" :data-apos-target="item.href"
+          :type="item.href ? 'button' : null"
         >
           {{ item.label }}
         </component>
@@ -79,8 +80,11 @@ export default {
     letter-spacing: 0.75px;
     font-size: map-get($font-sizes, meta);
     color: var(--a-text-primary);
-    a {
+
+    button {
+      @include apos-button-reset();
       @include link-primary;
+      letter-spacing: inherit;
       text-decoration: none;
 
       .apos-breadcrumb--dark & {
