@@ -5,16 +5,16 @@ import AposBreadcrumb from './modalBreadcrumb.vue';
 storiesOf('Breadcrumb', module)
   .add('Primary', () => ({
     components: { AposBreadcrumb },
-    template: `<AposBreadcrumb :items="items" @return-to="log"/>`,
+    template: `<AposBreadcrumb :items="items" @return-to="log" />`,
     data () {
       return {
         items: [
           {
-            href: 'marquee-widget',
+            target: 'marquee-widget',
             label: 'Marquee'
           },
           {
-            href: 'link-ui',
+            target: 'link-ui',
             label: 'Link'
           },
           {

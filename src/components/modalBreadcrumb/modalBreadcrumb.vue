@@ -6,10 +6,10 @@
         :class="`apos-breadcrumb__item ${modifier}`"
       >
         <component
-          :is="item.href ? 'button' : 'span'" :data-apos-target="item.href"
-          :type="item.href ? 'button' : null"
-          :aria-label="item.href ? `Return to ${item.label}` : null"
-          @click="item.href ? $emit('return-to', item.href) : null"
+          :is="item.target ? 'button' : 'span'" :data-apos-target="item.target"
+          :type="item.target ? 'button' : null"
+          :aria-label="item.target ? `Return to ${item.label}` : null"
+          @click="item.target ? $emit('return-to', item.target) : null"
         >
           {{ item.label }}
         </component>
