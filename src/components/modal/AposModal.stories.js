@@ -28,11 +28,11 @@ const inputValue = { data: '' };
 const inputStatus = {};
 const breadcrumbs = [
   {
-    href: '#',
+    target: 'pages-manager',
     label: 'Manage pages'
   },
   {
-    href: '#',
+    target: 'another-step',
     label: 'Another step'
   },
   {
@@ -90,7 +90,7 @@ export const layouts = () => {
           </template>
           ${hasBreadcrumbs ? `
             <template #breadcrumbs>
-              <AposBreadcrumb :items="breadcrumbs" />
+              <AposBreadcrumb :items="breadcrumbs" @return-to="log" />
             </template>
           ` : ''}
           ${hasLeftRail ? `
@@ -132,7 +132,12 @@ export const layouts = () => {
         ` : ''}
         </AposModal>
       </div>
-      `
+    `,
+    methods: {
+      log(target) {
+        console.log(`Return to ${target}`);
+      }
+    }
   };
 };
 
@@ -170,17 +175,20 @@ export const fullScreen = () => ({
           <AposButton modifier="primary" @click="startExit" label="Save Page" />
         </template>
         <template #breadcrumbs>
-          <AposBreadcrumb :items="breadcrumbs" />
+          <AposBreadcrumb :items="breadcrumbs" @return-to="log" />
         </template>
       </AposModal>
     </div>
-    `,
+  `,
   methods: {
     startEnter: function () {
       this.modal.active = true;
     },
     startExit: function () {
       this.modal.showModal = false;
+    },
+    log(target) {
+      console.log(`Return to ${target}`);
     }
   }
 });
@@ -225,7 +233,7 @@ export const slideOut = () => ({
           <AposButton modifier="primary" @click="startExit" label="Save Page" />
         </template>
         <template #breadcrumbs>
-          <AposBreadcrumb :items="breadcrumbs" />
+          <AposBreadcrumb :items="breadcrumbs" @return-to="log" />
         </template>
         <template #main>
         <AposModalBody>
@@ -239,13 +247,16 @@ export const slideOut = () => ({
       </template>
       </AposModal>
     </div>
-    `,
+  `,
   methods: {
     startEnter: function () {
       this.modal.active = true;
     },
     startExit: function () {
       this.modal.showModal = false;
+    },
+    log(target) {
+      console.log(`Return to ${target}`);
     }
   }
 });

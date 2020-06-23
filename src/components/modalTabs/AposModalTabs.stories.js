@@ -18,11 +18,11 @@ export default {
 
 const breadcrumbs = [
   {
-    href: '#',
+    target: 'pages-manager',
     label: 'Manage pages'
   },
   {
-    href: '#',
+    target: 'another-step',
     label: 'Another step'
   },
   {
@@ -86,7 +86,7 @@ export const tabs = () => {
             <AposButton type="primary" label="Save Page" />
           </template>
           <template #breadcrumbs>
-            <AposBreadcrumb :items="breadcrumbs" />
+            <AposBreadcrumb :items="breadcrumbs" @return-to="log" />
           </template>
           <template #leftRail>
             <AposModalRail>
@@ -109,6 +109,11 @@ export const tabs = () => {
           </template>
         </AposModal>
       </div>
-      `
+    `,
+    methods: {
+      log(target) {
+        console.log(`Return to ${target}`);
+      }
+    }
   };
 };

@@ -1,9 +1,22 @@
 <template>
   <nav :class="['apos-breadcrumb', classObj]" aria-label="breadcrumb">
     <ol class="apos-breadcrumb__items">
-      <li v-for="(item, index) in items" :key="index" :class="`apos-breadcrumb__item ${modifier}`">
-        <component :is="item.href ? 'a' : 'span'" :href="item.href">{{ item.label }}</component>
-        <ChevronRightIcon class="apos-breadcrumb__chevron" :size="13" v-if="index !== last" />
+      <li
+        v-for="(item, index) in items" :key="index"
+        :class="`apos-breadcrumb__item ${modifier}`"
+      >
+        <component
+          :is="item.target ? 'button' : 'span'" :data-apos-target="item.target"
+          :type="item.target ? 'button' : null"
+          :aria-label="item.target ? `Return to ${item.label}` : null"
+          @click="item.target ? $emit('return-to', item.target) : null"
+        >
+          {{ item.label }}
+        </component>
+        <ChevronRightIcon
+          class="apos-breadcrumb__chevron" :size="13"
+          v-if="index !== last"
+        />
       </li>
     </ol>
   </nav>
@@ -69,13 +82,20 @@ export default {
     letter-spacing: 0.75px;
     font-size: map-get($font-sizes, meta);
     color: var(--a-text-primary);
-    a {
+
+    button {
+      @include apos-button-reset();
       @include link-primary;
+      letter-spacing: inherit;
       text-decoration: none;
 
       .apos-breadcrumb--dark & {
         color: inherit;
       }
+    }
+
+    a:focus {
+      text-decoration: underline;
     }
   }
   .apos-breadcrumb__chevron {
