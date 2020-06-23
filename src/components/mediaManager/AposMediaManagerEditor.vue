@@ -2,26 +2,49 @@
   <div class="apos-media-manager-editor">
     <div class="apos-media-manager-editor__inner" v-if="media">
       <div class="apos-media-manager-editor__thumb-wrapper">
-        <img class="apos-media-manager-editor__thumb" :src="media.path" alt="">
+        <img
+          class="apos-media-manager-editor__thumb"
+          :src="media.path" alt=""
+        >
       </div>
       <ul class="apos-media-manager-editor__details">
-        <li class="apos-media-manager-editor__detail">{{ media.uploadedAt }}</li>
-        <li class="apos-media-manager-editor__detail">File Size: {{ media.fileSize }}</li>
-        <li class="apos-media-manager-editor__detail">{{ media.dim }}</li>
+        <li class="apos-media-manager-editor__detail">
+          {{ media.uploadedAt }}
+        </li>
+        <li class="apos-media-manager-editor__detail">
+          File Size: {{ media.fileSize }}
+        </li>
+        <li class="apos-media-manager-editor__detail">
+          {{ media.dim }}
+        </li>
       </ul>
       <AposStringInput
-        v-for="input in inputs" :field="input.field" :status="input.status" :value="input.value"
+        v-for="input in inputs" :field="input.field"
+        :status="input.status" :value="input.value"
         :key="input.field.name" :modifiers="['small', 'inverted']"
       />
       <AposBooleanInput
-        :field="published.field" :status="published.status" :value="published.value"
+        :field="published.field" :status="published.status"
+        :value="published.value"
         :modifiers="['small', 'inverted']"
       />
     </div>
     <AposModalLip :refresh="lipKey">
-      <div class="apos-media-manager-editor__lip" :class="{'apos-media-manager-editor__lip--two-controls': selected.length > 1}">
-        <AposButton @click="$emit('back')" v-if="selected.length > 1" class="apos-media-manager-editor__back" type="outline" label="Back" />
-        <AposButton @click="save" class="apos-media-manager-editor__save" label="Save" type="primary" />
+      <div
+        class="apos-media-manager-editor__lip"
+        :class="{
+          'apos-media-manager-editor__lip--two-controls': selected.length > 1
+        }"
+      >
+        <AposButton
+          @click="$emit('back')" v-if="selected.length > 1"
+          class="apos-media-manager-editor__back" type="outline"
+          label="Back"
+        />
+        <AposButton
+          @click="save" class="apos-media-manager-editor__save"
+          label="Save" type="primary"
+        />
       </div>
     </AposModalLip>
   </div>

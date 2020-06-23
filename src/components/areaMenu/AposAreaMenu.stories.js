@@ -1,4 +1,4 @@
-import { 
+import {
   withKnobs,
   boolean
 } from '@storybook/addon-knobs';

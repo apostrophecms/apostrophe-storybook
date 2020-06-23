@@ -1,11 +1,14 @@
 <template>
   <label
-    class="apos-choice-label" :for="id" :tabindex="{'-1' : field.hideLabel}"
+    class="apos-choice-label" :for="id"
+    :tabindex="{'-1' : field.hideLabel}"
   >
     <input
       type="checkbox" class="apos-sr-only apos-input--choice apos-input--checkbox"
-      :value="choice.value" :name="field.name" :id="id" :aria-label="choice.label" :tabindex="tabindex"
-      :disabled="status.disabled" v-on="{ 'click': status.readOnly ? readOnly : toggle }" :checked="isChecked"
+      :value="choice.value" :name="field.name"
+      :id="id" :aria-label="choice.label"
+      :tabindex="tabindex" :disabled="status.disabled"
+      v-on="{ 'click': status.readOnly ? readOnly : toggle }" :checked="isChecked"
     >
     <span class="apos-input-indicator" aria-hidden="true">
       <component
@@ -15,7 +18,12 @@
         :size="10" v-if="isChecked"
       />
     </span>
-    <span :class="{'apos-sr-only': field.hideLabel }" v-if="choice.label" class="apos-choice-label-text">{{ choice.label }}</span>
+    <span
+      :class="{'apos-sr-only': field.hideLabel }" v-if="choice.label"
+      class="apos-choice-label-text"
+    >
+      {{ choice.label }}
+    </span>
   </label>
 </template>
 

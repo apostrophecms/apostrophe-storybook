@@ -1,17 +1,29 @@
 <template>
   <AposModalToolbar class-name="apos-media-manager-toolbar">
     <template #leftControls>
-      <AposButton label="Select" :icon-only="true" :icon="checkboxIcon" type="outline" @click="$emit('select-click')" />
+      <AposButton
+        label="Select" :icon-only="true"
+        :icon="checkboxIcon" type="outline"
+        @click="$emit('select-click')"
+      />
       <AposTagApply :tags="applyTags" :apply-to="[]" />
       <!-- TODO trash component needs to be worked out with confirm, maybe separate into its own component -->
-      <AposButton label="Delete" @click="$emit('trash-click')" :icon-only="true" icon="Delete" type="outline" />
-      <AposContextMenu :button="more.button" :menu="more.menu" tip-alignment="right" />
+      <AposButton
+        label="Delete" @click="$emit('trash-click')"
+        :icon-only="true" icon="Delete"
+        type="outline"
+      />
+      <AposContextMenu
+        :button="more.button" :menu="more.menu"
+        tip-alignment="right"
+      />
     </template>
     <template #rightControls>
       <AposFilterMenu :menu="filterFields" @input="filter" />
       <AposStringInput
         @input="search" :field="searchField.field"
-        :status="searchField.status" :value="searchField.value" :modifiers="['small']"
+        :status="searchField.status" :value="searchField.value"
+        :modifiers="['small']"
       />
     </template>
   </AposModalToolbar>

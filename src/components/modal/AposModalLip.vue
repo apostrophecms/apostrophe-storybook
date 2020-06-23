@@ -1,4 +1,6 @@
 <template>
+  <!-- Disabling since the SVG is mostly not active vue template code. -->
+  <!-- eslint-disable vue/max-attributes-per-line -->
   <div class="apos-modal-lip" ref="lip">
     <div class="apos-modal-lip__shadow">
       <svg width="406px" height="56px" viewBox="0 0 406 56" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -11,7 +13,10 @@
             <feOffset dx="0" dy="0" in="shadowSpreadOuter1" result="shadowOffsetOuter1" />
             <feGaussianBlur stdDeviation="6.5" in="shadowOffsetOuter1" result="shadowBlurOuter1" />
             <feComposite in="shadowBlurOuter1" in2="SourceAlpha" operator="out" result="shadowBlurOuter1" />
-            <feColorMatrix :values="shadow" type="matrix" in="shadowBlurOuter1" />
+            <feColorMatrix
+              :values="shadow"
+              type="matrix" in="shadowBlurOuter1"
+            />
           </filter>
         </defs>
         <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -28,6 +33,7 @@
         </g>
       </svg>
     </div>
+    <!-- eslint-enable vue/max-attributes-per-line -->
     <div class="apos-modal-lip__content">
       <slot><!-- TODO: some default here --></slot>
     </div>

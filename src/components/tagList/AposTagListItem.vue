@@ -1,11 +1,25 @@
 <template>
   <li class="apos-tag-list__item">
-    <button :class="{'is-active' : active}" class="apos-tag-list__button" @click="click(tag)">
-      <transition name="slide-fade" mode="out-in" duration="100">
-        <Close v-if="active" class="apos-tag-list__icon apos-tag-list__icon--remove" :size="13" />
-        <Tag v-else class="apos-tag-list__icon apos-tag-list__icon--tag" :size="13" />
+    <button
+      :class="{'is-active' : active}" class="apos-tag-list__button"
+      @click="click(tag)"
+    >
+      <transition
+        name="slide-fade" mode="out-in"
+        duration="100"
+      >
+        <Close
+          v-if="active" class="apos-tag-list__icon apos-tag-list__icon--remove"
+          :size="13"
+        />
+        <Tag
+          v-else class="apos-tag-list__icon apos-tag-list__icon--tag"
+          :size="13"
+        />
       </transition>
-      <span class="apos-tag-list__label">{{ tag.label }}</span>
+      <span class="apos-tag-list__label">
+        {{ tag.label }}
+      </span>
     </button>
   </li>
 </template>

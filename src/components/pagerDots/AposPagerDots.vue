@@ -1,14 +1,19 @@
 
 <template>
   <ul class="apos-pager-dots">
-    <li class="apos-pager-dots__item" v-for="i in dots" :key="i">
+    <li
+      class="apos-pager-dots__item" v-for="i in dots"
+      :key="i"
+    >
       <button
         role="button"
         :class="{'is-active': i === index }"
         class="apos-pager-dots__button"
         @click="click(i)"
       >
-        <span class="apos-sr-only">Activate item {{ i }}</span>
+        <span class="apos-sr-only">
+          Activate item {{ i }}
+        </span>
       </button>
     </li>
   </ul>

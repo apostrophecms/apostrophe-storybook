@@ -12,21 +12,25 @@
             <dt>
               <button
                 :for="item.label" class="apos-area-menu__group-label"
-                v-if="item.items" tabindex="0" :id="menuId + '-trigger-' + index"
+                v-if="item.items" tabindex="0"
+                :id="menuId + '-trigger-' + index"
                 :aria-controls="menuId + '-group-' + index"
                 @focus="groupFocused"
                 @blur="groupBlurred"
                 @click="toggleGroup(index)"
-                @keydown.prevent.32="toggleGroup(index)"
-                @keydown.prevent.13="toggleGroup(index)"
-                @keydown.prevent.40="switchGroup(index, 1)"
-                @keydown.prevent.38="switchGroup(index, -1)"
-                @keydown.prevent.36="switchGroup(index, 0)"
-                @keydown.prevent.35="switchGroup(index, null)"
+                @keydown.prevent.space="toggleGroup(index)"
+                @keydown.prevent.enter="toggleGroup(index)"
+                @keydown.prevent.arrow-down="switchGroup(index, 1)"
+                @keydown.prevent.arrow-up="switchGroup(index, -1)"
+                @keydown.prevent.home="switchGroup(index, 0)"
+                @keydown.prevent.end="switchGroup(index, null)"
                 ref="groupButton"
               >
                 <span>{{ item.label }}</span>
-                <Chevron class="apos-area-menu__group-chevron" :class="{'is-active': index === active}" :size="13" />
+                <Chevron
+                  class="apos-area-menu__group-chevron"
+                  :class="{'is-active': index === active}" :size="13"
+                />
               </button>
             </dt>
             <dd class="apos-area-menu__group-list" role="region">
@@ -142,6 +146,7 @@ export default {
     },
 
     toggleGroup(index) {
+      console.log(index);
       if (this.active !== index) {
         this.active = index;
       } else {

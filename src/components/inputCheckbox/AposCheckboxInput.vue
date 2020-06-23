@@ -1,5 +1,8 @@
 <template>
-  <AposInputWrapper :field="field" :error="status.error" :uid="uid">
+  <AposInputWrapper
+    :field="field" :error="status.error"
+    :uid="uid"
+  >
     <template #body>
       <AposCheckbox
         :for="getChoiceId(uid, choice.value)"

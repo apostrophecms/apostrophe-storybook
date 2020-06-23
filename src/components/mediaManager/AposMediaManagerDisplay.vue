@@ -37,8 +37,11 @@
           @click.shift="$emit('select-series', item.id)"
           @click.meta="$emit('select-another', item.id)"
         >
-          <!-- TODO make sure using TITLE is the correct alt tag application here. -->
-          <img class="apos-media-manager-display__media" :src="item.path" :alt="item.title">
+          <!-- TODO: make sure using TITLE is the correct alt tag application here. -->
+          <img
+            class="apos-media-manager-display__media"
+            :src="item.path" :alt="item.title"
+          >
         </button>
       </div>
     </div>

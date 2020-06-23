@@ -1,5 +1,7 @@
 <template>
   <div class="apos-loading">
+    <!-- Disabling since the SVG is mostly not active vue template code. -->
+    <!-- eslint-disable vue/max-attributes-per-line -->
     <svg viewBox="0 0 70 20">
       <defs>
         <linearGradient
@@ -48,6 +50,7 @@
         </circle>
       </g>
     </svg>
+    <!-- eslint-enable vue/max-attributes-per-line -->
   </div>
 </template>
 

@@ -1,8 +1,14 @@
 <template>
-  <AposInputWrapper :field="field" :error="status.error" :uid="uid">
+  <AposInputWrapper
+    :field="field" :error="status.error"
+    :uid="uid"
+  >
     <template #body>
       <div class="apos-input-wrapper">
-        <select class="apos-input apos-input--select" :id="uid" v-model="next">
+        <select
+          class="apos-input apos-input--select" :id="uid"
+          v-model="next"
+        >
           <option
             v-for="choice in field.choices" :key="choice.value"
             :value="choice.value"

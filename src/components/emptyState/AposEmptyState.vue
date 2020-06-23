@@ -1,8 +1,14 @@
 <template>
   <div class="apos-empty-state">
-    <p class="o-heading apos-title" v-if="emptyState.title">{{ emptyState.title }}</p>
-    <p class="apos-hint" v-if="emptyState.message">{{ emptyState.message }}</p>
-    <div class="apos-emoji" v-if="emptyState.emoji">{{ emptyState.emoji }}</div>
+    <p class="o-heading apos-title" v-if="emptyState.title">
+      {{ emptyState.title }}
+    </p>
+    <p class="apos-hint" v-if="emptyState.message">
+      {{ emptyState.message }}
+    </p>
+    <div class="apos-emoji" v-if="emptyState.emoji">
+      {{ emptyState.emoji }}
+    </div>
   </div>
 </template>
 

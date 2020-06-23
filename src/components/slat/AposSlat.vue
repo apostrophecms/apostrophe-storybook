@@ -23,7 +23,10 @@
         </div>
       </div>
       <div class="apos-slat__secondary">
-        <Remove @click="remove" class="apos-slat__control apos-slat__control--remove" :size="13" />
+        <Remove
+          @click="remove" class="apos-slat__control apos-slat__control--remove"
+          :size="13"
+        />
       </div>
     </li>
   </transition>

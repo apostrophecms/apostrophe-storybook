@@ -1,5 +1,7 @@
 <template>
   <div class="apos-spinner">
+    <!-- Disabling since the SVG is mostly not active vue template code. -->
+    <!-- eslint-disable vue/max-attributes-per-line -->
     <svg
       xmlns="http://www.w3.org/2000/svg"
       class="apos-spinner__svg"
@@ -26,6 +28,7 @@
         </g>
       </g>
     </svg>
+    <!-- eslint-enable vue/max-attributes-per-line -->
   </div>
 </template>
 

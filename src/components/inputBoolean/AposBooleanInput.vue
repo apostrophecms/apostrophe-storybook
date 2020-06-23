@@ -1,5 +1,8 @@
 <template>
-  <AposInputWrapper :modifiers="modifiers" :field="field" :error="status.error" :uid="uid">
+  <AposInputWrapper
+    :modifiers="modifiers" :field="field"
+    :error="status.error" :uid="uid"
+  >
     <template #body>
       <div :class="classList">
         <input

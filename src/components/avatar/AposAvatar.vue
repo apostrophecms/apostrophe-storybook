@@ -1,6 +1,9 @@
 
 <template>
-  <img :src="src" class="apos-avatar" :style="{ width: size }" :alt=alt>
+  <img
+    :src="src" class="apos-avatar"
+    :style="{ width: size }" :alt="alt"
+  >
 </template>
 
 <script>
@@ -12,9 +15,13 @@ export default {
       required: true
     },
     size: {
-      type: [String],
+      type: String,
+      default: null
     },
-    alt: String
+    alt: {
+      type: String,
+      default: ""
+    }
   }
 };
 </script>
