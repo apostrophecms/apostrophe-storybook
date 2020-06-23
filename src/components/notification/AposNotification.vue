@@ -71,9 +71,9 @@ export default {
     },
     iconComponent () {
       if (this.icon) {
-        return () => import(`vue-material-design-icons/${this.icon}.vue`);
+        return this.icon;
       } else {
-        return () => import(`vue-material-design-icons/Circle.vue`);
+        return 'circle-icon';
       }
     },
     progressPercent () {

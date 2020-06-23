@@ -1,14 +1,14 @@
 <template>
-  <button @click="click" class="apos-area-menu__button" :data-action="item.action" 
+  <button @click="click" class="apos-area-menu__button" :data-action="item.action"
     v-bind:tabindex="String(tabindex)"
     @keydown.prevent.40="$emit('down')"
     @keydown.prevent.38="$emit('up')"
   >
-    <component 
+    <component
       v-if="item.icon"
       :size="15"
       class="apos-area-menu__item-icon"
-      v-bind:is="icon"
+      :is="item.icon"
     ></component>
     {{ item.label }}
   </button>
@@ -29,11 +29,6 @@ export default {
   },
 
   computed: {
-    icon() {
-      if (this.item.icon) {
-        return () => import(`vue-material-design-icons/${this.item.icon}.vue`);  
-      }
-    },
     tabindex() {
       if (this.tabbable) {
         return 0;

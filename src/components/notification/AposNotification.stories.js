@@ -36,14 +36,14 @@ export const notifications = () => ({
         select(
           'Icon', {
             None: null,
-            Label: 'Label',
-            Alert: 'AlertCircle',
-            Refresh: 'Refresh',
-            Delete: 'Delete',
-            'Double Check': 'CheckAll',
-            'Check': 'CheckBold',
-            'X': 'Close',
-            'Empty Checkbox': 'CheckboxBlankOutline'
+            Label: 'label-icon',
+            Alert: 'alert-circle-icon',
+            Refresh: 'refresh-icon',
+            Delete: 'delete-icon',
+            'Double Check': 'check-all-icon',
+            'Check': 'check-bold-icon',
+            'X': 'close-icon',
+            'Empty Checkbox': 'checkbox-blank-icon'
           },
           null
         )

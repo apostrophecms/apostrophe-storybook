@@ -5,7 +5,8 @@
     <AposSpinner :color="spinnerColor" />
     <div class="apos-button__content">
       <component
-        :size="15" class="apos-button__icon" v-if="icon" v-bind:is="iconComponent" :fillColor="iconColor"
+        :size="15" class="apos-button__icon"
+        v-if="icon" :is="icon" :fillColor="iconColor"
       />
       <span class="apos-button__label" :class="{ 'apos-sr-only' : iconOnly }">
         {{ label }}
@@ -80,11 +81,6 @@ export default {
         return modifiers.join(' ');
       } else {
         return false;
-      }
-    },
-    iconComponent () {
-      if (this.icon) {
-        return () => import(`vue-material-design-icons/${this.icon}.vue`);
       }
     },
     spinnerColor () {

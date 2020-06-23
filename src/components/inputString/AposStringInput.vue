@@ -11,10 +11,10 @@
           v-model="next" :type="type" :placeholder=field.placeholder @keydown.13="$emit('return')"
           :disabled="status.disabled" :required="field.required" :id="uid" :tabindex="tabindex">
         <component
-          v-if="iconComponent"
+          v-if="icon"
           :size="iconSize"
           class="apos-input-icon"
-          v-bind:is="iconComponent"
+          :is="icon"
         ></component>
       </div>
     </template>
@@ -47,20 +47,18 @@ export default {
       classes.push(`apos-input--${this.type}`);
       return classes;
     },
-    iconComponent () {
-      if (this.field.type === 'date') {
-        return () => import(`vue-material-design-icons/Calendar.vue`);
-      }
-      if (this.field.type === 'time') {
-        return () => import(`vue-material-design-icons/Clock.vue`);
-      }
-      if (this.field.icon) {
-        return () => import(`vue-material-design-icons/${this.field.icon}.vue`);
-      }
+    icon () {
       if (this.status.error) {
-        return () => import(`vue-material-design-icons/CircleMedium.vue`);
+        return 'circle-medium-icon';
+      } else if (this.field.type === 'date') {
+        return 'calendar-icon';
+      } else if (this.field.type === 'time') {
+        return 'clock-icon';
+      } else if (this.field.icon) {
+        return this.field.icon;
+      } else {
+        return null;
       }
-      return false;
     }
   },
   methods: {

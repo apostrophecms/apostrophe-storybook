@@ -67,7 +67,7 @@ export default {
         return {
           label: 'Context Menu Label',
           iconOnly: true,
-          icon: 'Label',
+          icon: 'label-icon',
           type: 'outline'
         };
       }

@@ -24,10 +24,10 @@ export const stringInputs = () => {
   const icon = select(
     'Icon', {
       None: null,
-      Calendar: 'Calendar',
-      Search: 'Magnify',
-      Time: 'Clock',
-      Phone: 'Phone'
+      Calendar: 'calendar-icon',
+      Search: 'magnify-icon',
+      Time: 'clock-icon',
+      Phone: 'phone-icon'
     },
     null
   );

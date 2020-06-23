@@ -54,10 +54,10 @@ export const buttons = () => ({
         select(
           'Icon', {
             None: null,
-            Label: 'Label',
-            Menu: 'DotsVertical',
-            Delete: 'Delete',
-            'Empty Checkbox': 'CheckboxBlankOutline'
+            Label: 'label-icon',
+            Menu: 'dots-vertical-icon',
+            Delete: 'delete-icon',
+            'Empty Checkbox': 'checkbox-blank-icon'
           },
           null
         )

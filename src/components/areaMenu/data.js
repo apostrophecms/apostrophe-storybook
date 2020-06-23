@@ -6,22 +6,22 @@ export default {
         {
           label: 'Two Column',
           action: 'add-two-column',
-          icon: 'ViewColumn'
+          icon: 'view-column-icon'
         },
         {
           label: 'Three Column',
           action: 'add-three-column',
-          icon: 'ViewColumn'
+          icon: 'view-column-icon'
         },
         {
           label: 'Two Thirds',
           action: 'add-two-thirds',
-          icon: 'ViewColumn'
+          icon: 'view-column-icon'
         },
         {
           label: 'Quarter',
           action: 'add-quarters',
-          icon: 'ViewColumn'
+          icon: 'view-column-icon'
         }
       ]
     },
@@ -31,65 +31,65 @@ export default {
         {
           label: 'Marquee',
           action: 'add-marquee',
-          icon: 'ImageSizeSelectActual'
+          icon: 'image-size-select-actual-icon'
         },
         {
           label: 'Image',
           action: 'add-image',
-          icon: 'Image'
+          icon: 'image-icon'
         },
         {
           label: 'Video',
           action: 'add-video',
-          icon: 'Video'
+          icon: 'video-icon'
         },
         {
           label: 'Instagram Feed',
           action: 'add-insta-feed',
-          icon: 'Instagram'
+          icon: 'instagram-icon'
         },
         {
           label: 'Cool API Thing',
           action: 'add-api-thing',
-          icon: 'Web'
+          icon: 'web-icon'
         }
       ]
     },
     {
       label: 'Two Column',
       action: 'add-two-column',
-      icon: 'ViewColumn'
+      icon: 'view-column-icon'
     },
     {
       label: 'Three Column',
       action: 'add-three-column',
-      icon: 'ViewColumn'
+      icon: 'view-column-icon'
     },
     {
       label: 'Marquee',
       action: 'add-marquee',
-      icon: 'ImageSizeSelectActual'
+      icon: 'image-size-select-actual-icon'
     },
     {
       label: 'Image',
       action: 'add-image',
-      icon: 'Image'
+      icon: 'image-icon'
     },
     {
       label: 'Video',
       action: 'add-video',
-      icon: 'Video'
+      icon: 'video-icon'
     },
     {
       label: 'Instagram Feed',
       action: 'add-insta-feed',
-      icon: 'Instagram'
+      icon: 'instagram-icon'
 
     },
     {
       label: 'Cool API Thing',
       action: 'add-api-thing',
-      icon: 'Web'
+      icon: 'web-icon'
     }
   ]
 };
