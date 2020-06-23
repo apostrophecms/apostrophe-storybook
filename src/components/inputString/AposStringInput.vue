@@ -1,21 +1,32 @@
 <template>
-  <AposInputWrapper :modifiers="modifiers" :field="field" :error="status.error" :uid="uid" >
-    <template slot="body">
+  <AposInputWrapper
+    :modifiers="modifiers" :field="field"
+    :error="status.error" :uid="uid"
+  >
+    <template #body>
       <div class="apos-input-wrapper">
-        <textarea :class="classes"
+        <textarea
+          :class="classes"
           v-if="field.textarea" rows="5"
-          v-model="next" :placeholder=field.placeholder @keydown.13="$emit('return')"
-          :disabled="status.disabled" :required="field.required" :id="uid" :tabindex="tabindex"
-          ></textarea>
-        <input :class="classes" v-else
-          v-model="next" :type="type" :placeholder=field.placeholder @keydown.13="$emit('return')"
-          :disabled="status.disabled" :required="field.required" :id="uid" :tabindex="tabindex">
+          v-model="next" :placeholder="field.placeholder"
+          @keydown.enter="$emit('return')"
+          :disabled="status.disabled" :required="field.required"
+          :id="uid" :tabindex="tabindex"
+        />
+        <input
+          v-else :class="classes"
+          v-model="next" :type="type"
+          :placeholder="field.placeholder"
+          @keydown.enter="$emit('return')"
+          :disabled="status.disabled" :required="field.required"
+          :id="uid" :tabindex="tabindex"
+        >
         <component
           v-if="icon"
           :size="iconSize"
           class="apos-input-icon"
           :is="icon"
-        ></component>
+        />
       </div>
     </template>
   </AposInputWrapper>
@@ -26,11 +37,11 @@ import AposInputWrapper from '../AposInputWrapper';
 import AposInputMixin from '../../mixins/AposInputMixin.js';
 
 export default {
+  name: 'AposStringInput',
   components: {
     AposInputWrapper
   },
   mixins: [ AposInputMixin ],
-  name: 'AposStringInput',
   computed: {
     tabindex () {
       return this.field.disableFocus ? '-1' : '0';

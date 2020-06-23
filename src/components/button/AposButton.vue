@@ -1,12 +1,16 @@
 <template>
-  <button type="button" @click="click" class="apos-button"
-    :class="modifierClass" v-bind:busy="busy" v-bind:disabled="isDisabled" :tabindex="tabindex"
+  <button
+    type="button" @click="click"
+    class="apos-button"
+    :class="modifierClass" :tabindex="tabindex"
+    :busy="busy" :disabled="isDisabled"
   >
     <AposSpinner :color="spinnerColor" />
     <div class="apos-button__content">
       <component
         :size="15" class="apos-button__icon"
-        v-if="icon" :is="icon" :fillColor="iconColor"
+        v-if="icon" :is="icon"
+        fill-color="currentColor"
       />
       <span class="apos-button__label" :class="{ 'apos-sr-only' : iconOnly }">
         {{ label }}
@@ -28,23 +32,39 @@ export default {
       required: true,
       type: String
     },
-    modifiers: Array,
+    modifiers: {
+      type: Array,
+      default() {
+        return [];
+      }
+    },
     disabled: Boolean,
     busy: Boolean,
-    icon: String,
-    type: String,
+    icon: {
+      type: String,
+      default: null
+    },
+    type: {
+      type: String,
+      default: null
+    },
     iconOnly: Boolean,
     iconColor: {
       type: String,
       default: ''
     },
-    state: Array,
+    state: {
+      type: Array,
+      default() {
+        return [];
+      }
+    },
     disableFocus: Boolean
   },
   data() {
     return {
       contextMenuOpen: true
-    }
+    };
   },
   computed: {
     tabindex() {
@@ -93,9 +113,11 @@ export default {
       if (this.type === 'outline') {
         return '--a-base-5';
       }
+
+      return null;
     },
     isDisabled() {
-      return (this.disabled || this.busy) ? true : false;
+      return (this.disabled || this.busy);
     }
   },
   methods: {
@@ -103,7 +125,7 @@ export default {
       this.$emit('click');
     }
   }
-}
+};
 </script>
 
 <style lang="scss">

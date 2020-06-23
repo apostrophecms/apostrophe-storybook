@@ -43,7 +43,11 @@ module.exports = {
   },
   computed: {
     style () {
-      return `color: var(${this.color});`;
+      if (this.color) {
+        return `color: var(${this.color});`;
+      }
+
+      return `color: var(--a-primary);`;
     }
   }
 };

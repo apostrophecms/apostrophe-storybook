@@ -1,15 +1,17 @@
 <template>
-  <button @click="click" class="apos-area-menu__button" :data-action="item.action"
-    v-bind:tabindex="String(tabindex)"
-    @keydown.prevent.40="$emit('down')"
-    @keydown.prevent.38="$emit('up')"
+  <button
+    @click="click" class="apos-area-menu__button"
+    :data-action="item.action"
+    :tabindex="String(tabindex)"
+    @keydown.prevent.arrow-down="$emit('down')"
+    @keydown.prevent.arrow-up="$emit('up')"
   >
     <component
       v-if="item.icon"
       :size="15"
       class="apos-area-menu__item-icon"
       :is="item.icon"
-    ></component>
+    />
     {{ item.label }}
   </button>
 </template>
@@ -43,7 +45,7 @@ export default {
       this.$emit('click');
     }
   }
-}
+};
 </script>
 
 <style lang="scss" scoped>

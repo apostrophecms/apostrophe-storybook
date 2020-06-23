@@ -7,8 +7,11 @@
         :size="icon ? 16 : 12"
       />
     </span>
-    <span class="apos-notification__label">{{ label }}</span>
-    <div class="apos-notification__progress"
+    <span class="apos-notification__label">
+      {{ label }}
+    </span>
+    <div
+      class="apos-notification__progress"
       v-if="progress && progress.current"
     >
       <div class="apos-notification__progress-bar">
@@ -59,7 +62,7 @@ export default {
   computed: {
     classList() {
       const classes = ['apos-notification'];
-      if (this.type && this.type!== 'none') {
+      if (this.type && this.type !== 'none') {
         classes.push(`apos-notification--${this.type}`);
       }
 
