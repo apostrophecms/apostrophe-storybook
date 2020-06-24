@@ -146,7 +146,6 @@ export default {
     },
 
     toggleGroup(index) {
-      console.log(index);
       if (this.active !== index) {
         this.active = index;
       } else {
