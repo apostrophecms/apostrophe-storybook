@@ -7,12 +7,12 @@
       <div :class="classList">
         <input
           class="apos-sr-only"
-          type="checkbox" :id="uid + '-true'"
+          type="checkbox" :id="`${uid}-true`"
           :value="true" @change="setValue(true)"
           :checked="value.data === true"
           ref="true"
         >
-        <label :for="uid + '-true'" class="apos-boolean__label apos-input">
+        <label :for="`${uid}-true`" class="apos-boolean__label apos-input">
           <CircleIcon
             :size="12" class="apos-boolean__icon"
             title="" v-show="!field.toggle"
@@ -21,12 +21,12 @@
         </label>
         <input
           class="apos-sr-only apos-boolean__input--false"
-          type="checkbox" :id="uid + '-false'"
+          type="checkbox" :id="`${uid}-false`"
           :value="false" @change="setValue(false)"
           :checked="value.data === false"
           ref="false"
         >
-        <label :for="uid + '-false'" class="apos-boolean__label apos-input">
+        <label :for="`${uid}-false`" class="apos-boolean__label apos-input">
           <CircleIcon
             :size="12" class="apos-boolean__icon"
             title="" v-show="!field.toggle"

@@ -51,6 +51,7 @@
         ]
       }
     ],
+    "vue/prefer-template": 1,
     "vue/attributes-order": 0
   }
 }

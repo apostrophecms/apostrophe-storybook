@@ -6,15 +6,15 @@
           class="apos-area-menu__item"
           v-for="(item, index) in myMenu" :key="item.label"
           :class="{'has-group': item.items}"
-          :ref="'item-' + index"
+          :ref="`item-${index}`"
         >
           <dl v-if="item.items" class="apos-area-menu__group">
             <dt>
               <button
                 :for="item.label" class="apos-area-menu__group-label"
                 v-if="item.items" tabindex="0"
-                :id="menuId + '-trigger-' + index"
-                :aria-controls="menuId + '-group-' + index"
+                :id="`${menuId}-trigger-${index}`"
+                :aria-controls="`${menuId}-group-${index}`"
                 @focus="groupFocused"
                 @blur="groupBlurred"
                 @click="toggleGroup(index)"
@@ -37,22 +37,22 @@
               <ul
                 class="apos-area-menu__items apos-area-menu__items--accordion"
                 :class="{'is-active': active === index}"
-                :id="menuId + '-group-' + index"
-                :aria-labelledby="menuId + '-trigger-' + index"
+                :id="`${menuId}-group-${index}`"
+                :aria-labelledby="`${menuId}-trigger-${index}`"
                 :aria-expanded="active === index ? 'true' : 'false'"
               >
                 <li
                   class="apos-area-menu__item"
                   v-for="(child, childIndex) in item.items"
                   :key="child.action"
-                  :ref="'child-' + index + '-' + childIndex"
+                  :ref="`child-${index}-${childIndex}`"
                 >
                   <AposAreaMenuItem
                     @click="clicked(child)"
                     :item="child"
                     :tabbable="index === active"
-                    @up="switchItem('child-' + index + '-' + (childIndex - 1), -1)"
-                    @down="switchItem('child-' + index + '-' + (childIndex + 1), 1)"
+                    @up="switchItem(`child-${index}-${childIndex - 1}`, -1)"
+                    @down="switchItem(`child-${index}-${childIndex + 1}`, 1)"
                   />
                 </li>
               </ul>
@@ -62,8 +62,8 @@
             v-else
             @click="clicked(item)"
             :item="item"
-            @up="switchItem('item-' + (index - 1), -1)"
-            @down="switchItem('item-' + (index + 1), 1)"
+            @up="switchItem(`item-${index - 1}`, -1)"
+            @down="switchItem(`item-${index + 1}`, 1)"
           />
         </li>
       </ul>

@@ -23,7 +23,7 @@
         <ol v-if="searchTags.length && !creating" class="apos-apply-tag-menu__tags">
           <li
             class="apos-apply-tag-menu__tag" v-for="tag in searchTags"
-            :key="keyPrefix + '-' + tag.slug"
+            :key="`${keyPrefix}-${tag.slug}`"
           >
             <AposCheckbox
               :field="checkboxes[tag.slug].field"
@@ -40,7 +40,7 @@
             We couldn't find any matching tags. Perhaps
             <AposButton
               @click="create"
-              :label="'create ' + searchInputValue + '?'"
+              :label="`create ${searchInputValue} ?`"
               type="quiet"
               :disabled="disabledCreate"
               :disable-focus="!open"
