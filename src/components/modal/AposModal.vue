@@ -14,7 +14,8 @@
     >
       <transition :name="transitionType" @after-leave="$emit('inactive')">
         <div
-          class="apos-modal__inner" data-apos-modal-inner v-if="modal.showModal"
+          v-if="modal.showModal"
+          class="apos-modal__inner" data-apos-modal-inner
         >
           <header class="apos-modal__header">
             <div class="apos-modal__header__main">

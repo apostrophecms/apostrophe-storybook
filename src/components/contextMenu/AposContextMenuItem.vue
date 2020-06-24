@@ -14,7 +14,10 @@
 export default {
   name: 'AposContextMenuItem',
   props: {
-    menuItem: Object,
+    menuItem: {
+      type: Object,
+      required: true
+    },
     open: Boolean
   },
   computed: {
@@ -27,7 +30,7 @@ export default {
       this.$emit('clicked', this.menuItem.action);
     }
   }
-}
+};
 </script>
 
 <style lang="scss">

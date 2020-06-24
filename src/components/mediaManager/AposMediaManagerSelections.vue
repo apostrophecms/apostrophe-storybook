@@ -3,16 +3,30 @@
     <div v-if="items.length">
       <p class="apos-media-manager-selections__heading">
         {{ items.length }} items selected
-        <AposButton label="Clear" type="quiet" @click="clear" />
+        <AposButton
+          label="Clear" type="quiet"
+          @click="clear"
+        />
       </p>
       <ol class="apos-media-manager-selections__items">
-        <li v-for="item in items" :key="item.id" class="apos-media-manager-selections__item">
+        <li
+          v-for="item in items"
+          :key="item.id" class="apos-media-manager-selections__item"
+        >
           <div class="apos-media-manager-selections__item-thumb-container">
-            <img :src="item.path" class="apos-media-manager-selections__item-thumb" alt="">
+            <img
+              :src="item.path" alt=""
+              class="apos-media-manager-selections__item-thumb"
+            >
           </div>
           <div class="apos-media-manager-selections__item-info">
-            <div class="apos-media-manager-selections__item-title">{{ item.title }}</div>
-            <AposButton label="Edit" type="quiet" @click="edit(item.id)" />
+            <div class="apos-media-manager-selections__item-title">
+              {{ item.title }}
+            </div>
+            <AposButton
+              label="Edit" type="quiet"
+              @click="edit(item.id)"
+            />
           </div>
         </li>
       </ol>

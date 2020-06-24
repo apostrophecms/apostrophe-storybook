@@ -1,5 +1,10 @@
 <template>
-  <svg :class="[alignmentModifier, originModifier]" class="apos-context-menu__tip" width="27px" height="13px" viewBox="0 0 27 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <!-- Disabling since the SVG is mostly not active vue template code. -->
+  <!-- eslint-disable vue/max-attributes-per-line -->
+  <svg
+    :class="[alignmentModifier, originModifier]"
+    class="apos-context-menu__tip" width="27px" height="13px" viewBox="0 0 27 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+  >
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g transform="translate(-0.375000, 1.312500)">
         <path class="apos-context-menu__tip-outline" d="M17.2842712,1.46446609 L25.748,9.928 L1.749,9.928 L10.2132034,1.46446609 C12.1658249,-0.488155365 15.3316498,-0.488155365 17.2842712,1.46446609 Z" stroke="var(--a-base-8)" />
@@ -7,14 +12,21 @@
       </g>
     </g>
   </svg>
+  <!-- eslint-enable vue/max-attributes-per-line -->
 </template>
 
 <script>
 export default {
   name: 'AposContextMenuTip',
   props: {
-    align: String,
-    origin: String
+    align: {
+      type: String,
+      required: true
+    },
+    origin: {
+      type: String,
+      required: true
+    }
   },
   computed: {
     alignmentModifier () {

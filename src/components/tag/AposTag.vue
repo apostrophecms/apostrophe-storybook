@@ -1,7 +1,10 @@
 <template>
   <div class="apos-tag">
     <button @click="click" class="apos-tag__button">
-      <Close class="apos-tag__remove" title="Remove Tag" :size="10" />
+      <Close
+        class="apos-tag__remove" title="Remove Tag"
+        :size="10"
+      />
     </button>
     {{ label }}
   </div>

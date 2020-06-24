@@ -2,9 +2,11 @@
 <template>
   <div ref="root">
     <draggable
-      class="apos-slat-list" tag="ol" v-model="items" role="list"
-      v-bind="dragOptions" :move="onMove" @start="isDragging=true"
-      @end="isDragging=false" :id="listId"
+      class="apos-slat-list" tag="ol"
+      v-model="items" role="list"
+      v-bind="dragOptions" :move="onMove"
+      @start="isDragging=true" @end="isDragging=false"
+      :id="listId"
     >
       <transition-group type="transition" name="apos-slat-list-transition">
         <AposSlat
@@ -12,7 +14,8 @@
           @engage="engage"
           @disengage="disengage"
           @move="move"
-          v-for="item in items" :key="item.id" :item="item"
+          v-for="item in items" :key="item.id"
+          :item="item"
           :class="{'apos-slat-list__item--disabled' : !editable}"
           :engaged="engaged === item.id"
           :parent="listId"

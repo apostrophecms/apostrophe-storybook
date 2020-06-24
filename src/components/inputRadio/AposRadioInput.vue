@@ -1,5 +1,8 @@
 <template>
-  <AposInputWrapper :field="field" :error="status.error" :uid="uid">
+  <AposInputWrapper
+    :field="field" :error="status.error"
+    :uid="uid"
+  >
     <template #body>
       <label
         class="apos-choice-label" :for="getChoiceId(uid, choice.value)"
@@ -18,7 +21,9 @@
             :size="8" v-if="next === choice.value"
           />
         </span>
-        <span class="apos-choice-label-text">{{ choice.label }}</span>
+        <span class="apos-choice-label-text">
+          {{ choice.label }}
+        </span>
       </label>
     </template>
   </AposInputWrapper>

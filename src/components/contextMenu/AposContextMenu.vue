@@ -1,15 +1,20 @@
 <template>
-  <div class="apos-context-menu" :class="classList" ref="component">
+  <div
+    class="apos-context-menu" :class="classList"
+    ref="component"
+  >
     <!-- TODO refactor buttons to take a single config obj -->
     <AposButton
       @click="buttonClicked" :label="button.label"
       :type="button.type" :icon="button.icon"
-      :icon-only="button.iconOnly" :state="buttonState" ref="button"
+      :icon-only="button.iconOnly" :state="buttonState"
+      ref="button"
       :modifiers="button.modifiers"
     />
     <div
       class="apos-primary-scrollbar apos-context-menu__popup"
-      :class="{'is-visible': open}" ref="popup" :aria-hidden="open ? 'false' : 'true'"
+      :class="{'is-visible': open}" ref="popup"
+      :aria-hidden="open ? 'false' : 'true'"
       role="dialog" :style="position"
     >
       <AposContextMenuTip
@@ -62,7 +67,7 @@ export default {
         return {
           label: 'Context Menu Label',
           iconOnly: true,
-          icon: 'Label',
+          icon: 'label-icon',
           type: 'outline'
         };
       }

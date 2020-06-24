@@ -1,12 +1,17 @@
 <template>
-  <AposInputWrapper :field="field" :error="status.error" :uid="uid">
+  <AposInputWrapper
+    :field="field" :error="status.error"
+    :uid="uid"
+  >
     <template #body>
       <div class="apos-input-wrapper apos-input-join">
         <div class="apos-input-join__input-wrapper">
           <input
             class="apos-input apos-input--text apos-input--join"
-            v-model="next" type="text" :placeholder="field.placeholder"
-            :disabled="status.disabled" :required="field.required" :id="uid"
+            v-model="next" type="text"
+            :placeholder="field.placeholder"
+            :disabled="status.disabled" :required="field.required"
+            :id="uid"
           >
           <AposButton
             :label="field.browseLabel"

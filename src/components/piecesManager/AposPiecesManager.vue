@@ -1,10 +1,14 @@
 <template>
   <AposModal
-    :modal="modal" @esc="cancel" @no-modal="$emit('safe-close')"
+    :modal="modal"
+    @esc="cancel" @no-modal="$emit('safe-close')"
     @inactive="modal.active = false" @show-modal="modal.showModal = true"
   >
     <template #primaryControls>
-      <AposButton type="default" label="Finished" @click="cancel" />
+      <AposButton
+        type="default" label="Finished"
+        @click="cancel"
+      />
     </template>
     <template #main>
       <AposModalBody>
@@ -22,10 +26,13 @@
               <tr>
                 <th class="apos-table__header" />
                 <th
-                  v-for="header in headers" scope="col" class="apos-table__header"
-                  :key="header.label"
+                  v-for="header in headers" scope="col"
+                  class="apos-table__header" :key="header.label"
                 >
-                  <component :is="getEl(header)" @click="sort(header.action)" class="apos-table__header-label">
+                  <component
+                    :is="getEl(header)" @click="sort(header.action)"
+                    class="apos-table__header-label"
+                  >
                     <component
                       v-if="header.icon"
                       :size="iconSize(header)"
@@ -52,11 +59,20 @@
                     @toggle="toggleRowCheck($event, row.id)"
                   />
                 </td>
-                <td class="apos-table__cell" v-for="header in headers" :key="row[header.name]">
-                  <a class="apos-table__link" v-if="header.name === 'url'" :href="row[header.name]">
+                <td
+                  class="apos-table__cell" v-for="header in headers"
+                  :key="row[header.name]"
+                >
+                  <a
+                    v-if="header.name === 'url'" class="apos-table__link"
+                    :href="row[header.name]"
+                  >
                     <LinkIcon :size="12" />
                   </a>
-                  <p v-else class="apos-table__cell-field" :class="`apos-table__cell-field--${header.name}`">
+                  <p
+                    v-else class="apos-table__cell-field"
+                    :class="`apos-table__cell-field--${header.name}`"
+                  >
                     {{ row[header.name] }}
                   </p>
                 </td>

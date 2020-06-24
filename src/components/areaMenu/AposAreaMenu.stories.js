@@ -1,4 +1,4 @@
-import { 
+import {
   withKnobs,
   boolean
 } from '@storybook/addon-knobs';
@@ -35,6 +35,11 @@ export const areaMenu = () => {
     components: {
       AposAreaMenu
     },
-    template: `<AposAreaMenu v-on:click="handler" :menu="menu" />`
+    template: `
+      <AposAreaMenu
+        v-on:click="handler" :menu="menu"
+        style="margin-left: 100px;"
+      />
+    `
   };
 };

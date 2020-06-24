@@ -1,12 +1,20 @@
 <template>
   <component :is="wrapEl" :class="classList">
     <!-- TODO i18n -->
-    <component v-if="field.label" :class="{'apos-sr-only': field.hideLabel }" :is="labelEl" class="apos-field-label" :for="uid">
+    <component
+      v-if="field.label" :class="{'apos-sr-only': field.hideLabel }"
+      class="apos-field-label"
+      :is="labelEl" :for="uid"
+    >
       {{ field.label }}
-      <span v-if="field.required" class="apos-field-required">*</span>
+      <span v-if="field.required" class="apos-field-required">
+        *
+      </span>
     </component>
     <!-- TODO i18n -->
-    <p v-if="field.help" class="apos-field-help">{{ field.help }}</p>
+    <p v-if="field.help" class="apos-field-help">
+      {{ field.help }}
+    </p>
     <slot name="body" />
     <!-- TODO i18n -->
     <div v-if="errorMessage" class="apos-field-error">

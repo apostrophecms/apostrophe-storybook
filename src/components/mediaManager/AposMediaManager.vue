@@ -11,7 +11,10 @@
     @esc="cancel" @no-modal="$emit('safe-close')"
   >
     <template #primaryControls>
-      <AposButton type="default" label="Finished" @click="cancel" />
+      <AposButton
+        type="default" label="Finished"
+        @click="cancel"
+      />
     </template>
     <template #leftRail v-if="!!media.length">
       <AposModalRail>
@@ -30,7 +33,8 @@
         </template>
         <template #bodyMain>
           <AposMediaManagerDisplay
-            v-if="!!myMedia.length" :media="myMedia" ref="display"
+            v-if="!!myMedia.length"
+            :media="myMedia" ref="display"
             @edit="updateEditing"
             @toggle="selectAnother"
             @select="select"
@@ -47,11 +51,13 @@
       <AposModalRail type="right">
         <div class="apos-media-manager__sidebar" :class="{'apos-media-manager__sidebar--empty' : !selected.length}">
           <AposMediaManagerEditor
-            v-show="editing" :media="editing" :selected="selected"
+            v-show="editing"
+            :media="editing" :selected="selected"
             @back="updateEditing(null)" @save="saveMedia"
           />
           <AposMediaManagerSelections
-            :items="selected" @clear="clearSelected" @edit="updateEditing"
+            :items="selected"
+            @clear="clearSelected" @edit="updateEditing"
             v-show="!editing"
           />
         </div>

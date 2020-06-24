@@ -1,12 +1,14 @@
 <template>
   <div class="apos-modal-tabs">
     <ul class="apos-modal-tabs__tabs">
-      <li class="apos-modal-tabs__tab" v-for="tab in tabs"
+      <li
+        class="apos-modal-tabs__tab" v-for="tab in tabs"
         :key="tab.name"
       >
         <button
-          :id="tab.name" class="apos-modal-tabs__btn" @click="selectTab"
+          :id="tab.name" class="apos-modal-tabs__btn"
           :aria-selected="tab.name === currentTab ? true : false"
+          @click="selectTab"
         >
           {{ tab.label }}
         </button>

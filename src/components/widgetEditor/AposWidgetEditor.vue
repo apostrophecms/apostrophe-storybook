@@ -11,14 +11,23 @@
       <AposModalBody>
         <template #bodyMain>
           <div class="apos-widget-editor__body">
-            <AposSchema :schema="schema" :doc="myDoc" @input="update" />
+            <AposSchema
+              :schema="schema" :doc="myDoc"
+              @input="update"
+            />
           </div>
         </template>
       </AposModalBody>
     </template>
     <template #footer>
-      <AposButton type="default" label="Cancel" @click="cancel" />
-      <AposButton type="primary" @click="save" :label="saveLabel" />
+      <AposButton
+        type="default" label="Cancel"
+        @click="cancel"
+      />
+      <AposButton
+        type="primary" @click="save"
+        :label="saveLabel"
+      />
     </template>
   </AposModal>
 </template>

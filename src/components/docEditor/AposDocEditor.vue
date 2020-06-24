@@ -5,11 +5,17 @@
     @esc="cancel" @no-modal="$emit('safe-close')"
   >
     <template #primaryControls>
-      <AposButton type="primary" label="Save" @save="submit" />
+      <AposButton
+        type="primary" label="Save"
+        @save="submit"
+      />
     </template>
     <template #leftRail>
       <AposModalRail>
-        <AposModalTabs :current="currentTab" :tabs="tabs" @select-tab="switchPane" />
+        <AposModalTabs
+          :current="currentTab" :tabs="tabs"
+          @select-tab="switchPane"
+        />
       </AposModalRail>
     </template>
     <template #main>
@@ -17,7 +23,10 @@
         <template #bodyMain>
           <AposModalTabsBody>
             <div class="apos-doc-editor__body">
-              <AposSchema :schema="currentFields" :doc="myDoc" @input="update" />
+              <AposSchema
+                :schema="currentFields" :doc="myDoc"
+                @input="update"
+              />
             </div>
           </AposModalTabsBody>
         </template>
@@ -26,7 +35,10 @@
     <template #rightRail>
       <AposModalRail type="right">
         <div class="apos-doc-editor__utility">
-          <AposSchema :schema="utility" :doc="myDoc" @input="update" :modifiers="['small', 'inverted']" />
+          <AposSchema
+            :schema="utility" :doc="myDoc"
+            @input="update" :modifiers="['small', 'inverted']"
+          />
         </div>
       </AposModalRail>
     </template>

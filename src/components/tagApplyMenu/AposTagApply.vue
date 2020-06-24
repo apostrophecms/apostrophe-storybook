@@ -1,10 +1,14 @@
 <template>
-  <AposContextMenu @open="open = $event" :origin="origin" :tip-alignment="tipAlignment">
+  <AposContextMenu
+    @open="open = $event" :origin="origin"
+    :tip-alignment="tipAlignment"
+  >
     <div class="apos-apply-tag-menu__inner">
       <AposStringInput
         @input="updateSearchInput"
         @return="create"
-        :field="searchField" :value="searchValue" :status="searchStatus" ref="textInput"
+        :field="searchField" :value="searchValue"
+        :status="searchStatus" ref="textInput"
       />
       <div class="apos-apply-tag__create">
         <AposButton
@@ -17,7 +21,10 @@
       </div>
       <transition name="fade">
         <ol v-if="searchTags.length && !creating" class="apos-apply-tag-menu__tags">
-          <li class="apos-apply-tag-menu__tag" v-for="tag in searchTags" :key="keyPrefix + '-' + tag.slug">
+          <li
+            class="apos-apply-tag-menu__tag" v-for="tag in searchTags"
+            :key="keyPrefix + '-' + tag.slug"
+          >
             <AposCheckbox
               :field="checkboxes[tag.slug].field"
               :status="checkboxes[tag.slug].status"
@@ -39,7 +46,9 @@
               :disable-focus="!open"
             />
           </p>
-          <span class="apos-apply-tag-menu__empty-icon">🌾</span>
+          <span class="apos-apply-tag-menu__empty-icon">
+            🌾
+          </span>
         </div>
       </transition>
     </div>

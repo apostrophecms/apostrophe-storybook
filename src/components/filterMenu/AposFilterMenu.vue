@@ -1,7 +1,13 @@
 <template>
-  <AposContextMenu :origin="origin" :tip-alignment="tipAlignment" :button="button">
+  <AposContextMenu
+    :origin="origin" :tip-alignment="tipAlignment"
+    :button="button"
+  >
     <div class="apos-filters-menu">
-      <div v-for="(set, key) in menu" :key="key" class="apos-filters-menu__set">
+      <div
+        v-for="(set, key) in menu" :key="key"
+        class="apos-filters-menu__set"
+      >
         <component
           :is="map[set.field.type]" :field="set.field"
           :value="set.value" :status="set.status"
