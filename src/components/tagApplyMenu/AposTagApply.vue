@@ -154,7 +154,7 @@ export default {
         label: 'Apply Tags',
         placeholder: 'Tags...',
         help: 'Find an existing tag or add a new one',
-        icon: (!this.searchTags || !this.searchTags.length) ? 'Pencil' : 'Magnify',
+        icon: (!this.searchTags || !this.searchTags.length) ? 'pencil-icon' : 'magnify-icon',
         disableFocus: !this.open
       };
     }

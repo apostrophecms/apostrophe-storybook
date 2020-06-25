@@ -73,7 +73,7 @@ export default {
         button: {
           label: 'More operations',
           iconOnly: true,
-          icon: 'DotsVertical',
+          icon: 'dots-vertical-icon',
           type: 'outline'
         },
         menu: [
@@ -87,7 +87,7 @@ export default {
         field: {
           name: 'search',
           placeholder: 'Search Images',
-          icon: 'Magnify'
+          icon: 'magnify-icon'
         },
         status: {},
         value: { data: '' }

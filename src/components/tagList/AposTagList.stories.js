@@ -48,7 +48,7 @@ export const tagList = () => ({
         <AposModalBody>
           <template #bodyHeader>
             <AposButton label="Exit" :iconOnly="true"  icon="Label" type="outline" />
-            <AposButton label="Exit" :iconOnly="true"  icon="DotsVertical" type="outline" />
+            <AposButton label="Exit" :iconOnly="true"  icon="dots-vertical-icon" type="outline" />
             <AposButton label="Exit" :iconOnly="true"  icon="Delete" type="outline" />
             <AposButton label="Exit" :iconOnly="true"  icon="CheckboxBlankOutline" type="outline" />
           </template>
