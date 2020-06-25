@@ -11,7 +11,7 @@
         :id="getChoiceId(uid, choice.value)"
         :choice="choice"
         :field="field"
-        :value="value"
+        :value="value.data"
         :status="status"
         @toggle="update"
       />

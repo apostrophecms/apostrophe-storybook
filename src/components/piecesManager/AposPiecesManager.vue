@@ -51,8 +51,9 @@
               >
                 <td class="apos-table__cell">
                   <AposCheckbox
+                    v-if="checkboxes[row.id]"
                     :field="checkboxes[row.id].field"
-                    :value="checkboxes[row.id].value"
+                    :value="checkboxes[row.id].value.data"
                     :status="checkboxes[row.id].status"
                     :choice="checkboxes[row.id].choice"
                     :id="row.id"
@@ -100,6 +101,7 @@ import AposCheckbox from '../inputCheckbox/AposCheckbox.vue';
 import CheckBoldIcon from "vue-material-design-icons/CheckBold.vue";
 import MinusIcon from "vue-material-design-icons/Minus.vue";
 import LinkIcon from "vue-material-design-icons/LinkVariant.vue";
+import docsData from './data';
 
 export default {
   components: {
@@ -134,6 +136,7 @@ export default {
   },
   data() {
     return {
+      rows: [],
       modal: {
         title: `Manage ${this.pieceType.pluralLabel || this.pieceType.label}`,
         active: false,
@@ -157,7 +160,15 @@ export default {
         return 'indeterminate';
       }
       return 'empty';
+    },
+    headers() {
+      // Imagine this is async.
+      return docsData.headers;
     }
+  },
+  async mounted() {
+    // Get the data. This will be more complex in actuality.
+    this.getPieces();
   },
   methods: {
     // Toolbar handlers
@@ -169,8 +180,10 @@ export default {
     search(query) {
       // TODO stub
       this.$emit('search', query);
+    },
+    async getPieces () {
+      this.rows = docsData.rows;
     }
-
   }
 };
 </script>

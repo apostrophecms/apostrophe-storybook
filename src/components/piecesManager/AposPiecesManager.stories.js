@@ -2,7 +2,6 @@ import {
   withKnobs
 } from '@storybook/addon-knobs';
 import AposPiecesManager from './AposPiecesManager.vue';
-import docsData from './data';
 import tagListData from '../tagList/data.js';
 import applyTagData from '../tagApplyMenu/data.js';
 
@@ -32,7 +31,6 @@ export const piecesManager = () => {
     },
     data () {
       return {
-        data: docsData,
         active: true,
         tagList: tagListData,
         applyTags: applyTagData.applyTo,
@@ -49,7 +47,7 @@ export const piecesManager = () => {
         </button>
         <AposPiecesManager
           v-if="active" @safe-close="finishExit"
-          :headers="data.headers" :rows="data.rows" :tagList="tagList"
+          :tagList="tagList"
           :applyTags="applyTags" :pieceType="pieceType" @trash="handleTrash"
           @sort="log"
         />

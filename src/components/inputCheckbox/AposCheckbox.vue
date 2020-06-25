@@ -46,7 +46,7 @@ export default {
       required: true
     },
     value: {
-      type: Object,
+      type: Array,
       required: true
     },
     status: {
@@ -65,7 +65,7 @@ export default {
   },
   computed: {
     isChecked: function () {
-      return this.value.data.includes(this.choice.value);
+      return this.value.includes(this.choice.value);
     }
   },
   methods: {

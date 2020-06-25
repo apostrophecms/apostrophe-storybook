@@ -28,7 +28,7 @@
             <AposCheckbox
               :field="checkboxes[tag.slug].field"
               :status="checkboxes[tag.slug].status"
-              :value="checkboxes[tag.slug].value"
+              :value="checkboxes[tag.slug].value.data"
               :choice="checkboxes[tag.slug].choice"
               @toggle="update"
               :disable-focus="!open"
