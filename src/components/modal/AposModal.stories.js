@@ -104,10 +104,10 @@ export const layouts = () => {
             <AposModalBody>
               ${hasBodyHeader ? `
                 <template #bodyHeader>
-                  <AposButton label="Exit" :iconOnly="true"  icon="Label" type="outline" />
+                  <AposButton label="Exit" :iconOnly="true"  icon="label-icon" type="outline" />
                   <AposButton label="Exit" :iconOnly="true"  icon="dots-vertical-icon" type="outline" />
-                  <AposButton label="Exit" :iconOnly="true"  icon="Delete" type="outline" />
-                  <AposButton label="Exit" :iconOnly="true"  icon="CheckboxBlankOutline" type="outline" />
+                  <AposButton label="Exit" :iconOnly="true"  icon="delete-icon" type="outline" />
+                  <AposButton label="Exit" :iconOnly="true"  icon="checkbox-blank-icon" type="outline" />
                 </template>
               ` : ''}
               <template #bodyMain>
