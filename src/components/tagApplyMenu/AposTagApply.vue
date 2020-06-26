@@ -28,7 +28,7 @@
             <AposCheckbox
               :field="checkboxes[tag.slug].field"
               :status="checkboxes[tag.slug].status"
-              :value="checkboxes[tag.slug].value"
+              :value="checkboxes[tag.slug].value.data"
               :choice="checkboxes[tag.slug].choice"
               @toggle="update"
               :disable-focus="!open"
@@ -154,7 +154,7 @@ export default {
         label: 'Apply Tags',
         placeholder: 'Tags...',
         help: 'Find an existing tag or add a new one',
-        icon: (!this.searchTags || !this.searchTags.length) ? 'Pencil' : 'Magnify',
+        icon: (!this.searchTags || !this.searchTags.length) ? 'pencil-icon' : 'magnify-icon',
         disableFocus: !this.open
       };
     }

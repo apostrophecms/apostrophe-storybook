@@ -1,42 +1,8 @@
 export default {
-  props: {
-    headers: {
-      type: Array,
-      required: true
-    },
-    rows: {
-      type: Array,
-      required: true
-    }
-  },
   data() {
-    // fetch all icons used in table headers
-    const icons = {};
-    this.headers.forEach(h => {
-      if (h.icon) {
-        icons[h.icon] = `${h.icon.toLowerCase()}-icon`;
-      }
-    });
-    // prep row checkbox fields
-    const checkboxes = {};
-    this.rows.forEach((row) => {
-      checkboxes[row.id] = {
-        status: {},
-        value: {
-          data: []
-        },
-        choice: { value: 'checked' },
-        field: {
-          name: row.id,
-          type: 'checkbox',
-          hideLabel: true,
-          label: `Toggle selection of ${row.title}`
-        }
-      };
-    });
     return {
-      icons,
-      checkboxes,
+      icons: {},
+      checkboxes: {},
       checked: []
     };
   },
@@ -56,6 +22,13 @@ export default {
       };
     }
   },
+  watch: {
+    rows: function(newValue) {
+      if (newValue.length) {
+        this.generateUi();
+      }
+    }
+  },
   methods: {
     toggleRowCheck(event, id) {
       if (this.checked.includes(id)) {
@@ -65,6 +38,7 @@ export default {
         this.checked.push(id);
         this.checkboxes[id].value.data = ['checked'];
       }
+      console.info(this.checkboxes[id].value.data);
     },
     selectAll(event) {
       if (!this.checked.length) {
@@ -101,6 +75,35 @@ export default {
 
     sort(action) {
       this.$emit('sort', action);
+    },
+    generateUi () {
+    // fetch all icons used in table headers
+      const icons = {};
+      this.headers.forEach(h => {
+        if (h.icon) {
+          icons[h.icon] = `${h.icon.toLowerCase()}-icon`;
+        }
+      });
+      this.icons = icons;
+      // prep row checkbox fields
+
+      const checkboxes = {};
+      this.rows.forEach((row) => {
+        checkboxes[row.id] = {
+          status: {},
+          value: {
+            data: []
+          },
+          choice: { value: 'checked' },
+          field: {
+            name: row.id,
+            type: 'checkbox',
+            hideLabel: true,
+            label: `Toggle selection of ${row.title}`
+          }
+        };
+        this.checkboxes = checkboxes;
+      });
     }
   }
 };

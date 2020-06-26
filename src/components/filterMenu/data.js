@@ -1,7 +1,7 @@
 export default {
   button: {
     label: 'Filter',
-    icon: 'ChevronDown',
+    icon: 'chevron-down-icon',
     modifiers: ['icon-right'],
     type: 'outline'
   },

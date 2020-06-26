@@ -10,7 +10,7 @@
       <!-- TODO trash component needs to be worked out with confirm, maybe separate into its own component -->
       <AposButton
         label="Delete" @click="$emit('trash-click')"
-        :icon-only="true" icon="Delete"
+        :icon-only="true" icon="delete-icon"
         type="outline"
       />
       <AposContextMenu
@@ -64,7 +64,7 @@ export default {
         button: {
           label: 'More operations',
           iconOnly: true,
-          icon: 'DotsVertical',
+          icon: 'dots-vertical-icon',
           type: 'outline'
         },
         menu: [
@@ -78,7 +78,7 @@ export default {
         field: {
           name: 'search',
           placeholder: 'Search Images',
-          icon: 'Magnify'
+          icon: 'magnify-icon'
         },
         status: {},
         value: { data: '' }
@@ -128,11 +128,11 @@ export default {
   computed: {
     checkboxIcon() {
       if (this.selectedState === 'checked') {
-        return 'CheckboxMarked';
+        return 'checkbox-marked-icon';
       } else if (this.selectedState === 'indeterminate') {
-        return 'MinusBox';
+        return 'minus-box-icon';
       } else {
-        return 'CheckboxBlankOutline';
+        return 'checkbox-blank-icon';
       }
     },
     iconColor() {

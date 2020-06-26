@@ -25,7 +25,7 @@
           <AposCheckbox
             tabindex="-1"
             :field="item.checkbox.field"
-            :value="item.checkbox.value"
+            :value="item.checkbox.value.data"
             :status="item.checkbox.status"
             :choice="item.checkbox.choice"
             @toggle="$emit('select-another', item.id)"
