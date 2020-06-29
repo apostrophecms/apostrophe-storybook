@@ -25,7 +25,7 @@
       <AposModalBody>
         <template #bodyHeader v-if="!!media.length">
           <AposMediaManagerToolbar
-            :selected="selected" :media="myMedia"
+            :checked="checked" :media="myMedia"
             @select-click="selectClick"
             @trash-click="trashClick"
             @search="search"
@@ -36,7 +36,7 @@
             v-if="!!myMedia.length"
             :media="myMedia" ref="display"
             @edit="updateEditing"
-            @toggle="selectAnother"
+            v-model="checked"
             @select="select"
             @select-series="selectSeries"
             @select-another="selectAnother"
@@ -49,7 +49,10 @@
     </template>
     <template #rightRail v-if="!!media.length">
       <AposModalRail type="right">
-        <div class="apos-media-manager__sidebar" :class="{'apos-media-manager__sidebar--empty' : !selected.length}">
+        <div
+          class="apos-media-manager__sidebar"
+          :class="{ 'apos-media-manager__sidebar--empty' : !checked.length }"
+        >
           <AposMediaManagerEditor
             v-show="editing"
             :media="editing" :selected="selected"
@@ -120,7 +123,7 @@ export default {
         value: {
           data: []
         },
-        choice: { value: 'checked' },
+        choice: { value: media.id },
         field: {
           name: media.id,
           type: 'checkbox',
@@ -139,6 +142,7 @@ export default {
         showModal: false
       },
       editing: null,
+      checked: [],
       lastSelected: null,
       myMedia,
       emptyDisplay: {
@@ -150,22 +154,19 @@ export default {
   },
   computed: {
     selected() {
-      return this.myMedia.filter(item => item.checkbox.value.data.length);
+      return this.myMedia.filter(item => this.checked.includes(item.id));
     }
   },
   watch: {
-    selected(newVal) {
-      if (newVal.length === 1) {
-        this.editing = this.myMedia.find(item => item.id === newVal[0].id);
-      } else {
+    checked (newVal) {
+      if (newVal.length > 1) {
         this.editing = null;
       }
     }
   },
   methods: {
     clearSelected() {
-      // select(null) will match nothing and deselect all
-      this.select(null);
+      this.checked = [];
       this.editing = null;
     },
     updateEditing(id) {
@@ -174,23 +175,23 @@ export default {
 
     // select setters
     select(id) {
-      this.myMedia.map((media) => {
-        media.checkbox.value.data = media.id === id ? ['checked'] : [];
-      });
+      if (this.checked.includes(id)) {
+        this.checked = [];
+      } else {
+        this.checked = [id];
+      }
+
+      this.updateEditing(id);
       this.lastSelected = id;
     },
 
     selectAnother(id) {
-      this.myMedia.forEach((media) => {
-        if (media.id === id) {
-          // meta deselect one
-          if (this.selected.find(item => item.id === id)) {
-            media.checkbox.value.data = [];
-          } else {
-            media.checkbox.value.data = ['checked'];
-          }
-        }
-      });
+      if (this.checked.includes(id)) {
+        this.checked = this.checked.filter(checkedId => checkedId !== id);
+      } else {
+        this.checked.push(id);
+      }
+
       this.lastSelected = id;
       this.editing = null;
     },
@@ -200,35 +201,46 @@ export default {
         this.select(id);
         return;
       }
+
       let beginIndex = this.myMedia.findIndex(media => media.id === this.lastSelected);
       let endIndex = this.myMedia.findIndex(media => media.id === id);
       const direction = beginIndex > endIndex ? -1 : 1;
+
       if (direction < 0) {
         [beginIndex, endIndex] = [endIndex, beginIndex];
       } else {
         endIndex++;
       }
+
       const sliced = this.myMedia.slice(beginIndex, endIndex);
       // always want to check, never toggle
-      sliced.forEach(media => (media.checkbox.value.data = ['checked']));
+      sliced.forEach(media => {
+        if (!this.checked.includes(media.id)) {
+          this.checked.push(media.id);
+        }
+      });
+
       this.lastSelected = sliced[sliced.length - 1].id;
       this.editing = null;
     },
 
     // Toolbar handlers
     selectClick() {
-      if (this.selected.length === this.myMedia.length) {
+      if (this.checked.length === this.myMedia.length) {
         // unselect all
-        this.select(null);
+        this.clearSelected();
       } else {
         // select all
-        this.lastSelected = this.myMedia[0].id;
-        this.selectSeries(this.myMedia[this.myMedia.length - 1].id);
+        this.checked = this.myMedia.map(media => media.id);
+        this.editing = null;
+        this.lastSelected = this.myMedia[this.myMedia.length - 1].id;
       }
     },
 
     // TODO stub
     trashClick() {
+      // TODO: This should probably use `checked` unless the trash action needs
+      // more than the ID.
       this.$emit('trash', this.selected);
     },
 
