@@ -25,7 +25,6 @@
           <AposCheckbox
             tabindex="-1"
             :field="item.checkbox.field"
-            :value="item.checkbox.value.data"
             :status="item.checkbox.status"
             :choice="item.checkbox.choice"
             v-model="checkedProxy"
