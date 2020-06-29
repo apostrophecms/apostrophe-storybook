@@ -11,8 +11,9 @@ export const tagApplyTagMenu = () => ({
   },
   methods: {
     log(value) {
-      console.log('log');
-      console.log(value);
+      // Do extra JSON work since `value` will come through with `getter` and
+      // `setter` functions.
+      console.table(JSON.parse(JSON.stringify(value)));
     }
   },
   data() {

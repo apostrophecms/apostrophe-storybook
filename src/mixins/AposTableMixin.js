@@ -94,7 +94,7 @@ export default {
           value: {
             data: []
           },
-          choice: { value: 'checked' },
+          choice: { value: row.id },
           field: {
             name: row.id,
             type: 'checkbox',

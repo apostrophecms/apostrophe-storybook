@@ -53,11 +53,10 @@
                   <AposCheckbox
                     v-if="checkboxes[row.id]"
                     :field="checkboxes[row.id].field"
-                    :value="checkboxes[row.id].value.data"
                     :status="checkboxes[row.id].status"
                     :choice="checkboxes[row.id].choice"
                     :id="row.id"
-                    @toggle="toggleRowCheck($event, row.id)"
+                    v-model="checked"
                   />
                 </td>
                 <td
