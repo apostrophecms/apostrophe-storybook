@@ -175,6 +175,12 @@ export default {
   methods: {
     // Create a new tag, or set up the input with "New Tag" if  empty.
     create() {
+      // The string input's `return` event still submits duplicates, so prevent
+      // them here.
+      if (this.disabledCreate) {
+        return;
+      }
+
       if (!this.searchInputValue || !this.searchInputValue.length) {
         this.creating = true;
         this.searchValue.data = 'New Tag';
