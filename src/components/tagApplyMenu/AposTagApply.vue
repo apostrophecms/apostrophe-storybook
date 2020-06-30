@@ -26,11 +26,12 @@
             :key="`${keyPrefix}-${tag.slug}`"
           >
             <AposCheckbox
+              v-if="checkboxes[tag.slug]"
               :field="checkboxes[tag.slug].field"
               :status="checkboxes[tag.slug].status"
-              :value="checkboxes[tag.slug].value.data"
               :choice="checkboxes[tag.slug].choice"
-              @toggle="update"
+              v-model="checked"
+              @updated="updateTag"
               :disable-focus="!open"
             />
           </li>
@@ -96,16 +97,15 @@ export default {
     }
   },
   data() {
-    const checkboxes = {};
-    this.tags.forEach((tag) => {
-      checkboxes[tag.slug] = createCheckbox(tag, this.applyTo);
-    });
     return {
       creating: false,
       searchValue: { data: '' },
       searchStatus: {},
-      checkboxes,
-      myTags: this.tags,
+      checkboxes: {},
+      // `myTags` will be the canonical array of tags and matching doc IDs that
+      // we will emit.
+      myTags: [...this.tags],
+      checked: [],
       searchInputValue: '',
       keyPrefix: this.generateId('key'), // used to keep checkboxes in sync w state
       origin: 'below',
@@ -119,6 +119,8 @@ export default {
     };
   },
   computed: {
+    // Returns true if a tag slug already exists for what you entered, so you
+    // can't create a new tag.
     disabledCreate() {
       const matches = this.myTags.filter((tag) => {
         return tag.slug === this.searchInputValue;
@@ -129,6 +131,8 @@ export default {
         return false;
       }
     },
+    // Unless we're in the middle of creating a new tag, search the tags that
+    // match the search input (as long as above 2 characters).
     searchTags() {
       if (this.creating) {
         return [];
@@ -141,6 +145,7 @@ export default {
         return this.myTags;
       }
     },
+    // Generate the button label.
     createLabel() {
       if (this.searchInputValue.length) {
         return `Create tag "${this.searchInputValue}"`;
@@ -148,6 +153,7 @@ export default {
         return 'Create new tag';
       }
     },
+    // Generate the field object for the search field.
     searchField() {
       return {
         name: 'tagSearch',
@@ -159,8 +165,22 @@ export default {
       };
     }
   },
+  mounted () {
+    const checkboxes = {};
+    this.tags.forEach((tag) => {
+      checkboxes[tag.slug] = this.createCheckbox(tag, this.applyTo);
+    });
+    this.checkboxes = checkboxes;
+  },
   methods: {
+    // Create a new tag, or set up the input with "New Tag" if  empty.
     create() {
+      // The string input's `return` event still submits duplicates, so prevent
+      // them here.
+      if (this.disabledCreate) {
+        return;
+      }
+
       if (!this.searchInputValue || !this.searchInputValue.length) {
         this.creating = true;
         this.searchValue.data = 'New Tag';
@@ -169,78 +189,110 @@ export default {
           this.$refs.textInput.$el.querySelector('input').select();
         });
       } else {
+        // TODO: No current sign of `create-tag` usage. Delete if unused.
         this.$emit('create-tag', this.searchInputValue);
+
         const tag = {
           label: this.searchInputValue,
           slug: this.searchInputValue,
-          checked: this.applyTo
+          match: this.applyTo
         };
-        this.checkboxes[tag.slug] = createCheckbox(tag, this.applyTo);
+        this.checkboxes[tag.slug] = this.createCheckbox(tag, this.applyTo);
         this.myTags.unshift(tag);
         this.creating = false;
         this.emitState();
       }
     },
-    update(slug) {
+    // `checked` will track all that are checked, but `updateTag` also
+    // updates indeterminate state and `match` arrays for the updated tag.
+    updateTag($event) {
+      const slug = $event.target.value;
+      // Find the matching tag.
       const tag = this.myTags.find(tag => tag.slug === slug);
+      // Find the matching checkbox.
       const box = this.checkboxes[slug];
-      if (!tag.checked) {
-        tag.checked = this.applyTo;
-        box.value.data.push(slug);
+      if (!box) {
+        // This should never happen. You updated a checkbox to trigger this.
+        return;
+      }
+
+      if (!tag.match) {
+        // If the tag has no `match` values, assign all the `applyTo` IDs to it.
+        tag.match = this.applyTo;
       } else {
-        if (tag.checked.length === this.applyTo.length) {
+        if (tag.match.length === this.applyTo.length) {
+          // If the tag has existings matches
           // previously full check, unapply to all
-
-          delete tag.checked;
-          box.value.data = [];
-
+          delete tag.match;
         } else {
-          // mixed check, check all
-          tag.checked = this.applyTo;
-          this.checkboxes[slug].value.data = [slug];
-          delete box.status.readOnly;
+          // Previously indeterminate. Set it's matches to all of `applyTo`.
+          tag.match = this.applyTo;
+
+          delete box.status.indeterminate;
           delete box.choice.indeterminate;
         }
       }
-      // refresh checkboxes :}
+      // Force refresh the checkboxes.
       this.keyPrefix = this.generateId('key');
-      // done, emit
+
+      // TODO: This should probably have an "Apply" or "Save" button to confirm
+      // before running emitting the updates.
       this.emitState();
     },
     emitState() {
       this.$emit('update', this.myTags);
     },
+    // Take the string field value and get a lower case version.
     updateSearchInput(value) {
       this.searchInputValue = value.data.toLowerCase();
       if (!this.searchInputValue) {
         this.creating = false;
       }
+    },
+    createCheckbox(tag, applyTo) {
+      const checkbox = {
+        field: {
+          type: 'checkbox',
+          name: tag.slug
+        },
+        status: {},
+        value: { data: [] },
+        choice: {
+          label: tag.label,
+          value: tag.slug
+        }
+      };
+
+      const state = this.getCheckedState(tag);
+
+      // If so, add those slugs to the `checked` array.
+      if (state !== 'unchecked') {
+        this.checked.push(tag.slug);
+      }
+
+      // If only some of `applyTo` matches, use the indeterminate state.
+      if (state === 'indeterminate') {
+        checkbox.choice.indeterminate = true;
+        checkbox.status.indeterminate = true;
+      }
+      return checkbox;
+    },
+    getCheckedState (tag) {
+      if (!tag.match) {
+        return 'unchecked';
+      }
+      // Go over the docs, checking how well they match the tag.
+      if (this.applyTo.every(id => tag.match.includes(id))) {
+        return 'checked';
+      } else if (this.applyTo.some(id => tag.match.includes(id))) {
+        return 'indeterminate';
+      }
+
+      return 'unchecked';
     }
   }
 };
 
-function createCheckbox(tag, applyTo) {
-  const checkbox = {
-    field: {
-      type: 'checkbox',
-      name: tag.slug
-    },
-    status: {},
-    value: { data: [] },
-    choice: {
-      label: tag.label,
-      value: tag.slug
-    }
-  };
-  if (tag.checked && tag.checked.length) {
-    if (tag.checked.length !== applyTo.length) {
-      checkbox.choice.indeterminate = true;
-      checkbox.status.readOnly = true;
-    }
-    checkbox.value.data.push(tag.slug);
-  }
-  return checkbox;
-}
 </script>
 
 <style lang="scss" scoped>

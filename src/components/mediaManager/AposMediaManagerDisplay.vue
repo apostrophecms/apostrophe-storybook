@@ -19,16 +19,21 @@
       <div
         class="apos-media-manager-display__cell" v-for="item in media"
         :key="generateId(item.id)"
-        :class="{'is-selected': !!item.checkbox.value.data.length}"
+        :class="{'is-selected': checked.includes(item.id)}"
       >
         <div class="apos-media-manager-display__checkbox">
           <AposCheckbox
             tabindex="-1"
-            :field="item.checkbox.field"
-            :value="item.checkbox.value.data"
-            :status="item.checkbox.status"
-            :choice="item.checkbox.choice"
-            @toggle="$emit('select-another', item.id)"
+            :field="{
+              name: item.id,
+              type: 'checkbox',
+              hideLabel: true,
+              label: `Toggle selection of ${item.title}`,
+              disableFocus: true
+            }"
+            :status="{}"
+            :choice="{ value: item.id }"
+            v-model="checkedProxy"
           />
         </div>
         <button
@@ -59,11 +64,31 @@ export default {
     CloudUpload
   },
   mixins: [ AposHelpers ],
+  // Custom model to handle the v-model connection on the parent.
+  model: {
+    prop: 'checked',
+    event: 'change'
+  },
   props: {
+    checked: {
+      type: [Array, Boolean],
+      default: false
+    },
     media: {
       type: Array,
       default() {
         return [];
+      }
+    }
+  },
+  computed: {
+    // Handle the local check state within this component.
+    checkedProxy: {
+      get() {
+        return this.checked;
+      },
+      set(val) {
+        this.$emit('change', val);
       }
     }
   }

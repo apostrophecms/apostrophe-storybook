@@ -8,7 +8,7 @@ export default {
     {
       label: 'Nature',
       slug: 'nature',
-      checked: [
+      match: [
         'reduce-earning-muscle-wonder-deciding',
         'lose-boyd-inside-tries-descartes',
         'oriented-smear-bodies-hedge-vermont'
@@ -17,7 +17,7 @@ export default {
     {
       label: 'Nurture',
       slug: 'nurture',
-      checked: [
+      match: [
         'reduce-earning-muscle-wonder-deciding',
         'lose-boyd-inside-tries-descartes',
         'oriented-smear-bodies-hedge-vermont'
@@ -26,7 +26,7 @@ export default {
     {
       label: 'Natural',
       slug: 'natural',
-      checked: [
+      match: [
         'reduce-earning-muscle-wonder-deciding',
         'oriented-smear-bodies-hedge-vermont'
       ]

@@ -11,9 +11,8 @@
         :id="getChoiceId(uid, choice.value)"
         :choice="choice"
         :field="field"
-        :value="value.data"
         :status="status"
-        @toggle="update"
+        v-model="value.data"
       />
     </template>
   </AposInputWrapper>
@@ -35,13 +34,6 @@ export default {
     this.value.data = Array.isArray(this.value.data) ? this.value.data : [];
   },
   methods: {
-    update(newValue) {
-      if (this.value.data.includes(newValue)) {
-        this.value.data = this.value.data.filter(item => item !== newValue);
-      } else {
-        this.value.data.push(newValue);
-      }
-    },
     getChoiceId(uid, value) {
       return uid + value.replace(/\s/g, '');
     },

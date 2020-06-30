@@ -18,7 +18,7 @@ export const mediaManager = () => {
     },
     methods: {
       handleTrash(selected) {
-        console.log(`trash ${selected}`);
+        console.info(`trash ${JSON.stringify(selected)}`);
       },
       toggleActive: function () {
         this.active = !this.active;

@@ -13,7 +13,8 @@ export default {
   },
   data () {
     return {
-      next: (this.value.data !== undefined) ? this.value.data : (this.field.def || ''),
+      next: (this.value.data !== undefined)
+        ? this.value.data : (this.field.def || ''),
       error: false,
       // This is just meant to be sufficient to prevent unintended collisions
       // in the UI between id attributes

@@ -47,7 +47,7 @@ export default {
     AposFilterMenu
   },
   props: {
-    selected: {
+    checked: {
       type: Array,
       default () {
         return [];
@@ -136,10 +136,10 @@ export default {
   },
   computed: {
     checkboxIcon() {
-      if (this.selected.length === this.media.length) {
+      if (this.checked.length === this.media.length) {
         return 'checkbox-marked-icon';
       }
-      if (this.selected.length < this.media.length && this.selected.length !== 0) {
+      if (this.checked.length < this.media.length && this.checked.length !== 0) {
         return 'minus-box-icon';
       }
       return 'checkbox-blank-icon';
