@@ -24,9 +24,15 @@
         <div class="apos-media-manager-display__checkbox">
           <AposCheckbox
             tabindex="-1"
-            :field="item.checkbox.field"
-            :status="item.checkbox.status"
-            :choice="item.checkbox.choice"
+            :field="{
+              name: item.id,
+              type: 'checkbox',
+              hideLabel: true,
+              label: `Toggle selection of ${item.title}`,
+              disableFocus: true
+            }"
+            :status="{}"
+            :choice="{ value: item.id }"
             v-model="checkedProxy"
           />
         </div>
