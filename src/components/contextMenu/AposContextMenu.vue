@@ -2,6 +2,7 @@
   <div
     class="apos-context-menu" :class="classList"
     ref="component" :style="localCssVar"
+    :data-apos-context-menu="uid"
   >
     <!-- TODO refactor buttons to take a single config obj -->
     <AposButton
@@ -43,6 +44,7 @@
 import AposContextMenuItem from './AposContextMenuItem';
 import AposContextMenuTip from './AposContextMenuTip';
 import AposButton from './../button/AposButton';
+import AposHelpers from '../../mixins/AposHelpersMixin';
 
 export default {
   name: 'AposContextMenu',
@@ -51,6 +53,7 @@ export default {
     AposContextMenuTip,
     AposButton
   },
+  mixins: [AposHelpers],
   props: {
     menu: {
       type: Array,
@@ -85,11 +88,13 @@ export default {
   data() {
     return {
       open: false,
-      vueId: this.$options._scopeId,
-      tipWidth: 27
+      tipWidth: '27'
     };
   },
   computed: {
+    uid() {
+      return this.generateId();
+    },
     classList() {
       const classes = [];
       classes.push(`apos-context-menu--origin-${this.origin}`);
@@ -135,7 +140,7 @@ export default {
     },
     clicks (event) {
       // if user clicks outside menu component, close menu
-      if (!event.target.closest(`[${this.vueId}]`)) {
+      if (!event.target.closest(`[data-apos-context-menu="${this.uid}"]`)) {
         this.open = false;
         this.unbind();
       }
