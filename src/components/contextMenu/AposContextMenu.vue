@@ -1,7 +1,7 @@
 <template>
   <div
     class="apos-context-menu" :class="classList"
-    ref="component"
+    ref="component" :style="localCssVar"
   >
     <!-- TODO refactor buttons to take a single config obj -->
     <AposButton
@@ -15,11 +15,12 @@
       class="apos-primary-scrollbar apos-context-menu__popup"
       :class="{'is-visible': open}" ref="popup"
       :aria-hidden="open ? 'false' : 'true'"
-      role="dialog" :style="position"
+      role="dialog"
     >
       <AposContextMenuTip
         :align="tipAlignment"
         :origin="origin"
+        :width="tipWidth"
       />
       <div class="apos-context-menu__pane">
         <slot>
@@ -85,7 +86,7 @@ export default {
     return {
       open: false,
       vueId: this.$options._scopeId,
-      position: ''
+      tipWidth: 27
     };
   },
   computed: {
@@ -105,13 +106,14 @@ export default {
     },
     buttonState() {
       return this.open ? ['active'] : null;
+    },
+    localCssVar() {
+      // Set the CSS custom property for this specific context menu.
+      return { '--tip-width': `${this.tipWidth}px` };
     }
   },
   watch: {
     open(newVal, oldVal) {
-      if (newVal) {
-        this.position = this.calculatePosition();
-      }
       this.$emit('open', newVal);
     }
   },
@@ -119,12 +121,10 @@ export default {
     bind() {
       document.addEventListener('click', this.clicks);
       document.addEventListener('keydown', this.keyboard);
-      window.addEventListener('resize', this.positionPopup);
     },
     unbind() {
       document.removeEventListener('click', this.clicks);
       document.removeEventListener('keydown', this.keyboard);
-      window.removeEventListener('resize', this.positionPopup);
     },
     keyboard(event) {
       // if user hits esc, close menu
@@ -150,51 +150,6 @@ export default {
     },
     menuItemClicked(action) {
       this.$emit('item-clicked', action);
-    },
-    positionPopup() {
-      this.position = this.calculatePosition();
-    },
-    // TODO this is proving a difficult way to handle positioning.
-    // Ideally we'd be using absolute positioning to anchor to the button and float above or below
-    // to display the menu pane. Initial attempts at this proved difficult for z-index and overflow clipping reasons.
-    calculatePosition() {
-      const button = this.$refs.button.$el;
-      const popup = this.$refs.popup;
-      const rect = button.getBoundingClientRect();
-      const buttonHeight = button.offsetHeight;
-      // getBoundingClientRect gives us the true x,y,etc of an el from the viewport but
-      // position:fixed inside position:fixed is positioned relatively to the first, account for it
-      let contextRect = {
-        top: 0,
-        left: 0
-      };
-      if (button.closest('[data-apos-modal-inner]')) {
-        contextRect = button.closest('[data-apos-modal-inner]').getBoundingClientRect();
-      }
-      let top, left;
-
-      if (this.origin === 'above') {
-        // above
-        top = rect.top - contextRect.top - popup.offsetHeight - 15;
-      } else {
-        // below
-        top = rect.top - contextRect.top + buttonHeight + 15;
-      }
-
-      if (this.tipAlignment === 'center') {
-        // center
-        const buttonCenter = rect.left - contextRect.left + (button.offsetWidth / 2);
-        left = buttonCenter - (popup.offsetWidth / 2);
-
-      } else if (this.tipAlignment === 'right') {
-        // right
-        left = rect.left - contextRect.left + button.offsetWidth - popup.offsetWidth + 15;
-      } else {
-        // left
-        left = rect.left - contextRect.left - 15;
-      }
-
-      return `top: ${top}px; left: ${left}px`;
     }
   }
 };
@@ -205,7 +160,7 @@ export default {
 
   .apos-context-menu {
     position: relative;
-    display: inline;
+    display: inline-block;
   }
 
   .apos-context-menu--unpadded .apos-context-menu__pane  {
@@ -214,7 +169,7 @@ export default {
 
   .apos-context-menu__popup {
     z-index: 2;
-    position: fixed;
+    position: absolute;
     display: inline-block;
     color: var(--a-text-primary);
     opacity: 0;
@@ -222,11 +177,33 @@ export default {
     transform: scale(0.98) translateY(-8px);
     transform-origin: top left;
     transition: scale 0.15s ease, translateY 0.15s ease;
+
+    $popup-vert-offset: 16px;
+    .apos-context-menu--origin-above & {
+      bottom: calc(100% + #{$popup-vert-offset});
+      // bottom: 0;
+    }
+    .apos-context-menu--origin-below & {
+      top: calc(100% + #{$popup-vert-offset});
+    }
+    .apos-context-menu--tip-alignment-center & {
+      left: 50%;
+      transform: translatex(-50%);
+    }
+    // We're positioning with the popup-tip in the center of the parent,
+    // so we adjust based on the tip's width and the tip offset.
+    .apos-context-menu--tip-alignment-left & {
+      left: 50%;
+      transform: translatex(calc(#{-$menuTipOffset} - var(--tip-width)/2));
+    }
+    .apos-context-menu--tip-alignment-right & {
+      right: 50%;
+      transform: translatex(calc(#{$menuTipOffset} + var(--tip-width)/2));
+    }
   }
 
   .apos-context-menu__popup.is-visible {
     opacity: 1;
-    transform: scale(1) translateY(0);
     pointer-events: auto;
   }
 
