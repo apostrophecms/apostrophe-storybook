@@ -4,6 +4,7 @@
     ref="component" :style="localCssVar"
     :data-apos-context-menu="uid"
   >
+    <slot name="prebutton" />
     <!-- TODO refactor buttons to take a single config obj -->
     <AposButton
       class="apos-context-menu__btn"

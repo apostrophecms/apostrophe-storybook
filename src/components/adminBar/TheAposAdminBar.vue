@@ -34,12 +34,14 @@
         />
       </li>
     </ul>
+    <TheAposAdminBarUser class="apos-admin-bar__user" :user="user" />
   </nav>
 </template>
 
 <script>
 import AposLogo from './AposLogo';
 import AposButton from '../button/AposButton';
+import TheAposAdminBarUser from './TheAposAdminBarUser';
 import AposContextMenu from '../contextMenu/AposContextMenu';
 
 export default {
@@ -47,7 +49,8 @@ export default {
   components: {
     AposLogo,
     AposButton,
-    AposContextMenu
+    AposContextMenu,
+    TheAposAdminBarUser
   },
   props: {
     items: {
@@ -60,7 +63,8 @@ export default {
   data() {
     return {
       menuItems: [],
-      plusMenu: []
+      plusMenu: [],
+      user: {}
     };
   },
   computed: {
@@ -81,6 +85,8 @@ export default {
         action: 'trees-piece'
       }
     ];
+
+    this.user = require('./userData').user;
   },
   methods: {
     emitEvent: function (name) {
@@ -113,9 +119,9 @@ body {
   left: 0;
   display: flex;
   align-items: center;
-  width: 100%;
+  right: 0;
   height: $menu-height;
-  padding: 0 16px;
+  padding: 0 30px 0 16px;
   border-bottom: 1px solid var(--a-base-9);
   background: var(--a-background-primary);
   font-size: map-get($font-sizes, menu-label);
@@ -196,5 +202,9 @@ body {
     width: 19px;
     height: 19px;
   }
+}
+
+.apos-admin-bar__user {
+  margin-left: auto;
 }
 </style>
