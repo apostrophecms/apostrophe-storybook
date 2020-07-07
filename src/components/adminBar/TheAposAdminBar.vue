@@ -1,55 +1,52 @@
 <template>
   <nav class="apos-admin-bar">
-    <div class="apos-admin-bar__logo">
-      <AposLogo />
-    </div>
-    <div
-      v-for="(item, index) in menuItems" :key="item.name"
-      class="apos-admin-bar__item"
-    >
-      <component
-        v-if="item.options" :is="item.options.href ? 'a' : 'button'"
-        class="apos-admin-bar__btn" :href="item.options.href"
-        v-on="item.options.href ? {} : { click: () => emitEvent(item.name) }"
+    <AposLogo class="apos-admin-bar__logo" />
+    <ul class="apos-admin-bar__items">
+      <li
+        v-for="(item, index) in menuItems" :key="item.name"
+        class="apos-admin-bar__item"
       >
-        {{ item.label }}
-      </component>
-      <AposContextMenu
-        v-else-if="item.items" class="apos-admin-bar__sub"
-        :menu="item.items" :button="{
-          label: item.label
-        }"
-        :tip-alignment="index > 1 ? 'right' : 'left'"
-      />
-      <!-- <ul
-        v-if="item.items" v-show="item.open"
-        class="apos-admin-bar__dropdown-items"
-      >
-        <li
-          v-for="subItem in item.items" :key="subItem.name"
-          class="apos-admin-bar__dropdown-item"
+        <component
+          v-if="item.options" :is="item.options.href ? 'a' : 'button'"
+          class="apos-admin-bar__btn" :href="item.options.href"
+          v-on="item.options.href ? {} : { click: () => emitEvent(item.name) }"
         >
-          <component
-            v-if="subItem.options" :is="subItem.options.href ? 'a' : 'button'"
-            class="apos-admin-bar__btn" :href="subItem.options.href"
-            v-on="subItem.options.href ? {} : { click: () => emitEvent(subItem.name) }"
-          >
-            {{ subItem.label }}
-          </component>
-        </li>
-      </ul> -->
-    </div>
+          {{ item.label }}
+        </component>
+        <AposContextMenu
+          v-else-if="item.items" class="apos-admin-bar__sub"
+          :menu="item.items" :button="{
+            label: item.label
+          }"
+          :tip-alignment="index > 1 ? 'right' : 'left'"
+        />
+      </li>
+      <li class="apos-admin-bar__item" v-if="plusMenu.length > 0">
+        <AposContextMenu
+          class="apos-admin-bar__plus"
+          :menu="plusMenu" :button="{
+            label: 'New item',
+            iconOnly: true,
+            icon: 'plus-icon',
+            type: 'primary'
+          }"
+          tip-alignment="right"
+        />
+      </li>
+    </ul>
   </nav>
 </template>
 
 <script>
 import AposLogo from './AposLogo';
+import AposButton from '../button/AposButton';
 import AposContextMenu from '../contextMenu/AposContextMenu';
 
 export default {
   name: 'TheAposAdminBar',
   components: {
     AposLogo,
+    AposButton,
     AposContextMenu
   },
   props: {
@@ -62,11 +59,28 @@ export default {
   },
   data() {
     return {
-      menuItems: []
+      menuItems: [],
+      plusMenu: []
     };
+  },
+  computed: {
   },
   mounted() {
     this.menuItems = [...this.items];
+    // This will need to be an async call to get pieces as well as the new page
+    // route.
+    this.plusMenu = [
+      {
+        label: 'Sandwich',
+        name: 'sandwich-artists',
+        action: 'sandwich-piece'
+      },
+      {
+        label: 'Tree',
+        name: 'trees',
+        action: 'trees-piece'
+      }
+    ];
   },
   methods: {
     emitEvent: function (name) {
@@ -83,7 +97,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-$menu-height: 63px;
+$menu-height: 68px;
+$menu-v-pad: 18px;
+$menu-item-height: $menu-height - (2 * $menu-v-pad);
 $menu-h-space: 16px;
 $menu-v-space: 25px;
 
@@ -105,9 +121,34 @@ body {
   font-size: map-get($font-sizes, menu-label);
 }
 
+.apos-admin-bar__items {
+  margin: 0;
+  padding: 0;
+}
+
 .apos-admin-bar__logo,
 .apos-admin-bar__item {
   display: inline-block;
+  height: $menu-item-height;
+  padding-top: $menu-v-pad;
+  padding-bottom: $menu-v-pad;
+}
+
+.apos-admin-bar__item {
+  display: inline-flex;
+  align-items: center;
+}
+
+.apos-admin-bar__sub /deep/ .apos-context-menu__btn {
+  height: $menu-item-height;
+  padding-left: 20px;
+  padding-right: 20px;
+  border-radius: 0;
+
+  &:hover,
+  &:focus {
+    background-color: transparent;
+  }
 }
 
 .apos-admin-bar__logo {
@@ -120,18 +161,16 @@ body {
   position: relative;
   display: inline-flex;
   align-items: center;
-  height: $menu-height;
   margin: 0;
   padding: 0 $menu-v-space;
   border: 0;
   color: var(--a-text-primary);
   text-decoration: none;
   cursor: pointer;
+}
 
-  &:hover,
-  &:focus {
-    background-color: var(--a-base-8);
-  }
+.apos-admin-bar__sub /deep/ .apos-context-menu__popup {
+  top: calc(100% + 10px);
 }
 
 .apos-admin-bar__dropdown-items .apos-admin-bar__btn {
@@ -143,5 +182,19 @@ body {
   margin: 0;
   padding: 0;
   background: var(--a-base-10);
+}
+
+.apos-admin-bar__plus {
+  margin-left: 20px;
+  // Adjust button padding and svg size to have a large plus icon while keeping
+  // the button size the same.
+  /deep/ .apos-context-menu__btn {
+    padding: 5px;
+  }
+
+  /deep/ svg {
+    width: 19px;
+    height: 19px;
+  }
 }
 </style>

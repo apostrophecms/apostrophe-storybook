@@ -6,6 +6,7 @@
   >
     <!-- TODO refactor buttons to take a single config obj -->
     <AposButton
+      class="apos-context-menu__btn"
       @click="buttonClicked" :label="button.label"
       :type="button.type" :icon="button.icon"
       :icon-only="button.iconOnly" :state="buttonState"

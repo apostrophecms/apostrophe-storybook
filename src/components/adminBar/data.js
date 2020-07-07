@@ -6,16 +6,31 @@ export default {
       menu: true,
       items: [
         {
-          label: 'Dogs and other stuff',
-          name: 'dogs',
-          options: {}
+          label: 'Sandwich artists',
+          name: 'sandwich-artists',
+          action: 'sandwich-manager'
         },
         {
-          label: 'Cats go meow',
-          name: 'cats',
-          options: {
-            href: '#cats'
-          }
+          label: 'Trees',
+          name: 'trees',
+          action: 'trees-manager'
+        }
+      ]
+    },
+    {
+      label: 'Media',
+      name: 'media',
+      menu: true,
+      items: [
+        {
+          label: 'Files',
+          name: 'files',
+          action: 'files-manager'
+        },
+        {
+          label: 'Images',
+          name: 'images',
+          action: 'image-manager'
         }
       ]
     },
