@@ -1,9 +1,10 @@
 <template>
   <!-- Disabling since the SVG is mostly not active vue template code. -->
   <!-- eslint-disable vue/max-attributes-per-line -->
+  <!-- NOTE: the `width` att -->
   <svg
     :class="[alignmentModifier, originModifier]"
-    class="apos-context-menu__tip" width="27px" height="13px" viewBox="0 0 27 13" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+    class="apos-context-menu__tip" :width="width" :height="height" :viewBox="`0 0 ${width} ${height}`" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
   >
     <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
       <g transform="translate(-0.375000, 1.312500)">
@@ -26,9 +27,16 @@ export default {
     origin: {
       type: String,
       required: true
+    },
+    width: {
+      type: String,
+      default: '27px'
     }
   },
   computed: {
+    height() {
+      return this.width * 0.4815;
+    },
     alignmentModifier () {
       return `apos-context-menu__tip--alignment-${this.align}`;
     },
@@ -45,7 +53,7 @@ export default {
   }
 
   .apos-context-menu__tip--alignment-left {
-    left: 20px;
+    left: $menuTipOffset;
   }
 
   .apos-context-menu__tip--alignment-center {
@@ -56,7 +64,7 @@ export default {
   }
 
   .apos-context-menu__tip--alignment-right {
-    right: 20px;
+    right: $menuTipOffset;
   }
 
   .apos-context-menu__tip--origin-below {
