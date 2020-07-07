@@ -1,9 +1,16 @@
 import Vue from 'vue';
-import { addDecorator } from '@storybook/vue';
+import { addDecorator, addParameters } from '@storybook/vue';
 import { withContexts } from '@storybook/addon-contexts/vue';
 import { contexts } from './configs/contexts';
 
 addDecorator(withContexts(contexts));
+// https://storybook.js.org/docs/configurations/options-parameter/#sorting-stories
+addParameters({
+  options: {
+    storySort: (a, b) =>
+      a[1].kind === b[1].kind ? 0 : a[1].id.localeCompare(b[1].id, undefined, { numeric: true }),
+  },
+});
 
 // Globally available icons
 import CalendarIcon from 'vue-material-design-icons/Calendar.vue';
