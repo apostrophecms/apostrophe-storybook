@@ -7,6 +7,7 @@
 <template>
   <AposModal
     :modal="modal"
+    class="apos-media-manager"
     @inactive="modal.active = false" @show-modal="modal.showModal = true"
     @esc="cancel" @no-modal="$emit('safe-close')"
   >
@@ -238,6 +239,12 @@ export default {
 
 <style lang="scss" scoped>
 @import '../../scss/_mixins';
+
+  .apos-media-manager /deep/ .apos-media-manager-toolbar {
+    position: relative;
+    z-index: 3;
+  }
+
 .apos-media-manager__empty {
   display: flex;
   justify-content: center;
