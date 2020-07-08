@@ -21,10 +21,10 @@
           :tip-alignment="index > 1 ? 'right' : 'left'"
         />
       </li>
-      <li class="apos-admin-bar__item" v-if="plusMenu.length > 0">
+      <li class="apos-admin-bar__item" v-if="createMenu.length > 0">
         <AposContextMenu
           class="apos-admin-bar__plus"
-          :menu="plusMenu" :button="{
+          :menu="createMenu" :button="{
             label: 'New item',
             iconOnly: true,
             icon: 'plus-icon',
@@ -60,7 +60,7 @@ export default {
   data() {
     return {
       menuItems: [],
-      plusMenu: []
+      createMenu: []
     };
   },
   computed: {
@@ -69,7 +69,7 @@ export default {
     this.menuItems = [...this.items];
     // This will need to be an async call to get pieces as well as the new page
     // route.
-    this.plusMenu = [
+    this.createMenu = [
       {
         label: 'Sandwich',
         name: 'sandwich-artists',
