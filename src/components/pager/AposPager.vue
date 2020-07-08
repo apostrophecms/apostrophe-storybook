@@ -97,7 +97,7 @@ export default {
 
   .apos-input--select {
     background-color: transparent;
-    padding: $spacing-base $spacing-double $spacing-base $spacing-base;
+    padding: ($spacing-base - 1px) $spacing-double ($spacing-base - 1px) $spacing-base;
   }
 
   .apos-input-icon {
