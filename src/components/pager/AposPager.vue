@@ -5,26 +5,42 @@
       class="apos-pager__btn"
       type="outline" @click="incrementPage(-1)"
       :icon-only="true" icon="chevron-left-icon"
-      label="Previous page of results"
+      :label="prevButtonLabel"
     />
-    Page {{ currentPage }}
+    Page
+    <div class="apos-input-wrapper">
+      <select
+        class="apos-input apos-input--select"
+        v-model="selectedPage" aria-label="Select page"
+      >
+        <option
+          v-for="num in totalPages" :key="num"
+          :value="num"
+        >
+          {{ num }}
+        </option>
+      </select>
+      <MenuSwap :size="24" class="apos-input-icon" />
+    </div>
     <AposButton
       :disabled="currentPage >= totalPages"
       class="apos-pager__btn"
       type="outline" @click="incrementPage(1)"
       :icon-only="true" icon="chevron-right-icon"
-      label="Next page of results"
+      :label="nextButtonLabel"
     />
   </nav>
 </template>
 
 <script>
 import AposButton from '../button/AposButton';
+import MenuSwap from "vue-material-design-icons/MenuSwap.vue";
 
 export default {
   name: 'AposPager',
   components: {
-    AposButton
+    AposButton,
+    MenuSwap
   },
   props: {
     currentPage: {
@@ -34,6 +50,24 @@ export default {
     totalPages: {
       type: Number,
       required: true
+    }
+  },
+  computed: {
+    prevButtonLabel () {
+      return this.currentPage > 1 ? `Go to page ${this.currentPage - 1}`
+        : 'Previous page';
+    },
+    nextButtonLabel () {
+      return this.currentPage < this.totalPages
+        ? `Go to page ${this.currentPage + 1}` : 'Next page';
+    },
+    selectedPage: {
+      get() {
+        return this.currentPage;
+      },
+      set(val) {
+        this.$emit('change', val);
+      }
     }
   },
   methods: {
@@ -50,11 +84,24 @@ export default {
 };
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
   .apos-pager {
     display: inline-flex;
     align-items: center;
     font-size: map-get($font-sizes, default);
+  }
+
+  .apos-input-wrapper {
+    margin-left: 0.5em;
+  }
+
+  .apos-input--select {
+    background-color: transparent;
+    padding: $spacing-base $spacing-double $spacing-base $spacing-base;
+  }
+
+  .apos-input-icon {
+    right: $spacing-base / 4;
   }
 
   .apos-pager__btn {

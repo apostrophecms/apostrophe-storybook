@@ -133,7 +133,7 @@ export default {
     position: relative;
     color: var(--a-text-primary);
     background-color: var(--a-base-9);
-    padding: 10px 20px;
+    padding: $spacing-base $spacing-double;
     border-radius: var(--a-border-radius);
     font-size: map-get($font-sizes, modal);
     letter-spacing: 0.75px;

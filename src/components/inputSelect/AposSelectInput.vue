@@ -56,29 +56,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.apos-input--select {
-  -moz-appearance: none;
-  -webkit-appearance: none;
-  background-repeat: no-repeat, repeat;
-  &:hover {
-    cursor: pointer;
-  }
-  &:hover ~ .apos-input-icon, &:active ~ .apos-input-icon {
-    color: var(--a-primary);
-  }
-}
-
 .apos-input-icon {
-  position: absolute;
-  right: $input-padding;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--a-base-2);
-  pointer-events: none;
   @include apos-transition();
-
-  .apos-field--error & {
-    color: var(--a-danger);
-  }
 }
 </style>

@@ -22,7 +22,7 @@
       <AposPager
         v-if="totalPages > 1" class="apos-manager__pager"
         :total-pages="totalPages" :current-page="currentPage"
-        @click="updatePage"
+        @click="updatePage" @change="updatePage"
       />
       <AposFilterMenu :menu="filterFields" @input="filter" />
       <AposStringInput
