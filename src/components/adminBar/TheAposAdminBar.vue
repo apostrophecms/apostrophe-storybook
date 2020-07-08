@@ -21,10 +21,10 @@
           :tip-alignment="index > 1 ? 'right' : 'left'"
         />
       </li>
-      <li class="apos-admin-bar__item" v-if="plusMenu.length > 0">
+      <li class="apos-admin-bar__item" v-if="createMenu.length > 0">
         <AposContextMenu
-          class="apos-admin-bar__plus"
-          :menu="plusMenu" :button="{
+          class="apos-admin-bar__create"
+          :menu="createMenu" :button="{
             label: 'New item',
             iconOnly: true,
             icon: 'plus-icon',
@@ -63,7 +63,7 @@ export default {
   data() {
     return {
       menuItems: [],
-      plusMenu: [],
+      createMenu: [],
       user: {}
     };
   },
@@ -73,7 +73,7 @@ export default {
     this.menuItems = [...this.items];
     // This will need to be an async call to get pieces as well as the new page
     // route.
-    this.plusMenu = [
+    this.createMenu = [
       {
         label: 'Sandwich',
         name: 'sandwich-artists',
@@ -132,33 +132,50 @@ body {
   padding: 0;
 }
 
-.apos-admin-bar__logo,
-.apos-admin-bar__item {
+.apos-admin-bar__logo {
   display: inline-block;
   height: $menu-item-height;
-  padding-top: $menu-v-pad;
-  padding-bottom: $menu-v-pad;
 }
 
+.apos-admin-bar__create /deep/ .apos-context-menu__btn,
+.apos-admin-bar__sub /deep/ .apos-context-menu__btn,
+.apos-admin-bar__btn {
+  &:hover,
+  &:focus {
+    transform: none;
+  }
+}
+
+.apos-admin-bar__sub /deep/ .apos-context-menu__btn,
+.apos-admin-bar__btn {
+  height: $menu-height;
+
+  &:hover,
+  &:focus {
+    color: var(--a-primary);
+    background-color: var(--a-base-10);
+  }
+}
 .apos-admin-bar__item {
   display: inline-flex;
   align-items: center;
 }
 
 .apos-admin-bar__sub /deep/ .apos-context-menu__btn {
-  height: $menu-item-height;
   padding-left: 20px;
   padding-right: 20px;
   border-radius: 0;
-
-  &:hover,
-  &:focus {
-    background-color: transparent;
-  }
 }
 
 .apos-admin-bar__logo {
   margin-right: $menu-h-space;
+}
+
+.apos-admin-bar__logo,
+.apos-admin-bar /deep/ .apos-context-menu__btn,
+.apos-admin-bar__btn {
+  padding-top: $menu-v-pad;
+  padding-bottom: $menu-v-pad;
 }
 
 .apos-admin-bar__sub /deep/ .apos-button,
@@ -168,7 +185,8 @@ body {
   display: inline-flex;
   align-items: center;
   margin: 0;
-  padding: 0 $menu-v-space;
+  padding-right: $menu-h-space;
+  padding-left: $menu-h-space;
   border: 0;
   color: var(--a-text-primary);
   text-decoration: none;
@@ -176,7 +194,7 @@ body {
 }
 
 .apos-admin-bar__sub /deep/ .apos-context-menu__popup {
-  top: calc(100% + 10px);
+  top: calc(100% - 10px);
 }
 
 .apos-admin-bar__dropdown-items .apos-admin-bar__btn {
@@ -190,7 +208,7 @@ body {
   background: var(--a-base-10);
 }
 
-.apos-admin-bar__plus {
+.apos-admin-bar__create {
   margin-left: 20px;
   // Adjust button padding and svg size to have a large plus icon while keeping
   // the button size the same.
@@ -198,7 +216,11 @@ body {
     padding: 5px;
   }
 
-  /deep/ svg {
+  /deep/ .apos-context-menu__popup {
+    top: calc(100% + 13px);
+  }
+
+  /deep/ .apos-button__icon svg {
     width: 19px;
     height: 19px;
   }
