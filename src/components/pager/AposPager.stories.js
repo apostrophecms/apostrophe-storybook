@@ -20,7 +20,6 @@ export const buttons = () => ({
   `,
   methods: {
     registerPageChange (pageNum) {
-      console.info('📃', pageNum);
       this.currentPage = pageNum;
     }
   }

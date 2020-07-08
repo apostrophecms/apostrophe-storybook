@@ -4,7 +4,7 @@
       :disabled="currentPage == 1"
       class="apos-pager__btn"
       type="outline" @click="incrementPage(-1)"
-      icon-only="true" icon="chevron-left-icon"
+      :icon-only="true" icon="chevron-left-icon"
       label="Previous page of results"
     />
     Page {{ currentPage }}
@@ -12,7 +12,7 @@
       :disabled="currentPage >= totalPages"
       class="apos-pager__btn"
       type="outline" @click="incrementPage(1)"
-      icon-only="true" icon="chevron-right-icon"
+      :icon-only="true" icon="chevron-right-icon"
       label="Next page of results"
     />
   </nav>
