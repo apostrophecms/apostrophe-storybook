@@ -3,9 +3,9 @@
     type="button" @click="click"
     class="apos-button"
     :class="modifierClass" :tabindex="tabindex"
-    :busy="busy" :disabled="isDisabled"
+    :disabled="isDisabled"
   >
-    <AposSpinner :color="spinnerColor" />
+    <AposSpinner :color="spinnerColor" v-if="busy" />
     <div class="apos-button__content">
       <component
         :size="15" class="apos-button__icon"
