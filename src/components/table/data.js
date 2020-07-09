@@ -25,7 +25,14 @@ export default {
     {
       label: 'Published',
       action: 'published-desc',
+      icon: 'Circle',
       name: 'published',
+      sortable: true
+    },
+    {
+      label: 'Edit',
+      action: 'edit-desc',
+      name: 'edit',
       sortable: true
     },
     {
@@ -46,7 +53,7 @@ export default {
       id: 'jealous-uptake-fostered-keller-legitimate',
       title: lorem.generateSentences(1),
       updatedAt: 'Thursday January 12th, 2020',
-      published: true,
+      published: false,
       url: '/something cool'
     },
     {
@@ -60,7 +67,7 @@ export default {
       id: 'willed-industries-roller-watery-weighing',
       title: lorem.generateSentences(1),
       updatedAt: 'Thursday January 12th, 2020',
-      published: true,
+      published: false,
       url: '/something cool'
     },
     {
@@ -74,7 +81,7 @@ export default {
       id: 'defeats-kinetic-recent-conjecture-premiums',
       title: lorem.generateSentences(1),
       updatedAt: 'Thursday January 12th, 2020',
-      published: true,
+      published: false,
       url: '/something cool'
     },
     {

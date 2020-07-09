@@ -1,4 +1,5 @@
-import { withKnobs } from '@storybook/addon-knobs';
+import { withKnobs, boolean } from '@storybook/addon-knobs';
+
 import AposTable from './AposTable.vue';
 
 import data from './data.js';
@@ -12,13 +13,22 @@ export const Table = () => ({
   components: {
     AposTable
   },
-  methods: {},
   data() {
     return {
-      data
+      data,
+      selectable: false,
+      tree: false
     };
   },
+  props: {
+    selectable: {
+      default: boolean('Selectable', false)
+    }
+  },
   template: `
-      <AposTable :data="data" />
-    `
+    <AposTable
+      :data="data"
+      :selectable="selectable"
+    />
+  `
 });
