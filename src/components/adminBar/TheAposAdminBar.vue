@@ -194,7 +194,7 @@ body {
 }
 
 .apos-admin-bar__sub /deep/ .apos-context-menu__popup {
-  top: calc(100% - 10px);
+  top: calc(100% + 5px);
 }
 
 .apos-admin-bar__dropdown-items .apos-admin-bar__btn {
