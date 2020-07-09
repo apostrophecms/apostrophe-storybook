@@ -154,7 +154,7 @@ body {
   &:focus {
     box-shadow: none;
     outline-width: 0;
-    background-color: var(--a-base-10);
+    background-color: var(--a-base-8);
   }
 }
 .apos-admin-bar__item {
