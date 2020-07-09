@@ -20,17 +20,21 @@
           >
             {{ confirmContent.heading }}
           </h2>
-          <p class="apos-confirm__description">
+          <p
+            class="apos-confirm__description"
+            v-if="confirmContent.description"
+          >
             {{ confirmContent.description }}
           </p>
           <div class="apos-confirm__btns">
             <AposButton
               class="apos-confirm__btn"
-              :label="confirmContent.negativeLabel" @click="cancel"
+              :label="confirmContent.negativeLabel || 'Cancel'" @click="cancel"
             />
             <AposButton
               class="apos-confirm__btn"
-              :label="confirmContent.affirmativeLabel" @click="confirm"
+              :label="confirmContent.affirmativeLabel || 'Confirm'"
+              @click="confirm"
               :type="confirmContent.theme || 'primary'"
             />
           </div>
