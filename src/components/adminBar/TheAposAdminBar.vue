@@ -230,4 +230,8 @@ body {
 .apos-admin-bar__user {
   margin-left: auto;
 }
+
+/deep/ .apos-context-menu__pane {
+  min-width: 150px;
+}
 </style>
