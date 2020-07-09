@@ -1,5 +1,5 @@
 import {
-  withKnobs
+  withKnobs, select
 } from '@storybook/addon-knobs';
 
 import AposModalConfirm from './AposModalConfirm.vue';
@@ -20,6 +20,11 @@ export const confirmationModal = () => {
       },
       finishExit: function () {
         this.active = false;
+      },
+      confirmed () {
+        setTimeout(function () {
+          window.alert('CONFIRMED 👍');
+        }, 400);
       }
     },
     data () {
@@ -31,7 +36,13 @@ export const confirmationModal = () => {
           description: 'Are you sure about this?',
           affirmativeLabel: 'Yes, trash them',
           negativeLabel: 'Cancel',
-          theme: null
+          theme: select(
+            'Type', {
+              Default: null,
+              Danger: 'danger'
+            },
+            null
+          )
         }
       };
     },
@@ -43,6 +54,7 @@ export const confirmationModal = () => {
         <AposModalConfirm
           v-if="active" @safe-close="finishExit"
           :confirmContent="confirmContent"
+          @confirm="confirmed"
         />
       </div>
     `

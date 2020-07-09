@@ -1,6 +1,6 @@
 <template>
   <div class="apos-empty-state">
-    <p class="o-heading apos-title" v-if="emptyState.title">
+    <p class="apos-heading apos-title" v-if="emptyState.title">
       {{ emptyState.title }}
     </p>
     <p class="apos-hint" v-if="emptyState.message">

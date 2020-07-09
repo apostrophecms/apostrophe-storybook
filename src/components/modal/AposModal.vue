@@ -22,7 +22,7 @@
               <div v-if="hasSecondaryControls" class="apos-modal__controls--secondary">
                 <slot name="secondaryControls" />
               </div>
-              <h2 :id="id" class="apos-modal__heading o-heading">
+              <h2 :id="id" class="apos-modal__heading apos-heading">
                 {{ modal.title }}
               </h2>
               <div

@@ -11,21 +11,27 @@
             v-if="confirmContent.icon" class="apos-confirm__icon"
             :src="confirmContent.icon" alt=""
           >
-          <h2 class="apos-confirm__heading" v-if="confirmContent.heading">
+          <AposLogo
+            v-else-if="confirmContent.icon !== false" class="apos-confirm__icon"
+          />
+          <h2
+            v-if="confirmContent.heading"
+            class="apos-confirm__heading apos-heading"
+          >
             {{ confirmContent.heading }}
           </h2>
-          <p>
+          <p class="apos-confirm__description">
             {{ confirmContent.description }}
           </p>
           <div class="apos-confirm__btns">
             <AposButton
               class="apos-confirm__btn"
-              :label="confirmContent.negativeLabel" @click="$emit('cancel')"
+              :label="confirmContent.negativeLabel" @click="cancel"
             />
             <AposButton
               class="apos-confirm__btn"
-              :label="confirmContent.affirmativeLabel" @click="$emit('cancel')"
-              type="primary"
+              :label="confirmContent.affirmativeLabel" @click="confirm"
+              :type="confirmContent.theme || 'primary'"
             />
           </div>
           <!-- confirmContent: {
@@ -47,12 +53,14 @@ import AposModalParentMixin from '../../mixins/AposModalParentMixin';
 import AposModal from '../modal/AposModal.vue';
 import AposModalBody from './../modal/AposModalBody.vue';
 import AposButton from '../button/AposButton.vue';
+import AposLogo from './AposLogo.vue';
 
 export default {
   components: {
     AposModal,
     AposModalBody,
-    AposButton
+    AposButton,
+    AposLogo
   },
   mixins: [AposModalParentMixin],
   props: {
@@ -71,6 +79,12 @@ export default {
       },
       lastSelected: null
     };
+  },
+  methods: {
+    confirm() {
+      this.modal.showModal = false;
+      this.$emit('confirm');
+    }
   }
 };
 </script>
@@ -96,9 +110,28 @@ export default {
   width: 420px;
   text-align: center;
 }
-// .apos-confirm
-// .apos-confirm__icon
+
+/deep/ .apos-modal__body {
+  padding: 60px;
+}
+
+.apos-confirm__icon {
+  width: 60px;
+  height: 60px;
+}
 // .apos-confirm__heading
-// .apos-confirm__btns
-// .apos-confirm__btn
+.apos-confirm__description {
+  font-size: map-get($font-sizes, default);
+  font-weight: 400;
+}
+
+.apos-confirm__btns {
+  margin-top: 30px;
+}
+
+.apos-confirm__btn {
+  & + & {
+    margin-left: $spacing-double;
+  }
+}
 </style>
