@@ -92,12 +92,14 @@ export default {
   }
 
   .apos-input-wrapper {
+    display: inline-flex;
+    align-self: stretch;
     margin-left: 0.5em;
   }
 
   .apos-input--select {
     background-color: transparent;
-    padding: ($spacing-base - 1px) $spacing-double ($spacing-base - 1px) $spacing-base;
+    padding: 0 $spacing-double 0 $spacing-base;
   }
 
   .apos-input-icon {
