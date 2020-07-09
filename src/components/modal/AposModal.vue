@@ -17,7 +17,7 @@
           v-if="modal.showModal"
           class="apos-modal__inner" data-apos-modal-inner
         >
-          <header class="apos-modal__header">
+          <header class="apos-modal__header" v-if="hasHeader">
             <div class="apos-modal__header__main">
               <div v-if="hasSecondaryControls" class="apos-modal__controls--secondary">
                 <slot name="secondaryControls" />
@@ -75,6 +75,10 @@ export default {
   computed: {
     id() {
       const rand = (Math.floor(Math.random() * Math.floor(10000)));
+
+      if (!this.modal.title) {
+        return 'rand';
+      }
       // replace everything not A-Za-z0-9_ with _
       const title = this.modal.title.replace(/\W/g, '_');
       return `${title}-${rand}`;
@@ -85,6 +89,10 @@ export default {
       } else {
         return 'fade';
       }
+    },
+    hasHeader () {
+      return this.modal.title || this.hasPrimaryControls ||
+        this.hasSecondaryControls || this.hasBreadcrumbs;
     },
     hasPrimaryControls: function () {
       return !!this.$slots.primaryControls;
