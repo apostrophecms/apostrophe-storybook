@@ -152,7 +152,8 @@ body {
 
   &:hover,
   &:focus {
-    color: var(--a-primary);
+    box-shadow: none;
+    outline-width: 0;
     background-color: var(--a-base-10);
   }
 }
