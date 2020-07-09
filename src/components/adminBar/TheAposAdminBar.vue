@@ -128,6 +128,7 @@ body {
 }
 
 .apos-admin-bar__items {
+  display: flex;
   margin: 0;
   padding: 0;
 }
