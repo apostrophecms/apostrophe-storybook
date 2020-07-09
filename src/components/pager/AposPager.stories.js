@@ -14,7 +14,7 @@ export const buttons = () => ({
   },
   template: `
     <AposPager
-      @click="registerPageChange"
+      @click="registerPageChange"  @change="registerPageChange"
       :totalPages="totalPages" :currentPage="currentPage"
     />
   `,
