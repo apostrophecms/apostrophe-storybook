@@ -34,14 +34,6 @@
               :type="confirmContent.theme || 'primary'"
             />
           </div>
-          <!-- confirmContent: {
-            icon: null,
-            heading: 'Trash articles',
-            description: 'Are you sure about this?',
-            affirmativeLabel: 'Yes, trash them',
-            negativeLabel: 'Cancel',
-            theme: null
-          } -->
         </template>
       </AposModalBody>
     </template>
