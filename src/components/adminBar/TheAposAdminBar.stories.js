@@ -5,7 +5,7 @@ export default {
   title: 'Admin Menu'
 };
 
-export const areaMenu = () => {
+export const adminMenu = () => {
   return {
     data() {
       return {

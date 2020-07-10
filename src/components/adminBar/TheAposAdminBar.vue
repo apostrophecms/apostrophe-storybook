@@ -34,12 +34,14 @@
         />
       </li>
     </ul>
+    <TheAposAdminBarUser class="apos-admin-bar__user" :user="user" />
   </nav>
 </template>
 
 <script>
 import AposLogo from './AposLogo';
 import AposButton from '../button/AposButton';
+import TheAposAdminBarUser from './TheAposAdminBarUser';
 import AposContextMenu from '../contextMenu/AposContextMenu';
 
 export default {
@@ -47,7 +49,8 @@ export default {
   components: {
     AposLogo,
     AposButton,
-    AposContextMenu
+    AposContextMenu,
+    TheAposAdminBarUser
   },
   props: {
     items: {
@@ -60,7 +63,8 @@ export default {
   data() {
     return {
       menuItems: [],
-      createMenu: []
+      createMenu: [],
+      user: {}
     };
   },
   computed: {
@@ -81,6 +85,8 @@ export default {
         action: 'trees-piece'
       }
     ];
+
+    this.user = require('./userData').user;
   },
   methods: {
     emitEvent: function (name) {
@@ -113,15 +119,16 @@ body {
   left: 0;
   display: flex;
   align-items: center;
-  width: 100%;
+  right: 0;
   height: $menu-height;
-  padding: 0 16px;
+  padding: 0 30px 0 16px;
   border-bottom: 1px solid var(--a-base-9);
   background: var(--a-background-primary);
   font-size: map-get($font-sizes, menu-label);
 }
 
 .apos-admin-bar__items {
+  display: flex;
   margin: 0;
   padding: 0;
 }
@@ -146,8 +153,9 @@ body {
 
   &:hover,
   &:focus {
-    color: var(--a-primary);
-    background-color: var(--a-base-10);
+    box-shadow: none;
+    outline-width: 0;
+    background-color: var(--a-base-8);
   }
 }
 .apos-admin-bar__item {
@@ -188,7 +196,7 @@ body {
 }
 
 .apos-admin-bar__sub /deep/ .apos-context-menu__popup {
-  top: calc(100% - 10px);
+  top: calc(100% + 5px);
 }
 
 .apos-admin-bar__dropdown-items .apos-admin-bar__btn {
@@ -220,4 +228,11 @@ body {
   }
 }
 
+.apos-admin-bar__user {
+  margin-left: auto;
+}
+
+/deep/ .apos-context-menu__pane {
+  min-width: 150px;
+}
 </style>
