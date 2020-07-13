@@ -55,7 +55,7 @@ function generateRow(maxDepth = 5) {
     url: `/${id}`
   };
 
-  if (randomBoolean(0.5)) {
+  if (randomBoolean(0.3)) {
     item.children = [];
     for (let i = 0; i < randomNumber(); i++) {
       if (maxDepth > i) {

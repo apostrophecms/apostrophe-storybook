@@ -1,12 +1,18 @@
 <template>
   <div class="apos-tree">
-    <AposTreeHeader :columns="data.headers" />
+    <h1>blues</h1>
+    <AposTreeHeader
+      :columns="spacingRow" :spacer-only="true"
+      @calced="setWidths"
+    />
+    <AposTreeHeader :columns="data.headers" :col-widths="colWidths" />
     <ol class="apos-tree--list">
       <AposTreeRow
         v-for="(row, index) in data.rows"
         :key="index"
         :row="row"
         :columns="columns"
+        :col-widths="colWidths"
       />
     </ol>
   </div>
@@ -23,11 +29,69 @@ export default {
     AposTreeRow
   },
   props: {
-    data: Object
+    data: {
+      type: Object,
+      default() {
+        return {};
+      }
+    }
+  },
+  data() {
+    return {
+      colWidths: null
+    };
   },
   computed: {
     columns() {
       return this.data.headers.map(column => column.name);
+    },
+    spacingRow() {
+      let spacingRow = {};
+      // Combine the header with the rows, the limit to a reasonable 50 rows.
+      const headers = {};
+      if (this.data.headers) {
+        this.data.headers.forEach(header => {
+          headers[header.name] = header.label;
+        });
+      }
+
+      let completeRows = [headers].concat(this.data.rows);
+      completeRows = completeRows.slice(0, 50);
+
+      // Loop over the combined header/rows array, finding the largest value
+      // for each key.
+      completeRows.forEach(row => {
+        if (spacingRow.length === 0) {
+          console.info('2', row);
+          spacingRow = Object.assign({}, row);
+          return;
+        }
+        this.columns.forEach(key => {
+          if (
+            !spacingRow[key] ||
+            (spacingRow[key] &&
+            spacingRow[key].toString().length < row[key].toString().length)
+          ) {
+            spacingRow[key] = row[key];
+          }
+        });
+      });
+      // Place that largest value on that key of the spacingRow object.
+      // Put that array in the DOM, and generate styles to be passed down based on its layout. Give the first column any leftover space.
+      const finalRow = [];
+      this.columns.forEach(col => {
+        finalRow.push({
+          name: col,
+          label: spacingRow[col]
+        });
+      });
+      return finalRow;
+    }
+  },
+  methods: {
+    setWidths(widths) {
+      console.info('👩‍🚒', widths, arguments);
+      this.colWidths = widths;
     }
   }
 };
@@ -53,9 +117,10 @@ export default {
   display: table-cell;
   padding: 12.5px 4.5px;
   border-bottom: 1px solid var(--a-base-9);
+  box-sizing: border-box;
 }
 
-.apos-tree--column-title {
-  width: 50vw;
-}
+// .apos-tree--column-title {
+//   width: 50vw;
+// }
 </style>

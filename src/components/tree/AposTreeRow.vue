@@ -6,15 +6,18 @@
         :key="`${index}-${cell.name}`"
         class="apos-tree--cell"
         :class="`apos-tree--column-${cell.name}`"
+        :data-col="cell.name"
+        :style="colWidths && colWidths[cell.name] ? { width: `${colWidths[cell.name]}px` } : {}"
       >
         {{ cell.value }}
       </span>
     </div>
     <ol class="apos-tree--list" v-if="row.children">
       <AposTreeRow
-        v-for="(row, index) in row.children"
+        v-for="(child, index) in row.children"
         :key="index"
-        :row="row"
+        :row="child"
+        :col-widths="colWidths"
       />
     </ol>
   </li>
@@ -24,8 +27,16 @@
 export default {
   name: 'AposTreeRow',
   props: {
-    row: Object,
-    columns: Array
+    row: {
+      type: Object,
+      required: true
+    },
+    colWidths: {
+      type: Object,
+      default () {
+        return {};
+      }
+    }
   },
   computed: {
     isOpen() {
@@ -57,7 +68,9 @@ export default {
 </script>
 
 <style lang="scss">
-.apos-tree--row .apos-tree--list .apos-tree--row-data {
-  padding-left: 24px;
+.apos-tree--cell {
+  .apos-tree--list .apos-tree--list &:first-child {
+    padding-left: 24px;
+  }
 }
 </style>
