@@ -1,5 +1,8 @@
 <template>
-  <div class="apos-tree--row-data">
+  <div
+    class="apos-tree--row-data" :class="headerClasses"
+    :aria-hidden="spacerOnly"
+  >
     <span
       v-for="(column, index) in columns"
       :key="`${index}-${column.name}`"
@@ -32,15 +35,57 @@ export default {
       }
     }
   },
+  computed: {
+    headerClasses() {
+      if (this.spacerOnly) {
+        return 'apos-tree-header--hidden';
+      }
+      return '';
+    }
+  },
   mounted() {
     if (this.spacerOnly) {
+      this.calculateWidths();
+
+      window.addEventListener('resize', debounce(this.calculateWidths, 100));
+    }
+  },
+  destroyed() {
+    if (this.spacerOnly) {
+      window.addEventListener('resize', debounce(this.calculateWidths, 100));
+    }
+  },
+  methods: {
+    calculateWidths() {
       const colWidths = {};
       this.columns.forEach(col => {
         colWidths[col.name] = this.$el.querySelector(`[data-spacer="${col.name}"]`).clientWidth;
       });
-      this.$emit('calced', colWidths);
+      this.$emit('calculated', colWidths);
     }
   }
+};
+
+// Debounce function from https://davidwalsh.name/javascript-debounce-function
+function debounce(func, wait, immediate) {
+  let timeout;
+
+  return function() {
+    const context = this;
+    const args = arguments;
+    const later = function() {
+      timeout = null;
+      if (!immediate) {
+        func.apply(context, args);
+      }
+    };
+    const callNow = immediate && !timeout;
+    clearTimeout(timeout);
+    timeout = setTimeout(later, wait);
+    if (callNow) {
+      func.apply(context, args);
+    }
+  };
 };
 </script>
 
@@ -48,5 +93,11 @@ export default {
 .apos-tree--header {
   display: flex;
   width: 100%;
+}
+
+.apos-tree--row-data.apos-tree-header--hidden {
+  display: block;
+  height: 0;
+  visibility: hidden;
 }
 </style>

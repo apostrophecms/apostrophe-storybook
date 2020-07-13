@@ -18,6 +18,7 @@
         :key="index"
         :row="child"
         :col-widths="colWidths"
+        :columns="columns"
       />
     </ol>
   </li>
@@ -27,6 +28,10 @@
 export default {
   name: 'AposTreeRow',
   props: {
+    columns: {
+      type: Array,
+      required: true
+    },
     row: {
       type: Object,
       required: true
@@ -43,25 +48,32 @@ export default {
       return true;
     },
     cells() {
-      const cells = [
-        {
-          name: 'title',
-          value: 'One'
-        },
-        {
-          name: 'updatedAt',
-          value: 'Friday July 10th, 2020'
-        },
-        {
-          name: 'published',
-          value: true
-        },
-        {
-          name: 'link',
-          value: '/one'
-        }
-      ];
-      return cells;
+      const cellArray = [];
+      this.columns.forEach(col => {
+        cellArray.push({
+          name: col,
+          value: this.row[col]
+        });
+      });
+      // const cells = [
+      //   {
+      //     name: 'title',
+      //     value: 'One'
+      //   },
+      //   {
+      //     name: 'updatedAt',
+      //     value: 'Friday July 10th, 2020'
+      //   },
+      //   {
+      //     name: 'published',
+      //     value: true
+      //   },
+      //   {
+      //     name: 'link',
+      //     value: '/one'
+      //   }
+      // ];
+      return cellArray;
     }
   }
 };

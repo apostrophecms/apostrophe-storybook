@@ -3,7 +3,7 @@
     <h1>blues</h1>
     <AposTreeHeader
       :columns="spacingRow" :spacer-only="true"
-      @calced="setWidths"
+      @calculated="setWidths"
     />
     <AposTreeHeader :columns="data.headers" :col-widths="colWidths" />
     <ol class="apos-tree--list">
@@ -90,7 +90,6 @@ export default {
   },
   methods: {
     setWidths(widths) {
-      console.info('👩‍🚒', widths, arguments);
       this.colWidths = widths;
     }
   }
@@ -119,8 +118,4 @@ export default {
   border-bottom: 1px solid var(--a-base-9);
   box-sizing: border-box;
 }
-
-// .apos-tree--column-title {
-//   width: 50vw;
-// }
 </style>
