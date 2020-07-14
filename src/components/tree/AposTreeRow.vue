@@ -55,24 +55,7 @@ export default {
           value: this.row[col]
         });
       });
-      // const cells = [
-      //   {
-      //     name: 'title',
-      //     value: 'One'
-      //   },
-      //   {
-      //     name: 'updatedAt',
-      //     value: 'Friday July 10th, 2020'
-      //   },
-      //   {
-      //     name: 'published',
-      //     value: true
-      //   },
-      //   {
-      //     name: 'link',
-      //     value: '/one'
-      //   }
-      // ];
+
       return cellArray;
     }
   }
@@ -80,9 +63,4 @@ export default {
 </script>
 
 <style lang="scss">
-.apos-tree--cell {
-  .apos-tree--list .apos-tree--list &:first-child {
-    padding-left: 24px;
-  }
-}
 </style>

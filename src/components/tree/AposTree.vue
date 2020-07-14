@@ -55,7 +55,14 @@ export default {
         });
       }
 
-      let completeRows = [headers].concat(this.data.rows);
+      let completeRows = [headers];
+      this.data.rows.forEach(row => {
+        completeRows.push(row);
+
+        if (row.children) {
+          completeRows = completeRows.concat(row.children);
+        }
+      });
       completeRows = completeRows.slice(0, 50);
 
       // Loop over the combined header/rows array, finding the largest value
@@ -66,6 +73,7 @@ export default {
           spacingRow = Object.assign({}, row);
           return;
         }
+
         this.columns.forEach(key => {
           if (
             !spacingRow[key] ||
@@ -108,14 +116,24 @@ export default {
 // NOTE: Row and cell styles are here since they're shared between the header and the row
 
 .apos-tree--row-data {
-  display: table;
+  display: flex;
   width: 100%;
 }
 
 .apos-tree--cell {
   display: table-cell;
-  padding: 12.5px 4.5px;
+  flex-shrink: 2;
+  padding: 16px 16px;
   border-bottom: 1px solid var(--a-base-9);
   box-sizing: border-box;
+
+  &:first-child {
+    flex-grow: 1;
+    flex-shrink: 1;
+  }
+
+  .apos-tree--list .apos-tree--list &:first-child {
+    padding-left: 24px;
+  }
 }
 </style>
