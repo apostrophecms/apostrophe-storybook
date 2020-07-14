@@ -12,7 +12,6 @@ export default {
 export const Tree = () => ({
   components: { AposTree },
   data() {
-    console.log(data);
     return { data };
   },
   props: {

@@ -9,14 +9,14 @@ $font-weights: (
 );
 
 $font-sizes: (
-  default: 12px,
   meta: 10px,
-  input-label: 14px,
+  default: 12px,
   input: 12px,
   input-hint: 12px,
-  heading: 22px,
   modal: 12px,
-  rail-title: 14px
+  input-label: 14px,
+  rail-title: 14px,
+  heading: 22px,
 );
 
 $spacing-base: 10px;

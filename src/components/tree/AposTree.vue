@@ -1,18 +1,18 @@
 <template>
   <div class="apos-tree">
-    <h1>blues</h1>
     <AposTreeHeader
-      :columns="spacingRow" :spacer-only="true"
+      :headers="spacingRow" :spacer-only="true"
       @calculated="setWidths"
     />
-    <AposTreeHeader :columns="data.headers" :col-widths="colWidths" />
+    <AposTreeHeader :headers="data.headers" :col-widths="colWidths" />
     <ol class="apos-tree--list">
       <AposTreeRow
         v-for="(row, index) in data.rows"
         :key="index"
         :row="row"
-        :columns="columns"
+        :headers="data.headers"
         :col-widths="colWidths"
+        :level="1"
       />
     </ol>
   </div>
@@ -42,9 +42,6 @@ export default {
     };
   },
   computed: {
-    columns() {
-      return this.data.headers.map(column => column.name);
-    },
     spacingRow() {
       let spacingRow = {};
       // Combine the header with the rows, the limit to a reasonable 50 rows.
@@ -56,6 +53,7 @@ export default {
       }
 
       let completeRows = [headers];
+      // Add child rows into `completeRows`.
       this.data.rows.forEach(row => {
         completeRows.push(row);
 
@@ -69,12 +67,12 @@ export default {
       // for each key.
       completeRows.forEach(row => {
         if (spacingRow.length === 0) {
-          console.info('2', row);
           spacingRow = Object.assign({}, row);
           return;
         }
 
-        this.columns.forEach(key => {
+        this.data.headers.forEach(col => {
+          const key = col.name;
           if (
             !spacingRow[key] ||
             (spacingRow[key] &&
@@ -87,10 +85,10 @@ export default {
       // Place that largest value on that key of the spacingRow object.
       // Put that array in the DOM, and generate styles to be passed down based on its layout. Give the first column any leftover space.
       const finalRow = [];
-      this.columns.forEach(col => {
+      this.data.headers.forEach(col => {
         finalRow.push({
-          name: col,
-          label: spacingRow[col]
+          name: col.name,
+          label: spacingRow[col.name]
         });
       });
       return finalRow;
@@ -105,6 +103,10 @@ export default {
 </script>
 
 <style lang="scss">
+.apos-tree {
+  font-size: map-get($font-sizes, default);
+}
+
 .apos-tree--list {
   width: 100%;
   margin-top: 0;
@@ -120,10 +122,10 @@ export default {
   width: 100%;
 }
 
-.apos-tree--cell {
-  display: table-cell;
+.apos-tree__cell {
+  display: inline-flex;
   flex-shrink: 2;
-  padding: 16px 16px;
+  padding: 16px;
   border-bottom: 1px solid var(--a-base-9);
   box-sizing: border-box;
 
@@ -131,9 +133,26 @@ export default {
     flex-grow: 1;
     flex-shrink: 1;
   }
+}
 
-  .apos-tree--list .apos-tree--list &:first-child {
-    padding-left: 24px;
+.apos-tree__cell__icon {
+  display: inline-flex;
+  align-items: flex-start;
+  margin-right: 10px;
+  padding-top: 0.2em;
+
+  .material-design-icon__svg {
+    width: 12px;
+    height: 12px;
+  }
+
+  .apos-tree__cell--icon & .material-design-icon__svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .apos-tree__cell--icon & {
+    padding-top: 0;
   }
 }
 </style>

@@ -1,16 +1,22 @@
 <template>
   <li class="apos-tree--row">
     <div class="apos-tree--row-data">
-      <span
+      <component
+        :is="cell.name === 'url' ? 'a' : 'span'"
+        :href="cell.name === 'url' ? cell.value : false"
+        :target="cell.name === 'url' ? '_blank' : false"
         v-for="(cell, index) in cells"
         :key="`${index}-${cell.name}`"
-        class="apos-tree--cell"
-        :class="`apos-tree--column-${cell.name}`"
+        :class="getCellClasses(cell)"
         :data-col="cell.name"
-        :style="colWidths && colWidths[cell.name] ? { width: `${colWidths[cell.name]}px` } : {}"
+        :style="getCellStyles(cell.name, index)"
       >
-        {{ cell.value }}
-      </span>
+        <component
+          v-if="cell.icon" :is="cell.icon"
+          class="apos-tree__cell__icon"
+        />
+        <span v-show="!cell.iconOnly">{{ cell.value }}</span>
+      </component>
     </div>
     <ol class="apos-tree--list" v-if="row.children">
       <AposTreeRow
@@ -18,7 +24,8 @@
         :key="index"
         :row="child"
         :col-widths="colWidths"
-        :columns="columns"
+        :headers="headers"
+        :level="level + 1"
       />
     </ol>
   </li>
@@ -28,7 +35,7 @@
 export default {
   name: 'AposTreeRow',
   props: {
-    columns: {
+    headers: {
       type: Array,
       required: true
     },
@@ -41,6 +48,10 @@ export default {
       default () {
         return {};
       }
+    },
+    level: {
+      type: Number,
+      required: true
     }
   },
   computed: {
@@ -49,18 +60,60 @@ export default {
     },
     cells() {
       const cellArray = [];
-      this.columns.forEach(col => {
+      this.headers.forEach(col => {
         cellArray.push({
-          name: col,
-          value: this.row[col]
+          name: col.name,
+          value: this.row[col.name],
+          icon: col.icon,
+          iconOnly: col.iconOnly
         });
       });
 
       return cellArray;
+    }
+  },
+  methods: {
+    getCellClasses(cell) {
+      const classes = ['apos-tree__cell'];
+      classes.push(`apos-tree__cell--${cell.name}`);
+
+      if (cell.iconOnly) {
+        classes.push('apos-tree__cell--icon');
+      }
+
+      // TODO: How does this work for i18n?
+      if (cell.name === 'published' && cell.value === 'Unpublished') {
+        classes.push('apos-tree__cell--disabled');
+      }
+
+      return classes;
+    },
+    getCellStyles(name, index) {
+      const styles = {};
+      if (this.colWidths && this.colWidths[name]) {
+        styles.width = `${this.colWidths[name]}px`;
+      }
+      if (index === 0) {
+        styles.paddingLeft = `${24 * this.level}px`
+      }
+      return styles;
     }
   }
 };
 </script>
 
 <style lang="scss">
+.apos-tree__cell--published {
+  .material-design-icon__svg {
+    fill: var(--a-success);
+  }
+
+  &.apos-tree__cell--disabled {
+    color: var(--a-base-3);
+
+    .material-design-icon__svg {
+      fill: var(--a-base-3);
+    }
+  }
+}
 </style>

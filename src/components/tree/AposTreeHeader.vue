@@ -1,17 +1,21 @@
 <template>
   <div
-    class="apos-tree--row-data" :class="headerClasses"
+    class="apos-tree--row-data apos-tree__header" :class="headerClasses"
     :aria-hidden="spacerOnly"
   >
     <span
-      v-for="(column, index) in columns"
-      :key="`${index}-${column.name}`"
-      class="apos-tree--cell"
-      :class="`apos-tree--column-${column.name}`"
-      :data-spacer="spacerOnly && column.name"
-      :style="colWidths && colWidths[column.name] ? { width: `${colWidths[column.name]}px` } : {}"
+      v-for="(col, index) in headers"
+      :key="`${index}-${col.name}`"
+      class="apos-tree__cell"
+      :class="`apos-tree--column-${col.name}`"
+      :data-spacer="spacerOnly && col.name"
+      :style="getCellStyles(col)"
     >
-      {{ column.label }}
+      <component
+        v-if="col.labelIcon" :is="col.labelIcon"
+        class="apos-tree__cell__icon"
+      />
+      {{ col.label }}
     </span>
   </div>
 </template>
@@ -20,7 +24,7 @@
 export default {
   name: 'AposTreeHeader',
   props: {
-    columns: {
+    headers: {
       type: Array,
       required: true
     },
@@ -38,7 +42,7 @@ export default {
   computed: {
     headerClasses() {
       if (this.spacerOnly) {
-        return 'apos-tree-header--hidden';
+        return 'apos-tree__header--hidden';
       }
       return '';
     }
@@ -58,10 +62,24 @@ export default {
   methods: {
     calculateWidths() {
       const colWidths = {};
-      this.columns.forEach(col => {
-        colWidths[col.name] = this.$el.querySelector(`[data-spacer="${col.name}"]`).clientWidth;
+
+      this.headers.forEach(col => {
+        const ref = this.$el.querySelector(`[data-spacer="${col.name}"]`);
+
+        if (!ref) {
+          return;
+        }
+
+        colWidths[col.name] = ref.clientWidth;
       });
       this.$emit('calculated', colWidths);
+    },
+    getCellStyles (cell) {
+      const styles = {};
+      if (this.colWidths && this.colWidths[cell.name]) {
+        styles.width = `${this.colWidths[cell.name]}px`;
+      }
+      return styles;
     }
   }
 };
@@ -90,12 +108,11 @@ function debounce(func, wait, immediate) {
 </script>
 
 <style lang="scss">
-.apos-tree--header {
-  display: flex;
-  width: 100%;
+.apos-tree__header {
+  color: var(--a-base-3);
 }
 
-.apos-tree--row-data.apos-tree-header--hidden {
+.apos-tree__header.apos-tree__header--hidden {
   display: block;
   height: 0;
   visibility: hidden;

@@ -16,17 +16,21 @@ export default {
     {
       label: 'Last Updated',
       action: 'updated-at-desc',
-      icon: 'Calendar',
+      labelIcon: 'calendar-icon',
       name: 'updatedAt'
     },
     {
       label: 'Published',
       action: 'published-desc',
-      name: 'published'
+      name: 'published',
+      labelIcon: 'circle-icon',
+      icon: 'circle-icon'
     },
     {
       label: 'Link',
-      name: 'url'
+      name: 'url',
+      icon: 'link-icon',
+      iconOnly: true
     }
   ],
   rows: generateRows(randomNumber())
@@ -51,7 +55,7 @@ function generateRow(maxDepth = 5) {
     id,
     title,
     updatedAt: randomDay(),
-    published: randomBoolean(),
+    published: randomBoolean() ? 'Published' : 'Unpublished',
     url: `/${id}`
   };
 
