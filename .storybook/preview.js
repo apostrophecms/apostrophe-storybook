@@ -31,6 +31,8 @@ import CheckBoldIcon from 'vue-material-design-icons/CheckBold.vue';
 import CloseIcon from 'vue-material-design-icons/Close.vue';
 import PencilIcon from 'vue-material-design-icons/Pencil.vue';
 import ChevronDownIcon from 'vue-material-design-icons/ChevronDown.vue';
+import ChevronRightIcon from 'vue-material-design-icons/ChevronRight.vue';
+import ChevronLeftIcon from 'vue-material-design-icons/ChevronLeft.vue';
 
 Vue.component('calendar-icon', CalendarIcon);
 Vue.component('magnify-icon', MagnifyIcon);
@@ -57,3 +59,5 @@ Vue.component('check-bold-icon', CheckBoldIcon);
 Vue.component('close-icon', CloseIcon);
 Vue.component('pencil-icon', PencilIcon);
 Vue.component('chevron-down-icon', ChevronDownIcon);
+Vue.component('chevron-right-icon', ChevronRightIcon);
+Vue.component('chevron-left-icon', ChevronLeftIcon);

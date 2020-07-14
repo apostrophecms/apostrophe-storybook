@@ -7,6 +7,7 @@ const lorem = new LoremIpsum({
 });
 
 export default {
+  totalPages: 4,
   headers: [
     {
       label: 'Title',

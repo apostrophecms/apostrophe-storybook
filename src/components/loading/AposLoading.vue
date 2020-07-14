@@ -29,21 +29,21 @@
       <g>
         <circle class="apos-loading__first" cx="10" cy="10" stroke-width="0" fill="url('#gradOne')" r="4.08836">
           <animate
-            attributeName="r" dur="550ms" values="3;3;4;5;6;5;4;3" repeatCount="indefinite"
+            attributeName="r" dur="950ms" values="3;3;4;5;6;5;4;3" repeatCount="indefinite"
             keyTimes="0; 0.15; 0.3; 0.45; 0.6; 0.75; 0.9; 1"
             keySplines=".42 0 1 1; 0 0 .59 1; .42 0 1 1; 0 0 .59 1; .42 0 1 1; 0 0 .59 1; .42 0 1 1; 0 0 .59 1;"
           />
         </circle>
         <circle class="apos-loading__second" cx="30" cy="10" stroke-width="0" fill="url('#gradTwo')" r="5.08836">
           <animate
-            attributeName="r" dur="550ms" values="4;3;3;4;5;6;5;4" repeatCount="indefinite"
+            attributeName="r" dur="950ms" values="4;3;3;4;5;6;5;4" repeatCount="indefinite"
             keyTimes="0; 0.15; 0.3; 0.45; 0.6; 0.75; 0.9; 1"
             keySplines=".42 0 1 1; 0 0 .59 1; .42 0 1 1; 0 0 .59 1; .42 0 1 1; 0 0 .59 1; .42 0 1 1; 0 0 .59 1;"
           />
         </circle>
         <circle class="apos-loading__third" cx="50" cy="10" stroke-width="0" fill="url('#gradThree')" r="5.91164">
           <animate
-            attributeName="r" dur="550ms" values="5;4;3;3;4;5;6;5" repeatCount="indefinite"
+            attributeName="r" dur="950ms" values="5;4;3;3;4;5;6;5" repeatCount="indefinite"
             keyTimes="0; 0.15; 0.3; 0.45; 0.6; 0.75; 0.9; 1"
             keySplines=".42 0 1 1; 0 0 .59 1; .42 0 1 1; 0 0 .59 1; .42 0 1 1; 0 0 .59 1; .42 0 1 1; 0 0 .59 1;"
           />

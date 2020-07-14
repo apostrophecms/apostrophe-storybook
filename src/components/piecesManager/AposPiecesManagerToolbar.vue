@@ -19,6 +19,11 @@
       />
     </template>
     <template #rightControls>
+      <AposPager
+        v-if="totalPages > 1" class="apos-manager__pager"
+        :total-pages="totalPages" :current-page="currentPage"
+        @click="updatePage" @change="updatePage"
+      />
       <AposFilterMenu :menu="filterFields" @input="filter" />
       <AposStringInput
         @input="search" :field="searchField.field"
@@ -36,6 +41,7 @@ import AposTagApply from './../tagApplyMenu/AposTagApply.vue';
 import AposButton from './../button/AposButton.vue';
 import AposStringInput from './../inputString/AposStringInput.vue';
 import AposModalToolbar from './../modalToolbar/AposModalToolbar.vue';
+import AposPager from '../pager/AposPager';
 
 export default {
   components: {
@@ -43,6 +49,7 @@ export default {
     AposModalToolbar,
     AposStringInput,
     AposContextMenu,
+    AposPager,
     AposTagApply,
     AposFilterMenu
   },
@@ -56,6 +63,14 @@ export default {
       default () {
         return [];
       }
+    },
+    totalPages: {
+      type: Number,
+      required: true
+    },
+    currentPage: {
+      type: Number,
+      required: true
     }
   },
   data() {
@@ -149,6 +164,9 @@ export default {
     },
     search(value) {
       this.$emit('search', value.data);
+    },
+    updatePage (newPage) {
+      this.$emit('update-page', newPage);
     }
   }
 };

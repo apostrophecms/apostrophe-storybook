@@ -14,10 +14,12 @@
       <AposModalBody>
         <template #bodyHeader v-if="!!rows.length">
           <AposPiecesManagerToolbar
+            :total-pages="totalPages" :current-page="currentPage"
             :selected-state="selectAllState"
             @select-click="selectAll"
             @trash-click="trashClick"
             @search="search"
+            @update-page="updatePage"
           />
         </template>
         <template #bodyMain>
@@ -136,6 +138,8 @@ export default {
   data() {
     return {
       rows: [],
+      totalPages: 0,
+      currentPage: 1,
       modal: {
         title: `Manage ${this.pieceType.pluralLabel || this.pieceType.label}`,
         active: false,
@@ -181,7 +185,13 @@ export default {
       this.$emit('search', query);
     },
     async getPieces () {
+      // This will need to take the `currentPage` value into account.
       this.rows = docsData.rows;
+      this.totalPages = docsData.totalPages;
+    },
+    updatePage (pageNum) {
+      this.currentPage = pageNum;
+      this.getPieces();
     }
   }
 };
