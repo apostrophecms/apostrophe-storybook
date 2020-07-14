@@ -1,11 +1,11 @@
 <template>
-  <div class="apos-tree">
+  <div class="apos-tree" :class="{ 'apos-tree--nested': nested }">
     <AposTreeHeader
       :headers="spacingRow" :spacer-only="true"
       @calculated="setWidths"
     />
     <AposTreeHeader :headers="data.headers" :col-widths="colWidths" />
-    <ol class="apos-tree--list">
+    <ol class="apos-tree__list">
       <AposTreeRow
         v-for="(row, index) in data.rows"
         :key="index"
@@ -13,6 +13,7 @@
         :headers="data.headers"
         :col-widths="colWidths"
         :level="1"
+        :nested="nested"
       />
     </ol>
   </div>
@@ -38,6 +39,7 @@ export default {
   },
   data() {
     return {
+      nested: false,
       colWidths: null
     };
   },
@@ -58,6 +60,7 @@ export default {
         completeRows.push(row);
 
         if (row.children) {
+          this.nested = true;
           completeRows = completeRows.concat(row.children);
         }
       });
@@ -86,10 +89,31 @@ export default {
       // Put that array in the DOM, and generate styles to be passed down based on its layout. Give the first column any leftover space.
       const finalRow = [];
       this.data.headers.forEach(col => {
-        finalRow.push({
+        let obj;
+        const foundIndex = this.data.headers.findIndex(o => {
+          return o.name === col.name;
+        });
+        const spacerInfo = {
           name: col.name,
           label: spacingRow[col.name]
-        });
+        };
+
+        if (foundIndex > -1) {
+          // Deep copy the original header column to capture all options.
+          const foundObj = JSON.parse(JSON.stringify(this.data.headers[foundIndex]));
+
+          if (foundObj.iconOnly) {
+            // If the "column" will only show icons, let the "column header"
+            // set the width.
+            delete spacerInfo.label;
+          }
+
+          obj = Object.assign(foundObj, spacerInfo);
+        } else {
+          obj = spacerInfo;
+        }
+
+        finalRow.push(obj);
       });
       return finalRow;
     }
@@ -107,7 +131,7 @@ export default {
   font-size: map-get($font-sizes, default);
 }
 
-.apos-tree--list {
+.apos-tree__list {
   width: 100%;
   margin-top: 0;
   margin-bottom: 0;
@@ -117,7 +141,7 @@ export default {
 
 // NOTE: Row and cell styles are here since they're shared between the header and the row
 
-.apos-tree--row-data {
+.apos-tree__row-data {
   display: flex;
   width: 100%;
 }

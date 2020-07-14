@@ -1,6 +1,6 @@
 <template>
-  <li class="apos-tree--row">
-    <div class="apos-tree--row-data">
+  <li class="apos-tree__row">
+    <div class="apos-tree__row-data">
       <component
         :is="cell.name === 'url' ? 'a' : 'span'"
         :href="cell.name === 'url' ? cell.value : false"
@@ -18,7 +18,7 @@
         <span v-show="!cell.iconOnly">{{ cell.value }}</span>
       </component>
     </div>
-    <ol class="apos-tree--list" v-if="row.children">
+    <ol class="apos-tree__list" v-if="row.children">
       <AposTreeRow
         v-for="(child, index) in row.children"
         :key="index"
@@ -51,6 +51,10 @@ export default {
     },
     level: {
       type: Number,
+      required: true
+    },
+    nested: {
+      type: Boolean,
       required: true
     }
   },
@@ -90,12 +94,12 @@ export default {
     },
     getCellStyles(name, index) {
       const styles = {};
-      if (this.colWidths && this.colWidths[name]) {
+      if (this.nested && index === 0 && this.colWidths && this.colWidths[name]) {
+        styles.width = `${this.colWidths[name] - (24 * this.level)}px`;
+      } else if (this.colWidths && this.colWidths[name]) {
         styles.width = `${this.colWidths[name]}px`;
       }
-      if (index === 0) {
-        styles.paddingLeft = `${24 * this.level}px`
-      }
+
       return styles;
     }
   }
@@ -103,6 +107,12 @@ export default {
 </script>
 
 <style lang="scss">
+.apos-tree__row {
+  .apos-tree--nested & {
+    padding-left: 24px;
+  }
+}
+
 .apos-tree__cell--published {
   .material-design-icon__svg {
     fill: var(--a-success);

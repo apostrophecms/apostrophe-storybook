@@ -1,6 +1,6 @@
 <template>
   <div
-    class="apos-tree--row-data apos-tree__header" :class="headerClasses"
+    class="apos-tree__row-data apos-tree__header" :class="headerClasses"
     :aria-hidden="spacerOnly"
   >
     <span
