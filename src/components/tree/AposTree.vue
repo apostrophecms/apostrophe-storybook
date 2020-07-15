@@ -5,29 +5,28 @@
       @calculated="setWidths"
     />
     <AposTreeHeader :headers="data.headers" :col-widths="colWidths" />
-    <ol class="apos-tree__list">
-      <AposTreeRow
-        v-for="(row, index) in data.rows"
-        :key="index"
-        :row="row"
-        :headers="data.headers"
-        :col-widths="colWidths"
-        :level="1"
-        :nested="nested"
-      />
-    </ol>
+    <AposTreeRows
+      :rows="myRows"
+      :headers="data.headers"
+      :col-widths="colWidths"
+      :level="1"
+      :nested="nested"
+      @busy="setBusy"
+      @update="update"
+      list-id="root"
+    />
   </div>
 </template>
 
 <script>
 import AposTreeHeader from './AposTreeHeader';
-import AposTreeRow from './AposTreeRow';
+import AposTreeRows from './AposTreeRows';
 
 export default {
   name: 'AposTree',
   components: {
     AposTreeHeader,
-    AposTreeRow
+    AposTreeRows
   },
   props: {
     data: {
@@ -39,6 +38,8 @@ export default {
   },
   data() {
     return {
+      // Copy the `data` property to mutate with VueDraggable.
+      myRows: this.data.rows,
       nested: false,
       colWidths: null
     };
@@ -121,6 +122,24 @@ export default {
   methods: {
     setWidths(widths) {
       this.colWidths = widths;
+    },
+    setBusy(val) {
+      console.info('Busy state is ', val);
+    },
+    update(event) {
+      console.info('CHANGE: ', {
+        // The ID of the item that moved.
+        changedId: event.item.dataset.rowId,
+        // The ID of the original parent, or 'root' if top-level.
+        startContext: event.from.dataset.listId,
+        // The index of the moved item within its original context.
+        startIndex: event.oldIndex,
+        // The ID of the new parent, or 'root' if top-level.
+        endContext: event.to.dataset.listId,
+        // The index of the moved item within its new context.
+        endIndex: event.newIndex
+      });
+      this.setBusy(false);
     }
   }
 };
