@@ -6,6 +6,9 @@ const lorem = new LoremIpsum({
   }
 });
 
+let draggable = false;
+const rows = generateRows(randomNumber());
+
 export default {
   headers: [
     {
@@ -33,7 +36,8 @@ export default {
       iconOnly: true
     }
   ],
-  rows: generateRows(randomNumber())
+  rows,
+  draggable
 };
 
 function generateRows(number) {
@@ -60,6 +64,7 @@ function generateRow(maxDepth = 5) {
   };
 
   if (randomBoolean(0.3)) {
+    draggable = true;
     item.children = [];
     for (let i = 0; i < randomNumber(); i++) {
       if (maxDepth > i) {

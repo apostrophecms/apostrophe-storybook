@@ -7,6 +7,7 @@
     @start="startDrag"
     @end="endDrag"
     :data-list-id="listId"
+    :disabled="!draggable"
   >
     <li
       class="apos-tree__row" v-for="row in myRows"
@@ -40,6 +41,7 @@
         :level="level + 1"
         :nested="nested"
         :list-id="row.id"
+        :draggable="draggable"
         @busy="$emit('busy', $event)"
         @update="$emit('update', $event)"
       />
@@ -73,6 +75,10 @@ export default {
       required: true
     },
     nested: {
+      type: Boolean,
+      required: true
+    },
+    draggable: {
       type: Boolean,
       required: true
     },

@@ -6,7 +6,7 @@
     />
     <AposTreeHeader :headers="data.headers" :col-widths="colWidths" />
     <AposTreeRows
-      :rows="myRows"
+      :rows="data.rows"
       :headers="data.headers"
       :col-widths="colWidths"
       :level="1"
@@ -14,6 +14,7 @@
       @busy="setBusy"
       @update="update"
       list-id="root"
+      :draggable="draggable"
     />
   </div>
 </template>
@@ -21,6 +22,7 @@
 <script>
 import AposTreeHeader from './AposTreeHeader';
 import AposTreeRows from './AposTreeRows';
+import treeData from './data';
 
 export default {
   name: 'AposTree',
@@ -28,23 +30,21 @@ export default {
     AposTreeHeader,
     AposTreeRows
   },
-  props: {
-    data: {
-      type: Object,
-      default() {
-        return {};
-      }
-    }
-  },
   data() {
     return {
       // Copy the `data` property to mutate with VueDraggable.
-      myRows: this.data.rows,
       nested: false,
       colWidths: null
     };
   },
   computed: {
+    data() {
+      return treeData;
+    },
+    draggable() {
+      // In practice this will be set directly since many
+      return treeData.draggable;
+    },
     spacingRow() {
       let spacingRow = {};
       // Combine the header with the rows, the limit to a reasonable 50 rows.
@@ -124,10 +124,10 @@ export default {
       this.colWidths = widths;
     },
     setBusy(val) {
-      console.info('Busy state is ', val);
+      this.$emit('busy', val);
     },
     update(event) {
-      console.info('CHANGE: ', {
+      this.$emit('update', {
         // The ID of the item that moved.
         changedId: event.item.dataset.rowId,
         // The ID of the original parent, or 'root' if top-level.

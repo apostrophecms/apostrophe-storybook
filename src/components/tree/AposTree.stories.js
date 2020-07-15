@@ -13,5 +13,14 @@ export const Tree = () => ({
   data() {
     return { data };
   },
-  template: '<AposTree :data="data" />'
+  methods: {
+    setBusy(val) {
+      console.info('Busy state is ', val);
+    },
+    update(obj) {
+      // We'll hit a route here to update the docs.
+      console.info('CHANGED ROW:', obj);
+    }
+  },
+  template: '<AposTree :data="data" @update="update" @busy="setBusy" />'
 });
