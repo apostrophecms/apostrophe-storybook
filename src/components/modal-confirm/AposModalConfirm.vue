@@ -72,8 +72,7 @@ export default {
         active: false,
         type: 'overlay',
         showModal: false
-      },
-      lastSelected: null
+      }
     };
   },
   methods: {
@@ -115,7 +114,7 @@ export default {
   width: 60px;
   height: 60px;
 }
-// .apos-confirm__heading
+
 .apos-confirm__description {
   font-size: map-get($font-sizes, default);
   font-weight: 400;

@@ -77,7 +77,7 @@ export default {
       const rand = (Math.floor(Math.random() * Math.floor(10000)));
 
       if (!this.modal.title) {
-        return 'rand';
+        return rand;
       }
       // replace everything not A-Za-z0-9_ with _
       const title = this.modal.title.replace(/\W/g, '_');
