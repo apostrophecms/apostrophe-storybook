@@ -148,6 +148,7 @@ export default {
 <style lang="scss">
 .apos-tree {
   font-size: map-get($font-sizes, default);
+  color: var(--a-text-primary);
 }
 
 .apos-tree__list {

@@ -146,7 +146,7 @@ export default {
   }
 
   &.apos-tree__cell--disabled {
-    color: var(--a-base-3);
+    color: var(--a-base-2);
 
     .material-design-icon__svg {
       fill: var(--a-base-3);
