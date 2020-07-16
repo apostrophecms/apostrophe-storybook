@@ -60,12 +60,14 @@ function generateRow(maxDepth = 5) {
     title,
     updatedAt: randomDay(),
     published: randomBoolean() ? 'Published' : 'Unpublished',
-    url: `/${id}`
+    url: `/${id}`,
+    // Even items without children need to have an `children` array eventually.
+    // This is to support dragging other items into them as children.
+    children: []
   };
 
   if (randomBoolean(0.3)) {
     draggable = true;
-    item.children = [];
     for (let i = 0; i < randomNumber(); i++) {
       if (maxDepth > i) {
         const child = generateRow(i);

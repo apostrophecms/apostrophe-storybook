@@ -13,7 +13,7 @@ $cell-padding: 16px;
   padding-left: 0;
   list-style-type: none;
 
-  .apos-tree__row--parent & {
+  .apos-tree__row--parent > & {
     position: relative;
 
     &::before {
@@ -62,7 +62,9 @@ $cell-padding: 16px;
   border-bottom: 1px solid var(--a-base-8);
   box-sizing: border-box;
 
-  &:first-child {
+  // Let the first cell column (usually "title") grow. We're assuming the first
+  // cell is not a link since there are dedicated "edit" and "link" columns.
+  &:first-of-type:not(a) {
     flex-grow: 1;
     flex-shrink: 1;
   }

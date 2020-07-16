@@ -15,6 +15,7 @@
       @update="update"
       list-id="root"
       :draggable="draggable"
+      :tree-id="treeId"
     />
   </div>
 </template>
@@ -22,6 +23,7 @@
 <script>
 import AposTreeHeader from './AposTreeHeader';
 import AposTreeRows from './AposTreeRows';
+import AposHelpers from '../../mixins/AposHelpersMixin';
 import treeData from './data';
 
 export default {
@@ -30,11 +32,13 @@ export default {
     AposTreeHeader,
     AposTreeRows
   },
+  mixins: [AposHelpers],
   data() {
     return {
       // Copy the `data` property to mutate with VueDraggable.
       nested: false,
-      colWidths: null
+      colWidths: null,
+      treeId: this.generateId()
     };
   },
   computed: {
@@ -60,7 +64,7 @@ export default {
       this.data.rows.forEach(row => {
         completeRows.push(row);
 
-        if (row.children) {
+        if (row.children && row.children.length > 0) {
           this.nested = true;
           completeRows = completeRows.concat(row.children);
         }

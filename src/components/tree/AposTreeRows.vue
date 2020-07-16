@@ -3,7 +3,7 @@
     tag="ol"
     class="apos-tree__list"
     :list="myRows"
-    :group="{ name: 'g1' }"
+    :group="{ name: treeId }"
     @start="startDrag"
     @end="endDrag"
     :data-list-id="listId"
@@ -11,13 +11,15 @@
     handle=".apos-tree__row__handle"
   >
     <li
-      class="apos-tree__row" :class="{ 'apos-tree__row--parent': !!row.children }"
+      class="apos-tree__row"
+      :class="{ 'apos-tree__row--parent': row.children && row.children.length > 0 }"
       v-for="row in myRows" :key="row.id"
       :data-row-id="row.id"
     >
       <div class="apos-tree__row-data">
         <button
-          v-if="row.children" class="apos-tree__row__toggle"
+          v-if="row.children && row.children.length > 0"
+          class="apos-tree__row__toggle"
           aria-label="Toggle section"
         >
           <chevron-down-icon :size="16" class="apos-tree__row__toggle-icon" />
@@ -52,6 +54,7 @@
         :level="level + 1"
         :nested="nested"
         :list-id="row.id"
+        :tree-id="treeId"
         :draggable="draggable"
         @busy="$emit('busy', $event)"
         @update="$emit('update', $event)"
@@ -98,6 +101,10 @@ export default {
       required: true
     },
     listId: {
+      type: String,
+      required: true
+    },
+    treeId: {
       type: String,
       required: true
     }
