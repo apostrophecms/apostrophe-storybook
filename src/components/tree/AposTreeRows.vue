@@ -8,12 +8,20 @@
     @end="endDrag"
     :data-list-id="listId"
     :disabled="!draggable"
+    handle=".apos-tree__row__handle"
   >
     <li
-      class="apos-tree__row" v-for="row in myRows"
-      :key="row.id" :data-row-id="row.id"
+      class="apos-tree__row" :class="{ 'apos-tree__row--parent': !!row.children }"
+      v-for="row in myRows" :key="row.id"
+      :data-row-id="row.id"
     >
       <div class="apos-tree__row-data">
+        <button
+          v-if="row.children" class="apos-tree__row__toggle"
+          aria-label="Toggle section"
+        >
+          <chevron-down-icon :size="16" class="apos-tree__row__toggle-icon" />
+        </button>
         <component
           v-for="(col, index) in headers"
           :key="`${index}-${col.name}`"
@@ -24,6 +32,9 @@
           :data-col="col.name"
           :style="getCellStyles(col.name, index)"
         >
+          <drag-icon
+            v-if="draggable && index === 0" class="apos-tree__row__handle"
+          />
           <component
             v-if="col.icon" :is="col.icon"
             class="apos-tree__cell__icon"
@@ -51,10 +62,14 @@
 
 <script>
 import VueDraggable from 'vuedraggable';
+import DragIcon from 'vue-material-design-icons/Drag.vue';
 
 export default {
   name: 'AposTreeRows',
-  components: { VueDraggable },
+  components: {
+    VueDraggable,
+    'drag-icon': DragIcon
+  },
   props: {
     headers: {
       type: Array,
@@ -134,23 +149,4 @@ export default {
 </script>
 
 <style lang="scss">
-.apos-tree__row {
-  .apos-tree--nested & {
-    padding-left: 24px;
-  }
-}
-
-.apos-tree__cell--published {
-  .material-design-icon__svg {
-    fill: var(--a-success);
-  }
-
-  &.apos-tree__cell--disabled {
-    color: var(--a-base-2);
-
-    .material-design-icon__svg {
-      fill: var(--a-base-3);
-    }
-  }
-}
 </style>

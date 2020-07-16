@@ -146,57 +146,5 @@ export default {
 </script>
 
 <style lang="scss">
-.apos-tree {
-  font-size: map-get($font-sizes, default);
-  color: var(--a-text-primary);
-}
-
-.apos-tree__list {
-  width: 100%;
-  margin-top: 0;
-  margin-bottom: 0;
-  padding-left: 0;
-  list-style-type: none;
-}
-
-// NOTE: Row and cell styles are here since they're shared between the header and the row
-
-.apos-tree__row-data {
-  display: flex;
-  width: 100%;
-}
-
-.apos-tree__cell {
-  display: inline-flex;
-  flex-shrink: 2;
-  padding: 16px;
-  border-bottom: 1px solid var(--a-base-9);
-  box-sizing: border-box;
-
-  &:first-child {
-    flex-grow: 1;
-    flex-shrink: 1;
-  }
-}
-
-.apos-tree__cell__icon {
-  display: inline-flex;
-  align-items: flex-start;
-  margin-right: 10px;
-  padding-top: 0.2em;
-
-  .material-design-icon__svg {
-    width: 12px;
-    height: 12px;
-  }
-
-  .apos-tree__cell--icon & .material-design-icon__svg {
-    width: 18px;
-    height: 18px;
-  }
-
-  .apos-tree__cell--icon & {
-    padding-top: 0;
-  }
-}
+@import './_tree';
 </style>
