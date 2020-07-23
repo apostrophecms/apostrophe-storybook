@@ -17,7 +17,7 @@
     "vue-loader": "^15.9.1",
     "vue-material-design-icons": "^3.4.0",
     "vue-template-compiler": "^2.6.11",
-    "vuedraggable": "^2.23.2"
+    "vuedraggable": "^2.24.0"
   },
   "devDependencies": {
     "@babel/core": "^7.8.7",
