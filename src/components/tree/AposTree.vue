@@ -150,5 +150,137 @@ export default {
 </script>
 
 <style lang="scss">
-@import './_tree';
+  $row-nested-h-padding: 24px;
+  $cell-padding: 16px;
+
+  .apos-tree {
+    font-size: map-get($font-sizes, default);
+    color: var(--a-text-primary);
+  }
+
+  .apos-tree__list {
+    width: 100%;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-left: 0;
+    list-style-type: none;
+
+    .apos-tree__row--parent > & {
+      position: relative;
+
+      &::before {
+        position: absolute;
+        display: block;
+        content: '';
+        background-color: var(--a-base-8);
+        width: 1px;
+        top: 0;
+        top: -12px;
+        bottom: 0;
+        left: -$row-nested-h-padding / 2;
+      }
+    }
+  }
+
+  .apos-tree__row-data {
+    position: relative;
+    display: flex;
+    width: 100%;
+
+    .apos-tree__row--parent .apos-tree__row & {
+      &::before {
+        position: absolute;
+        display: block;
+        content: '';
+        background-color: var(--a-base-8);
+        width: 24px;
+        height: 1px;
+        top: 50%;
+        left: -$row-nested-h-padding * 1.5;
+      }
+    }
+
+    .apos-tree__row--parent > &:first-child {
+      &::before {
+        width: 14px;
+      }
+    }
+  }
+
+  .apos-tree__cell {
+    display: inline-flex;
+    flex-shrink: 2;
+    padding: $cell-padding;
+    border-bottom: 1px solid var(--a-base-8);
+    box-sizing: border-box;
+
+    // Let the first cell column (usually "title") grow. We're assuming the first
+    // cell is not a link since there are dedicated "edit" and "link" columns.
+    &:first-of-type:not(a) {
+      flex-grow: 1;
+      flex-shrink: 1;
+    }
+  }
+
+  .apos-tree__cell--published {
+    .material-design-icon__svg {
+      fill: var(--a-success);
+    }
+
+    &.apos-tree__cell--disabled {
+      color: var(--a-base-2);
+
+      .material-design-icon__svg {
+        fill: var(--a-base-2);
+      }
+    }
+  }
+
+  .apos-tree__cell__icon {
+    display: inline-flex;
+    align-items: flex-start;
+    margin-right: 10px;
+    padding-top: 0.2em;
+
+    .material-design-icon__svg {
+      width: 12px;
+      height: 12px;
+    }
+
+    .apos-tree__cell--icon & .material-design-icon__svg {
+      width: 18px;
+      height: 18px;
+    }
+
+    .apos-tree__cell--icon & {
+      padding-top: 0;
+    }
+  }
+
+  .apos-tree__row {
+    .apos-tree--nested & {
+      padding-left: $row-nested-h-padding;
+    }
+  }
+
+  .apos-tree__row--parent {
+    position: relative;
+  }
+
+  .apos-tree__row__handle {
+    margin-top: -0.35em;
+    line-height: 0;
+  }
+
+  .apos-tree__row__toggle {
+    @include apos-button-reset();
+    position: absolute;
+    top: 50%;
+    left: -$row-nested-h-padding / 2;
+    transform: translate(-50%, -50%);
+  }
+
+  .apos-tree__row__toggle-icon {
+    display: block;
+  }
 </style>
